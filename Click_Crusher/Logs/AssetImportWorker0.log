@@ -15,7 +15,7 @@ C:/Users/Kim/Desktop/Project/Click-Crusher/Click_Crusher
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-58326
+60275
 Successfully changed project path to: C:/Users/Kim/Desktop/Project/Click-Crusher/Click_Crusher
 C:/Users/Kim/Desktop/Project/Click-Crusher/Click_Crusher
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,12 +49,12 @@ C:/Users/Kim/Desktop/Project/Click-Crusher/Click_Crusher
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [10668] Host "[IP] 175.212.63.251 [Port] 0 [Flags] 2 [Guid] 1035328085 [EditorId] 1035328085 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-5MEC467) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [13000] Host "[IP] 119.202.69.237 [Port] 0 [Flags] 2 [Guid] 2885673336 [EditorId] 2885673336 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-5MEC467) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [10668] Host "[IP] 175.212.63.251 [Port] 0 [Flags] 2 [Guid] 1035328085 [EditorId] 1035328085 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-5MEC467) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [13000] Host "[IP] 119.202.69.237 [Port] 0 [Flags] 2 [Guid] 2885673336 [EditorId] 2885673336 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-5MEC467) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [Physics::Module] Initialized MultithreadedJobDispatcher with 3 workers.
-Refreshing native plugins compatible for Editor in 20.80 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 20.05 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.14f1 (eff2de9070d8)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.14f1/Editor/Data/Resources/UnitySubsystems
@@ -70,47 +70,47 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56680
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56188
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.14f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.026431 seconds.
-- Loaded All Assemblies, in  0.738 seconds
+Registered in 0.018297 seconds.
+- Loaded All Assemblies, in  0.779 seconds
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 398 ms
+Android Extension - Scanning For ADB Devices 428 ms
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.054 seconds
-Domain Reload Profiling: 1789ms
-	BeginReloadAssembly (216ms)
+- Finished resetting the current domain, in  0.938 seconds
+Domain Reload Profiling: 1715ms
+	BeginReloadAssembly (177ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (45ms)
-	RebuildNativeTypeToScriptingClass (15ms)
-	initialDomainReloadingComplete (118ms)
-	LoadAllAssembliesAndSetupDomain (340ms)
-		LoadAssemblies (213ms)
+	RebuildCommonClasses (226ms)
+	RebuildNativeTypeToScriptingClass (21ms)
+	initialDomainReloadingComplete (107ms)
+	LoadAllAssembliesAndSetupDomain (246ms)
+		LoadAssemblies (174ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (337ms)
-			TypeCache.Refresh (334ms)
-				TypeCache.ScanAssembly (314ms)
+		AnalyzeDomain (243ms)
+			TypeCache.Refresh (241ms)
+				TypeCache.ScanAssembly (221ms)
 			ScanForSourceGeneratedMonoScriptInfo (1ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (1054ms)
+	FinalizeReload (939ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (958ms)
+		SetupLoadedEditorAssemblies (844ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (581ms)
-			SetLoadedEditorAssemblies (8ms)
+			InitializePlatformSupportModulesInManaged (602ms)
+			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (4ms)
-			ProcessInitializeOnLoadAttributes (288ms)
-			ProcessInitializeOnLoadMethodAttributes (76ms)
+			BeforeProcessingInitializeOnLoad (3ms)
+			ProcessInitializeOnLoadAttributes (160ms)
+			ProcessInitializeOnLoadMethodAttributes (74ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -118,8 +118,8 @@ Domain Reload Profiling: 1789ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  1.066 seconds
-Refreshing native plugins compatible for Editor in 8.24 ms, found 4 plugins.
+- Loaded All Assemblies, in  1.093 seconds
+Refreshing native plugins compatible for Editor in 7.74 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Package Manager log level set to [2]
@@ -127,47 +127,47 @@ Package Manager log level set to [2]
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.043 seconds
-Domain Reload Profiling: 2103ms
-	BeginReloadAssembly (224ms)
+- Finished resetting the current domain, in  1.097 seconds
+Domain Reload Profiling: 2184ms
+	BeginReloadAssembly (240ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (9ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (30ms)
-	RebuildCommonClasses (54ms)
-	RebuildNativeTypeToScriptingClass (19ms)
-	initialDomainReloadingComplete (89ms)
-	LoadAllAssembliesAndSetupDomain (672ms)
-		LoadAssemblies (518ms)
+		CreateAndSetChildDomain (31ms)
+	RebuildCommonClasses (64ms)
+	RebuildNativeTypeToScriptingClass (27ms)
+	initialDomainReloadingComplete (93ms)
+	LoadAllAssembliesAndSetupDomain (663ms)
+		LoadAssemblies (499ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (288ms)
-			TypeCache.Refresh (241ms)
-				TypeCache.ScanAssembly (216ms)
-			ScanForSourceGeneratedMonoScriptInfo (37ms)
-			ResolveRequiredComponents (8ms)
-	FinalizeReload (1043ms)
+		AnalyzeDomain (304ms)
+			TypeCache.Refresh (254ms)
+				TypeCache.ScanAssembly (223ms)
+			ScanForSourceGeneratedMonoScriptInfo (39ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (1098ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (791ms)
+		SetupLoadedEditorAssemblies (781ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (41ms)
 			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (122ms)
-			ProcessInitializeOnLoadAttributes (550ms)
-			ProcessInitializeOnLoadMethodAttributes (60ms)
-			AfterProcessingInitializeOnLoad (12ms)
+			BeforeProcessingInitializeOnLoad (121ms)
+			ProcessInitializeOnLoadAttributes (511ms)
+			ProcessInitializeOnLoadMethodAttributes (85ms)
+			AfterProcessingInitializeOnLoad (17ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (11ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
-Refreshing native plugins compatible for Editor in 7.34 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 8.55 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4079 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 70 unused Assets / (244.3 KB). Loaded Objects now: 4546.
-Memory consumption went from 167.8 MB to 167.5 MB.
-Total: 4.724700 ms (FindLiveObjects: 0.517700 ms CreateObjectMapping: 0.336500 ms MarkObjects: 3.485800 ms  DeleteObjects: 0.383600 ms)
+Memory consumption went from 167.8 MB to 167.6 MB.
+Total: 4.551500 ms (FindLiveObjects: 0.363800 ms CreateObjectMapping: 0.427100 ms MarkObjects: 3.516800 ms  DeleteObjects: 0.242800 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -184,334 +184,761 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 639693.264271 seconds.
-  path: Assets/MonsterPixel
-  artifactKey: Guid(8ad43740d6201da41baaf3d221bee5ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/MonsterPixel using Guid(8ad43740d6201da41baaf3d221bee5ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11a6941dbcd14c535205c6eed175a99d') in 0.003071 seconds
+  Time since last request: 723720.004416 seconds.
+  path: Assets/Pixel Texture/Monster/Alien/Alien2.png
+  artifactKey: Guid(3b2cbda8294ab6b45b6da78c09a8818c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Alien/Alien2.png using Guid(3b2cbda8294ab6b45b6da78c09a8818c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd9f91fae7b81e6835865059de7bd7ade') in 0.128761 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Pixel Texture/Monster/Alien
+  artifactKey: Guid(bec5e42b8b8191f40aca422ae8f45e49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Alien using Guid(bec5e42b8b8191f40aca422ae8f45e49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8495cc832fc62c44ab6aa1a3214a250a') in 0.000599 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 7.201672 seconds.
-  path: Assets/Pixel Texter
-  artifactKey: Guid(8ad43740d6201da41baaf3d221bee5ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texter using Guid(8ad43740d6201da41baaf3d221bee5ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38b6a0ec324a7a01c8335f1d77720e3b') in 0.000554 seconds
+  Time since last request: 0.000018 seconds.
+  path: Assets/Pixel Texture/Monster/Alien/Alien1.png
+  artifactKey: Guid(377d6754fc23b394abd742cc773291ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Alien/Alien1.png using Guid(377d6754fc23b394abd742cc773291ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87611500d43e3dd8fb1fe0258ce0fc86') in 0.031115 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Pixel Texture/Monster/Alien/Alien5.png
+  artifactKey: Guid(485f4680e88aa1c4d934c011414f9c21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Alien/Alien5.png using Guid(485f4680e88aa1c4d934c011414f9c21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d49c46b6f72eac3fb0ee8d06e6331b2') in 0.026445 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Pixel Texture/Monster/Alien/Alien3.png
+  artifactKey: Guid(e31b6755668bbac40b823aecfbff6528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Alien/Alien3.png using Guid(e31b6755668bbac40b823aecfbff6528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63803ee4329edc4cba7f96259cfebead') in 0.030343 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Pixel Texture/Monster/Alien/Alien4.png
+  artifactKey: Guid(e9ee17033146ee84e969d6b7da3e8f03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Alien/Alien4.png using Guid(e9ee17033146ee84e969d6b7da3e8f03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37a221aba6bed18ac5f1595b82487d53') in 0.039406 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 66.220056 seconds.
+  path: Assets/Pixel Texture/Monster/Alien/Alien1.controller
+  artifactKey: Guid(3417d0d2b6df77a429d06979422cab99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Alien/Alien1.controller using Guid(3417d0d2b6df77a429d06979422cab99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f0c54de40372bd91353ee9042cdc4ff') in 0.002113 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 2.092324 seconds.
+  path: Assets/Pixel Texture/Monster/Alien/Alien.controller
+  artifactKey: Guid(3417d0d2b6df77a429d06979422cab99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Alien/Alien.controller using Guid(3417d0d2b6df77a429d06979422cab99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95a35aa7c9a2f40fc8d0195c25d7531b') in 0.001797 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 3.848009 seconds.
+  path: Assets/Pixel Texture/Monster/Drone
+  artifactKey: Guid(d05745a7b70c24940aeea444e4c660f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Drone using Guid(d05745a7b70c24940aeea444e4c660f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d711bbf14c809c8dac2729107fb3abd') in 0.000556 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 19.722573 seconds.
-  path: Assets/Pixel Texture
-  artifactKey: Guid(8ad43740d6201da41baaf3d221bee5ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture using Guid(8ad43740d6201da41baaf3d221bee5ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65127f3610e25ed4b3c6cf9b4b8cd5d1') in 0.000604 seconds
+  Time since last request: 0.059606 seconds.
+  path: Assets/Pixel Texture/Monster/Drone/Drone1.png
+  artifactKey: Guid(3bc701ae3a9372247b2ceb58ac35da60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Drone/Drone1.png using Guid(3bc701ae3a9372247b2ceb58ac35da60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b7e14ab68777a7b5b1b7114c11d0095') in 0.036396 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Pixel Texture/Monster/Drone/Drone3.png
+  artifactKey: Guid(b0d1731cf2851a940a56bf117320e048) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Drone/Drone3.png using Guid(b0d1731cf2851a940a56bf117320e048) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd54570431a90fd25a72388d832d6297') in 0.045035 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000262 seconds.
+  path: Assets/Pixel Texture/Monster/Drone/Drone2.png
+  artifactKey: Guid(0478cd4aa04ee434ca9c933be3b4b130) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Drone/Drone2.png using Guid(0478cd4aa04ee434ca9c933be3b4b130) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '517e30d0c46864420accbeaaa19f7515') in 0.050379 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Pixel Texture/Monster/Drone/Drone4.png
+  artifactKey: Guid(977879f2563ede44cb9c104137a60521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Drone/Drone4.png using Guid(977879f2563ede44cb9c104137a60521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afdef8596219f6644604190f0ffbe237') in 0.050323 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Pixel Texture/Monster/Drone/Drone5.png
+  artifactKey: Guid(770abd85c3fc7fa459ff15bd73d358e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Drone/Drone5.png using Guid(770abd85c3fc7fa459ff15bd73d358e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4063f2119d23a773824cc42b87a2b412') in 0.037213 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 108.365543 seconds.
+  path: Assets/Pixel Texture/Monster/Drone/Drone1.controller
+  artifactKey: Guid(7dd75c77f9305f249b7b7417df258d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Drone/Drone1.controller using Guid(7dd75c77f9305f249b7b7417df258d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ea82c7b4e8749723927e8d0b88b4dbc') in 0.001188 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.679634 seconds.
+  path: Assets/Pixel Texture/Monster/Drone/Drone.controller
+  artifactKey: Guid(7dd75c77f9305f249b7b7417df258d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Drone/Drone.controller using Guid(7dd75c77f9305f249b7b7417df258d98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df1e661452abe532a91f4508b15e0256') in 0.001440 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 4.055007 seconds.
+  path: Assets/Pixel Texture/Monster/Goblin
+  artifactKey: Guid(2e022ff04e169a647ae76d09e072c469) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Goblin using Guid(2e022ff04e169a647ae76d09e072c469) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f05b8e413722dc64f11028119250eae') in 0.000591 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 16.057085 seconds.
-  path: Assets/Pixel Texture/Act
-  artifactKey: Guid(764fde6e17ca67841a6b022091f3a372) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act using Guid(764fde6e17ca67841a6b022091f3a372) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '257cbd278468e7dec594ae440e54d7d5') in 0.000562 seconds
+  Time since last request: 0.067984 seconds.
+  path: Assets/Pixel Texture/Monster/Goblin/Goblin1.png
+  artifactKey: Guid(ae3d80afe9d025c49be6190185fc3690) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Goblin/Goblin1.png using Guid(ae3d80afe9d025c49be6190185fc3690) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '239756339e2a55a365f9a49b27c3ebdf') in 0.051230 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000081 seconds.
+  path: Assets/Pixel Texture/Monster/Goblin/Goblin4.png
+  artifactKey: Guid(2427b02ddb68fc94f8c24510302eb87c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Goblin/Goblin4.png using Guid(2427b02ddb68fc94f8c24510302eb87c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99da2ed3abe4f3d56e3e3830ca1a48b3') in 0.030374 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000081 seconds.
+  path: Assets/Pixel Texture/Monster/Goblin/Goblin3.png
+  artifactKey: Guid(4f45279b08c7af24c9c8773067e14c94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Goblin/Goblin3.png using Guid(4f45279b08c7af24c9c8773067e14c94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c4b139765ebdd0ec1b2eb1bffc8a18f') in 0.039758 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Pixel Texture/Monster/Goblin/Goblin2.png
+  artifactKey: Guid(1627ae55de914b3469a0b3049207570f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Goblin/Goblin2.png using Guid(1627ae55de914b3469a0b3049207570f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56c3c00a6f7010006e63758f20ca95ec') in 0.036664 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 43.372253 seconds.
+  path: Assets/Pixel Texture/Monster/Goblin/Goblin1.controller
+  artifactKey: Guid(2495737cedfaad345ae14008731c0b40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Goblin/Goblin1.controller using Guid(2495737cedfaad345ae14008731c0b40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a217613fe8b202f9756ef6f94cc8f1e9') in 0.001544 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.961833 seconds.
+  path: Assets/Pixel Texture/Monster/Goblin/Goblin.controller
+  artifactKey: Guid(2495737cedfaad345ae14008731c0b40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Goblin/Goblin.controller using Guid(2495737cedfaad345ae14008731c0b40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c511343b4094251d2ab13d4dafc4cb83') in 0.001974 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 3.190520 seconds.
+  path: Assets/Pixel Texture/Monster/Red Goblin
+  artifactKey: Guid(0d3a801b87fee244386288b032d166a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Red Goblin using Guid(0d3a801b87fee244386288b032d166a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b34294b3609673c73bc22eb031bcd1f5') in 0.000523 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 0.107823 seconds.
-  path: Assets/Pixel Texture/Act/Fire.png
-  artifactKey: Guid(4e4bf289b0c73a046ad7c7b93cff62e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act/Fire.png using Guid(4e4bf289b0c73a046ad7c7b93cff62e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9960b6c873a60ba242391bcd749b2017') in 0.169242 seconds
+  Time since last request: 0.067631 seconds.
+  path: Assets/Pixel Texture/Monster/Red Goblin/Red Goblin1.png
+  artifactKey: Guid(ff84f46f1e8baa947a7f3d4ff15c0280) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Red Goblin/Red Goblin1.png using Guid(ff84f46f1e8baa947a7f3d4ff15c0280) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18616d02e0af59b5f159a405fefea69c') in 0.026963 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Pixel Texture/Act/Posion.png
-  artifactKey: Guid(0aee7b5cb4388494cbdc101fa181f421) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act/Posion.png using Guid(0aee7b5cb4388494cbdc101fa181f421) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80f68d19d660b5ec9629f0a1c3c359f4') in 0.028264 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/Pixel Texture/Act/Holy Shiled.png
-  artifactKey: Guid(e3c16b71445f8df43aee75b0cb41a1ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act/Holy Shiled.png using Guid(e3c16b71445f8df43aee75b0cb41a1ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '216e55c06ef09450bcc632ef69b383c2') in 0.027452 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/Pixel Texture/Act/Holy Shot.png
-  artifactKey: Guid(930b6b9258d8f4e4db6741272f986355) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act/Holy Shot.png using Guid(930b6b9258d8f4e4db6741272f986355) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cdfd4bbac880d1b40f2161b3c4ccc354') in 0.028521 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Pixel Texture/Act/Rock.png
-  artifactKey: Guid(ac800e729ad36bb498c3652ffd770b1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act/Rock.png using Guid(ac800e729ad36bb498c3652ffd770b1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf8d6c71ff5d3a3f4c09f7930c419abf') in 0.027814 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Pixel Texture/Act/Sturn.png
-  artifactKey: Guid(95ae1e61944f0314284b5d71c2a8a8a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act/Sturn.png using Guid(95ae1e61944f0314284b5d71c2a8a8a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cdfc001d85ce71a64bee613dce7cbe9') in 0.029649 seconds
+  Time since last request: 0.000016 seconds.
+  path: Assets/Pixel Texture/Monster/Red Goblin/Red Goblin2.png
+  artifactKey: Guid(d73658716d787a247af4747b688d2d81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Red Goblin/Red Goblin2.png using Guid(d73658716d787a247af4747b688d2d81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b311a3e407a1724a4c1c9c834d43170f') in 0.029489 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
   Time since last request: 0.000022 seconds.
-  path: Assets/Pixel Texture/Act/Melee.png
-  artifactKey: Guid(7de6e54311bcd9d4ba8bb844d3d509d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act/Melee.png using Guid(7de6e54311bcd9d4ba8bb844d3d509d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed2c7ebd50db78c5424a3d3b5720bd0e') in 0.030528 seconds
+  path: Assets/Pixel Texture/Monster/Red Goblin/Red Goblin3.png
+  artifactKey: Guid(c11e38777b52b094b955b1ee7fc238f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Red Goblin/Red Goblin3.png using Guid(c11e38777b52b094b955b1ee7fc238f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5e2d67e33ff8c29e351d94d85f26305') in 0.028019 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
   Time since last request: 0.000026 seconds.
-  path: Assets/Pixel Texture/Act/Fire Shot.png
-  artifactKey: Guid(09d48e44321f4cb4abb2d87aa7784603) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Act/Fire Shot.png using Guid(09d48e44321f4cb4abb2d87aa7784603) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8903ea6e24340ed3fa63ae1be283bbbc') in 0.027737 seconds
+  path: Assets/Pixel Texture/Monster/Red Goblin/Red Goblin4.png
+  artifactKey: Guid(4f0ea683da32eb04f93ca68c00fd02e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Red Goblin/Red Goblin4.png using Guid(4f0ea683da32eb04f93ca68c00fd02e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ac99c9cd38696df5efba89b31d68b84') in 0.040981 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 58.583888 seconds.
-  path: Assets/Pixel Texture/Char/Luck.png
-  artifactKey: Guid(7a7eadb9c61fd82448be3de3775aac3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Char/Luck.png using Guid(7a7eadb9c61fd82448be3de3775aac3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88f3490eab0f126c9c3fb0a83a59f443') in 0.044617 seconds
+  Time since last request: 0.000082 seconds.
+  path: Assets/Pixel Texture/Monster/Red Goblin/Red Goblin5.png
+  artifactKey: Guid(6663e3eba0add7d4eba222fd791fb714) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Red Goblin/Red Goblin5.png using Guid(6663e3eba0add7d4eba222fd791fb714) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be3f416f807dcb5bf3a91a8a03191f88') in 0.033123 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000158 seconds.
-  path: Assets/Pixel Texture/Char/Water.png
-  artifactKey: Guid(b9d4ef0362c38c74ba94a9ba96772837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Char/Water.png using Guid(b9d4ef0362c38c74ba94a9ba96772837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cff575c6f23decf5a69e4cdc6f862bd7') in 0.038718 seconds
+  Time since last request: 187.331658 seconds.
+  path: Assets/Pixel Texture/Monster/Red Goblin/Red Goblin1.controller
+  artifactKey: Guid(ac01dad415cef504984204d6e8309033) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Red Goblin/Red Goblin1.controller using Guid(ac01dad415cef504984204d6e8309033) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b546aed5e63d7f21c4e039f497a857ce') in 0.001559 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.693337 seconds.
+  path: Assets/Pixel Texture/Monster/Red Goblin/Red Goblin.controller
+  artifactKey: Guid(ac01dad415cef504984204d6e8309033) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Red Goblin/Red Goblin.controller using Guid(ac01dad415cef504984204d6e8309033) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f459ed920351e4972b8055d251495cec') in 0.001434 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 4.013477 seconds.
+  path: Assets/Pixel Texture/Monster/Soil
+  artifactKey: Guid(e35bd9335280f2e488825378b7b12968) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Soil using Guid(e35bd9335280f2e488825378b7b12968) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f90a29d8116ec95c411843180608ed26') in 0.000632 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.064794 seconds.
+  path: Assets/Pixel Texture/Monster/Soil/Soil1.png
+  artifactKey: Guid(7d6d2b1815070a64f8dffadab3a31a9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Soil/Soil1.png using Guid(7d6d2b1815070a64f8dffadab3a31a9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9698bfda1ffab7729c6949a9721d702') in 0.038216 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Pixel Texture/Char/Rock.png
-  artifactKey: Guid(576338b66f8498a4da3ca7420507c166) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Char/Rock.png using Guid(576338b66f8498a4da3ca7420507c166) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52d9d21df91efc510d2f2c4b0b62c86c') in 0.028579 seconds
+  Time since last request: 0.000016 seconds.
+  path: Assets/Pixel Texture/Monster/Soil/Soil4.png
+  artifactKey: Guid(03e6cb16f70671643bc5d0abff60d209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Soil/Soil4.png using Guid(03e6cb16f70671643bc5d0abff60d209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1168f1ac6f2e786cbb192d291674e69a') in 0.036923 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Pixel Texture/Char/Sturn.png
-  artifactKey: Guid(3246e57bc489c4d41829e9ed14190a42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Char/Sturn.png using Guid(3246e57bc489c4d41829e9ed14190a42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2828a04e466d0f357c644fa6c8bf5bf2') in 0.028627 seconds
+  Time since last request: 0.000018 seconds.
+  path: Assets/Pixel Texture/Monster/Soil/Soil5.png
+  artifactKey: Guid(5b942fab29d3bc341a18c4de30063618) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Soil/Soil5.png using Guid(5b942fab29d3bc341a18c4de30063618) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b0437441e3e1a4ab1d0c73669e65286') in 0.031095 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 8.316705 seconds.
-  path: Assets/Pixel Texture/Pass/HealthUP.png
-  artifactKey: Guid(3b38eeedbce28f248a68f0016202167c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Pass/HealthUP.png using Guid(3b38eeedbce28f248a68f0016202167c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0fed712769899bfdeee10589a4c933f') in 0.049011 seconds
+  Time since last request: 0.000017 seconds.
+  path: Assets/Pixel Texture/Monster/Soil/Soil3.png
+  artifactKey: Guid(38e67e8017de3854a9cee2e3655c755e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Soil/Soil3.png using Guid(38e67e8017de3854a9cee2e3655c755e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '146ad3f0636171c30facc3b6e7e33f4a') in 0.034444 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000085 seconds.
+  path: Assets/Pixel Texture/Monster/Soil/Soil2.png
+  artifactKey: Guid(4e989b2078d9c174c8735c1f976dfd18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Soil/Soil2.png using Guid(4e989b2078d9c174c8735c1f976dfd18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5681576352d5eac540a465fe55b20dc0') in 0.029367 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 48.192216 seconds.
+  path: Assets/Pixel Texture/Monster/Soil/Soil1.controller
+  artifactKey: Guid(70f2fa9949668ab48951d5c00b06b27e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Soil/Soil1.controller using Guid(70f2fa9949668ab48951d5c00b06b27e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2579c110e1643635d841d16b9a39ba9') in 0.001486 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 2.245319 seconds.
+  path: Assets/Pixel Texture/Monster/Soil/Soil.controller
+  artifactKey: Guid(70f2fa9949668ab48951d5c00b06b27e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Soil/Soil.controller using Guid(70f2fa9949668ab48951d5c00b06b27e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '78e2ae69665c3a2b0f8b56dd7330ea41') in 0.002459 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 2.193983 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag
+  artifactKey: Guid(c7dcda6c28dd9994a8800d7e4512de60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag using Guid(c7dcda6c28dd9994a8800d7e4512de60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0482c2bdcdba3dbb995867295319138e') in 0.000526 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.172985 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag1.png
+  artifactKey: Guid(c924dc04862539f4ca4b5e34ab64a85a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag1.png using Guid(c924dc04862539f4ca4b5e34ab64a85a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c943f3ca1b1a58c3746ada7589ace96b') in 0.029264 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
   Time since last request: 0.000020 seconds.
-  path: Assets/Pixel Texture/Pass/Shield.png
-  artifactKey: Guid(94a2d836b709cbe4c995412fdb6dd68a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Pass/Shield.png using Guid(94a2d836b709cbe4c995412fdb6dd68a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a4bb2c9f1c2428749665d17441f2095') in 0.044773 seconds
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag2.png
+  artifactKey: Guid(fcb9aaf9be0b65a49a0f7a92b43e291c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag2.png using Guid(fcb9aaf9be0b65a49a0f7a92b43e291c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47043f0b5483c26fa451879ac76b7701') in 0.030861 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag6.png
+  artifactKey: Guid(c56d6adf9c645d7419df4ed8599a4f27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag6.png using Guid(c56d6adf9c645d7419df4ed8599a4f27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '887ff067bbd17bfe321d0289ec3f271b') in 0.025411 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag3.png
+  artifactKey: Guid(4a0d96c3ade0fd74ab7cf87235b2fc9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag3.png using Guid(4a0d96c3ade0fd74ab7cf87235b2fc9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9acef2a5764092cbbf11f29a2144755b') in 0.028366 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag7.png
+  artifactKey: Guid(41178d3b107e29f44bdedfcab8fbe8ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag7.png using Guid(41178d3b107e29f44bdedfcab8fbe8ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48232fac9000b0405813ef97838d7247') in 0.023935 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag4.png
+  artifactKey: Guid(37a4a8b754ef979498bc5a86277d969c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag4.png using Guid(37a4a8b754ef979498bc5a86277d969c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f32b81443b5c0f2692b7396fbfee3ae') in 0.032634 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag5.png
+  artifactKey: Guid(3ad9854c1e0e7b74787cd16ed904eb45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag5.png using Guid(3ad9854c1e0e7b74787cd16ed904eb45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a1f321ad36d8e89f975aac1c7697030') in 0.025465 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 76.288566 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag1.controller
+  artifactKey: Guid(0c592e8ac7fca90498d21b28014166cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag1.controller using Guid(0c592e8ac7fca90498d21b28014166cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70c78aaee1d329add278b85517aeec37') in 0.001357 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.905986 seconds.
+  path: Assets/Pixel Texture/Monster/Trash Bag/Trash Bag.controller
+  artifactKey: Guid(0c592e8ac7fca90498d21b28014166cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Monster/Trash Bag/Trash Bag.controller using Guid(0c592e8ac7fca90498d21b28014166cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90104c2329edee2bd46582b9de91ff5d') in 0.001399 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 30.199142 seconds.
+  path: Assets/Pixel Texture/Boss
+  artifactKey: Guid(12f8ad036be071d4380ec5ba6d10d6b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss using Guid(12f8ad036be071d4380ec5ba6d10d6b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46b1e08675a79018a80dfe2eb081241d') in 0.000542 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.527613 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch
+  artifactKey: Guid(8111509a6f8c3f249bcbeb2abd89fecc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch using Guid(8111509a6f8c3f249bcbeb2abd89fecc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf628dda4b0183e772ced2c6cb8727cc') in 0.000525 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.088363 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch1.png
+  artifactKey: Guid(584fcc8fb82d4534c98d0dd3fc0dbea7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch1.png using Guid(584fcc8fb82d4534c98d0dd3fc0dbea7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4cda08bd25105d2b1be507de515c82d5') in 0.046531 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch9.png
+  artifactKey: Guid(7d6eaf7bbee0a2d4b8d7f172468f5ea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch9.png using Guid(7d6eaf7bbee0a2d4b8d7f172468f5ea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46d9869e5ccb09425379e4e521f28b8e') in 0.022985 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000556 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch7.png
+  artifactKey: Guid(74541748dd6fd43458264bbc51dcc8bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch7.png using Guid(74541748dd6fd43458264bbc51dcc8bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f532fb5060c1d9dc76d0ac51665defe') in 0.035569 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000334 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch3.png
+  artifactKey: Guid(99858940a93dc9446abcc2ffb2caf922) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch3.png using Guid(99858940a93dc9446abcc2ffb2caf922) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4cde66bf4e563a8f0142c47fd1d7d7f') in 0.029793 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch5.png
+  artifactKey: Guid(989ac9360a2ed2341b19fd2b05f1021a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch5.png using Guid(989ac9360a2ed2341b19fd2b05f1021a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '846097cbe0436293d86821b4f322ae47') in 0.038981 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000196 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch6.png
+  artifactKey: Guid(33e7277525140c741b9564cf7546135c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch6.png using Guid(33e7277525140c741b9564cf7546135c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c13c0e60e4d54b00c6944a2426da82dc') in 0.030179 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch8.png
+  artifactKey: Guid(deb62ab1aa3aa0f4d830a2dca46f6860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch8.png using Guid(deb62ab1aa3aa0f4d830a2dca46f6860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1af6792fd1f2f52086d5c2efefa987c2') in 0.027325 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch2.png
+  artifactKey: Guid(86b037a8b470c7242960bcb8993efbe5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch2.png using Guid(86b037a8b470c7242960bcb8993efbe5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9caf718e8835acd914d850668d3f8b5e') in 0.021646 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch4.png
+  artifactKey: Guid(f66cc1cfcc73ada4e8ec4af0590de96b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch4.png using Guid(f66cc1cfcc73ada4e8ec4af0590de96b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b4d528187a0dcd0d968c0c1a95af83f5') in 0.019848 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 21.042311 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch1.controller
+  artifactKey: Guid(96ba4318687c65f4d968cac5cc546e28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch1.controller using Guid(96ba4318687c65f4d968cac5cc546e28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94b28006c18dd324e4f719778fb9cca4') in 0.001247 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.884648 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch.controller
+  artifactKey: Guid(96ba4318687c65f4d968cac5cc546e28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch.controller using Guid(96ba4318687c65f4d968cac5cc546e28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '329ede2453abb29e3589fead519493a4') in 0.001607 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 89.359656 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touc.controller
+  artifactKey: Guid(96ba4318687c65f4d968cac5cc546e28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touc.controller using Guid(96ba4318687c65f4d968cac5cc546e28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3e00c9908badbd92a245233b5736062') in 0.001537 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 8.172948 seconds.
+  path: Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch.anim
+  artifactKey: Guid(3857c64845e7b994aaaf77a2e46e06b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Don`t Touch/Don`t Touch.anim using Guid(3857c64845e7b994aaaf77a2e46e06b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86f1c7880db9c5103a872981766984d8') in 0.001363 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 5.905970 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime
+  artifactKey: Guid(d7f5d56de8c499a43b01e59a52c2f631) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime using Guid(d7f5d56de8c499a43b01e59a52c2f631) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9479ee082b05f3a9c8a54260c8aa839d') in 0.000659 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.092123 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime1.png
+  artifactKey: Guid(355ae70e9553e4f428ff11ce473da908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime1.png using Guid(355ae70e9553e4f428ff11ce473da908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d13e7cc91f2cc36a8c7c648bd35ae76') in 0.038790 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime7.png
+  artifactKey: Guid(bd323b0c46ef2b845a8674d1ef6a8511) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime7.png using Guid(bd323b0c46ef2b845a8674d1ef6a8511) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6070922bd15520cb31f3437d85451cfc') in 0.027972 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime5.png
+  artifactKey: Guid(59a9f955180787943a676b6e8dd34f78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime5.png using Guid(59a9f955180787943a676b6e8dd34f78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7cbe65bbfa612200eb8a41af215a312') in 0.027661 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
   Time since last request: 0.000023 seconds.
-  path: Assets/Pixel Texture/Pass/Power.png
-  artifactKey: Guid(d66de24743f22b3479e96bce7844e804) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Pass/Power.png using Guid(d66de24743f22b3479e96bce7844e804) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bbb89bb20c8cf69b90e95aca3014b73d') in 0.036618 seconds
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime4.png
+  artifactKey: Guid(43dbb33a962e8cc43a8e96b20853a14d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime4.png using Guid(43dbb33a962e8cc43a8e96b20853a14d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e0ecef9257ba4da0527dd56135bac3dc') in 0.029511 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 7.911714 seconds.
-  path: Assets/Pixel Texture/UI/0.5Health.png
-  artifactKey: Guid(320c2a32f8fe2c542bbd2401ce12aa17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/UI/0.5Health.png using Guid(320c2a32f8fe2c542bbd2401ce12aa17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd00725b3239981368ec149a75214584c') in 0.044137 seconds
+  Time since last request: 0.000017 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime2.png
+  artifactKey: Guid(d0f7094d6d0287b48a0ec1e0fe75000d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime2.png using Guid(d0f7094d6d0287b48a0ec1e0fe75000d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '737fefcefe27fe94b2fb6c7227d8c684') in 0.030829 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000135 seconds.
-  path: Assets/Pixel Texture/UI/Health.png
-  artifactKey: Guid(725fab47aaaaf6846948e5230a41b4ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/UI/Health.png using Guid(725fab47aaaaf6846948e5230a41b4ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '514d21f4c9b61afcaa817dddf7aa4fb7') in 0.034869 seconds
+  Time since last request: 0.000094 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime6.png
+  artifactKey: Guid(0b0363acf7994964492a8e063b39e1d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime6.png using Guid(0b0363acf7994964492a8e063b39e1d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57e02db5f554f4d60335f89235870c6e') in 0.021498 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Pixel Texture/UI/Defense.png
-  artifactKey: Guid(64b4ee060b962064fb66391139ffe067) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/UI/Defense.png using Guid(64b4ee060b962064fb66391139ffe067) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b17d5855cdc0cf88385cb43d6f1a9f71') in 0.034040 seconds
+  Time since last request: 0.000016 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime3.png
+  artifactKey: Guid(0bec9e9416e2214428155c49873304c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime3.png using Guid(0bec9e9416e2214428155c49873304c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b53b1a72e1c8b3658d3dfa0b0539e840') in 0.021464 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/Pixel Texture/UI/0Health.png
-  artifactKey: Guid(a1f1005b14ded454ebc1a29220dd24bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/UI/0Health.png using Guid(a1f1005b14ded454ebc1a29220dd24bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '994a91126b6e1f16eb90222e503331a7') in 0.033749 seconds
+  Time since last request: 56.770472 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime1.controller
+  artifactKey: Guid(4055e1fbcea95154a923be7579006bc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime1.controller using Guid(4055e1fbcea95154a923be7579006bc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e50163b41d3bcdf0e4f43579c11b1cc7') in 0.001664 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
+Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 34.335505 seconds.
-  path: Assets/Pixel Texture/Monster
-  artifactKey: Guid(dc1ea9747ba84d64f9d6e2fa3da1ba60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster using Guid(dc1ea9747ba84d64f9d6e2fa3da1ba60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ea8473f985e7ecef6a825419efb7493') in 0.000565 seconds
+  Time since last request: 1.840982 seconds.
+  path: Assets/Pixel Texture/Boss/King Slime/King Slime.controller
+  artifactKey: Guid(4055e1fbcea95154a923be7579006bc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/King Slime/King Slime.controller using Guid(4055e1fbcea95154a923be7579006bc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0e8f598ae1d6e90b007bbbbde637869') in 0.001438 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 2.053859 seconds.
+  path: Assets/Pixel Texture/Boss/Robot
+  artifactKey: Guid(bf48fcba9e481c2449ddd3b4b7a1c7ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot using Guid(bf48fcba9e481c2449ddd3b4b7a1c7ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d765825e42a12e84a21aa6a33b8290e') in 0.000525 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 0.071638 seconds.
-  path: Assets/Pixel Texture/Monster/Alien.png
-  artifactKey: Guid(4fa71aef56f51494a8899ed36e60d34c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster/Alien.png using Guid(4fa71aef56f51494a8899ed36e60d34c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56ad5e667b7abb08db27c269b2b4a020') in 0.038883 seconds
+  Time since last request: 0.092949 seconds.
+  path: Assets/Pixel Texture/Boss/Robot/Robot1.png
+  artifactKey: Guid(f63af3e02b4f2bf44aeeb43c3887acb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot1.png using Guid(f63af3e02b4f2bf44aeeb43c3887acb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15ea80c52c7dc01f5e7fc7056308cae0') in 0.027865 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Pixel Texture/Monster/Drone.png
-  artifactKey: Guid(f9ec9d810f72d4c489e8853a0f0cea68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster/Drone.png using Guid(f9ec9d810f72d4c489e8853a0f0cea68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36177b9ccd7fa7320adde1a2846ce129') in 0.036864 seconds
+  Time since last request: 0.000117 seconds.
+  path: Assets/Pixel Texture/Boss/Robot/Robot4.png
+  artifactKey: Guid(c10ceb9f83828474eb9455e5a5e011cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot4.png using Guid(c10ceb9f83828474eb9455e5a5e011cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d09277dd116d0c3d3f664f7dcf7eee5') in 0.030957 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000089 seconds.
-  path: Assets/Pixel Texture/Monster/Goblin.png
-  artifactKey: Guid(f97a67d4740378f41a8f7670f945889c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster/Goblin.png using Guid(f97a67d4740378f41a8f7670f945889c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24514791cb123d3c3afcd661b6c841cf') in 0.027234 seconds
+  Time since last request: 0.000268 seconds.
+  path: Assets/Pixel Texture/Boss/Robot/Robot3.png
+  artifactKey: Guid(c10616b8ccb951147a4fe03edc3a313e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot3.png using Guid(c10616b8ccb951147a4fe03edc3a313e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31279b4efe6bc9166c3ba0a41a690c03') in 0.032682 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Pixel Texture/Monster/Slime1.png
-  artifactKey: Guid(043828f9f8afd4e4ba1f13dbe935e6c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster/Slime1.png using Guid(043828f9f8afd4e4ba1f13dbe935e6c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afcf1e527675f0462f5919b8ea56cc97') in 0.028829 seconds
+  Time since last request: 0.000017 seconds.
+  path: Assets/Pixel Texture/Boss/Robot/Robot5.png
+  artifactKey: Guid(5a6348392daa142448d02f17e7c37614) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot5.png using Guid(5a6348392daa142448d02f17e7c37614) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6356a10bc6e73ca19b07579a546e3c09') in 0.032614 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
   Time since last request: 0.000021 seconds.
-  path: Assets/Pixel Texture/Monster/Trash Bag.png
-  artifactKey: Guid(37731a7d6c1316643b16e56602116cc0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster/Trash Bag.png using Guid(37731a7d6c1316643b16e56602116cc0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e0aaec95680678322e3bb6280307f2c') in 0.028533 seconds
+  path: Assets/Pixel Texture/Boss/Robot/Robot7.png
+  artifactKey: Guid(cd84b1ee6845fae45b160372d6818c1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot7.png using Guid(cd84b1ee6845fae45b160372d6818c1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1199480f08ff54a6c9b6941135340ccd') in 0.027084 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Pixel Texture/Monster/Slime.png
-  artifactKey: Guid(880fb2aead18f994f9d471ad92f98a27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster/Slime.png using Guid(880fb2aead18f994f9d471ad92f98a27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f5ade0f51d3fad9fc0000f30408971a') in 0.028212 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Pixel Texture/Monster/Soil.png
-  artifactKey: Guid(400c5925072fdfe49ba0ce75a854882d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster/Soil.png using Guid(400c5925072fdfe49ba0ce75a854882d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad65102a1f9f365049225a40c17d7c0e') in 0.030848 seconds
+  Time since last request: 0.000024 seconds.
+  path: Assets/Pixel Texture/Boss/Robot/Robot18.png
+  artifactKey: Guid(b26549f83036b5f42807b470bea25bc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot18.png using Guid(b26549f83036b5f42807b470bea25bc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ccaa2470f17772a1b9adeac90aa183bc') in 0.022734 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
   Time since last request: 0.000030 seconds.
-  path: Assets/Pixel Texture/Monster/Goblin2.png
-  artifactKey: Guid(1cb787fc194732348b30cde2effbc6af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Monster/Goblin2.png using Guid(1cb787fc194732348b30cde2effbc6af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a718c233823b237046b541bc87db9c5') in 0.029879 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 7.410632 seconds.
-  path: Assets/Pixel Texture/Boss/Don`t Touch.png
-  artifactKey: Guid(4461124b64d6b25488a029844ce265a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Boss/Don`t Touch.png using Guid(4461124b64d6b25488a029844ce265a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b1fbaac7c5b2aac59e55fa45e0c8c2a') in 0.054331 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000161 seconds.
-  path: Assets/Pixel Texture/Boss/Witcher.png
-  artifactKey: Guid(560b27760fcb1d04aa808e4186d261a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Boss/Witcher.png using Guid(560b27760fcb1d04aa808e4186d261a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8fce3ed3d96388ad7db67a949ed31b43') in 0.032412 seconds
+  path: Assets/Pixel Texture/Boss/Robot/Robot6.png
+  artifactKey: Guid(3baabaf0c40fced4d9ed998c60b9336d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot6.png using Guid(3baabaf0c40fced4d9ed998c60b9336d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '378cc4e25b02a02b7b47aba45935c4e3') in 0.029069 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
   Time since last request: 0.000022 seconds.
-  path: Assets/Pixel Texture/Boss/King Slime.png
-  artifactKey: Guid(7814d4b7af14acd489709988ed184d55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Boss/King Slime.png using Guid(7814d4b7af14acd489709988ed184d55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '930efe3de5170b85fd99327a8fa5c61c') in 0.029388 seconds
+  path: Assets/Pixel Texture/Boss/Robot/Robot2.png
+  artifactKey: Guid(a3853542e40dc4e41be624daf521fc82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot2.png using Guid(a3853542e40dc4e41be624daf521fc82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '645e38b56dc402ce083532cd7120e709') in 0.038530 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Pixel Texture/Boss/pixil-frame-0 (5).png
-  artifactKey: Guid(d12f73d0f81de4148935531de6461f00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Pixel Texture/Boss/pixil-frame-0 (5).png using Guid(d12f73d0f81de4148935531de6461f00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2b7c2f231e58c8d6682e6431ecb69f8') in 0.029688 seconds
+  Time since last request: 11.501949 seconds.
+  path: Assets/Pixel Texture/Boss/Robot/Robot1.controller
+  artifactKey: Guid(d3206d7c48593634a99344c101495405) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot1.controller using Guid(d3206d7c48593634a99344c101495405) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2b0071f9c4af5f9bb9b08192aebe60a') in 0.001184 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.621882 seconds.
+  path: Assets/Pixel Texture/Boss/Robot/Robot.controller
+  artifactKey: Guid(d3206d7c48593634a99344c101495405) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Robot/Robot.controller using Guid(d3206d7c48593634a99344c101495405) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be8974e1d93741026565f170d09251d5') in 0.001386 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 1.294321 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher
+  artifactKey: Guid(a84d9793e2b4ad942b5ccd25c652324b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher using Guid(a84d9793e2b4ad942b5ccd25c652324b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe894318d6a0b0fd6c52d081ac18abb1') in 0.000526 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.032583 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad1.png
+  artifactKey: Guid(465fb76b7efd7114ba12e5c56f20edad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad1.png using Guid(465fb76b7efd7114ba12e5c56f20edad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8adda8763072f98509eede4dcea314b') in 0.027045 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.654 seconds
-Refreshing native plugins compatible for Editor in 6.01 ms, found 4 plugins.
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.310 seconds
-Domain Reload Profiling: 1958ms
-	BeginReloadAssembly (207ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (15ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (43ms)
-	RebuildCommonClasses (45ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (43ms)
-	LoadAllAssembliesAndSetupDomain (338ms)
-		LoadAssemblies (434ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (16ms)
-			TypeCache.Refresh (7ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (8ms)
-	FinalizeReload (1310ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (584ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (33ms)
-			SetLoadedEditorAssemblies (5ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (99ms)
-			ProcessInitializeOnLoadAttributes (394ms)
-			ProcessInitializeOnLoadMethodAttributes (42ms)
-			AfterProcessingInitializeOnLoad (10ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (18ms)
+Received Import Request.
+  Time since last request: 0.000071 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad6.png
+  artifactKey: Guid(1f3787ef55d7416448a40ff62488c6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad6.png using Guid(1f3787ef55d7416448a40ff62488c6d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b69781604b2b5a5cc231e82d4010fbb') in 0.027293 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad7.png
+  artifactKey: Guid(f1ec47ca3029da94886a03f79ce08f48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad7.png using Guid(f1ec47ca3029da94886a03f79ce08f48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61db7570803e936bcd2303a5c3b39066') in 0.020212 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad2.png
+  artifactKey: Guid(8a0fa57ce3840014891331a1f87631cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad2.png using Guid(8a0fa57ce3840014891331a1f87631cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7da4f794947dd036064c20ba3c15d5b8') in 0.019654 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad3.png
+  artifactKey: Guid(2d2598969aa15104884da0f36350d755) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad3.png using Guid(2d2598969aa15104884da0f36350d755) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2f8346f2610e3b838772a6fc1aa79c7') in 0.025651 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000137 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad5.png
+  artifactKey: Guid(65320877ca8db134daad09c8bba83841) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad5.png using Guid(65320877ca8db134daad09c8bba83841) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9763aff5fc7784200aafc98b7438e7d') in 0.020441 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad4.png
+  artifactKey: Guid(a97b82e32f6ca1f478fc09e7a81a461e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad4.png using Guid(a97b82e32f6ca1f478fc09e7a81a461e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc06eab99ce800b654980e9b43a02734') in 0.026594 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 25.229266 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad1.controller
+  artifactKey: Guid(edd20ffb234894f49b18de8b5af85d6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad1.controller using Guid(edd20ffb234894f49b18de8b5af85d6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44120634cdd254eedddb93147988a443') in 0.001719 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.455417 seconds.
+  path: Assets/Pixel Texture/Boss/Witcher/Wizrad.controller
+  artifactKey: Guid(edd20ffb234894f49b18de8b5af85d6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pixel Texture/Boss/Witcher/Wizrad.controller using Guid(edd20ffb234894f49b18de8b5af85d6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d23f4389b9f9bf85c6829c55ef0d2b9') in 0.001552 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
