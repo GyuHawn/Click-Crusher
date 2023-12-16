@@ -31,9 +31,9 @@ public class StageManager : MonoBehaviour
         {
             mainStage = 1;
             subStage = 1;
-            gameStart = true;
             StageMonsterSetting();
             SpawnMonsters();
+            gameStart = true;
         }
     }
 
@@ -46,27 +46,36 @@ public class StageManager : MonoBehaviour
     {
         if (subStage == 1)
         {
-            baseMonster = 5;
+            //baseMonster = 5;
+            baseMonster = 1;
         }
         else if (subStage == 2)
         {
-            baseMonster = 4;
-            strongMonster = 2;
+            //baseMonster = 4;
+            //strongMonster = 2;
+            baseMonster = 1;
+            strongMonster = 1;
         }
         else if (subStage == 3)
         {
-            baseMonster = 3;
-            strongMonster = 3;
+            //baseMonster = 3;
+            //strongMonster = 3;
+            baseMonster = 1;
+            strongMonster = 1;
         }
         else if (subStage == 4)
         {
-            baseMonster = 3;
-            strongMonster = 4;
+            //baseMonster = 3;
+            //strongMonster = 4;
+            baseMonster = 1;
+            strongMonster = 1;
         }
         else if (subStage == 5)
         {
-            baseMonster = 4; // 보스 스테이지에서는 기본 몬스터 없음
-            strongMonster = 3; // 보스 스테이지에서는 강화 몬스터 없음
+            //baseMonster = 4;
+            //strongMonster = 3;
+            baseMonster = 1;
+            strongMonster = 1;
             bossMonster = 1;
         }
     }

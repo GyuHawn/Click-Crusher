@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4910542}
   - component: {fileID: 4910541}
   - component: {fileID: 4910540}
+  - component: {fileID: 4910543}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -176,6 +177,18 @@ MonoBehaviour:
   - {fileID: 4668726434209911797, guid: 90004d16246468a46bc67aad7a89c80a, type: 3}
   - {fileID: 1420504613422698039, guid: 44d4bcd6011294848bc0414bbe1ec7dd, type: 3}
   - {fileID: 3878439414470102981, guid: 57afda84db01c0f42bc983622b26ebf4, type: 3}
+  stage2Monsters:
+  - {fileID: 6233018901187577752, guid: e1fd7084222fa5e42a58ae09735370dd, type: 3}
+  - {fileID: 4354138343788019845, guid: 0a8e499bc4bf5f64282a5d799a34b2bb, type: 3}
+  - {fileID: 5987989549211886757, guid: 5b667c66ff1f4844b98decee45366d23, type: 3}
+  stage3Monsters:
+  - {fileID: 5149694661625140213, guid: 56e9ddb6d04a54247b4984b86bed7e21, type: 3}
+  - {fileID: 1897845137633585263, guid: ef0ab63e60f60234b9e9d5d73df6e400, type: 3}
+  - {fileID: 5987989549211886757, guid: 5b667c66ff1f4844b98decee45366d23, type: 3}
+  stage4Monsters:
+  - {fileID: 4686160507855837747, guid: 77ec80b6575488c449fcd9b693619527, type: 3}
+  - {fileID: 1610252348850780578, guid: c816803578a035840bc4a4b8179ed1f8, type: 3}
+  - {fileID: 5987989549211886757, guid: 5b667c66ff1f4844b98decee45366d23, type: 3}
   monsterSpawnPoints:
   - {fileID: 2093476481}
   - {fileID: 711276149}
@@ -231,6 +244,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4910543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214d9444538e9234b9767bcfac6a02e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!1 &5875218
 GameObject:
   m_ObjectHideFlags: 0
