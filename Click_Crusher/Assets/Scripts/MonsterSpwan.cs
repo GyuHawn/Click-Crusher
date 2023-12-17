@@ -110,7 +110,6 @@ public class MonsterSpwan : MonoBehaviour
             }
             else if (stagerManage.mainStage == 2)
             {
-                Debug.Log("main : " + stagerManage.mainStage + " sub : " + stagerManage.subStage);
                 for (int i = 0; i < baseCount; i++)
                 {
                     InstantiateRandom(stage2Monsters[0], monsterSpawnPoints);

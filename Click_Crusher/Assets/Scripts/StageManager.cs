@@ -80,6 +80,13 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    void NextStageSetting()
+    {
+        baseMonster = 1;
+        strongMonster = 0;
+        bossMonster = 0;
+    }
+  
     void SpawnMonsters()
     {
         monsterCount = baseMonster + strongMonster + bossMonster; // 몬스터 수 설정
@@ -97,6 +104,7 @@ public class StageManager : MonoBehaviour
             mainStage++;
         }
 
+        NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
         StageMonsterSetting();
         SpawnMonsters();
     }
