@@ -15,6 +15,8 @@ public class MonsterController : MonoBehaviour
     public float attackTime;
     private float originalAttackTime;
 
+    public GameObject danager;
+
     private Animator anim;
 
     void Start()
@@ -26,6 +28,7 @@ public class MonsterController : MonoBehaviour
 
         currentHealth = maxHealth;
 
+        danager.SetActive(false);
         attack = false;
         originalAttackTime = attackTime;
     }
@@ -78,9 +81,7 @@ public class MonsterController : MonoBehaviour
 
         if (attackTime <= 0)
         {
-            attack = true;
-            anim.SetBool("Attack", true);
-            StartCoroutine(ResetAttackFlag());
+            StartCoroutine(MonsterAttack());
         }
         else
         {
@@ -88,12 +89,21 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    IEnumerator ResetAttackFlag()
+    IEnumerator MonsterAttack()
     {
+        danager.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+
+        danager.SetActive(false);
+
+        attack = true;
+        anim.SetBool("Attack", true);
+
         yield return new WaitForSeconds(1.0f);
         anim.SetBool("Attack", false);
         attack = false;
         attackTime = originalAttackTime;
+
     }
 
     public void Die()

@@ -6,6 +6,7 @@ using TMPro;
 public class StageManager : MonoBehaviour
 {
     private MonsterSpwan monsterSpawn;
+    private SelectItem selectItem;
 
     private bool gameStart = false; // 게임시작 여부
 
@@ -22,6 +23,7 @@ public class StageManager : MonoBehaviour
     private void Awake()
     {
         monsterSpawn = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
+        selectItem = GameObject.Find("Manager").GetComponent<SelectItem>();
     }
 
     void Start()
@@ -102,10 +104,18 @@ public class StageManager : MonoBehaviour
         {
             subStage = 1;
             mainStage++;
+
+            selectItem.selectItemMenu.SetActive(true);
+            StartCoroutine(DelayStage());
         }
 
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
         StageMonsterSetting();
         SpawnMonsters();
+    }
+
+    IEnumerator DelayStage()
+    {
+        yield return new WaitForSeconds(3f);
     }
 }
