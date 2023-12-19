@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3879901064457098563}
   - component: {fileID: 4302042256079168423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Danager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 8116723668272489436}
   - component: {fileID: -1914172369673208207}
   - component: {fileID: 7271773474787821027}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: King Slime
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,12 +184,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712808c28a7bd86428971fb5ab087bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 2
   maxHealth: 50
   currentHealth: 0
   attack: 0
   attackTime: 10
   danager: {fileID: 1968297095832017761}
+  dieEffect: {fileID: 0}
 --- !u!61 &-1914172369673208207
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6321960445670993677}
   - component: {fileID: 3247707031269952755}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Danager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,9 +96,10 @@ GameObject:
   - component: {fileID: 2717837474348829015}
   - component: {fileID: -1046502063397026569}
   - component: {fileID: 7859330576798106848}
-  m_Layer: 0
+  - component: {fileID: -6303223954297844607}
+  m_Layer: 7
   m_Name: Wizrad
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,9 +229,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712808c28a7bd86428971fb5ab087bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 3
   maxHealth: 50
   currentHealth: 0
   attack: 0
-  attackTime: 0
+  attackTime: 10
   danager: {fileID: 1855906955496412482}
+  dieEffect: {fileID: 0}
+--- !u!95 &-6303223954297844607
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5987989549211886757}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8bd272020a1aa234592d0196218c0b5b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

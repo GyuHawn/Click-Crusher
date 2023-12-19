@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6135655345003901217}
   - component: {fileID: 1687081350343884645}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Danager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 2266418150959188243}
   - component: {fileID: 7910757609517268617}
   - component: {fileID: 4481032287689546005}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Drone
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,12 +183,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712808c28a7bd86428971fb5ab087bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 2
   maxHealth: 20
   currentHealth: 0
   attack: 0
-  attackTime: 0
+  attackTime: 5
   danager: {fileID: 1753894967411054716}
+  dieEffect: {fileID: 0}
 --- !u!61 &4481032287689546005
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -7,15 +7,17 @@ public class MonsterController : MonoBehaviour
     private StageManager stagerManager;
     private PlayerController playerController;
 
-    public float damage;
+    public int damage;
     public float maxHealth;
     public float currentHealth;
 
     public bool attack;
     public float attackTime;
     private float originalAttackTime;
+    private bool boosAttack;
 
     public GameObject danager;
+    public GameObject dieEffect;
 
     private Animator anim;
 
@@ -30,6 +32,7 @@ public class MonsterController : MonoBehaviour
 
         danager.SetActive(false);
         attack = false;
+        boosAttack = false;
         originalAttackTime = attackTime;
     }
 
@@ -40,7 +43,7 @@ public class MonsterController : MonoBehaviour
             Die();
         }
 
-        // PC ���콺 Ŭ��
+        // PC 마우스 클릭
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -50,7 +53,7 @@ public class MonsterController : MonoBehaviour
             {
                 if (attack)
                 {
-                    playerController.currentHealth -= damage;
+                    playerController.playerHealth -= damage;
                 }
                 else
                 {
@@ -59,7 +62,7 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-        // ����� ��ġ
+        // 모바일 터치
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -70,13 +73,19 @@ public class MonsterController : MonoBehaviour
             {
                 if(attack)
                 {
-                    playerController.currentHealth -= damage;
+                    playerController.playerHealth -= damage;
                 }
                 else
                 {
                     currentHealth -= playerController.damage;
                 }
             }
+        }
+
+        if (gameObject.tag == "Boss" && attack && !playerController.defending && !boosAttack)
+        { 
+            playerController.playerHealth -= damage; // 보스가 한번만 공격하도록
+            boosAttack = true;
         }
 
         if (attackTime <= 0)
@@ -98,6 +107,7 @@ public class MonsterController : MonoBehaviour
 
         attack = true;
         anim.SetBool("Attack", true);
+        boosAttack = false;
 
         yield return new WaitForSeconds(1.0f);
         anim.SetBool("Attack", false);
@@ -108,6 +118,21 @@ public class MonsterController : MonoBehaviour
 
     public void Die()
     {
+        StartCoroutine(MonsterDie());
+    }
+
+    IEnumerator MonsterDie()
+    {
+        if(dieEffect != null)
+        {
+            SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+            renderer.enabled = false;
+
+            dieEffect.SetActive(true);
+
+            yield return new WaitForSeconds(1f);
+        }
+
         stagerManager.monsterCount--;
         stagerManager.NextStage();
 
