@@ -105,7 +105,7 @@ public class StageManager : MonoBehaviour
             subStage = 1;
             mainStage++;
 
-            selectItem.selectItemMenu.SetActive(true);
+            selectItem.ItemSelect();
             StartCoroutine(DelayStage());
         }
 
