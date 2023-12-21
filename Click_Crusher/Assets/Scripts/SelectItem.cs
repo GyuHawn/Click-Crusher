@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class SelectItem : MonoBehaviour
 {
@@ -21,104 +22,191 @@ public class SelectItem : MonoBehaviour
     public TMP_Text itemName;
     public TMP_Text itemEx;
 
+    public int fireLv;
+    public int fireShotLv;
+    public int holyShiledLv;
+    public int holyShotLv;
+    public int meleeLv;
+    public int posionLv;
+    public int rockLv;
+    public int sturnLv;
+
+    public bool fireSelect;
+    public bool fireShotSelect;
+    public bool holyShiledSelect;
+    public bool holyShotSelect;
+    public bool meleeSelect;
+    public bool posionSelect;
+    public bool rockSelect;
+    public bool sturnSelect;
+
     public GameObject selectItemMenu;
 
     public Canvas canvas;
+
+    /*public void ItemSelect()
+    {
+        // 1. items의 아이템중 랜덤으로 3개의 아이템 선택
+        // 2. itemPos1,2,3 위치로 차례로 하나씩 이동
+
+        // 5. 만약 selectedItems의 카운트가 4개가 되었다면 items중에서 고르지않고 selectedItems 중에서 선택하도록
+    }
+
+    // 아이템 선택 버튼
+    public void CloseMenu()
+    {
+        // 3. 랜덤으로 선택된 아이템 중 선택한 아이템의 selectNum에 맞는 아이템을 selectItemPos1에 생성(Instantiate)(canvas안에 생성되도록)
+        // 3-1. 선택한 아이템이 맞는 bool값을 true로
+        // 4. selectItemPos1에 이미 아이템이 생성되었다면 selectItemPos2에(2가 있다면 3, 3에 있다면 4)
+        // 5. 선택한 아이템은 selectedItems에 추가
+
+        // 6. selectedItems 카운트가 4이상이라면 이후부터는 생성은 하지말고 Lv만 오르도록 
+    }*/
 
     public void ItemSelect()
     {
         selectItemMenu.SetActive(true);
 
-        if (selectedItems.Count < 4)
+        // 1. items의 아이템 중 랜덤으로 3개의 아이템 선택
+        selectedItems.Clear(); // 기존에 선택된 아이템 초기화
+        for (int i = 0; i < 3; i++)
         {
-            List<GameObject> RandomItem = new List<GameObject>(items);
+            int randomIndex = Random.Range(0, items.Length);
+            GameObject selectedItem = items[randomIndex];
+            selectedItems.Add(selectedItem);
 
-            for (int i = 0; i < 3; i++)
-            {
-                int randomIndex = Random.Range(0, RandomItem.Count);
+            // 해당 아이템을 itemPos1, 2, 3 위치로 이동
+            GameObject itemPos = null;
+            if (i == 0) itemPos = itemPos1;
+            else if (i == 1) itemPos = itemPos2;
+            else if (i == 2) itemPos = itemPos3;
 
-                // 중복 체크
-                while (selectedItems.Contains(RandomItem[randomIndex]))
-                {
-                    randomIndex = Random.Range(0, RandomItem.Count);
-                }
-
-                switch (i)
-                {
-                    case 0:
-                        RandomItem[randomIndex].transform.position = itemPos1.transform.position;
-                        break;
-                    case 1:
-                        RandomItem[randomIndex].transform.position = itemPos2.transform.position;
-                        break;
-                    case 2:
-                        RandomItem[randomIndex].transform.position = itemPos3.transform.position;
-                        break;
-                }
-
-                RandomItem.RemoveAt(randomIndex);
-            }
+            selectedItem.transform.position = itemPos.transform.position;
         }
-        else
-        {
-            // 이미 4개의 아이템이 선택된 경우의 처리
-            for (int i = 0; i < 3; i++)
-            {
-                int randomIndex = Random.Range(0, selectedItems.Count);
 
-                switch (i)
-                {
-                    case 0:
-                        selectedItems[randomIndex].transform.position = itemPos1.transform.position;
-                        break;
-                    case 1:
-                        selectedItems[randomIndex].transform.position = itemPos2.transform.position;
-                        break;
-                    case 2:
-                        selectedItems[randomIndex].transform.position = itemPos3.transform.position;
-                        break;
-                }
-            }
+        // 5. 만약 selectedItems의 카운트가 4개가 되었다면 items 중에서 고르지 않고 selectedItems 중에서 선택
+        if (selectedItems.Count >= 4)
+        {
+            selectNum = Random.Range(0, selectedItems.Count) + 1;
         }
     }
 
     public void CloseMenu()
     {
-        if (selectNum != 0)
-        {
-            selectedItems.Add(items[selectNum - 1]);
+        GameObject newItem = null;
 
-            // 선택된 아이템을 selectItemPos1,2,3,4로 이동
-            switch (selectedItems.Count)
+        // 3. 랜덤으로 선택된 아이템 중 선택한 아이템의 selectNum에 맞는 아이템을 selectItemPos에 생성(Instantiate)(canvas 안에 생성되도록)
+        switch (selectedItems.Count)
+        {
+            case 1:
+                newItem = Instantiate(items[selectNum - 1], selectItemPos1.transform.position, Quaternion.identity);
+                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.position = selectItemPos1.transform.position;
+                break;
+            case 2:
+                newItem = Instantiate(items[selectNum - 1], selectItemPos2.transform.position, Quaternion.identity);
+                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.position = selectItemPos2.transform.position;
+                break;
+            case 3:
+                newItem = Instantiate(items[selectNum - 1], selectItemPos3.transform.position, Quaternion.identity);
+                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.position = selectItemPos3.transform.position;
+                break;
+            case 4:
+                newItem = Instantiate(items[selectNum - 1], selectItemPos4.transform.position, Quaternion.identity);
+                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.position = selectItemPos4.transform.position;
+                break;
+        }
+
+        // 3-1. 선택한 아이템이 맞는 bool값을 true로
+        if (newItem != null)
+        {
+            UpdateBoolValues(newItem.name);
+
+            // 4. selectItemPos에 이미 아이템이 생성되었다면 selectItemPos2에(2가 있다면 3, 3에 있다면 4)
+            int nextPos = Mathf.Min(selectedItems.Count + 1, 4);
+            GameObject nextSelectItemPos = null;
+            switch (nextPos)
             {
                 case 1:
-                    selectedItems[0].transform.position = selectItemPos1.transform.position;
+                    nextSelectItemPos = selectItemPos1;
                     break;
                 case 2:
-                    selectedItems[1].transform.position = selectItemPos2.transform.position;
+                    nextSelectItemPos = selectItemPos2;
                     break;
                 case 3:
-                    selectedItems[2].transform.position = selectItemPos3.transform.position;
+                    nextSelectItemPos = selectItemPos3;
                     break;
                 case 4:
-                    selectedItems[3].transform.position = selectItemPos4.transform.position;
+                    nextSelectItemPos = selectItemPos4;
                     break;
+            }
+
+            // 5. 선택한 아이템은 selectedItems에 추가
+            selectedItems.Add(newItem);
+
+            // 6. selectedItems 카운트가 4 이상이라면 이후부터는 생성은 하지 말고 Lv만 오르도록
+            if (selectedItems.Count < 4)
+            {
+                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.position = nextSelectItemPos.transform.position;
             }
         }
 
-        foreach (var item in items)
+        // 모든 아이템을 숨김
+        foreach (GameObject item in items)
         {
-            // 선택되지 않은 아이템만 (0, 2000) 위치로 이동
-            if (!selectedItems.Contains(item))
-            {
-                item.transform.position = new Vector3(0, 2000, 0);
-            }
-        }   
+            item.transform.position = new Vector3(0, 2000, 0);
+        }
 
+        // 메뉴 닫기
         selectItemMenu.SetActive(false);
     }
 
 
+    void UpdateBoolValues(string itemName)
+    {
+        // 선택한 아이템에 따라 bool 값을 업데이트
+        switch (itemName)
+        {
+            case "Fire":
+                fireSelect = true;
+                fireLv++;
+                break;
+            case "FireShot":
+                fireShotSelect = true;
+                fireShotLv++;
+                break;
+            case "HolyShiled":
+                holyShiledSelect = true;
+                holyShiledLv++;
+                break;
+            case "HolyShot":
+                holyShotSelect = true;
+                holyShotLv++;
+                break;
+            case "Melee":
+                meleeSelect = true;
+                meleeLv++;
+                break;
+            case "Posion":
+                posionSelect = true;
+                posionLv++;
+                break;
+            case "Rock":
+                rockSelect = true;
+                rockLv++;
+                break;
+            case "Sturn":
+                sturnSelect = true;
+                sturnLv++;
+                break;
+        }
+    }
+
+    // 버튼에 할당되어 있음
     public void Fire()
     {
         //items[0]

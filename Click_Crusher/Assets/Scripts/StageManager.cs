@@ -100,13 +100,23 @@ public class StageManager : MonoBehaviour
         if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
 
         subStage++;
+
+        selectItem.ItemSelect();
+        StartCoroutine(DelayStage());
+
+        if (subStage == 3)
+        {
+            //selectItem.ItemSelect();
+            //StartCoroutine(DelayStage());
+        }
+
         if (subStage > 5)
         {
             subStage = 1;
             mainStage++;
 
-            selectItem.ItemSelect();
-            StartCoroutine(DelayStage());
+            //selectItem.ItemSelect();
+            //StartCoroutine(DelayStage());
         }
 
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
@@ -116,6 +126,6 @@ public class StageManager : MonoBehaviour
 
     IEnumerator DelayStage()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
     }
 }
