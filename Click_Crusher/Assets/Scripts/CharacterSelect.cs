@@ -18,12 +18,8 @@ public class CharacterSelect : MonoBehaviour
     public GameObject useLight;
     public GameObject useLuck;
 
-    void Start()
-    {
-        
-    }
+    public int selectChar;
 
-    
     void Update()
     {
         if (waterChar)
@@ -47,6 +43,8 @@ public class CharacterSelect : MonoBehaviour
         lightEx.SetActive(false);
         luckEx.SetActive(false);
         waterChar = true;
+
+        selectChar = 1;
     }
 
     public void WaterChar()
@@ -58,6 +56,8 @@ public class CharacterSelect : MonoBehaviour
             lightEx.SetActive(false);
             luckEx.SetActive(false);
             lightChar = true;
+
+            selectChar = 2;
         }
     }
 
@@ -70,6 +70,8 @@ public class CharacterSelect : MonoBehaviour
             waterEx.SetActive(false);
             luckEx.SetActive(false);
             luckChar = true;
+
+            selectChar = 3;
         }
     }
 
@@ -81,11 +83,14 @@ public class CharacterSelect : MonoBehaviour
             rockEx.SetActive(false);
             waterEx.SetActive(false);
             lightEx.SetActive(false);
+
+            selectChar = 4;
         }
     }
 
     public void GameStart()
     {
+        PlayerPrefs.SetInt("SelectChar", selectChar);
         LodingController.LoadScene("Game");
     }
 }
