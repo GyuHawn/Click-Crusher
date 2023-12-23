@@ -6,6 +6,7 @@ public class MonsterController : MonoBehaviour
 {
     private StageManager stagerManager;
     private PlayerController playerController;
+    private ItemSkill itemSkill;
 
     public int damage;
     public float maxHealth;
@@ -25,6 +26,7 @@ public class MonsterController : MonoBehaviour
     {
         stagerManager = GameObject.Find("Manager").GetComponent<StageManager>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
+        itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
 
         anim = GetComponent<Animator>();
 
@@ -44,7 +46,7 @@ public class MonsterController : MonoBehaviour
         }
 
         // PC 마우스 클릭
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !itemSkill.fireShotReady)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
@@ -63,7 +65,7 @@ public class MonsterController : MonoBehaviour
         }
 
         // 모바일 터치
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && !itemSkill.fireShotReady)
         {
             Touch touch = Input.GetTouch(0);
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
@@ -137,5 +139,13 @@ public class MonsterController : MonoBehaviour
         stagerManager.NextStage();
 
         Destroy(gameObject);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Fire"))
+        {
+            Debug.Log("불에닿음");
+        }
     }
 }
