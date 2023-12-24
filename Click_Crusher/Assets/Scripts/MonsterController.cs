@@ -19,6 +19,10 @@ public class MonsterController : MonoBehaviour
 
     public GameObject danager;
     public GameObject dieEffect;
+    public GameObject sturn;
+
+    // 플레이어 기술 관련
+    public bool stop; // 기절중인지
 
     private Animator anim;
 
@@ -33,6 +37,7 @@ public class MonsterController : MonoBehaviour
         currentHealth = maxHealth;
 
         danager.SetActive(false);
+        stop = false;
         attack = false;
         boosAttack = false;
         originalAttackTime = attackTime;
@@ -43,6 +48,15 @@ public class MonsterController : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+
+        if (stop)
+        {
+            anim.enabled = false;
+        }
+        else
+        {
+            anim.enabled = true;
         }
 
         // PC 마우스 클릭
@@ -125,7 +139,8 @@ public class MonsterController : MonoBehaviour
 
     IEnumerator MonsterDie()
     {
-        if(dieEffect != null)
+
+        if (dieEffect != null)
         {
             SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
             renderer.enabled = false;
@@ -138,7 +153,14 @@ public class MonsterController : MonoBehaviour
         stagerManager.monsterCount--;
         stagerManager.NextStage();
 
-        Destroy(gameObject);
+        if (stop)
+        {
+            itemSkill.DestroyMonster(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

@@ -38,7 +38,7 @@ public class SelectItem : MonoBehaviour
     public int passLv;
     public int fireLv;
     public int fireShotLv;
-    public int holyShiledLv;
+    public int holyWaveLv;
     public int holyShotLv;
     public int meleeLv;
     public int posionLv;
@@ -47,7 +47,7 @@ public class SelectItem : MonoBehaviour
 
     public bool fireSelect;
     public bool fireShotSelect;
-    public bool holyShiledSelect;
+    public bool holyWaveSelect;
     public bool holyShotSelect;
     public bool meleeSelect;
     public bool posionSelect;
@@ -251,7 +251,7 @@ public class SelectItem : MonoBehaviour
         {
             case "Fire": return fireLv;
             case "Fire Shot": return fireShotLv;
-            case "Holy Shiled": return holyShiledLv;
+            case "Holy Wave": return holyWaveLv;
             case "Holy Shot": return holyShotLv;
             case "Melee": return meleeLv;
             case "Posion": return posionLv;
@@ -325,7 +325,7 @@ public class SelectItem : MonoBehaviour
                 fireShotLv++;
                 break;
             case 3:
-                holyShiledLv++;
+                holyWaveLv++;
                 break;
             case 4:
                 holyShotLv++;
@@ -373,15 +373,15 @@ public class SelectItem : MonoBehaviour
             itemEx.text = "넓은 범위에 불꽃을 퍼뜨려 대량의 데미지를 입힘니다.";
         }
     }
-    public void HolyShiled()
+    public void HolyWave()
     {
         if (itemSelecting)
         {
             //items[2]
             selectedItem = true;
             selectNum = 3;
-            itemName.text = "빛의 보호막";
-            itemEx.text = "한 번의 공격을 완벽하게 방어하는 빛의 방패를 소환합니다.";
+            itemName.text = "빛의 파동";
+            itemEx.text = "빛의 파동이 일렁이며 맵 전체에 에너지를 퍼뜨려, 일정 시간 동안 적들에게 지속적인 피해를 입힙니다.";
         }
     }
     public void HolyShot()

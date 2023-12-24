@@ -119,6 +119,7 @@ Transform:
   m_Children:
   - {fileID: 3870664032101625304}
   - {fileID: 1503051873140132551}
+  - {fileID: 3362269174900092071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6853183666985330526
@@ -192,6 +193,7 @@ MonoBehaviour:
   attackTime: 5
   danager: {fileID: 914078803259523554}
   dieEffect: {fileID: 1583531501855458294}
+  sturn: {fileID: 1561941023121855241}
 --- !u!61 &-7084965480941929197
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -258,6 +260,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1561941023121855241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3362269174900092071}
+  m_Layer: 6
+  m_Name: Sturn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3362269174900092071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561941023121855241}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3730729964679469470}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7609282320185949030
 PrefabInstance:
   m_ObjectHideFlags: 0

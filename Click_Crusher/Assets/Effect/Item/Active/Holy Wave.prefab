@@ -9534,7 +9534,7 @@ GameObject:
   - component: {fileID: 198858562690846188}
   - component: {fileID: 199240645737875422}
   m_Layer: 0
-  m_Name: Holy Barrier
+  m_Name: Holy Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
