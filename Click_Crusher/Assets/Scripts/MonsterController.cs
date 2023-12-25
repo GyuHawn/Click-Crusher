@@ -12,6 +12,9 @@ public class MonsterController : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
 
+    // 피격 간격
+    private bool canTakeDamage = true;
+
     public bool attack;
     public float attackTime;
     private float originalAttackTime;
@@ -24,6 +27,7 @@ public class MonsterController : MonoBehaviour
     // 플레이어 기술 관련
     public bool stop; // 기절중인지
 
+    SpriteRenderer spriteRenderer;
     private Animator anim;
 
     void Start()
@@ -32,6 +36,7 @@ public class MonsterController : MonoBehaviour
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
         currentHealth = maxHealth;
@@ -65,7 +70,7 @@ public class MonsterController : MonoBehaviour
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            if (hit.collider != null && hit.collider.gameObject == gameObject && canTakeDamage)
             {
                 if (attack)
                 {
@@ -73,7 +78,22 @@ public class MonsterController : MonoBehaviour
                 }
                 else
                 {
-                    currentHealth -= playerController.damage;
+                    if (itemSkill.meleeReady)
+                    {
+                        for(int i = 0; i < 4; i++)
+                        {
+                            currentHealth -= playerController.damage;
+                            HitMonster(0.2f, 0.1f);
+                            Debug.Log("ss");
+                        }
+                        HitMonster(1f, 0.2f);
+                    }
+                    else
+                    {
+                        currentHealth -= playerController.damage;
+                        HitMonster(1f, 0.2f);
+                    }
+                    
                 }
             }
         }
@@ -85,7 +105,7 @@ public class MonsterController : MonoBehaviour
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            if (hit.collider != null && hit.collider.gameObject == gameObject && canTakeDamage)
             {
                 if(attack)
                 {
@@ -93,7 +113,20 @@ public class MonsterController : MonoBehaviour
                 }
                 else
                 {
-                    currentHealth -= playerController.damage;
+                    if (itemSkill.meleeReady)
+                    {
+                        for (int i = 0; i < itemSkill.meleeNum; i++)
+                        {
+                            currentHealth -= playerController.damage;
+                            HitMonster(0.3f, 0.2f);
+                        }
+                        HitMonster(1f, 0.2f);
+                    }
+                    else
+                    {
+                        currentHealth -= playerController.damage;
+                        HitMonster(1f, 0.2f);
+                    }
                 }
             }
         }
@@ -112,7 +145,16 @@ public class MonsterController : MonoBehaviour
         {
             attackTime -= Time.deltaTime;
         }
+
+        // 플레이어 아이템 발동시 데미지
+        // holy Wave
+        if (itemSkill.holyWave && canTakeDamage)
+        {
+            currentHealth -= itemSkill.holyWaveDamage;
+            HitMonster(1f, 0.2f);
+        }
     }
+
 
     IEnumerator MonsterAttack()
     {
@@ -130,6 +172,28 @@ public class MonsterController : MonoBehaviour
         attack = false;
         attackTime = originalAttackTime;
 
+    }
+
+    public void HitMonster(float damageCooldown, float colorChangeTime)
+    {
+        if (canTakeDamage)
+        {
+            spriteRenderer.color = Color.red;
+            StartCoroutine(BackColor(colorChangeTime));
+            StartCoroutine(DamageCooldown(damageCooldown));
+        }
+    }
+
+    IEnumerator BackColor(float time)
+    {
+        yield return new WaitForSeconds(time);
+        spriteRenderer.color = Color.white;
+    }
+    IEnumerator DamageCooldown(float damageCooldown)
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(damageCooldown);
+        canTakeDamage = true;
     }
 
     public void Die()
@@ -163,11 +227,15 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Fire"))
+        if (collision.gameObject.tag == "HolyShot")
         {
-            Debug.Log("불에닿음");
+            if (canTakeDamage)
+            {
+                currentHealth -= itemSkill.holyShotDamage;
+                HitMonster(0.5f, 0.2f);
+            }
         }
     }
 }

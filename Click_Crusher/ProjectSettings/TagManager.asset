@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - Boss
   - Fire
+  - HolyShot
   layers:
   - Default
   - TransparentFX

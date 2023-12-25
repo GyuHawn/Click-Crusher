@@ -9,6 +9,7 @@ public class ItemSkill : MonoBehaviour
     private SelectItem selectItem;
 
     // fire
+    private GameObject fireInstance;
     public GameObject fireEffect;
     public Transform firePos;
     public Vector2 fireBoxSize;
@@ -21,12 +22,16 @@ public class ItemSkill : MonoBehaviour
     public int fireShotSubNum;
 
     // holyWave
+    private GameObject WaveInstance;
     public GameObject holyWaveEffect;
     public Transform holyWavePos;
+    public bool holyWave;
+    public float holyWaveDamage;
 
     // holyShot
     public GameObject holyShotEffect;
     public bool holyShotReady;
+    public float holyShotDamage;
 
     // melee
     public GameObject meleeEffect;
@@ -50,11 +55,15 @@ public class ItemSkill : MonoBehaviour
     {
         selectItem = GameObject.Find("Manager").GetComponent<SelectItem>();
 
+        // 사용준비
         fireShotReady = false;
         holyShotReady = false;
         meleeReady = false;
         posionReady = false;
         rockReady = false;
+
+        // 사용중인지
+        holyWave = false;
     }
 
     void Update()
@@ -114,7 +123,7 @@ public class ItemSkill : MonoBehaviour
 
             if (hit.collider != null)
             {
-                Melee(hit.point);
+                Melee(hit.point, 4);
 
                 if (meleeNum <= 0)
                 {
@@ -151,7 +160,7 @@ public class ItemSkill : MonoBehaviour
 
                 // firePos를 기준으로 랜덤한 위치에 불 효과 생성
                 Vector3 randomPos = firePos.position + new Vector3(randomX, randomY, 0);
-                GameObject fireInstance = Instantiate(fireEffect, randomPos, Quaternion.Euler(-90, 0, 0));
+                fireInstance = Instantiate(fireEffect, randomPos, Quaternion.Euler(-90, 0, 0));
 
                 // 생성한 불 효과를 3초 후에 제거
                 Destroy(fireInstance, 3f);
@@ -193,14 +202,24 @@ public class ItemSkill : MonoBehaviour
     }
 
     // holyWave --------------------------------
+    
     public void HolyWave()
     {
         if (!selectItem.itemSelecting)
         {
-            GameObject WaveInstance = Instantiate(holyWaveEffect, holyWavePos.position, Quaternion.identity);
+            WaveInstance = Instantiate(holyWaveEffect, holyWavePos.position, Quaternion.identity);
+            holyWave = true;
 
             Destroy(WaveInstance, 3f);
+            StartCoroutine(DestroyWave());
         }
+    }
+
+    IEnumerator DestroyWave()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(WaveInstance);
+        holyWave = false;
     }
 
     // holyShot --------------------------------
@@ -216,7 +235,22 @@ public class ItemSkill : MonoBehaviour
     {
         GameObject holyShotInstance = Instantiate(holyShotEffect, targetPosition, Quaternion.identity);
 
-        Destroy(holyShotInstance, 5f);
+        StartCoroutine(RotateHolyShot(holyShotInstance, 5f));
+    }
+
+    private IEnumerator RotateHolyShot(GameObject holyShotInstance, float duration)
+    {
+        float elapsedTime = 0f;
+        float rotationSpeed = 360f / duration;
+
+        while (elapsedTime < duration)
+        {
+            holyShotInstance.transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(holyShotInstance); 
     }
 
     // melee --------------------------------
@@ -229,12 +263,25 @@ public class ItemSkill : MonoBehaviour
         }
     }
 
-    public void Melee(Vector3 targetPosition)
+    public void Melee(Vector3 targetPosition, int numEffects)
     {
-        GameObject meleeInstance = Instantiate(meleeEffect, targetPosition, Quaternion.identity);
-
+        StartCoroutine(MeleeInstantiate(targetPosition , numEffects));
         meleeNum--;
-        Destroy(meleeInstance, 0.5f);
+    }
+
+    IEnumerator MeleeInstantiate(Vector3 targetPosition, int numEffects)
+    {
+        for (int i = 0; i < numEffects; i++)
+        {
+            Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+            Vector3 spawnPosition = targetPosition + randomOffset;
+
+            GameObject meleeInstance = Instantiate(meleeEffect, spawnPosition, Quaternion.identity);
+
+            Destroy(meleeInstance, 0.5f);
+
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     // posion --------------------------------
