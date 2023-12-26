@@ -14,24 +14,29 @@ public class ItemSkill : MonoBehaviour
     public Transform firePos;
     public Vector2 fireBoxSize;
     public int fireNum;
+    public float fireDamage;
 
     // fireShot
     public GameObject fireShotEffect;
     public GameObject fireShotSub;
     public bool fireShotReady;
     public int fireShotSubNum;
+    public float fireShotDamage;
+    public float fireShoSubDamage;
 
     // holyWave
     private GameObject WaveInstance;
     public GameObject holyWaveEffect;
     public Transform holyWavePos;
     public bool holyWave;
+    public float holyWaveTime;
     public float holyWaveDamage;
 
     // holyShot
     public GameObject holyShotEffect;
     public bool holyShotReady;
     public float holyShotDamage;
+    public float holyShotTime;
 
     // melee
     public GameObject meleeEffect;
@@ -42,14 +47,18 @@ public class ItemSkill : MonoBehaviour
     // posion
     public GameObject posionEffect;
     public bool posionReady;
+    public float posionTime;
+    public float poisonDamage;
 
     // rock
     public GameObject rockEffect;
     public bool rockReady;
+    public float rockDamage;
 
     //sturn
     public GameObject sturnEffect;
     public GameObject sturnImage;
+    public float sturnTime;
 
     void Start()
     {
@@ -71,6 +80,11 @@ public class ItemSkill : MonoBehaviour
         fireNum = 3 + selectItem.fireLv;
         fireShotSubNum = 3 + selectItem.fireShotLv;
         meleeMaxNum = 5 + selectItem.meleeLv;
+        holyWaveTime = 3 + selectItem.holyWaveLv;
+        holyShotTime = 3 + selectItem.holyShotLv;
+        posionTime = 3 + selectItem.posionLv;
+        rockDamage = 5 * selectItem.rockLv;
+        sturnTime = 3 + selectItem.sturnLv;
 
         // fireShot
         if (fireShotReady && (Input.GetMouseButtonDown(0) || Input.touchCount > 0))
@@ -110,7 +124,6 @@ public class ItemSkill : MonoBehaviour
             if (hit.collider != null)
             {
                 Rock(hit.point);
-                rockReady = false;
             }
         }
 
@@ -210,14 +223,14 @@ public class ItemSkill : MonoBehaviour
             WaveInstance = Instantiate(holyWaveEffect, holyWavePos.position, Quaternion.identity);
             holyWave = true;
 
-            Destroy(WaveInstance, 3f);
+            Destroy(WaveInstance, holyWaveTime);
             StartCoroutine(DestroyWave());
         }
     }
 
     IEnumerator DestroyWave()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(holyWaveTime);
         Destroy(WaveInstance);
         holyWave = false;
     }
@@ -235,7 +248,7 @@ public class ItemSkill : MonoBehaviour
     {
         GameObject holyShotInstance = Instantiate(holyShotEffect, targetPosition, Quaternion.identity);
 
-        StartCoroutine(RotateHolyShot(holyShotInstance, 5f));
+        StartCoroutine(RotateHolyShot(holyShotInstance, holyShotTime));
     }
 
     private IEnumerator RotateHolyShot(GameObject holyShotInstance, float duration)
@@ -252,7 +265,7 @@ public class ItemSkill : MonoBehaviour
 
         Destroy(holyShotInstance); 
     }
-
+  
     // melee --------------------------------
     public void MeleeReady()
     {
@@ -348,7 +361,7 @@ public class ItemSkill : MonoBehaviour
 
     IEnumerator Removestun()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(sturnTime);
 
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
         foreach (GameObject monster in monsters)

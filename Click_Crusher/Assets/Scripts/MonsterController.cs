@@ -25,7 +25,9 @@ public class MonsterController : MonoBehaviour
     public GameObject sturn;
 
     // 플레이어 기술 관련
+    public bool fired; // 불
     public bool stop; // 기절중인지
+    public bool poisoned; // 중독
 
     SpriteRenderer spriteRenderer;
     private Animator anim;
@@ -80,20 +82,31 @@ public class MonsterController : MonoBehaviour
                 {
                     if (itemSkill.meleeReady)
                     {
-                        for(int i = 0; i < 4; i++)
+                        for (int i = 0; i < 4; i++)
                         {
                             currentHealth -= playerController.damage;
                             HitMonster(0.2f, 0.1f);
-                            Debug.Log("ss");
                         }
-                        HitMonster(1f, 0.2f);
+                        HitMonster(0.5f, 0.2f);
+                    }
+                    else if (itemSkill.rockReady)
+                    {
+                        currentHealth -= (playerController.damage + itemSkill.rockDamage);
+                        itemSkill.rockReady = false;
+                        HitMonster(0.5f, 0.2f);
+                    }
+                    else if (itemSkill.fireShotReady)
+                    {
+                        currentHealth -= (playerController.damage + itemSkill.fireShotDamage);
+                        itemSkill.fireShotReady = false;
+                        HitMonster(0.5f, 0.2f);
                     }
                     else
                     {
                         currentHealth -= playerController.damage;
-                        HitMonster(1f, 0.2f);
+                        HitMonster(0.5f, 0.2f);
                     }
-                    
+
                 }
             }
         }
@@ -107,7 +120,7 @@ public class MonsterController : MonoBehaviour
 
             if (hit.collider != null && hit.collider.gameObject == gameObject && canTakeDamage)
             {
-                if(attack)
+                if (attack)
                 {
                     playerController.playerHealth -= damage;
                 }
@@ -120,19 +133,19 @@ public class MonsterController : MonoBehaviour
                             currentHealth -= playerController.damage;
                             HitMonster(0.3f, 0.2f);
                         }
-                        HitMonster(1f, 0.2f);
+                        HitMonster(0.5f, 0.2f);
                     }
                     else
                     {
                         currentHealth -= playerController.damage;
-                        HitMonster(1f, 0.2f);
+                        HitMonster(0.5f, 0.2f);
                     }
                 }
             }
         }
 
         if (gameObject.tag == "Boss" && attack && !playerController.defending && !boosAttack)
-        { 
+        {
             playerController.playerHealth -= damage; // 보스가 한번만 공격하도록
             boosAttack = true;
         }
@@ -150,11 +163,46 @@ public class MonsterController : MonoBehaviour
         // holy Wave
         if (itemSkill.holyWave && canTakeDamage)
         {
-            currentHealth -= itemSkill.holyWaveDamage;
-            HitMonster(1f, 0.2f);
+            if (canTakeDamage)
+            {
+                currentHealth -= itemSkill.holyWaveDamage;
+                HitMonster(0.7f, 0.2f);
+            }
+        }
+
+        if (poisoned)
+        {
+            if (canTakeDamage)
+            {
+                if (itemSkill.posionTime >= 0)
+                {
+                    currentHealth -= itemSkill.poisonDamage;
+                    HitMonster(0.5f, 0.2f);
+                }
+                else
+                {
+                    poisoned = false;
+                }
+            }
+        }
+
+        if (fired)
+        {
+            if (canTakeDamage)
+            {
+                currentHealth -= itemSkill.fireDamage;
+                HitMonster(0.3f, 0.2f);
+                StartCoroutine(DeleteFire());
+            }
         }
     }
 
+    IEnumerator DeleteFire()
+    {
+        yield return new WaitForSeconds(3f);
+
+        fired = false;
+    }
 
     IEnumerator MonsterAttack()
     {
@@ -178,9 +226,24 @@ public class MonsterController : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            spriteRenderer.color = Color.red;
-            StartCoroutine(BackColor(colorChangeTime));
-            StartCoroutine(DamageCooldown(damageCooldown));
+            if (fired)
+            {
+                spriteRenderer.color = new Color(1f, 0.5f, 0, 1);
+                StartCoroutine(BackColor(colorChangeTime));
+                StartCoroutine(DamageCooldown(damageCooldown));
+            }
+            else if (poisoned)
+            {
+                spriteRenderer.color = new Color(0.7f, 0, 0.7f, 1);
+                StartCoroutine(BackColor(colorChangeTime));
+                StartCoroutine(DamageCooldown(damageCooldown));
+            }
+            else
+            {
+                spriteRenderer.color = Color.red;
+                StartCoroutine(BackColor(colorChangeTime));
+                StartCoroutine(DamageCooldown(damageCooldown));
+            }
         }
     }
 
@@ -236,6 +299,19 @@ public class MonsterController : MonoBehaviour
                 currentHealth -= itemSkill.holyShotDamage;
                 HitMonster(0.5f, 0.2f);
             }
+        }
+        else if (collision.gameObject.tag == "Fire")
+        {
+            fired = true;
+        }
+        else if (collision.gameObject.tag == "Poison")
+        {
+            poisoned = true;
+        }
+        else if (collision.gameObject.tag == "FireShotSub")
+        {
+            currentHealth -= itemSkill.fireShoSubDamage;
+            HitMonster(0.5f, 0.2f);
         }
     }
 }

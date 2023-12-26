@@ -9,6 +9,8 @@ TagManager:
   - Boss
   - Fire
   - HolyShot
+  - Poison
+  - FireShotSub
   layers:
   - Default
   - TransparentFX
