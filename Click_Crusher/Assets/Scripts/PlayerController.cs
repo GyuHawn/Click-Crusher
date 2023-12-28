@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject defenseCoolTime;
     public TMP_Text defenseCoolTimeText;
 
+    public int money;
 
     void Start()
     {

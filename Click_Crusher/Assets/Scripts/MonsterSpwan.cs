@@ -8,10 +8,15 @@ public class MonsterSpwan : MonoBehaviour
 
     private int stage;
 
-    public GameObject[] stage1Monsters; // [0] - baseMonster, [1] - strongMonster, [2] - bossMonster
+    // sub == 1 -> [0] / sub == 2 -> [0,1] / sub == 3 -> [0,1,2] / sub == 4 -> [0,1,2,3] / sub == 5 -> [0,1,2,3,4(Boss)] 
+    public GameObject[] stage1Monsters;
     public GameObject[] stage2Monsters;
     public GameObject[] stage3Monsters;
     public GameObject[] stage4Monsters;
+    public GameObject[] stage5Monsters;
+    public GameObject[] stage6Monsters;
+    public GameObject[] stage7Monsters;
+    public GameObject[] InfiniteMonsters;
 
     public GameObject[] monsterSpawnPoints; // 몬스터 소환 위치
     public GameObject[] bossStageSpawnPoints; // 보스 스테이지 몬스터 소환 위치
@@ -28,117 +33,152 @@ public class MonsterSpwan : MonoBehaviour
         stage = stagerManage.mainStage;
     }
 
-    public void MonsterInstantiate(int baseCount, int strongCount, int bossCount)
-    {     
+    public void MonsterInstantiate(int base0Count, int base1Count, int base2Count, int base3Count, int bossCount)
+    {
         if (stagerManage.subStage == 5)
         {
-            if (stagerManage.mainStage == 1)
+            GameObject[] currentStageMonsters = null;
+
+            if (stagerManage.mainStage <= 7)
             {
-                for (int i = 0; i < baseCount; i++)
+                switch (stagerManage.mainStage)
                 {
-                    InstantiateRandom(stage1Monsters[0], bossStageSpawnPoints);
-                }
-                for (int i = 0; i < strongCount; i++)
-                {
-                    InstantiateRandom(stage1Monsters[1], bossStageSpawnPoints);
-                }
-                if (bossCount > 0)
-                {
-                    Instantiate(stage1Monsters[2], pos.position, Quaternion.identity);
-                }
-            }
-            else if (stagerManage.mainStage == 2)
-            {
-                for (int i = 0; i < baseCount; i++)
-                {
-                    InstantiateRandom(stage2Monsters[0], bossStageSpawnPoints);
-                }
-                for (int i = 0; i < strongCount; i++)
-                {
-                    InstantiateRandom(stage2Monsters[1], bossStageSpawnPoints);
-                }
-                if (bossCount > 0)
-                {
-                    Instantiate(stage2Monsters[2], pos.position, Quaternion.identity);
-                }
-            }
-            else if (stagerManage.mainStage == 3)
-            {
-                for (int i = 0; i < baseCount; i++)
-                {
-                    InstantiateRandom(stage3Monsters[0], bossStageSpawnPoints);
-                }
-                for (int i = 0; i < strongCount; i++)
-                {
-                    InstantiateRandom(stage3Monsters[1], bossStageSpawnPoints);
-                }
-                if (bossCount > 0)
-                {
-                    Instantiate(stage3Monsters[2], pos.position, Quaternion.identity);
-                }
-            }
-            else if (stagerManage.mainStage == 4)
-            {
-                for (int i = 0; i < baseCount; i++)
-                {
-                    InstantiateRandom(stage4Monsters[0], bossStageSpawnPoints);
+                    case 1:
+                        currentStageMonsters = stage1Monsters;
+                        break;
+                    case 2:
+                        currentStageMonsters = stage2Monsters;
+                        break;
+                    case 3:
+                        currentStageMonsters = stage3Monsters;
+                        break;
+                    case 4:
+                        currentStageMonsters = stage4Monsters;
+                        break;
+                    case 5:
+                        currentStageMonsters = stage5Monsters;
+                        break;
+                    case 6:
+                        currentStageMonsters = stage6Monsters;
+                        break;
+                    case 7:
+                        currentStageMonsters = stage7Monsters;
+                        break;
                 }
 
-                for (int i = 0; i < strongCount; i++)
+                for (int i = 0; i < base0Count; i++)
                 {
-                    InstantiateRandom(stage4Monsters[1], bossStageSpawnPoints);
+                    InstantiateRandom(currentStageMonsters[0], bossStageSpawnPoints);
+                }
+                for (int i = 0; i < base1Count; i++)
+                {
+                    InstantiateRandom(currentStageMonsters[1], bossStageSpawnPoints);
+                }
+                for (int i = 0; i < base2Count; i++)
+                {
+                    InstantiateRandom(currentStageMonsters[2], bossStageSpawnPoints);
+                }
+                for (int i = 0; i < base3Count; i++)
+                {
+                    InstantiateRandom(currentStageMonsters[3], bossStageSpawnPoints);
                 }
                 if (bossCount > 0)
                 {
-                    Instantiate(stage4Monsters[2], pos.position, Quaternion.identity);
+                    Instantiate(currentStageMonsters[4], pos.position, Quaternion.identity);
+                }
+            }
+            else
+            {
+                // 8스테이지 이후부터는 InfiniteMonsters만 사용
+                for (int i = 0; i < base0Count; i++)
+                {
+                    InstantiateRandom(InfiniteMonsters[0], bossStageSpawnPoints);
+                }
+                for (int i = 0; i < base1Count; i++)
+                {
+                    InstantiateRandom(InfiniteMonsters[1], bossStageSpawnPoints);
+                }
+                for (int i = 0; i < base2Count; i++)
+                {
+                    InstantiateRandom(InfiniteMonsters[2], bossStageSpawnPoints);
+                }
+                for (int i = 0; i < base3Count; i++)
+                {
+                    InstantiateRandom(InfiniteMonsters[3], bossStageSpawnPoints);
+                }
+                if (bossCount > 0)
+                {
+                    Instantiate(InfiniteMonsters[7], pos.position, Quaternion.identity); // 8번째 인덱스가 boss
                 }
             }
         }
 
         if (stagerManage.subStage != 5)
         {
-            if (stagerManage.mainStage == 1)
+            GameObject[] currentStageMonsters = null;
+
+            if (stagerManage.mainStage <= 7)
             {
-                for (int i = 0; i < baseCount; i++)
+                switch (stagerManage.mainStage)
                 {
-                    InstantiateRandom(stage1Monsters[0], monsterSpawnPoints);
+                    case 1:
+                        currentStageMonsters = stage1Monsters;
+                        break;
+                    case 2:
+                        currentStageMonsters = stage2Monsters;
+                        break;
+                    case 3:
+                        currentStageMonsters = stage3Monsters;
+                        break;
+                    case 4:
+                        currentStageMonsters = stage4Monsters;
+                        break;
+                    case 5:
+                        currentStageMonsters = stage5Monsters;
+                        break;
+                    case 6:
+                        currentStageMonsters = stage6Monsters;
+                        break;
+                    case 7:
+                        currentStageMonsters = stage7Monsters;
+                        break;
                 }
-                for (int i = 0; i < strongCount; i++)
+
+                for (int i = 0; i < base0Count; i++)
                 {
-                    InstantiateRandom(stage1Monsters[1], monsterSpawnPoints);
+                    InstantiateRandom(currentStageMonsters[0], monsterSpawnPoints);
+                }
+                for (int i = 0; i < base1Count; i++)
+                {
+                    InstantiateRandom(currentStageMonsters[1], monsterSpawnPoints);
+                }
+                for (int i = 0; i < base2Count; i++)
+                {
+                    InstantiateRandom(currentStageMonsters[2], monsterSpawnPoints);
+                }
+                for (int i = 0; i < base3Count; i++)
+                {
+                    InstantiateRandom(currentStageMonsters[3], monsterSpawnPoints);
                 }
             }
-            else if (stagerManage.mainStage == 2)
+            else
             {
-                for (int i = 0; i < baseCount; i++)
+                // 8스테이지 이후부터는 InfiniteMonsters만 사용
+                for (int i = 0; i < base0Count; i++)
                 {
-                    InstantiateRandom(stage2Monsters[0], monsterSpawnPoints);
+                    InstantiateRandom(InfiniteMonsters[0], monsterSpawnPoints);
                 }
-                for (int i = 0; i < strongCount; i++)
+                for (int i = 0; i < base1Count; i++)
                 {
-                    InstantiateRandom(stage2Monsters[1], monsterSpawnPoints);
+                    InstantiateRandom(InfiniteMonsters[1], monsterSpawnPoints);
                 }
-            }
-            else if (stagerManage.mainStage == 3)
-            {
-                for (int i = 0; i < baseCount; i++)
+                for (int i = 0; i < base2Count; i++)
                 {
-                    InstantiateRandom(stage3Monsters[0], monsterSpawnPoints);
+                    InstantiateRandom(InfiniteMonsters[2], monsterSpawnPoints);
                 }
-                for (int i = 0; i < strongCount; i++)
+                for (int i = 0; i < base3Count; i++)
                 {
-                    InstantiateRandom(stage3Monsters[1], monsterSpawnPoints);
-                }
-            }
-            else if (stagerManage.mainStage == 4)
-            {
-                for (int i = 0; i < baseCount; i++)
-                {
-                    InstantiateRandom(stage4Monsters[0], monsterSpawnPoints);
-                }
-                for (int i = 0; i < strongCount; i++)
-                {
-                    InstantiateRandom(stage4Monsters[1], monsterSpawnPoints);
+                    InstantiateRandom(InfiniteMonsters[3], monsterSpawnPoints);
                 }
             }
         }

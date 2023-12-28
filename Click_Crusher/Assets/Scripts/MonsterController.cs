@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
-    private StageManager stagerManager;
+    private StageManager stageManager;
     private PlayerController playerController;
     private ItemSkill itemSkill;
 
@@ -17,7 +17,6 @@ public class MonsterController : MonoBehaviour
 
     public bool attack;
     public float attackTime;
-    private float originalAttackTime;
     private bool boosAttack;
 
     public GameObject danager;
@@ -34,7 +33,7 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
-        stagerManager = GameObject.Find("Manager").GetComponent<StageManager>();
+        stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
 
@@ -47,7 +46,14 @@ public class MonsterController : MonoBehaviour
         stop = false;
         attack = false;
         boosAttack = false;
-        originalAttackTime = attackTime;
+        if(gameObject.tag == "Monster")
+        {
+            attackTime = Random.Range(3.0f, 6.0f);
+        }
+        else if(gameObject.tag == "Boss")
+        {
+            attackTime = Random.Range(7.0f, 10.0f);
+        }
     }
 
     void Update()
@@ -160,7 +166,6 @@ public class MonsterController : MonoBehaviour
         }
 
         // 플레이어 아이템 발동시 데미지
-        // holy Wave
         if (itemSkill.holyWave && canTakeDamage)
         {
             if (canTakeDamage)
@@ -218,8 +223,15 @@ public class MonsterController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         anim.SetBool("Attack", false);
         attack = false;
-        attackTime = originalAttackTime;
 
+        if (gameObject.tag == "Monster")
+        {
+            attackTime = Random.Range(3.0f, 5.0f);
+        }
+        else if (gameObject.tag == "Boss")
+        {
+            attackTime = Random.Range(8.0f, 10.0f);
+        }
     }
 
     public void HitMonster(float damageCooldown, float colorChangeTime)
@@ -277,8 +289,8 @@ public class MonsterController : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        stagerManager.monsterCount--;
-        stagerManager.NextStage();
+        stageManager.monsterCount--;
+        stageManager.NextStage();
 
         if (stop)
         {
