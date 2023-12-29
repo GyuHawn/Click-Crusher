@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
-using System;
 
 public class SelectItem : MonoBehaviour
 {
+    private Character character;
+
     public bool itemSelecting;
 
     public GameObject[] items; // 아이템 배열
@@ -34,7 +36,6 @@ public class SelectItem : MonoBehaviour
     public GameObject[] characters;
     public GameObject charPos;
 
-    public int character;
     public int passLv;
     public int fireLv;
     public int fireShotLv;
@@ -62,35 +63,46 @@ public class SelectItem : MonoBehaviour
 
     private void Start()
     {
-        itemSelecting = false;
+        character = GameObject.Find("Manager").GetComponent<Character>();
 
-        int selectChar = PlayerPrefs.GetInt("SelectChar");
-        character = selectChar;
+        itemSelecting = false;       
+    }
 
+    private void Update()
+    {
+        ItemLevelOpen();
+        CharacterInstant();
+    }
+    
+    void CharacterInstant()
+    {
         GameObject newCharacter = null;
-        if (character == 1)
+        if (newCharacter == null)
         {
-            newCharacter = Instantiate(characters[0], charPos.transform.position, Quaternion.identity);
-            newCharacter.transform.SetParent(canvas.transform, false);
-            newCharacter.transform.position = charPos.transform.position;
-        }
-        if (character == 2)
-        {
-            newCharacter = Instantiate(characters[1], charPos.transform.position, Quaternion.identity);
-            newCharacter.transform.SetParent(canvas.transform, false);
-            newCharacter.transform.position = charPos.transform.position;
-        }
-        if (character == 3)
-        {
-            newCharacter = Instantiate(characters[2], charPos.transform.position, Quaternion.identity);
-            newCharacter.transform.SetParent(canvas.transform, false);
-            newCharacter.transform.position = charPos.transform.position;
-        }
-        if (character == 4)
-        {
-            newCharacter = Instantiate(characters[3], charPos.transform.position, Quaternion.identity);
-            newCharacter.transform.SetParent(canvas.transform, false);
-            newCharacter.transform.position = charPos.transform.position;
+            if (character.currentCharacter == 1)
+            {
+                newCharacter = Instantiate(characters[0], charPos.transform.position, Quaternion.identity);
+                newCharacter.transform.SetParent(canvas.transform, false);
+                newCharacter.transform.position = charPos.transform.position;
+            }
+            if (character.currentCharacter == 2)
+            {
+                newCharacter = Instantiate(characters[1], charPos.transform.position, Quaternion.identity);
+                newCharacter.transform.SetParent(canvas.transform, false);
+                newCharacter.transform.position = charPos.transform.position;
+            }
+            if (character.currentCharacter == 3)
+            {
+                newCharacter = Instantiate(characters[2], charPos.transform.position, Quaternion.identity);
+                newCharacter.transform.SetParent(canvas.transform, false);
+                newCharacter.transform.position = charPos.transform.position;
+            }
+            if (character.currentCharacter == 4)
+            {
+                newCharacter = Instantiate(characters[3], charPos.transform.position, Quaternion.identity);
+                newCharacter.transform.SetParent(canvas.transform, false);
+                newCharacter.transform.position = charPos.transform.position;
+            }
         }
     }
 
@@ -261,10 +273,7 @@ public class SelectItem : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        ItemLevelOpen();
-    }
+    
 
 
     void ItemLevelOpen()
@@ -316,33 +325,99 @@ public class SelectItem : MonoBehaviour
 
     public void ItemLevelUp()
     {
-        switch (selectNum)
+        if(character.currentCharacter == 4)
         {
-            case 1:
-                fireLv++;
-                break;
-            case 2:
-                fireShotLv++;
-                break;
-            case 3:
-                holyWaveLv++;
-                break;
-            case 4:
-                holyShotLv++;
-                break;
-            case 5:
-                meleeLv++;
-                break;
-            case 6:
-                posionLv++;
-                break;
-            case 7:
-                rockLv++;
-                break;
-            case 8:
-                sturnLv++;
-                break;
+            if (UnityEngine.Random.Range(0, 100) < 50)
+            {
+                switch (selectNum)
+                {
+                    case 1:
+                        fireLv += 2;
+                        break;
+                    case 2:
+                        fireShotLv += 2;
+                        break;
+                    case 3:
+                        holyWaveLv += 2;
+                        break;
+                    case 4:
+                        holyShotLv += 2;
+                        break;
+                    case 5:
+                        meleeLv += 2;
+                        break;
+                    case 6:
+                        posionLv += 2;
+                        break;
+                    case 7:
+                        rockLv += 2;
+                        break;
+                    case 8:
+                        sturnLv += 2;
+                        break;
+                }
+            }
+            else
+            {
+                switch (selectNum)
+                {
+                    case 1:
+                        fireLv++;
+                        break;
+                    case 2:
+                        fireShotLv++;
+                        break;
+                    case 3:
+                        holyWaveLv++;
+                        break;
+                    case 4:
+                        holyShotLv++;
+                        break;
+                    case 5:
+                        meleeLv++;
+                        break;
+                    case 6:
+                        posionLv++;
+                        break;
+                    case 7:
+                        rockLv++;
+                        break;
+                    case 8:
+                        sturnLv++;
+                        break;
+                }
+            }
         }
+        else
+        {
+            switch (selectNum)
+            {
+                case 1:
+                    fireLv++;
+                    break;
+                case 2:
+                    fireShotLv++;
+                    break;
+                case 3:
+                    holyWaveLv++;
+                    break;
+                case 4:
+                    holyShotLv++;
+                    break;
+                case 5:
+                    meleeLv++;
+                    break;
+                case 6:
+                    posionLv++;
+                    break;
+                case 7:
+                    rockLv++;
+                    break;
+                case 8:
+                    sturnLv++;
+                    break;
+            }
+        }     
     }
 
     void ItemTextClear()

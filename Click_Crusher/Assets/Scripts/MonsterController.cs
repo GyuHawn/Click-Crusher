@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
+    private Character character;
     private StageManager stageManager;
     private PlayerController playerController;
     private ItemSkill itemSkill;
@@ -33,6 +35,7 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
+        character = GameObject.Find("Manager").GetComponent<Character>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
@@ -80,71 +83,155 @@ public class MonsterController : MonoBehaviour
 
             if (hit.collider != null && hit.collider.gameObject == gameObject && canTakeDamage)
             {
-                if (attack)
+                int monsterLayer = LayerMask.NameToLayer("Monster");
+                int bossLayer = LayerMask.NameToLayer("Boss");
+                if (hit.collider.gameObject.layer == monsterLayer || hit.collider.gameObject.layer == bossLayer)
                 {
-                    playerController.playerHealth -= damage;
-                }
-                else
-                {
-                    if (itemSkill.meleeReady)
+
+                    if (attack)
                     {
-                        for (int i = 0; i < 4; i++)
-                        {
-                            currentHealth -= playerController.damage;
-                            HitMonster(0.2f, 0.1f);
-                        }
-                        HitMonster(0.5f, 0.2f);
-                    }
-                    else if (itemSkill.rockReady)
-                    {
-                        currentHealth -= (playerController.damage + itemSkill.rockDamage);
-                        itemSkill.rockReady = false;
-                        HitMonster(0.5f, 0.2f);
-                    }
-                    else if (itemSkill.fireShotReady)
-                    {
-                        currentHealth -= (playerController.damage + itemSkill.fireShotDamage);
-                        itemSkill.fireShotReady = false;
-                        HitMonster(0.5f, 0.2f);
+                        playerController.playerHealth -= damage;
                     }
                     else
                     {
-                        currentHealth -= playerController.damage;
-                        HitMonster(0.5f, 0.2f);
-                    }
+                        if (itemSkill.meleeReady)
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                currentHealth -= playerController.damage;
+                                HitMonster(0.2f, 0.1f);
+                            }
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else if (itemSkill.rockReady)
+                        {
+                            currentHealth -= (playerController.damage + itemSkill.rockDamage);
+                            itemSkill.rockReady = false;
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else if (itemSkill.fireShotReady)
+                        {
+                            currentHealth -= (playerController.damage + itemSkill.fireShotDamage);
+                            itemSkill.fireShotReady = false;
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else if (character.water)
+                        {
+                            currentHealth -= playerController.damage;
 
+                            if (Random.Range(0, 100) < 10)
+                            {
+                                character.Water(hit.point);
+                                currentHealth -= character.waterDamage;
+                            }
+
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else if (character.lihgt)
+                        {
+                            currentHealth -= playerController.damage;
+
+                            if (Random.Range(0, 100) < 100)
+                            {
+                                GameObject sturnInstance = Instantiate(itemSkill.sturnEffect, gameObject.transform.position, Quaternion.identity);
+                                GameObject sturnimageInstance = Instantiate(itemSkill.sturnImage, sturn.transform.position, Quaternion.identity);
+
+                                stop = true;
+                                attackTime += 5f;
+
+                                StartCoroutine(Removestun());
+                                Destroy(sturnimageInstance, 3f);
+                            }
+
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else
+                        {
+                            currentHealth -= playerController.damage;
+                            HitMonster(0.5f, 0.2f);
+                        }
+
+                    }
                 }
             }
         }
 
         // 모바일 터치
-        if (Input.touchCount > 0 && !itemSkill.fireShotReady)
+        if (Input.GetMouseButtonDown(0) && !itemSkill.fireShotReady)
         {
-            Touch touch = Input.GetTouch(0);
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
             if (hit.collider != null && hit.collider.gameObject == gameObject && canTakeDamage)
             {
-                if (attack)
+                int monsterLayer = LayerMask.NameToLayer("Monster");
+                int bossLayer = LayerMask.NameToLayer("Boss");
+                if (hit.collider.gameObject.layer == monsterLayer || hit.collider.gameObject.layer == bossLayer)
                 {
-                    playerController.playerHealth -= damage;
-                }
-                else
-                {
-                    if (itemSkill.meleeReady)
+
+                    if (attack)
                     {
-                        for (int i = 0; i < itemSkill.meleeNum; i++)
-                        {
-                            currentHealth -= playerController.damage;
-                            HitMonster(0.3f, 0.2f);
-                        }
-                        HitMonster(0.5f, 0.2f);
+                        playerController.playerHealth -= damage;
                     }
                     else
                     {
-                        currentHealth -= playerController.damage;
-                        HitMonster(0.5f, 0.2f);
+                        if (itemSkill.meleeReady)
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                currentHealth -= playerController.damage;
+                                HitMonster(0.2f, 0.1f);
+                            }
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else if (itemSkill.rockReady)
+                        {
+                            currentHealth -= (playerController.damage + itemSkill.rockDamage);
+                            itemSkill.rockReady = false;
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else if (itemSkill.fireShotReady)
+                        {
+                            currentHealth -= (playerController.damage + itemSkill.fireShotDamage);
+                            itemSkill.fireShotReady = false;
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else if (character.water)
+                        {
+                            currentHealth -= playerController.damage;
+
+                            if (Random.Range(0, 100) < 10)
+                            {
+                                character.Water(hit.point);
+                                currentHealth -= character.waterDamage;
+                            }
+
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else if (character.lihgt)
+                        {
+                            currentHealth -= playerController.damage;
+
+                            if (Random.Range(0, 100) < 10)
+                            {
+                                GameObject sturnInstance = Instantiate(itemSkill.sturnEffect, gameObject.transform.position, Quaternion.identity);
+                                GameObject sturnimageInstance = Instantiate(itemSkill.sturnImage, sturn.transform.position, Quaternion.identity);
+
+                                stop = true;
+                                attackTime += 5f;
+
+                                StartCoroutine(Removestun());
+                                Destroy(sturnimageInstance, 3f);
+                            }
+
+                            HitMonster(0.5f, 0.2f);
+                        }
+                        else
+                        {
+                            currentHealth -= playerController.damage;
+                            HitMonster(0.5f, 0.2f);
+                        }
+
                     }
                 }
             }
@@ -200,6 +287,13 @@ public class MonsterController : MonoBehaviour
                 StartCoroutine(DeleteFire());
             }
         }
+    }
+
+    IEnumerator Removestun()
+    {
+        yield return new WaitForSeconds(3f);
+
+        stop = false;
     }
 
     IEnumerator DeleteFire()

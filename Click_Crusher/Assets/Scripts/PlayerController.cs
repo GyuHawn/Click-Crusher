@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.TextCore.Text;
 
 public class PlayerController : MonoBehaviour
 {
+    private Character character;
+
     public GameObject[] playerHealthUI;
     public int playerHealth;
     public GameObject gameover;
@@ -21,10 +24,17 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        character = GameObject.Find("Manager").GetComponent<Character>();
+
         defending = false;
 
         playerHealth = 8;
         UpdateHealthUI();
+
+        if (character.rock)
+        {
+            damage += character.rockDamage;
+        }
     }
 
     void Update()
@@ -39,7 +49,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             defenseCoolTime.SetActive(false);
-        }
+        }      
     }
 
     void UpdateHealthUI()

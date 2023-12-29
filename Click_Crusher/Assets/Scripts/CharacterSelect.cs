@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CharacterSelect : MonoBehaviour
 {
@@ -20,19 +21,31 @@ public class CharacterSelect : MonoBehaviour
 
     public int selectChar;
 
+    public int playerMoney;
+    public TMP_Text playerMoneyText;
+
+    public GameObject waterOpenBtn;
+    public GameObject lightOpenBtn;
+    public GameObject luckOpenBtn;
+
     void Update()
     {
+        playerMoneyText.text = playerMoney.ToString();
+
         if (waterChar)
         {
             useWater.SetActive(false);
+            waterOpenBtn.SetActive(false);
         }
         if (lightChar)
         {
             useLight.SetActive(false);
+            lightOpenBtn.SetActive(false);
         }
         if (luckChar)
         {
             useLuck.SetActive(false);
+            luckOpenBtn.SetActive(false);
         }
     }
 
@@ -42,7 +55,6 @@ public class CharacterSelect : MonoBehaviour
         waterEx.SetActive(false);
         lightEx.SetActive(false);
         luckEx.SetActive(false);
-        waterChar = true;
 
         selectChar = 1;
     }
@@ -55,7 +67,6 @@ public class CharacterSelect : MonoBehaviour
             rockEx.SetActive(false);
             lightEx.SetActive(false);
             luckEx.SetActive(false);
-            lightChar = true;
 
             selectChar = 2;
         }
@@ -69,7 +80,6 @@ public class CharacterSelect : MonoBehaviour
             rockEx.SetActive(false);
             waterEx.SetActive(false);
             luckEx.SetActive(false);
-            luckChar = true;
 
             selectChar = 3;
         }
@@ -87,6 +97,32 @@ public class CharacterSelect : MonoBehaviour
             selectChar = 4;
         }
     }
+
+    public void OpenWater()
+    {
+        if(playerMoney >= 100)
+        {
+            waterChar = true;
+            playerMoney -= 100;
+        }
+    }
+    public void OpenLight()
+    {
+        if (playerMoney >= 500)
+        {
+            lightChar = true;
+            playerMoney -= 500;
+        }      
+    }
+    public void OpenLuck()
+    {
+        if (playerMoney >= 1000)
+        {
+            luckChar = true;
+            playerMoney -= 1000;
+        }       
+    }
+
 
     public void GameStart()
     {
