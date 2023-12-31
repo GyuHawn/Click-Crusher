@@ -1,28 +1,29 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class SelectItem : MonoBehaviour
 {
+    private StageManager stageManager;
     private Character character;
 
     public bool itemSelecting;
 
-    public GameObject[] items; // 아이템 배열
-    public GameObject itemPos1; // 선택된 아이템 위치
+    public GameObject[] items;
+    public GameObject itemPos1;
     public GameObject itemPos2;
     public GameObject itemPos3;
-    public List<GameObject> selectItems; // 선택한 아이템
-    public List<GameObject> playerItems; // 플레이어 아이템
+    public List<GameObject> selectItems;
+    public List<GameObject> playerItems;
 
     public GameObject selectItemPos1;
     public GameObject selectItemPos2;
     public GameObject selectItemPos3;
     public GameObject selectItemPos4;
-    public int selectNum; // 선택한 아이템 번호
+    public int selectNum;
 
     public TMP_Text itemName;
     public TMP_Text itemEx;
@@ -35,6 +36,8 @@ public class SelectItem : MonoBehaviour
 
     public GameObject[] characters;
     public GameObject charPos;
+
+    private GameObject newCharacter; // 수정된 부분
 
     public int passLv;
     public int fireLv;
@@ -64,8 +67,10 @@ public class SelectItem : MonoBehaviour
     private void Start()
     {
         character = GameObject.Find("Manager").GetComponent<Character>();
+        stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
 
-        itemSelecting = false;       
+        itemSelecting = false;
+        newCharacter = null; // 초기화 추가
     }
 
     private void Update()
@@ -73,10 +78,9 @@ public class SelectItem : MonoBehaviour
         ItemLevelOpen();
         CharacterInstant();
     }
-    
+
     void CharacterInstant()
     {
-        GameObject newCharacter = null;
         if (newCharacter == null)
         {
             if (character.currentCharacter == 1)
@@ -108,16 +112,12 @@ public class SelectItem : MonoBehaviour
 
     public void ItemSelect()
     {
+        stageManager.selectingItem = true;
         selectItemMenu.SetActive(true);
         selectItems.Clear();
 
         itemSelecting = true;
         selectedItem = false;
-
-        foreach (GameObject playerItem in playerItems)
-        {
-            playerItem.SetActive(false);
-        }
 
         if (playerItems.Count >= 4)
         {
@@ -202,6 +202,7 @@ public class SelectItem : MonoBehaviour
             ItemTextClear();
             ItemLevelUp();
             itemSelecting = false;
+            stageManager.selectingItem = false;
             selectItemMenu.SetActive(false);
         }
     }

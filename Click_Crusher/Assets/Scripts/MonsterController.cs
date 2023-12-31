@@ -7,6 +7,7 @@ public class MonsterController : MonoBehaviour
 {
     private Character character;
     private StageManager stageManager;
+    private MonsterSpwan monsterSpawn;
     private PlayerController playerController;
     private ItemSkill itemSkill;
 
@@ -18,8 +19,8 @@ public class MonsterController : MonoBehaviour
     private bool canTakeDamage = true;
 
     public bool attack;
+    private int bossAttackNum;
     public float attackTime;
-    private bool boosAttack;
 
     public GameObject danager;
     public GameObject dieEffect;
@@ -37,6 +38,7 @@ public class MonsterController : MonoBehaviour
     {
         character = GameObject.Find("Manager").GetComponent<Character>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
+        monsterSpawn = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
 
@@ -48,12 +50,14 @@ public class MonsterController : MonoBehaviour
         danager.SetActive(false);
         stop = false;
         attack = false;
-        boosAttack = false;
-        if(gameObject.tag == "Monster")
+        bossAttackNum = 1;
+
+
+        if (gameObject.tag == "Monster")
         {
             attackTime = Random.Range(3.0f, 6.0f);
         }
-        else if(gameObject.tag == "Boss")
+        else if (gameObject.tag == "Boss")
         {
             attackTime = Random.Range(7.0f, 10.0f);
         }
@@ -237,15 +241,30 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-        if (gameObject.tag == "Boss" && attack && !playerController.defending && !boosAttack)
+        /*if (gameObject.tag == "Boss" && attack && !playerController.defending)
         {
-            playerController.playerHealth -= damage; // 보스가 한번만 공격하도록
-            boosAttack = true;
-        }
+            if (playerController.defending)
+            {
+                Debug.Log("방어");
+            }
+            else
+            {
+                Debug.Log("보스공격");
+                playerController.playerHealth -= damage;
+            }
+        }*/
 
         if (attackTime <= 0)
         {
-            StartCoroutine(MonsterAttack());
+            attack = true;
+            if (gameObject.tag == "Monster")
+            {
+                StartCoroutine(MonsterAttack());
+            }
+            else if(gameObject.tag == "Boss" && bossAttackNum == 1)
+            {
+                StartCoroutine(BossAttack());               
+            }
         }
         else
         {
@@ -303,6 +322,44 @@ public class MonsterController : MonoBehaviour
         fired = false;
     }
 
+    IEnumerator BossAttack()
+    {
+        danager.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+
+        danager.SetActive(false);
+
+        anim.SetBool("Attack", true);
+
+        if (bossAttackNum != 0)
+        {
+            if (playerController.defending)
+            {
+                Debug.Log("방어");
+            }
+            else
+            {
+                bossAttackNum = 0;
+
+                Debug.Log("보스공격");
+                playerController.playerHealth -= damage;
+            }         
+        }
+
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("Attack", false);
+
+        attackTime = Random.Range(8.0f, 10.0f);
+        StartCoroutine(ReadyBossAttack());
+    }
+
+    IEnumerator ReadyBossAttack()
+    {
+        yield return new WaitForSeconds(attackTime);
+        bossAttackNum = 1;
+    }
+
+
     IEnumerator MonsterAttack()
     {
         danager.SetActive(true);
@@ -310,22 +367,13 @@ public class MonsterController : MonoBehaviour
 
         danager.SetActive(false);
 
-        attack = true;
         anim.SetBool("Attack", true);
-        boosAttack = false;
 
-        yield return new WaitForSeconds(1.0f);
-        anim.SetBool("Attack", false);
+        yield return new WaitForSeconds(1f);
         attack = false;
+        anim.SetBool("Attack", false);
 
-        if (gameObject.tag == "Monster")
-        {
-            attackTime = Random.Range(3.0f, 5.0f);
-        }
-        else if (gameObject.tag == "Boss")
-        {
-            attackTime = Random.Range(8.0f, 10.0f);
-        }
+        attackTime = Random.Range(3.0f, 5.0f);
     }
 
     public void HitMonster(float damageCooldown, float colorChangeTime)
@@ -383,8 +431,8 @@ public class MonsterController : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        stageManager.monsterCount--;
-        stageManager.NextStage();
+        //stageManager.monsterCount--;
+        monsterSpawn.RemoveMonsterFromList(gameObject);
 
         if (stop)
         {

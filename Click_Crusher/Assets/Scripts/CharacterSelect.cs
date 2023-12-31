@@ -28,8 +28,16 @@ public class CharacterSelect : MonoBehaviour
     public GameObject lightOpenBtn;
     public GameObject luckOpenBtn;
 
+    private void Start()
+    {
+        waterChar = PlayerPrefs.GetInt("WaterCharOpen", 0) == 1;
+        lightChar = PlayerPrefs.GetInt("LightCharOpen", 0) == 1;
+        luckChar = PlayerPrefs.GetInt("LuckCharOpen", 0) == 1;
+    }
+
     void Update()
     {
+        playerMoney = PlayerPrefs.GetInt("GameMoney", 0);
         playerMoneyText.text = playerMoney.ToString();
 
         if (waterChar)
@@ -61,7 +69,7 @@ public class CharacterSelect : MonoBehaviour
 
     public void WaterChar()
     {
-        if(waterChar)
+        if (waterChar)
         {
             waterEx.SetActive(true);
             rockEx.SetActive(false);
@@ -100,29 +108,36 @@ public class CharacterSelect : MonoBehaviour
 
     public void OpenWater()
     {
-        if(playerMoney >= 100)
+        if (playerMoney >= 100)
         {
             waterChar = true;
             playerMoney -= 100;
+            PlayerPrefs.SetInt("WaterCharOpen", 1);
+            PlayerPrefs.SetInt("GameMoney", playerMoney);
         }
     }
+
     public void OpenLight()
     {
         if (playerMoney >= 500)
         {
             lightChar = true;
             playerMoney -= 500;
-        }      
+            PlayerPrefs.SetInt("LightCharOpen", 1);
+            PlayerPrefs.SetInt("GameMoney", playerMoney);
+        }
     }
+
     public void OpenLuck()
     {
         if (playerMoney >= 1000)
         {
             luckChar = true;
             playerMoney -= 1000;
-        }       
+            PlayerPrefs.SetInt("LuckCharOpen", 1);
+            PlayerPrefs.SetInt("GameMoney", playerMoney);
+        }
     }
-
 
     public void GameStart()
     {

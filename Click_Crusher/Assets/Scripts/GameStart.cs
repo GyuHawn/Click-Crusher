@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour
 {
-    
     public void NewGame()
     {
         LodingController.LoadScene("Character");
+    }
+
+    public void ResetGame()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

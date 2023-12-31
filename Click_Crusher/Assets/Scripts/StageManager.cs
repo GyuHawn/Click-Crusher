@@ -8,8 +8,10 @@ public class StageManager : MonoBehaviour
     private MonsterSpwan monsterSpawn;
     private SelectItem selectItem;
     private SelectPass selectPass;
+    private StageTimeLimit stageTimeLimit;
+    private PlayerController playerController;
 
-    private bool gameStart = false; // 게임시작 여부
+    public bool gameStart = false; // 게임시작 여부
 
     public int mainStage; // 메인스테이지 (1, 2, 3...)
     public int subStage; // 서브스테이지 (1-1, 1-2...)
@@ -21,15 +23,19 @@ public class StageManager : MonoBehaviour
     public int base3Monster; // 스테이지 몬스터 [3]의 수
     public int bossMonster; // 보스몬스터 수
 
-    public int monsterCount = 0; // 소환된 몬스터 수
+   // public int monsterCount = 0; // 소환된 몬스터 수
 
     public float timeLimit; // 스테이지당 제한시간
+
+    public bool selectingItem;
 
     private void Awake()
     {
         monsterSpawn = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
         selectItem = GameObject.Find("Manager").GetComponent<SelectItem>();
         selectPass = GameObject.Find("Manager").GetComponent<SelectPass>();
+        stageTimeLimit = GameObject.Find("Manager").GetComponent<StageTimeLimit>();
+        playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
     }
 
     void Start()
@@ -41,13 +47,28 @@ public class StageManager : MonoBehaviour
             subStage = 1;
             StageMonsterSetting();
             SpawnMonsters();
+            selectingItem = false;
             gameStart = true;
         }
+
     }
 
     void Update()
     {
-        stageText.text = "Stage " + mainStage + "-" + subStage;
+        if(mainStage <= 7)
+        {
+            stageText.text = "Stage " + mainStage + "-" + subStage;
+        }
+        else if(mainStage >= 8)
+        {
+            stageText.text = "Stage " + mainStage;
+        }
+
+        if(stageTimeLimit.stageFail >= stageTimeLimit.stageTime)
+        {
+            playerController.gameover.SetActive(true);
+            gameStart = false;
+        }
     }
 
     public void StageMonsterSetting()
@@ -102,33 +123,21 @@ public class StageManager : MonoBehaviour
         base2Monster = 0;
         base3Monster = 0;
         bossMonster = 0;
+
+        stageTimeLimit.stageFail = 0f;
     }
 
     void SpawnMonsters()
     {
-        monsterCount = base0Monster + base1Monster + base2Monster + base3Monster + bossMonster; // 몬스터 수 설정
+        //monsterCount = base0Monster + base1Monster + base2Monster + base3Monster + bossMonster; // 몬스터 수 설정
         monsterSpawn.MonsterInstantiate(base0Monster, base1Monster, base2Monster, base3Monster, bossMonster);
     }
 
     public void NextStage()
     {
-        if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
-
-        if (mainStage >= 8)
-        {
-            if (mainStage % 10 == 2 || mainStage % 10 == 5 || mainStage % 10 == 8)
-            {
-                selectPass.passMenu.SetActive(true);
-            }
-            else if(mainStage % 10 == 0 || mainStage % 10 == 6)
-            {
-                selectItem.ItemSelect();
-                StartCoroutine(DelayStage());
-            }
-
-            mainStage++;
-        }
-        else
+        //if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
+      
+        if (mainStage < 8)
         {
             subStage++;
 
@@ -136,6 +145,7 @@ public class StageManager : MonoBehaviour
             {
                 if (subStage == 2)
                 {
+                    selectingItem = true;
                     selectPass.passMenu.SetActive(true);
                 }
             }
@@ -153,6 +163,21 @@ public class StageManager : MonoBehaviour
                 selectItem.ItemSelect();
                 StartCoroutine(DelayStage());
             }
+        }
+        else
+        {
+            if (mainStage % 10 == 2 || mainStage % 10 == 5 || mainStage % 10 == 8)
+            {
+                selectingItem = true;
+                selectPass.passMenu.SetActive(true);
+            }
+            else if (mainStage % 10 == 0 || mainStage % 10 == 6)
+            {
+                selectItem.ItemSelect();
+                StartCoroutine(DelayStage());
+            }
+
+            mainStage++;
         }
 
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화

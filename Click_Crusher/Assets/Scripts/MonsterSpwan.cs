@@ -21,6 +21,8 @@ public class MonsterSpwan : MonoBehaviour
     public GameObject[] monsterSpawnPoints; // 몬스터 소환 위치
     public GameObject[] bossStageSpawnPoints; // 보스 스테이지 몬스터 소환 위치
 
+    private List<GameObject> spawnedMonsters = new List<GameObject>();
+
     public Transform pos;
 
     private void Awake()
@@ -84,31 +86,8 @@ public class MonsterSpwan : MonoBehaviour
                 }
                 if (bossCount > 0)
                 {
-                    Instantiate(currentStageMonsters[4], pos.position, Quaternion.identity);
-                }
-            }
-            else
-            {
-                // 8스테이지 이후부터는 InfiniteMonsters만 사용
-                for (int i = 0; i < base0Count; i++)
-                {
-                    InstantiateRandom(InfiniteMonsters[0], bossStageSpawnPoints);
-                }
-                for (int i = 0; i < base1Count; i++)
-                {
-                    InstantiateRandom(InfiniteMonsters[1], bossStageSpawnPoints);
-                }
-                for (int i = 0; i < base2Count; i++)
-                {
-                    InstantiateRandom(InfiniteMonsters[2], bossStageSpawnPoints);
-                }
-                for (int i = 0; i < base3Count; i++)
-                {
-                    InstantiateRandom(InfiniteMonsters[3], bossStageSpawnPoints);
-                }
-                if (bossCount > 0)
-                {
-                    Instantiate(InfiniteMonsters[7], pos.position, Quaternion.identity); // 8번째 인덱스가 boss
+                    GameObject bossMonster = Instantiate(currentStageMonsters[4], pos.position, Quaternion.identity);
+                    spawnedMonsters.Add(bossMonster);
                 }
             }
         }
@@ -180,6 +159,11 @@ public class MonsterSpwan : MonoBehaviour
                 {
                     InstantiateRandom(InfiniteMonsters[3], monsterSpawnPoints);
                 }
+                if (bossCount > 0)
+                {
+                    GameObject bossMonster = Instantiate(InfiniteMonsters[6], pos.position, Quaternion.identity);
+                    spawnedMonsters.Add(bossMonster);
+                }
             }
         }
     }
@@ -188,7 +172,8 @@ public class MonsterSpwan : MonoBehaviour
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
         Vector3 randomPosition = GetRandomPosition(spawnPoints[randomIndex].transform.position);
-        Instantiate(monsterPrefab, randomPosition, Quaternion.identity);
+        GameObject spawnedMonster = Instantiate(monsterPrefab, randomPosition, Quaternion.identity);
+        spawnedMonsters.Add(spawnedMonster); // 몬스터를 리스트에 추가
     }
 
     Vector3 GetRandomPosition(Vector3 center)
@@ -200,5 +185,14 @@ public class MonsterSpwan : MonoBehaviour
         float z = center.z;
 
         return new Vector3(x, y, z);
+    }
+
+    public void RemoveMonsterFromList(GameObject monster)
+    {
+        spawnedMonsters.Remove(monster);
+        if (spawnedMonsters.Count == 0)
+        {
+            stagerManage.NextStage();
+        }
     }
 }

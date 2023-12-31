@@ -12,8 +12,6 @@ public class SelectPass : MonoBehaviour
 
     public int selecPass;
 
-    public int plusMoney;
-
     public TMP_Text passName;
     public TMP_Text passEx;
 
@@ -23,7 +21,6 @@ public class SelectPass : MonoBehaviour
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
 
         selecPass = 0;
-        plusMoney = 100;
     }
 
     public void powerUP()
@@ -53,7 +50,7 @@ public class SelectPass : MonoBehaviour
 
     public void EnterPass()
     {
-        if(selecPass == 1)
+        if (selecPass == 1)
         {
             playerController.damage += 10;
         }
@@ -67,9 +64,10 @@ public class SelectPass : MonoBehaviour
         }
         else if (selecPass == 4)
         {
-            playerController.money += 200;
+            PlayerPrefs.SetInt("GameMoney", PlayerPrefs.GetInt("GameMoney", 0) + 200);
         }
 
+        stageManager.selectingItem = false;
         passMenu.SetActive(false);
     }
 }

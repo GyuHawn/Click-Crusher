@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.TextCore.Text;
 
 public class PlayerController : MonoBehaviour
 {
     private Character character;
+    private StageManager stageManager;
 
     public GameObject[] playerHealthUI;
     public int playerHealth;
@@ -22,9 +22,13 @@ public class PlayerController : MonoBehaviour
 
     public int money;
 
+    private float gameTime;
+    public TMP_Text gameTimeText;
+
     void Start()
     {
         character = GameObject.Find("Manager").GetComponent<Character>();
+        stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
 
         defending = false;
 
@@ -35,11 +39,14 @@ public class PlayerController : MonoBehaviour
         {
             damage += character.rockDamage;
         }
+
+        gameTime = 0f;
     }
 
     void Update()
     {
         UpdateHealthUI();
+
 
         if (defenseTime >= 0)
         {
@@ -49,7 +56,13 @@ public class PlayerController : MonoBehaviour
         else
         {
             defenseCoolTime.SetActive(false);
-        }      
+        }
+
+        // 게임 시간 증가
+        gameTime += Time.deltaTime;
+
+        // 시간을 텍스트로 표시
+        gameTimeText.text = string.Format("{0:00}:{1:00}", Mathf.Floor(gameTime / 60), gameTime % 60);
     }
 
     void UpdateHealthUI()
@@ -66,6 +79,9 @@ public class PlayerController : MonoBehaviour
 
         if (playerHealth <= 0)
         {
+            playerHealthUI[0].SetActive(true);
+            Time.timeScale = 0f;
+            stageManager.gameStart = false;
             gameover.SetActive(true);
         }
     }
@@ -85,8 +101,8 @@ public class PlayerController : MonoBehaviour
         defenseCoolTime.SetActive(true);
         defenseTime = 6;
 
+        yield return new WaitForSeconds(3f);
 
-        yield return new WaitForSeconds(1f);
         defending = false;
         defenseUI.SetActive(false);
     }
