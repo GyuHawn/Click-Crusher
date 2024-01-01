@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     public float damage;
 
-    public GameObject defenseUI;
+    public GameObject defenseEffect;
     public bool defending;
     public float defenseTime;
     public GameObject defenseCoolTime;
@@ -97,13 +97,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator StartDefense()
     {
         defending = true;
-        defenseUI.SetActive(true);
+        defenseEffect.SetActive(true);
         defenseCoolTime.SetActive(true);
         defenseTime = 6;
 
         yield return new WaitForSeconds(3f);
 
         defending = false;
-        defenseUI.SetActive(false);
+        defenseEffect.SetActive(false);
     }
 }

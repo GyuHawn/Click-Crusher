@@ -15,6 +15,9 @@ public class ItemSkill : MonoBehaviour
     public Vector2 fireBoxSize;
     public int fireNum;
     public float fireDamage;
+    public float fireTime;
+    public GameObject fireCoolTime;
+    public TMP_Text fireCoolTimeText;
 
     // fireShot
     public GameObject fireShotEffect;
@@ -23,42 +26,63 @@ public class ItemSkill : MonoBehaviour
     public int fireShotSubNum;
     public float fireShotDamage;
     public float fireShoSubDamage;
+    public float fireShotTime;
+    public GameObject fireShotCoolTime;
+    public TMP_Text fireShotCoolTimeText;
 
     // holyWave
     private GameObject WaveInstance;
     public GameObject holyWaveEffect;
     public Transform holyWavePos;
     public bool holyWave;
-    public float holyWaveTime;
+    public float holyWaveDuration;
     public float holyWaveDamage;
+    public float holyWaveTime;
+    public GameObject holyWaveCoolTime;
+    public TMP_Text holyWaveCoolTimeText;
 
     // holyShot
     public GameObject holyShotEffect;
     public bool holyShotReady;
+    public float holyShotDuration;
     public float holyShotDamage;
     public float holyShotTime;
+    public GameObject holyShotCoolTime;
+    public TMP_Text holyShotCoolTimeText;
 
     // melee
     public GameObject meleeEffect;
     public bool meleeReady;
     public int meleeMaxNum;
     public int meleeNum;
+    public float meleeTime;
+    public GameObject meleeCoolTime;
+    public TMP_Text meleeCoolTimeText;
 
     // posion
     public GameObject posionEffect;
     public bool posionReady;
-    public float posionTime;
+    public float posionDuration;
     public float poisonDamage;
+    public float posionTime;
+    public GameObject posionCoolTime;
+    public TMP_Text posionCoolTimeText;
 
     // rock
     public GameObject rockEffect;
     public bool rockReady;
     public float rockDamage;
+    public float rockTime;
+    public GameObject rockCoolTime;
+    public TMP_Text rockCoolTimeText;
 
-    //sturn
+    // sturn
     public GameObject sturnEffect;
     public GameObject sturnImage;
+    public float sturnDuration;
     public float sturnTime;
+    public GameObject sturnCoolTime;
+    public TMP_Text sturnCoolTimeText;
 
     void Start()
     {
@@ -77,10 +101,12 @@ public class ItemSkill : MonoBehaviour
 
     void Update()
     {
+        SkillCoolTime();
+
         fireNum = 3 + selectItem.fireLv;
         fireShotSubNum = 3 + selectItem.fireShotLv;
         meleeMaxNum = 5 + selectItem.meleeLv;
-        holyWaveTime = 3 + selectItem.holyWaveLv;
+        holyWaveDuration = 3 + selectItem.holyWaveLv;
         holyShotTime = 3 + selectItem.holyShotLv;
         posionTime = 3 + selectItem.posionLv;
         rockDamage = 5 * selectItem.rockLv;
@@ -160,11 +186,113 @@ public class ItemSkill : MonoBehaviour
         }
     }
 
+    void SkillCoolTime()
+    {
+
+        // fire
+        if (fireTime >= 0)
+        {
+            fireCoolTime.SetActive(true);
+            fireCoolTimeText.text = ((int)fireTime).ToString();
+            fireTime -= Time.deltaTime;
+        }
+        else
+        {
+            fireCoolTime.SetActive(false);
+        }
+
+        // fireShot
+        if (fireShotTime >= 0)
+        {
+            fireShotCoolTime.SetActive(true);
+            fireShotCoolTimeText.text = ((int)fireShotTime).ToString();
+            fireShotTime -= Time.deltaTime;
+        }
+        else
+        {
+            fireShotCoolTime.SetActive(false);
+        }
+
+        // holyWave
+        if (holyWaveTime >= 0)
+        {
+            holyWaveCoolTime.SetActive(true);
+            holyWaveCoolTimeText.text = ((int)holyWaveTime).ToString();
+            holyWaveTime -= Time.deltaTime;
+        }
+        else
+        {
+            holyWaveCoolTime.SetActive(false);
+        }
+
+        // holyShot
+        if (holyShotTime >= 0)
+        {
+            holyShotCoolTime.SetActive(true);
+            holyShotCoolTimeText.text = ((int)holyShotTime).ToString();
+            holyShotTime -= Time.deltaTime;
+        }
+        else
+        {
+            holyShotCoolTime.SetActive(false);
+        }
+
+        // melee
+        if (meleeTime >= 0)
+        {
+            meleeCoolTime.SetActive(true);
+            meleeCoolTimeText.text = ((int)meleeTime).ToString();
+            meleeTime -= Time.deltaTime;
+        }
+        else
+        {
+            meleeCoolTime.SetActive(false);
+        }
+
+        // posion
+        if (posionTime >= 0)
+        {
+            posionCoolTime.SetActive(true);
+            posionCoolTimeText.text = ((int)posionTime).ToString();
+            posionTime -= Time.deltaTime;
+        }
+        else
+        {
+            posionCoolTime.SetActive(false);
+        }
+
+        // rock
+        if (rockTime >= 0)
+        {
+            rockCoolTime.SetActive(true);
+            rockCoolTimeText.text = ((int)rockTime).ToString();
+            rockTime -= Time.deltaTime;
+        }
+        else
+        {
+            rockCoolTime.SetActive(false);
+        }
+
+        // sturn
+        if (sturnTime >= 0)
+        {
+            sturnCoolTime.SetActive(true);
+            sturnCoolTimeText.text = ((int)sturnTime).ToString();
+            sturnTime -= Time.deltaTime;
+        }
+        else
+        {
+            sturnCoolTime.SetActive(false);
+        }
+    }
+
     // fire --------------------------------
     public void Fire()
     {
-        if (!selectItem.itemSelecting)
+        if (!selectItem.itemSelecting && fireTime <= 0)
         {
+            fireTime = 5;
+
             for (int i = 0; i < fireNum; i++)
             {
                 // 랜덤한 위치 계산
@@ -184,7 +312,7 @@ public class ItemSkill : MonoBehaviour
     // fireShot --------------------------------
     public void FireShotReady()
     {
-        if (!selectItem.itemSelecting)
+        if (!selectItem.itemSelecting && fireShotTime <= 0)
         {
             fireShotReady = true;
         }
@@ -192,6 +320,8 @@ public class ItemSkill : MonoBehaviour
 
     IEnumerator FireShot(Vector3 targetPosition)
     {
+        fireShotTime = 5;
+
         GameObject fireShotInstance = Instantiate(fireShotEffect, targetPosition, Quaternion.identity);
 
         List<GameObject> sub = new List<GameObject>();
@@ -218,19 +348,21 @@ public class ItemSkill : MonoBehaviour
     
     public void HolyWave()
     {
-        if (!selectItem.itemSelecting)
+        if (!selectItem.itemSelecting && holyWaveTime <= 0)
         {
+            holyWaveTime = 5;
+
             WaveInstance = Instantiate(holyWaveEffect, holyWavePos.position, Quaternion.identity);
             holyWave = true;
 
-            Destroy(WaveInstance, holyWaveTime);
+            Destroy(WaveInstance, holyWaveDuration);
             StartCoroutine(DestroyWave());
         }
     }
 
     IEnumerator DestroyWave()
     {
-        yield return new WaitForSeconds(holyWaveTime);
+        yield return new WaitForSeconds(holyWaveDuration);
         Destroy(WaveInstance);
         holyWave = false;
     }
@@ -238,7 +370,7 @@ public class ItemSkill : MonoBehaviour
     // holyShot --------------------------------
     public void HolyShotReady()
     {
-        if (!selectItem.itemSelecting)
+        if (!selectItem.itemSelecting && holyShotTime <= 0)
         {
             holyShotReady = true;
         }
@@ -246,6 +378,8 @@ public class ItemSkill : MonoBehaviour
 
     public void HolyShot(Vector3 targetPosition)
     {
+        holyShotTime = 5;
+
         GameObject holyShotInstance = Instantiate(holyShotEffect, targetPosition, Quaternion.identity);
 
         StartCoroutine(RotateHolyShot(holyShotInstance, holyShotTime));
@@ -269,7 +403,7 @@ public class ItemSkill : MonoBehaviour
     // melee --------------------------------
     public void MeleeReady()
     {
-        if (!selectItem.itemSelecting)
+        if (!selectItem.itemSelecting && meleeTime <= 0)
         {
             meleeReady = true;
             meleeNum = meleeMaxNum;
@@ -278,6 +412,8 @@ public class ItemSkill : MonoBehaviour
 
     public void Melee(Vector3 targetPosition, int numEffects)
     {
+        meleeTime = 5;
+
         StartCoroutine(MeleeInstantiate(targetPosition , numEffects));
         meleeNum--;
     }
@@ -300,7 +436,7 @@ public class ItemSkill : MonoBehaviour
     // posion --------------------------------
     public void PosiontReady()
     {
-        if (!selectItem.itemSelecting)
+        if (!selectItem.itemSelecting && posionTime <= 0)
         {
             posionReady = true;
         }
@@ -308,6 +444,8 @@ public class ItemSkill : MonoBehaviour
 
     public void Posion(Vector3 targetPosition)
     {
+        posionTime = 5;
+
         GameObject posionInstance = Instantiate(posionEffect, targetPosition, Quaternion.identity);
 
         Destroy(posionInstance, 5f);
@@ -316,7 +454,7 @@ public class ItemSkill : MonoBehaviour
     // rock --------------------------------
     public void Rockeady()
     {
-        if (!selectItem.itemSelecting)
+        if (!selectItem.itemSelecting && fireTime <= 0)
         {
             rockReady = true;
         }
@@ -324,6 +462,8 @@ public class ItemSkill : MonoBehaviour
 
     public void Rock(Vector3 targetPosition)
     {
+        fireShotTime = 5;
+
         GameObject rockInstance = Instantiate(rockEffect, targetPosition, Quaternion.identity);
 
         Destroy(rockInstance, 5f);
@@ -334,8 +474,10 @@ public class ItemSkill : MonoBehaviour
 
     public void Sturn()
     {
-        if (!selectItem.itemSelecting)
+        if (!selectItem.itemSelecting && sturnTime <= 0)
         {
+            sturnTime = 5;
+
             GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
             foreach (GameObject monster in monsters)
