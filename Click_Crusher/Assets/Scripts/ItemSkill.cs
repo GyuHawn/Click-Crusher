@@ -107,10 +107,10 @@ public class ItemSkill : MonoBehaviour
         fireShotSubNum = 3 + selectItem.fireShotLv;
         meleeMaxNum = 5 + selectItem.meleeLv;
         holyWaveDuration = 3 + selectItem.holyWaveLv;
-        holyShotTime = 3 + selectItem.holyShotLv;
-        posionTime = 3 + selectItem.posionLv;
+        holyShotDuration = 3 + selectItem.holyShotLv;
+        posionDuration = 3 + selectItem.posionLv;
         rockDamage = 5 * selectItem.rockLv;
-        sturnTime = 3 + selectItem.sturnLv;
+        sturnDuration = 3 + selectItem.sturnLv;
 
         // fireShot
         if (fireShotReady && (Input.GetMouseButtonDown(0) || Input.touchCount > 0))
@@ -186,103 +186,203 @@ public class ItemSkill : MonoBehaviour
         }
     }
 
+    public void CoolTimeUIApply()
+    {
+        GameObject playerFire = GameObject.Find("Fire-PItem");
+        GameObject playerFireShot = GameObject.Find("Fire Shot-PItem");
+        GameObject playerHolyShot = GameObject.Find("Holy Shot-PItem");
+        GameObject playerHolyWave = GameObject.Find("Holy Wave-PItem");
+        GameObject playerMelee = GameObject.Find("Melee-PItem");
+        GameObject playerPoison = GameObject.Find("Posion-PItem");
+        GameObject playerSturn = GameObject.Find("Sturn-PItem");
+        GameObject playerRock = GameObject.Find("Rock-PItem");
+
+        if (playerFire != null)
+        {
+            Transform CoolTime = playerFire.transform.Find("CoolTime");
+            TMP_Text CoolTimeText = playerFire.GetComponentInChildren<TMP_Text>();
+
+            fireCoolTime = CoolTime.gameObject;
+            fireCoolTimeText = CoolTimeText;
+        }
+        else if (playerFireShot != null)
+        {
+            Transform CoolTime = playerFireShot.transform.Find("CoolTime");
+            TMP_Text CoolTimeText = playerFireShot.GetComponentInChildren<TMP_Text>();
+
+            fireShotCoolTime = CoolTime.gameObject;
+            fireShotCoolTimeText = CoolTimeText;
+        }
+        else if (playerHolyShot != null)
+        {
+            Transform CoolTime = playerHolyShot.transform.Find("CoolTime");
+            TMP_Text CoolTimeText = playerHolyShot.GetComponentInChildren<TMP_Text>();
+
+            holyShotCoolTime = CoolTime.gameObject;
+            holyShotCoolTimeText = CoolTimeText;
+        }
+        else if (playerHolyWave != null)
+        {
+            Transform CoolTime = playerHolyWave.transform.Find("CoolTime");
+            TMP_Text CoolTimeText = playerHolyWave.GetComponentInChildren<TMP_Text>();
+
+            holyWaveCoolTime = CoolTime.gameObject;
+            holyWaveCoolTimeText = CoolTimeText;
+        }
+        else if (playerMelee != null)
+        {
+            Transform CoolTime = playerMelee.transform.Find("CoolTime");
+            TMP_Text CoolTimeText = playerMelee.GetComponentInChildren<TMP_Text>();
+
+            meleeCoolTime = CoolTime.gameObject;
+            meleeCoolTimeText = CoolTimeText;
+        }
+        else if (playerPoison != null)
+        {
+            Transform CoolTime = playerPoison.transform.Find("CoolTime");
+            TMP_Text CoolTimeText = playerPoison.GetComponentInChildren<TMP_Text>();
+
+            posionCoolTime = CoolTime.gameObject;
+            posionCoolTimeText = CoolTimeText;
+        }
+        else if (playerSturn != null)
+        {
+            Transform CoolTime = playerSturn.transform.Find("CoolTime");
+            TMP_Text CoolTimeText = playerSturn.GetComponentInChildren<TMP_Text>();
+
+            sturnCoolTime = CoolTime.gameObject;
+            sturnCoolTimeText = CoolTimeText;
+        }
+        else if (playerRock != null)
+        {
+            Transform CoolTime = playerRock.transform.Find("CoolTime");
+            TMP_Text CoolTimeText = playerRock.GetComponentInChildren<TMP_Text>();
+
+            rockCoolTime = CoolTime.gameObject;
+            rockCoolTimeText = CoolTimeText;
+        }
+    }
+
     void SkillCoolTime()
     {
-
         // fire
-        if (fireTime >= 0)
+        if(fireCoolTime != null && fireCoolTimeText != null)
         {
-            fireCoolTime.SetActive(true);
-            fireCoolTimeText.text = ((int)fireTime).ToString();
-            fireTime -= Time.deltaTime;
+            if (fireTime >= 0)
+            {
+                fireCoolTime.SetActive(true);
+                fireCoolTimeText.text = ((int)fireTime).ToString();
+                fireTime -= Time.deltaTime;
+            }
+            else
+            {
+                fireCoolTime.SetActive(false);
+            }
         }
-        else
-        {
-            fireCoolTime.SetActive(false);
-        }
-
+        
         // fireShot
-        if (fireShotTime >= 0)
+        if (fireShotCoolTime != null && fireShotCoolTimeText != null)
         {
-            fireShotCoolTime.SetActive(true);
-            fireShotCoolTimeText.text = ((int)fireShotTime).ToString();
-            fireShotTime -= Time.deltaTime;
-        }
-        else
-        {
-            fireShotCoolTime.SetActive(false);
+            if (fireShotTime >= 0)
+            {
+                fireShotCoolTime.SetActive(true);
+                fireShotCoolTimeText.text = ((int)fireShotTime).ToString();
+                fireShotTime -= Time.deltaTime;
+            }
+            else
+            {
+                fireShotCoolTime.SetActive(false);
+            }
         }
 
         // holyWave
-        if (holyWaveTime >= 0)
+        if (holyWaveCoolTime != null && holyWaveCoolTimeText != null)
         {
-            holyWaveCoolTime.SetActive(true);
-            holyWaveCoolTimeText.text = ((int)holyWaveTime).ToString();
-            holyWaveTime -= Time.deltaTime;
-        }
-        else
-        {
-            holyWaveCoolTime.SetActive(false);
+            if (holyWaveTime >= 0)
+            {
+                holyWaveCoolTime.SetActive(true);
+                holyWaveCoolTimeText.text = ((int)holyWaveTime).ToString();
+                holyWaveTime -= Time.deltaTime;
+            }
+            else
+            {
+                holyWaveCoolTime.SetActive(false);
+            }
         }
 
         // holyShot
-        if (holyShotTime >= 0)
+        if (holyShotCoolTime != null && holyShotCoolTimeText != null)
         {
-            holyShotCoolTime.SetActive(true);
-            holyShotCoolTimeText.text = ((int)holyShotTime).ToString();
-            holyShotTime -= Time.deltaTime;
-        }
-        else
-        {
-            holyShotCoolTime.SetActive(false);
+            if (holyShotTime >= 0)
+            {
+                holyShotCoolTime.SetActive(true);
+                holyShotCoolTimeText.text = ((int)holyShotTime).ToString();
+                holyShotTime -= Time.deltaTime;
+            }
+            else
+            {
+                holyShotCoolTime.SetActive(false);
+            }
         }
 
         // melee
-        if (meleeTime >= 0)
+        if (meleeCoolTime != null && meleeCoolTimeText != null)
         {
-            meleeCoolTime.SetActive(true);
-            meleeCoolTimeText.text = ((int)meleeTime).ToString();
-            meleeTime -= Time.deltaTime;
-        }
-        else
-        {
-            meleeCoolTime.SetActive(false);
+            if (meleeTime >= 0)
+            {
+                meleeCoolTime.SetActive(true);
+                meleeCoolTimeText.text = ((int)meleeTime).ToString();
+                meleeTime -= Time.deltaTime;
+            }
+            else
+            {
+                meleeCoolTime.SetActive(false);
+            }
         }
 
         // posion
-        if (posionTime >= 0)
+        if (posionCoolTime != null && posionCoolTimeText != null)
         {
-            posionCoolTime.SetActive(true);
-            posionCoolTimeText.text = ((int)posionTime).ToString();
-            posionTime -= Time.deltaTime;
-        }
-        else
-        {
-            posionCoolTime.SetActive(false);
+            if (posionTime >= 0)
+            {
+                posionCoolTime.SetActive(true);
+                posionCoolTimeText.text = ((int)posionTime).ToString();
+                posionTime -= Time.deltaTime;
+            }
+            else
+            {
+                posionCoolTime.SetActive(false);
+            }
         }
 
         // rock
-        if (rockTime >= 0)
+        if (rockCoolTime != null && rockCoolTimeText != null)
         {
-            rockCoolTime.SetActive(true);
-            rockCoolTimeText.text = ((int)rockTime).ToString();
-            rockTime -= Time.deltaTime;
-        }
-        else
-        {
-            rockCoolTime.SetActive(false);
+            if (rockTime >= 0)
+            {
+                rockCoolTime.SetActive(true);
+                rockCoolTimeText.text = ((int)rockTime).ToString();
+                rockTime -= Time.deltaTime;
+            }
+            else
+            {
+                rockCoolTime.SetActive(false);
+            }
         }
 
         // sturn
-        if (sturnTime >= 0)
+        if (sturnCoolTime != null && sturnCoolTimeText != null)
         {
-            sturnCoolTime.SetActive(true);
-            sturnCoolTimeText.text = ((int)sturnTime).ToString();
-            sturnTime -= Time.deltaTime;
-        }
-        else
-        {
-            sturnCoolTime.SetActive(false);
+            if (sturnTime >= 0)
+            {
+                sturnCoolTime.SetActive(true);
+                sturnCoolTimeText.text = ((int)sturnTime).ToString();
+                sturnTime -= Time.deltaTime;
+            }
+            else
+            {
+                sturnCoolTime.SetActive(false);
+            }
         }
     }
 
@@ -462,7 +562,7 @@ public class ItemSkill : MonoBehaviour
 
     public void Rock(Vector3 targetPosition)
     {
-        fireShotTime = 5;
+        rockTime = 5;
 
         GameObject rockInstance = Instantiate(rockEffect, targetPosition, Quaternion.identity);
 

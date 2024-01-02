@@ -9,6 +9,7 @@ public class SelectItem : MonoBehaviour
 {
     private StageManager stageManager;
     private Character character;
+    private ItemSkill itemSkill;
 
     public bool itemSelecting;
 
@@ -68,6 +69,7 @@ public class SelectItem : MonoBehaviour
     {
         character = GameObject.Find("Manager").GetComponent<Character>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
+        itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
 
         itemSelecting = false;
         newCharacter = null; // 초기화 추가
@@ -199,8 +201,10 @@ public class SelectItem : MonoBehaviour
                 playerItem.SetActive(true);
             }
             
+            
             ItemTextClear();
             ItemLevelUp();
+            itemSkill.CoolTimeUIApply();
             itemSelecting = false;
             stageManager.selectingItem = false;
             selectItemMenu.SetActive(false);
@@ -238,7 +242,7 @@ public class SelectItem : MonoBehaviour
 
         if (newItem != null)
         {
-            newItem.name = newItem.name.Replace("(Clone)", "");
+            newItem.name = newItem.name.Replace("(Clone)", "-PItem");
             int nextPos = Mathf.Min(playerItems.Count, 4);
             switch (nextPos)
             {
@@ -273,9 +277,6 @@ public class SelectItem : MonoBehaviour
             default: return 0;
         }
     }
-
-    
-
 
     void ItemLevelOpen()
     {
