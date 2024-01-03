@@ -172,7 +172,7 @@ public class SelectItem : MonoBehaviour
 
             foreach (GameObject item in playerItems)
             {
-                if (item.name == items[selectNum - 1].name)
+                if (item.name == items[selectNum - 1].name + "")
                 {
                     isItemExist = true;
                     break;
@@ -200,17 +200,15 @@ public class SelectItem : MonoBehaviour
             {
                 playerItem.SetActive(true);
             }
-            
-            
+
             ItemTextClear();
             ItemLevelUp();
-            itemSkill.CoolTimeUIApply();
             itemSelecting = false;
             stageManager.selectingItem = false;
             selectItemMenu.SetActive(false);
         }
     }
-
+    
     void InstantiateItem()
     {
         GameObject newItem = null;
@@ -242,7 +240,7 @@ public class SelectItem : MonoBehaviour
 
         if (newItem != null)
         {
-            newItem.name = newItem.name.Replace("(Clone)", "-PItem");
+            newItem.name = newItem.name.Replace("(Clone)", "");
             int nextPos = Mathf.Min(playerItems.Count, 4);
             switch (nextPos)
             {
@@ -327,100 +325,35 @@ public class SelectItem : MonoBehaviour
 
     public void ItemLevelUp()
     {
-        if(character.currentCharacter == 4)
+        switch (selectNum)
         {
-            if (UnityEngine.Random.Range(0, 100) < 50)
-            {
-                switch (selectNum)
-                {
-                    case 1:
-                        fireLv += 2;
-                        break;
-                    case 2:
-                        fireShotLv += 2;
-                        break;
-                    case 3:
-                        holyWaveLv += 2;
-                        break;
-                    case 4:
-                        holyShotLv += 2;
-                        break;
-                    case 5:
-                        meleeLv += 2;
-                        break;
-                    case 6:
-                        posionLv += 2;
-                        break;
-                    case 7:
-                        rockLv += 2;
-                        break;
-                    case 8:
-                        sturnLv += 2;
-                        break;
-                }
-            }
-            else
-            {
-                switch (selectNum)
-                {
-                    case 1:
-                        fireLv++;
-                        break;
-                    case 2:
-                        fireShotLv++;
-                        break;
-                    case 3:
-                        holyWaveLv++;
-                        break;
-                    case 4:
-                        holyShotLv++;
-                        break;
-                    case 5:
-                        meleeLv++;
-                        break;
-                    case 6:
-                        posionLv++;
-                        break;
-                    case 7:
-                        rockLv++;
-                        break;
-                    case 8:
-                        sturnLv++;
-                        break;
-                }
-            }
+            case 1:
+                fireLv++;
+                break;
+            case 2:
+                fireShotLv++;
+                break;
+            case 3:
+                holyWaveLv++;
+                break;
+            case 4:
+                holyShotLv++;
+                break;
+            case 5:
+                meleeLv++;
+                break;
+            case 6:
+                posionLv++;
+                break;
+            case 7:
+                rockLv++;
+                break;
+            case 8:
+                sturnLv++;
+                break;
         }
-        else
-        {
-            switch (selectNum)
-            {
-                case 1:
-                    fireLv++;
-                    break;
-                case 2:
-                    fireShotLv++;
-                    break;
-                case 3:
-                    holyWaveLv++;
-                    break;
-                case 4:
-                    holyShotLv++;
-                    break;
-                case 5:
-                    meleeLv++;
-                    break;
-                case 6:
-                    posionLv++;
-                    break;
-                case 7:
-                    rockLv++;
-                    break;
-                case 8:
-                    sturnLv++;
-                    break;
-            }
-        }     
     }
+    
 
     void ItemTextClear()
     {
@@ -436,7 +369,7 @@ public class SelectItem : MonoBehaviour
             selectedItem = true;
             selectNum = 1;
             itemName.text = "화염소환";
-            itemEx.text = "주변의 랜덤한 위치에 불기둥을 소환하여 일정 시간 동안 데미지를 입힘니다.";
+            itemEx.text = "일정확률로 공격한 위치에 불기둥을 소환합니다.";
         }
     }
     public void FireShot()
@@ -447,7 +380,7 @@ public class SelectItem : MonoBehaviour
             selectedItem = true;
             selectNum = 2;
             itemName.text = "폭발하는 불꽃";
-            itemEx.text = "넓은 범위에 불꽃을 퍼뜨려 대량의 데미지를 입힘니다.";
+            itemEx.text = "일정확률로 강력한 데미지를 주고 파편을 날려 주위에 데미지를 입힘니다.";
         }
     }
     public void HolyWave()
@@ -458,7 +391,7 @@ public class SelectItem : MonoBehaviour
             selectedItem = true;
             selectNum = 3;
             itemName.text = "빛의 파동";
-            itemEx.text = "빛의 파동이 일렁이며 맵 전체에 에너지를 퍼뜨려, 일정 시간 동안 적들에게 지속적인 피해를 입힙니다.";
+            itemEx.text = "일정확률로 빛의 파동이 일렁이며, 일정 시간 동안 전체 적들에게 지속적인 피해를 입힙니다.";
         }
     }
     public void HolyShot()
@@ -469,7 +402,7 @@ public class SelectItem : MonoBehaviour
             selectedItem = true;
             selectNum = 4;
             itemName.text = "빛의 심판";
-            itemEx.text = "선택한 범위에 빛을 집중하여 일정 시간 동안 데미지를 입힘니다.";
+            itemEx.text = "일정확률로 공격한 범위에 빛을 집중하여 일정 시간 동안 데미지를 입힘니다.";
         }
     }
     public void Melee()
@@ -480,7 +413,7 @@ public class SelectItem : MonoBehaviour
             selectedItem = true;
             selectNum = 5;
             itemName.text = "폭풍의 일격";
-            itemEx.text = "이후 5번의 공격동안 추가적으로 한 번 더 공격합니다.";
+            itemEx.text = "일정확률로 적에게 추가적으로 공격을 합니다.";
         }
     }
     public void Posion()
@@ -491,7 +424,7 @@ public class SelectItem : MonoBehaviour
             selectedItem = true;
             selectNum = 6;
             itemName.text = "맹독";
-            itemEx.text = "다음 공격한 몬스터에게 일정 시간 동안 지속적으로 데미지를 입힘니다.";
+            itemEx.text = "일정확률로 몬스터에게 일정 시간 동안 지속적으로 데미지를 입힘니다.";
         }
     }
     public void Rock()
@@ -502,7 +435,7 @@ public class SelectItem : MonoBehaviour
             selectedItem = true;
             selectNum = 7;
             itemName.text = "압도적인 힘";
-            itemEx.text = "다음 공격에 강력한 데미지를 입힘니다.";
+            itemEx.text = "일정확률로 강력한 데미지를 입힘니다.";
         }
     }
     public void Sturn()
@@ -513,7 +446,7 @@ public class SelectItem : MonoBehaviour
             selectedItem = true;
             selectNum = 8;
             itemName.text = "흙의 강타";
-            itemEx.text = "강력한 흙의 힘으로 적을 공격하여 일정 시간 동안 기절 상태로 만듭니다.";
+            itemEx.text = "일정확률로 적을 공격하여 일정 시간 동안 기절 상태로 만듭니다.";
         }
     }
 }

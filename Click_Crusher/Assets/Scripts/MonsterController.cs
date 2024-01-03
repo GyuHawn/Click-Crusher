@@ -80,7 +80,7 @@ public class MonsterController : MonoBehaviour
         }
 
         // PC 마우스 클릭
-        if (Input.GetMouseButtonDown(0) && !itemSkill.fireShotReady)
+        if (Input.GetMouseButtonDown(0))
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
@@ -95,73 +95,13 @@ public class MonsterController : MonoBehaviour
                     if (attack)
                     {
                         playerController.playerHealth -= damage;
-                    }
-                    else
-                    {
-                        if (itemSkill.meleeReady)
-                        {
-                            for (int i = 0; i < 4; i++)
-                            {
-                                currentHealth -= playerController.damage;
-                                HitMonster(0.2f, 0.1f);
-                            }
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else if (itemSkill.rockReady)
-                        {
-                            currentHealth -= (playerController.damage + itemSkill.rockDamage);
-                            itemSkill.rockReady = false;
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else if (itemSkill.fireShotReady)
-                        {
-                            currentHealth -= (playerController.damage + itemSkill.fireShotDamage);
-                            itemSkill.fireShotReady = false;
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else if (character.water)
-                        {
-                            currentHealth -= playerController.damage;
-
-                            if (Random.Range(0, 100) < 10)
-                            {
-                                character.Water(hit.point);
-                                currentHealth -= character.waterDamage;
-                            }
-
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else if (character.lihgt)
-                        {
-                            currentHealth -= playerController.damage;
-
-                            if (Random.Range(0, 100) < 100)
-                            {
-                                GameObject sturnInstance = Instantiate(itemSkill.sturnEffect, gameObject.transform.position, Quaternion.identity);
-                                GameObject sturnimageInstance = Instantiate(itemSkill.sturnImage, sturn.transform.position, Quaternion.identity);
-
-                                stop = true;
-                                attackTime += 5f;
-
-                                StartCoroutine(Removestun());
-                                Destroy(sturnimageInstance, 3f);
-                            }
-
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else
-                        {
-                            currentHealth -= playerController.damage;
-                            HitMonster(0.5f, 0.2f);
-                        }
-
-                    }
+                    }                 
                 }
             }
         }
 
         // 모바일 터치
-        if (Input.GetMouseButtonDown(0) && !itemSkill.fireShotReady)
+        if (Input.GetMouseButtonDown(0))
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
@@ -176,83 +116,10 @@ public class MonsterController : MonoBehaviour
                     if (attack)
                     {
                         playerController.playerHealth -= damage;
-                    }
-                    else
-                    {
-                        if (itemSkill.meleeReady)
-                        {
-                            for (int i = 0; i < 4; i++)
-                            {
-                                currentHealth -= playerController.damage;
-                                HitMonster(0.2f, 0.1f);
-                            }
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else if (itemSkill.rockReady)
-                        {
-                            currentHealth -= (playerController.damage + itemSkill.rockDamage);
-                            itemSkill.rockReady = false;
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else if (itemSkill.fireShotReady)
-                        {
-                            currentHealth -= (playerController.damage + itemSkill.fireShotDamage);
-                            itemSkill.fireShotReady = false;
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else if (character.water)
-                        {
-                            currentHealth -= playerController.damage;
-
-                            if (Random.Range(0, 100) < 10)
-                            {
-                                character.Water(hit.point);
-                                currentHealth -= character.waterDamage;
-                            }
-
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else if (character.lihgt)
-                        {
-                            currentHealth -= playerController.damage;
-
-                            if (Random.Range(0, 100) < 10)
-                            {
-                                GameObject sturnInstance = Instantiate(itemSkill.sturnEffect, gameObject.transform.position, Quaternion.identity);
-                                GameObject sturnimageInstance = Instantiate(itemSkill.sturnImage, sturn.transform.position, Quaternion.identity);
-
-                                stop = true;
-                                attackTime += 5f;
-
-                                StartCoroutine(Removestun());
-                                Destroy(sturnimageInstance, 3f);
-                            }
-
-                            HitMonster(0.5f, 0.2f);
-                        }
-                        else
-                        {
-                            currentHealth -= playerController.damage;
-                            HitMonster(0.5f, 0.2f);
-                        }
-
-                    }
+                    }                 
                 }
             }
         }
-
-        /*if (gameObject.tag == "Boss" && attack && !playerController.defending)
-        {
-            if (playerController.defending)
-            {
-                Debug.Log("방어");
-            }
-            else
-            {
-                Debug.Log("보스공격");
-                playerController.playerHealth -= damage;
-            }
-        }*/
 
         if (attackTime <= 0)
         {
@@ -285,7 +152,7 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
-                if (itemSkill.posionTime >= 0)
+                if (itemSkill.posionDuration >= 0)
                 {
                     currentHealth -= itemSkill.poisonDamage;
                     HitMonster(0.5f, 0.2f);
@@ -335,13 +202,11 @@ public class MonsterController : MonoBehaviour
         {
             if (playerController.defending)
             {
-                Debug.Log("방어");
+
             }
             else
             {
                 bossAttackNum = 0;
-
-                Debug.Log("보스공격");
                 playerController.playerHealth -= damage;
             }         
         }

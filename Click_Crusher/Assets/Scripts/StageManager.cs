@@ -141,7 +141,9 @@ public class StageManager : MonoBehaviour
         {
             subStage++;
 
-            if (mainStage >= 2 && mainStage < 8)
+            selectItem.ItemSelect();
+            StartCoroutine(DelayStage());
+           /* if (mainStage >= 2 && mainStage < 8)
             {
                 if (subStage == 2)
                 {
@@ -177,7 +179,7 @@ public class StageManager : MonoBehaviour
                 StartCoroutine(DelayStage());
             }
 
-            mainStage++;
+            mainStage++;*/
         }
 
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
