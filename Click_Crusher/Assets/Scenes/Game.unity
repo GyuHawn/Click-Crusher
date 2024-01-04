@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4910542}
+  - component: {fileID: 4910543}
   - component: {fileID: 4910545}
   - component: {fileID: 4910548}
   - component: {fileID: 4910547}
@@ -139,7 +140,6 @@ GameObject:
   - component: {fileID: 4910544}
   - component: {fileID: 4910541}
   - component: {fileID: 4910540}
-  - component: {fileID: 4910543}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -312,7 +312,7 @@ MonoBehaviour:
   - {fileID: 1521765857}
   playerHealth: 0
   gameover: {fileID: 909437216}
-  damage: 1000
+  damage: 0
   defenseEffect: {fileID: 1671184088}
   defending: 0
   defenseTime: 0
@@ -320,6 +320,7 @@ MonoBehaviour:
   defenseCoolTimeText: {fileID: 1561283385}
   money: 0
   gameTimeText: {fileID: 841981646}
+  isDragging: 0
 --- !u!114 &4910544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,33 +399,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireEffect: {fileID: 1727626132299242, guid: b0bc1b6b391734647b9bb142bafc0819, type: 3}
-  firePos: {fileID: 442449474}
-  fireBoxSize: {x: 10, y: 6}
   fireDamage: 1
+  fireDamagePercent: 0
+  fireDuration: 0
+  firePercent: 0
+  isFire: 0
   fireShotEffect: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
   fireShotSub: {fileID: 377886417881520460, guid: 018dfaf33330a884f95b87ab827e1c82, type: 3}
   fireShotSubNum: 5
   fireShotDamage: 1
-  fireShoSubDamage: 0
+  fireShotDamagePercent: 0
+  fireShotSubDamage: 0
+  fireShotSubDamagePercent: 0
+  fireShotPercent: 0
+  isFireShot: 0
   holyWaveEffect: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
   holyWavePos: {fileID: 310290280}
   holyWave: 0
   holyWaveDuration: 3
   holyWaveDamage: 1
+  holyWaveDamagePercent: 0
+  holyWavePercent: 0
+  isHolyWave: 0
   holyShotEffect: {fileID: 1545806602296978, guid: 9e4577abe56a95f4a91d29a0473cd30c, type: 3}
   holyShotDuration: 3
   holyShotDamage: 0.1
+  holyShotDamagePercent: 0
+  holyShotPercent: 0
+  isHolyShot: 0
   meleeEffect: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
   meleeMaxNum: 0
   meleeNum: 0
+  meleePercent: 0
+  isMelee: 0
   posionEffect: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   posionDuration: 5
   poisonDamage: 1
+  poisonDamagePercent: 0
+  posionPercent: 0
+  isPosion: 0
   rockEffect: {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
   rockDamage: 100
+  rockDamagePercent: 0
+  rockPercent: 0
+  isRock: 0
   sturnEffect: {fileID: 1750940742320366, guid: ec1383a81f8b26e41bd5795fba065567, type: 3}
   sturnImage: {fileID: 1032629073625697751, guid: 31c41e1f58495b24bb36d84673125722, type: 3}
   sturnDuration: 0
+  sturnPercent: 0
+  isSturn: 0
 --- !u!114 &4910546
 MonoBehaviour:
   m_ObjectHideFlags: 0

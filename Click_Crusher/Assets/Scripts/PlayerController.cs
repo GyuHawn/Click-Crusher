@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private float gameTime;
     public TMP_Text gameTimeText;
 
+    public bool isDragging = false; // 드래그 중인지
     void Start()
     {
         character = GameObject.Find("Manager").GetComponent<Character>();

@@ -29,7 +29,10 @@ public class MonsterController : MonoBehaviour
     // 플레이어 기술 관련
     public bool fired; // 불
     public bool stop; // 기절중인지
-    public bool poisoned; // 중독
+    public bool poisoned; // 중독   
+
+    private int monsterLayer;
+    private int bossLayer;
 
     SpriteRenderer spriteRenderer;
     private Animator anim;
@@ -51,6 +54,9 @@ public class MonsterController : MonoBehaviour
         stop = false;
         attack = false;
         bossAttackNum = 1;
+
+        monsterLayer = LayerMask.NameToLayer("Monster");
+        bossLayer = LayerMask.NameToLayer("Boss");
 
 
         if (gameObject.tag == "Monster")
@@ -79,44 +85,35 @@ public class MonsterController : MonoBehaviour
             anim.enabled = true;
         }
 
-        // PC 마우스 클릭
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
-
-            if (hit.collider != null && hit.collider.gameObject == gameObject && canTakeDamage)
-            {
-                int monsterLayer = LayerMask.NameToLayer("Monster");
-                int bossLayer = LayerMask.NameToLayer("Boss");
-                if (hit.collider.gameObject.layer == monsterLayer || hit.collider.gameObject.layer == bossLayer)
-                {
-
-                    if (attack)
-                    {
-                        playerController.playerHealth -= damage;
-                    }                 
-                }
-            }
+            playerController.isDragging = true;
         }
 
-        // 모바일 터치
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
+        {
+            playerController.isDragging = false;
+        }
+
+        if (playerController.isDragging)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.gameObject == gameObject && canTakeDamage)
+            if (hit.collider != null && (hit.collider.gameObject.layer == monsterLayer || hit.collider.gameObject.layer == bossLayer))
             {
-                int monsterLayer = LayerMask.NameToLayer("Monster");
-                int bossLayer = LayerMask.NameToLayer("Boss");
-                if (hit.collider.gameObject.layer == monsterLayer || hit.collider.gameObject.layer == bossLayer)
+                if (attack)
                 {
-
-                    if (attack)
+                    if (canTakeDamage)
                     {
                         playerController.playerHealth -= damage;
-                    }                 
+                        StartCoroutine(DamageCooldown(1f));
+                    }
+                }
+                else
+                {
+                    currentHealth -= playerController.damage;
+                    HitMonster(0.5f, 0.2f);
                 }
             }
         }
@@ -329,7 +326,7 @@ public class MonsterController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "FireShotSub")
         {
-            currentHealth -= itemSkill.fireShoSubDamage;
+            currentHealth -= itemSkill.fireShotSubDamage;
             HitMonster(0.5f, 0.2f);
         }
     }

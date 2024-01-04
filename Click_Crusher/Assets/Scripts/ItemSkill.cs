@@ -7,20 +7,27 @@ using UnityEngine;
 public class ItemSkill : MonoBehaviour
 {
     private SelectItem selectItem;
+    private PlayerController playerController;
 
     // fire
     private GameObject fireInstance;
     public GameObject fireEffect;
-    public Transform firePos;
-    public Vector2 fireBoxSize;
     public float fireDamage;
+    public float fireDamagePercent;
+    public float fireDuration;
+    public float firePercent;
+    public bool isFire;
 
     // fireShot
     public GameObject fireShotEffect;
     public GameObject fireShotSub;
     public int fireShotSubNum;
     public float fireShotDamage;
-    public float fireShoSubDamage;
+    public float fireShotDamagePercent;
+    public float fireShotSubDamage;
+    public float fireShotSubDamagePercent;
+    public float fireShotPercent;
+    public bool isFireShot;
 
     // holyWave
     private GameObject WaveInstance;
@@ -29,37 +36,56 @@ public class ItemSkill : MonoBehaviour
     public bool holyWave;
     public float holyWaveDuration;
     public float holyWaveDamage;
+    public float holyWaveDamagePercent;
+    public float holyWavePercent;
+    public bool isHolyWave;
 
     // holyShot
     public GameObject holyShotEffect;
     public float holyShotDuration;
     public float holyShotDamage;
+    public float holyShotDamagePercent;
+    public float holyShotPercent;
+    public bool isHolyShot;
 
     // melee
     public GameObject meleeEffect;
     public int meleeMaxNum;
     public int meleeNum;
+    public float meleePercent;
+    public bool isMelee;
 
     // posion
     public GameObject posionEffect;
     public float posionDuration;
     public float poisonDamage;
+    public float poisonDamagePercent;
+    public float posionPercent;
+    public bool isPosion;
 
     // rock
     public GameObject rockEffect;
     public float rockDamage;
+    public float rockDamagePercent;
+    public float rockPercent;
+    public bool isRock;
 
     // sturn
     public GameObject sturnEffect;
     public GameObject sturnImage;
     public float sturnDuration;
+    public float sturnPercent;
+    public bool isSturn;
 
     void Start()
     {
         selectItem = GameObject.Find("Manager").GetComponent<SelectItem>();
+        playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
 
         // 사용중인지
         holyWave = false;
+
+        BasicSettings();
     }
 
     void Update()
@@ -71,59 +97,177 @@ public class ItemSkill : MonoBehaviour
         posionDuration = 3 + selectItem.posionLv;
         rockDamage = 5 * selectItem.rockLv;
         sturnDuration = 3 + selectItem.sturnLv;
+    }
 
+    public void BasicSettings()
+    {
+        // 공격력 퍼센트
+        fireDamagePercent = 0.5f;
+        fireShotDamagePercent = 1.5f;
+        fireShotSubDamagePercent = 0.5f;
+        holyWaveDamagePercent = 0.3f;
+        holyShotDamagePercent = 0.7f;
+        poisonDamagePercent = 0.4f;
+        rockDamagePercent = 2f;
+
+        // 공격력
+        fireDamage = playerController.damage * fireDamagePercent;
+        fireShotDamage = playerController.damage * fireShotDamagePercent;
+        fireShotSubDamage = playerController.damage * fireShotSubDamagePercent;
+        holyWaveDamage = playerController.damage * holyWaveDamagePercent;
+        holyShotDamage = playerController.damage * holyShotDamagePercent;
+        poisonDamage = playerController.damage * poisonDamagePercent;
+        rockDamage = playerController.damage * rockDamagePercent;
+
+        // 갯수
+        fireShotSubNum = 3;
+        meleeMaxNum = 5;
+
+        // 시간
+        fireDuration = 3f;
+        holyShotDuration = 2f;
+        holyWaveDuration = 4f;
+        posionDuration = 5f;
+        sturnDuration = 3f;
+
+        // 확률
+        firePercent = 10f;
+        fireShotPercent = 20f;
+        holyShotPercent = 10f;
+        holyWavePercent = 5f;
+        rockPercent = 30f;
+        posionPercent = 10f;
+        meleePercent = 60f;
+        sturnPercent = 30f;
+    }
+
+    public void ItemValueUp()
+    {
+        // fire
+        fireDamagePercent += 0.1f;
+        fireDuration += 0.5f;
+
+        // fireShot
+        fireShotDamagePercent += 0.2f;
+        fireShotSubDamagePercent += 0.2f;
+        fireShotSubNum++;
+
+        // holyWave
+        holyWaveDamagePercent += 0.05f;
+        holyWaveDuration += 0.5f;
+
+        // holyShot
+        holyShotDamagePercent += 0.2f;
+        holyShotDuration += 0.5f;
+
+        // rock
+        rockDamagePercent += 0.5f;
+
+        // poison
+        poisonDamagePercent += 0.05f;
+
+        // melee
+        meleeMaxNum++;
+
+        // sturn
+        sturnDuration += 1f;
+    }
+
+    public void GetItem()
+    {
+        GameObject fireObj = GameObject.Find("FirePltem");
+        GameObject fireShotObj = GameObject.Find("Fire ShotPltem");
+        GameObject holyWaveObj = GameObject.Find("Holy WavePltem");
+        GameObject holyShotObj = GameObject.Find("Holy ShotPltem");
+        GameObject rockObj = GameObject.Find("RockPltem");
+        GameObject posionObj = GameObject.Find("PosionPltem");
+        GameObject meleeObj = GameObject.Find("MeleePltem");
+        GameObject sturnObj = GameObject.Find("SturnPltem");
+
+        if (fireObj != null)
+        {
+            isFire = true;
+        }
+        else if (fireShotObj != null)
+        {
+            isFireShot = true;
+        }
+        else if (holyWaveObj != null)
+        {
+            isHolyWave = true;
+        }
+        else if (holyShotObj != null)
+        {
+            isHolyShot = true;
+        }
+        else if (rockObj != null)
+        {
+            isRock = true;
+        }
+        else if (posionObj != null)
+        {
+            isPosion = true;
+        }
+        else if (meleeObj != null)
+        {
+            isMelee = true;
+        }
+        else if (sturnObj != null)
+        {
+            isSturn = true;
+        }
     }
 
     // fire --------------------------------
-    public void Fire()
+    public void Fire(Vector3 targetPosition)
     {
-            // 랜덤한 위치 계산
-            float randomX = Random.Range(-fireBoxSize.x / 2, fireBoxSize.x / 2);
-            float randomY = Random.Range(-fireBoxSize.y / 2, fireBoxSize.y / 2);
+        if(isFire)
+        {
+            fireInstance = Instantiate(fireEffect, targetPosition, Quaternion.Euler(-90, 0, 0));
 
-            // firePos를 기준으로 랜덤한 위치에 불 효과 생성
-            Vector3 randomPos = firePos.position + new Vector3(randomX, randomY, 0);
-            fireInstance = Instantiate(fireEffect, randomPos, Quaternion.Euler(-90, 0, 0));
-
-            // 생성한 불 효과를 3초 후에 제거
             Destroy(fireInstance, 3f);
-
+        }      
     }
 
     // fireShot --------------------------------
     public void FireShot (Vector3 targetPosition)
     {
-        GameObject fireShotInstance = Instantiate(fireShotEffect, targetPosition, Quaternion.identity);
-
-        List<GameObject> sub = new List<GameObject>();
-
-        for (int i = 0; i < fireShotSubNum; i++)
+        if (isFireShot)
         {
-            GameObject subShot = Instantiate(fireShotSub, targetPosition, Quaternion.identity);
-            Vector2 randomDirection = Random.insideUnitCircle.normalized;
-            subShot.GetComponent<Rigidbody2D>().velocity = randomDirection * 5f;
+            GameObject fireShotInstance = Instantiate(fireShotEffect, targetPosition, Quaternion.identity);
 
-            sub.Add(subShot);
-        }
+            List<GameObject> sub = new List<GameObject>();
 
-        foreach(GameObject delete in sub)
-        {
-            Destroy(delete);
-        }
+            for (int i = 0; i < fireShotSubNum; i++)
+            {
+                GameObject subShot = Instantiate(fireShotSub, targetPosition, Quaternion.identity);
+                Vector2 randomDirection = Random.insideUnitCircle.normalized;
+                subShot.GetComponent<Rigidbody2D>().velocity = randomDirection * 5f;
 
-        Destroy(fireShotInstance, 3f);
+                sub.Add(subShot);
+            }
+
+            foreach (GameObject delete in sub)
+            {
+                Destroy(delete);
+            }
+
+            Destroy(fireShotInstance, 3f);
+        }     
     }
 
     // holyWave --------------------------------
 
     public void HolyWave()
     {
-        WaveInstance = Instantiate(holyWaveEffect, holyWavePos.position, Quaternion.identity);
-        holyWave = true;
+        if(isHolyWave)
+        {
+            WaveInstance = Instantiate(holyWaveEffect, holyWavePos.position, Quaternion.identity);
+            holyWave = true;
 
-        Destroy(WaveInstance, holyWaveDuration);
-        StartCoroutine(DestroyWave());
-
+            Destroy(WaveInstance, holyWaveDuration);
+            StartCoroutine(DestroyWave());
+        }      
     }
 
     IEnumerator DestroyWave()
@@ -137,9 +281,12 @@ public class ItemSkill : MonoBehaviour
 
     public void HolyShot(Vector3 targetPosition)
     {
-        GameObject holyShotInstance = Instantiate(holyShotEffect, targetPosition, Quaternion.identity);
+        if (isHolyShot)
+        {
+            GameObject holyShotInstance = Instantiate(holyShotEffect, targetPosition, Quaternion.identity);
 
-        StartCoroutine(RotateHolyShot(holyShotInstance, 5f));
+            StartCoroutine(RotateHolyShot(holyShotInstance, 5f));
+        }       
     }
 
     private IEnumerator RotateHolyShot(GameObject holyShotInstance, float duration)
@@ -159,9 +306,12 @@ public class ItemSkill : MonoBehaviour
   
     // melee --------------------------------
     public void Melee(Vector3 targetPosition, int numEffects)
-    {     
-        StartCoroutine(MeleeInstantiate(targetPosition , numEffects));
-        meleeNum--;
+    {
+        if (isMelee)
+        {
+            StartCoroutine(MeleeInstantiate(targetPosition, numEffects));
+            meleeNum--;
+        }     
     }
 
     IEnumerator MeleeInstantiate(Vector3 targetPosition, int numEffects)
@@ -182,17 +332,23 @@ public class ItemSkill : MonoBehaviour
     // posion --------------------------------
     public void Posion(Vector3 targetPosition)
     {
-        GameObject posionInstance = Instantiate(posionEffect, targetPosition, Quaternion.identity);
+        if(isPosion)
+        {
+            GameObject posionInstance = Instantiate(posionEffect, targetPosition, Quaternion.identity);
 
-        Destroy(posionInstance, 5f);
+            Destroy(posionInstance, 5f);
+        }       
     }
 
     // rock --------------------------------
     public void Rock(Vector3 targetPosition)
     {
-        GameObject rockInstance = Instantiate(rockEffect, targetPosition, Quaternion.identity);
+        if(isRock)
+        {
+            GameObject rockInstance = Instantiate(rockEffect, targetPosition, Quaternion.identity);
 
-        Destroy(rockInstance, 5f);
+            Destroy(rockInstance, 5f);
+        }       
     }
 
     // sturn --------------------------------
@@ -200,27 +356,29 @@ public class ItemSkill : MonoBehaviour
 
     public void Sturn()
     {
-        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-
-        foreach (GameObject monster in monsters)
+        if (isSturn)
         {
-            MonsterController monsterController = monster.GetComponent<MonsterController>();
-            GameObject sturnInstance = Instantiate(sturnEffect, monster.transform.position, Quaternion.identity);
-            GameObject sturnimageInstance = Instantiate(sturnImage, monsterController.sturn.transform.position, Quaternion.identity);
+            GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
-            if (monsterController != null)
+            foreach (GameObject monster in monsters)
             {
-                monsterController.stop = true;
-                monsterController.attackTime += 5;
+                MonsterController monsterController = monster.GetComponent<MonsterController>();
+                GameObject sturnInstance = Instantiate(sturnEffect, monster.transform.position, Quaternion.identity);
+                GameObject sturnimageInstance = Instantiate(sturnImage, monsterController.sturn.transform.position, Quaternion.identity);
+
+                if (monsterController != null)
+                {
+                    monsterController.stop = true;
+                    monsterController.attackTime += 5;
+                }
+
+                monsterToSturnImage[monster] = sturnimageInstance;
+
+                Destroy(sturnimageInstance, 3f);
             }
 
-            monsterToSturnImage[monster] = sturnimageInstance;
-
-            Destroy(sturnimageInstance, 3f);
-        }
-
-        StartCoroutine(Removestun());
-
+            StartCoroutine(Removestun());
+        }      
     }
 
     IEnumerator Removestun()

@@ -203,6 +203,7 @@ public class SelectItem : MonoBehaviour
 
             ItemTextClear();
             ItemLevelUp();
+            itemSkill.ItemValueUp();
             itemSelecting = false;
             stageManager.selectingItem = false;
             selectItemMenu.SetActive(false);
@@ -240,7 +241,7 @@ public class SelectItem : MonoBehaviour
 
         if (newItem != null)
         {
-            newItem.name = newItem.name.Replace("(Clone)", "");
+            newItem.name = newItem.name.Replace("(Clone)", "Pltem");
             int nextPos = Mathf.Min(playerItems.Count, 4);
             switch (nextPos)
             {
