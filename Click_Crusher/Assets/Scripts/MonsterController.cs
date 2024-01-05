@@ -16,7 +16,7 @@ public class MonsterController : MonoBehaviour
     public float currentHealth;
 
     // 피격 간격
-    private bool canTakeDamage = true;
+    public bool canTakeDamage = true;
 
     public bool attack;
     private int bossAttackNum;
@@ -84,7 +84,7 @@ public class MonsterController : MonoBehaviour
         {
             anim.enabled = true;
         }
-
+/*
         if (Input.GetMouseButtonDown(0))
         {
             playerController.isDragging = true;
@@ -93,9 +93,9 @@ public class MonsterController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             playerController.isDragging = false;
-        }
+        }*/
 
-        if (playerController.isDragging)
+        /*if (playerController.isDragging)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
@@ -113,10 +113,52 @@ public class MonsterController : MonoBehaviour
                 else
                 {
                     currentHealth -= playerController.damage;
+                    itemSkill.SetCurrentAttackedMonster(hit.collider.gameObject);
                     HitMonster(0.5f, 0.2f);
                 }
+
+                if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
+                {
+                    Debug.Log("파이어");
+                    itemSkill.Fire(hit.collider.gameObject.transform.position);
+                }
+                else if (itemSkill.isFireShot && Random.Range(0f, 100f) <= itemSkill.fireShotPercent)
+                {
+                    Debug.Log("파이어샷");
+                    itemSkill.FireShot(hit.collider.gameObject.transform.position);
+                }
+                else if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
+                {
+                    Debug.Log("홀리웨이브");
+                    itemSkill.HolyWave();
+                }
+                else if (itemSkill.isHolyShot && Random.Range(0f, 100f) <= itemSkill.holyShotPercent)
+                {
+                    Debug.Log("홀리샷");
+                    itemSkill.HolyShot(hit.collider.gameObject.transform.position);
+                }
+                else if (itemSkill.isMelee && Random.Range(0f, 100f) <= itemSkill.meleePercent)
+                {
+                    Debug.Log("난투");
+                    itemSkill.Melee(hit.collider.gameObject.transform.position, itemSkill.meleeNum);
+                }
+                else if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
+                {
+                    Debug.Log("독");
+                    itemSkill.Posion(hit.collider.gameObject.transform.position);
+                }
+                else if (itemSkill.isRock && Random.Range(0f, 100f) <= itemSkill.rockPercent)
+                {
+                    Debug.Log("돌");
+                    itemSkill.Rock(hit.collider.gameObject.transform.position);
+                }
+                else if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
+                {
+                    Debug.Log("스턴");
+                    itemSkill.Sturn();
+                }
             }
-        }
+        }*/
 
         if (attackTime <= 0)
         {
@@ -273,6 +315,11 @@ public class MonsterController : MonoBehaviour
         canTakeDamage = false;
         yield return new WaitForSeconds(damageCooldown);
         canTakeDamage = true;
+    }
+
+    public void DamegeCoolDown(float damageCooldown)
+    {
+        StartCoroutine(DamageCooldown(damageCooldown));
     }
 
     public void Die()

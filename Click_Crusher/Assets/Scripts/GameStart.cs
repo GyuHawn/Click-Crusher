@@ -7,6 +7,13 @@ public class GameStart : MonoBehaviour
 {
     public void NewGame()
     {
+        StartCoroutine(GameStartButton());
+    }
+    
+    IEnumerator GameStartButton()
+    {
+        yield return new WaitForSeconds(1f);
+
         LodingController.LoadScene("Character");
     }
 

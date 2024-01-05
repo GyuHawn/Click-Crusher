@@ -142,6 +142,13 @@ public class CharacterSelect : MonoBehaviour
     public void GameStart()
     {
         PlayerPrefs.SetInt("SelectChar", selectChar);
+        StartCoroutine(GameStartButton());
+    }
+
+    IEnumerator GameStartButton()
+    {
+        yield return new WaitForSeconds(1f);
+
         LodingController.LoadScene("Game");
     }
 }

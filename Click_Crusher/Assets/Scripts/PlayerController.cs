@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Character character;
     private StageManager stageManager;
+    private ItemSkill itemSkill;
 
     public GameObject[] playerHealthUI;
     public int playerHealth;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         character = GameObject.Find("Manager").GetComponent<Character>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
+        itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
 
         defending = false;
 
@@ -64,6 +66,90 @@ public class PlayerController : MonoBehaviour
 
         // 시간을 텍스트로 표시
         gameTimeText.text = string.Format("{0:00}:{1:00}", Mathf.Floor(gameTime / 60), gameTime % 60);
+
+
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            isDragging = true;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+        }
+
+        if (isDragging)
+        {
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+
+            if (hit.collider != null)
+            {
+                MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
+
+                if (monsterController != null)
+                {
+                    if (monsterController.attack)
+                    {
+                        if (monsterController.canTakeDamage)
+                        {
+                            playerHealth -= monsterController.damage;
+                            monsterController.DamegeCoolDown(1f);
+                        }
+                    }
+                    else
+                    {
+                        monsterController.currentHealth -= damage;
+                        itemSkill.SetCurrentAttackedMonster(hit.collider.gameObject);
+                        monsterController.HitMonster(0.5f, 0.2f);
+                    }
+
+
+                    if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
+                    {
+                        Debug.Log("파이어");
+                        itemSkill.Fire(hit.collider.gameObject.transform.position);
+                    }
+                    else if (itemSkill.isFireShot && Random.Range(0f, 100f) <= itemSkill.fireShotPercent)
+                    {
+                        Debug.Log("파이어샷");
+                        itemSkill.FireShot(hit.collider.gameObject.transform.position);
+                    }
+                    else if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
+                    {
+                        Debug.Log("홀리웨이브");
+                        itemSkill.HolyWave();
+                    }
+                    else if (itemSkill.isHolyShot && Random.Range(0f, 100f) <= itemSkill.holyShotPercent)
+                    {
+                        Debug.Log("홀리샷");
+                        itemSkill.HolyShot(hit.collider.gameObject.transform.position);
+                    }
+                    else if (itemSkill.isMelee && Random.Range(0f, 100f) <= itemSkill.meleePercent)
+                    {
+                        Debug.Log("난투");
+                        itemSkill.Melee(hit.collider.gameObject.transform.position, itemSkill.meleeNum);
+                    }
+                    else if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
+                    {
+                        Debug.Log("독");
+                        itemSkill.Posion(hit.collider.gameObject.transform.position);
+                    }
+                    else if (itemSkill.isRock && Random.Range(0f, 100f) <= itemSkill.rockPercent)
+                    {
+                        Debug.Log("돌");
+                        itemSkill.Rock(hit.collider.gameObject.transform.position);
+                    }
+                    else if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
+                    {
+                        Debug.Log("스턴");
+                        itemSkill.Sturn();
+                    }
+                }
+            }
+        }
+
     }
 
     void UpdateHealthUI()

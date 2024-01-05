@@ -50,7 +50,6 @@ public class ItemSkill : MonoBehaviour
 
     // melee
     public GameObject meleeEffect;
-    public int meleeMaxNum;
     public int meleeNum;
     public float meleePercent;
     public bool isMelee;
@@ -76,6 +75,7 @@ public class ItemSkill : MonoBehaviour
     public float sturnDuration;
     public float sturnPercent;
     public bool isSturn;
+    private GameObject currentAttackedMonster;
 
     void Start()
     {
@@ -86,17 +86,6 @@ public class ItemSkill : MonoBehaviour
         holyWave = false;
 
         BasicSettings();
-    }
-
-    void Update()
-    {
-        fireShotSubNum = 3 + selectItem.fireShotLv;
-        meleeMaxNum = 5 + selectItem.meleeLv;
-        holyWaveDuration = 3 + selectItem.holyWaveLv;
-        holyShotDuration = 3 + selectItem.holyShotLv;
-        posionDuration = 3 + selectItem.posionLv;
-        rockDamage = 5 * selectItem.rockLv;
-        sturnDuration = 3 + selectItem.sturnLv;
     }
 
     public void BasicSettings()
@@ -121,7 +110,7 @@ public class ItemSkill : MonoBehaviour
 
         // 갯수
         fireShotSubNum = 3;
-        meleeMaxNum = 5;
+        meleeNum = 5;
 
         // 시간
         fireDuration = 3f;
@@ -131,14 +120,22 @@ public class ItemSkill : MonoBehaviour
         sturnDuration = 3f;
 
         // 확률
-        firePercent = 10f;
+        /*firePercent = 10f;
         fireShotPercent = 20f;
         holyShotPercent = 10f;
         holyWavePercent = 5f;
         rockPercent = 30f;
         posionPercent = 10f;
         meleePercent = 60f;
-        sturnPercent = 30f;
+        sturnPercent = 30f;*/
+        firePercent = 100f;
+        fireShotPercent = 100f;
+        holyShotPercent = 100f;
+        holyWavePercent = 100f;
+        rockPercent = 100f;
+        posionPercent = 100f;
+        meleePercent = 100f;
+        sturnPercent = 100f;
     }
 
     public void ItemValueUp()
@@ -167,7 +164,7 @@ public class ItemSkill : MonoBehaviour
         poisonDamagePercent += 0.05f;
 
         // melee
-        meleeMaxNum++;
+        meleeNum++;
 
         // sturn
         sturnDuration += 1f;
@@ -310,7 +307,6 @@ public class ItemSkill : MonoBehaviour
         if (isMelee)
         {
             StartCoroutine(MeleeInstantiate(targetPosition, numEffects));
-            meleeNum--;
         }     
     }
 
@@ -358,27 +354,26 @@ public class ItemSkill : MonoBehaviour
     {
         if (isSturn)
         {
-            GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-
-            foreach (GameObject monster in monsters)
+            // 현재 공격한 몬스터만을 스턴시키도록 변경
+            if (currentAttackedMonster != null)
             {
-                MonsterController monsterController = monster.GetComponent<MonsterController>();
-                GameObject sturnInstance = Instantiate(sturnEffect, monster.transform.position, Quaternion.identity);
-                GameObject sturnimageInstance = Instantiate(sturnImage, monsterController.sturn.transform.position, Quaternion.identity);
-
+                MonsterController monsterController = currentAttackedMonster.GetComponent<MonsterController>();
                 if (monsterController != null)
                 {
+                    GameObject sturnInstance = Instantiate(sturnEffect, currentAttackedMonster.transform.position, Quaternion.identity);
+                    GameObject sturnimageInstance = Instantiate(sturnImage, monsterController.sturn.transform.position, Quaternion.identity);
+
                     monsterController.stop = true;
                     monsterController.attackTime += 5;
+
+                    monsterToSturnImage[currentAttackedMonster] = sturnimageInstance;
+
+                    Destroy(sturnimageInstance, 3f);
                 }
-
-                monsterToSturnImage[monster] = sturnimageInstance;
-
-                Destroy(sturnimageInstance, 3f);
             }
 
             StartCoroutine(Removestun());
-        }      
+        }
     }
 
     IEnumerator Removestun()
@@ -397,6 +392,11 @@ public class ItemSkill : MonoBehaviour
         }
     }
 
+    public void SetCurrentAttackedMonster(GameObject monster)
+    {
+        currentAttackedMonster = monster;
+    }
+
     public void DestroyMonster(GameObject monster)
     {
         if (monsterToSturnImage.ContainsKey(monster))
@@ -407,4 +407,5 @@ public class ItemSkill : MonoBehaviour
 
         Destroy(monster);
     }
+
 }

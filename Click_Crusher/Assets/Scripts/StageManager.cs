@@ -44,7 +44,7 @@ public class StageManager : MonoBehaviour
         if (!gameStart)
         {
             mainStage = 1;
-            subStage = 1;
+            subStage = 2;
             StageMonsterSetting();
             SpawnMonsters();
             selectingItem = false;
