@@ -8,6 +8,7 @@ public class ItemSkill : MonoBehaviour
 {
     private SelectItem selectItem;
     private PlayerController playerController;
+    private AudioManager audioManager;
 
     // fire
     private GameObject fireInstance;
@@ -81,6 +82,7 @@ public class ItemSkill : MonoBehaviour
     {
         selectItem = GameObject.Find("Manager").GetComponent<SelectItem>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
+        audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
 
         // 사용중인지
         holyWave = false;
@@ -120,22 +122,14 @@ public class ItemSkill : MonoBehaviour
         sturnDuration = 3f;
 
         // 확률
-        /*firePercent = 10f;
+        firePercent = 10f;
         fireShotPercent = 20f;
         holyShotPercent = 10f;
         holyWavePercent = 5f;
         rockPercent = 30f;
         posionPercent = 10f;
         meleePercent = 60f;
-        sturnPercent = 30f;*/
-        firePercent = 100f;
-        fireShotPercent = 100f;
-        holyShotPercent = 100f;
-        holyWavePercent = 100f;
-        rockPercent = 100f;
-        posionPercent = 100f;
-        meleePercent = 100f;
-        sturnPercent = 100f;
+        sturnPercent = 30f;
     }
 
     public void ItemValueUp()
@@ -220,6 +214,8 @@ public class ItemSkill : MonoBehaviour
     {
         if(isFire)
         {
+            audioManager.FireAudio();
+
             fireInstance = Instantiate(fireEffect, targetPosition, Quaternion.Euler(-90, 0, 0));
 
             Destroy(fireInstance, 3f);
@@ -231,6 +227,8 @@ public class ItemSkill : MonoBehaviour
     {
         if (isFireShot)
         {
+            audioManager.FireShotAudio();
+
             GameObject fireShotInstance = Instantiate(fireShotEffect, targetPosition, Quaternion.identity);
 
             List<GameObject> sub = new List<GameObject>();
@@ -259,6 +257,8 @@ public class ItemSkill : MonoBehaviour
     {
         if(isHolyWave)
         {
+            audioManager.HolyWaveAudio();
+
             WaveInstance = Instantiate(holyWaveEffect, holyWavePos.position, Quaternion.identity);
             holyWave = true;
 
@@ -280,6 +280,8 @@ public class ItemSkill : MonoBehaviour
     {
         if (isHolyShot)
         {
+            audioManager.HolyShotAudio();
+
             GameObject holyShotInstance = Instantiate(holyShotEffect, targetPosition, Quaternion.identity);
 
             StartCoroutine(RotateHolyShot(holyShotInstance, 5f));
@@ -314,6 +316,8 @@ public class ItemSkill : MonoBehaviour
     {
         for (int i = 0; i < numEffects; i++)
         {
+            audioManager.MeleeAudio();
+
             Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
             Vector3 spawnPosition = targetPosition + randomOffset;
 
@@ -330,6 +334,10 @@ public class ItemSkill : MonoBehaviour
     {
         if(isPosion)
         {
+            Debug.Log("11");
+            audioManager.PosionAudio();
+
+            Debug.Log("22");
             GameObject posionInstance = Instantiate(posionEffect, targetPosition, Quaternion.identity);
 
             Destroy(posionInstance, 5f);
@@ -341,6 +349,8 @@ public class ItemSkill : MonoBehaviour
     {
         if(isRock)
         {
+            audioManager.RockAudio();
+
             GameObject rockInstance = Instantiate(rockEffect, targetPosition, Quaternion.identity);
 
             Destroy(rockInstance, 5f);
@@ -354,7 +364,8 @@ public class ItemSkill : MonoBehaviour
     {
         if (isSturn)
         {
-            // 현재 공격한 몬스터만을 스턴시키도록 변경
+            audioManager.SturnAudio();
+
             if (currentAttackedMonster != null)
             {
                 MonsterController monsterController = currentAttackedMonster.GetComponent<MonsterController>();

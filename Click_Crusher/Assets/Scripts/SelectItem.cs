@@ -266,14 +266,14 @@ public class SelectItem : MonoBehaviour
     {
         switch (item.name)
         {
-            case "Fire": return fireLv;
-            case "Fire Shot": return fireShotLv;
-            case "Holy Wave": return holyWaveLv;
-            case "Holy Shot": return holyShotLv;
-            case "Melee": return meleeLv;
-            case "Posion": return posionLv;
-            case "Rock": return rockLv;
-            case "Sturn": return sturnLv;
+            case "FirePltem": return fireLv;
+            case "Fire ShotPltem": return fireShotLv;
+            case "Holy WavePltem": return holyWaveLv;
+            case "Holy ShotPltem": return holyShotLv;
+            case "MeleePltem": return meleeLv;
+            case "PosionPltem": return posionLv;
+            case "RockPltem": return rockLv;
+            case "SturnPltem": return sturnLv;
             default: return 0;
         }
     }

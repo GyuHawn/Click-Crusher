@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Burst.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
     private Character character;
     private StageManager stageManager;
     private ItemSkill itemSkill;
+    private AudioManager audioManager;
 
     public GameObject[] playerHealthUI;
     public int playerHealth;
     public GameObject gameover;
 
     public float damage;
+    private bool isAttacking = false;
 
     public GameObject defenseEffect;
     public bool defending;
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
         character = GameObject.Find("Manager").GetComponent<Character>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
+        audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
 
         defending = false;
 
@@ -50,7 +54,6 @@ public class PlayerController : MonoBehaviour
     {
         UpdateHealthUI();
 
-
         if (defenseTime >= 0)
         {
             defenseCoolTimeText.text = ((int)defenseTime).ToString();
@@ -61,13 +64,8 @@ public class PlayerController : MonoBehaviour
             defenseCoolTime.SetActive(false);
         }
 
-        // 게임 시간 증가
         gameTime += Time.deltaTime;
-
-        // 시간을 텍스트로 표시
         gameTimeText.text = string.Format("{0:00}:{1:00}", Mathf.Floor(gameTime / 60), gameTime % 60);
-
-
         
         if (Input.GetMouseButtonDown(0))
         {
@@ -79,7 +77,7 @@ public class PlayerController : MonoBehaviour
             isDragging = false;
         }
 
-        if (isDragging)
+        if (isDragging && !isAttacking) // 새로운 조건 추가
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
@@ -89,67 +87,82 @@ public class PlayerController : MonoBehaviour
                 MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
 
                 if (monsterController != null)
-                {
-                    if (monsterController.attack)
-                    {
-                        if (monsterController.canTakeDamage)
-                        {
-                            playerHealth -= monsterController.damage;
-                            monsterController.DamegeCoolDown(1f);
-                        }
-                    }
-                    else
-                    {
-                        monsterController.currentHealth -= damage;
-                        itemSkill.SetCurrentAttackedMonster(hit.collider.gameObject);
-                        monsterController.HitMonster(0.5f, 0.2f);
-                    }
-
-
-                    if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
-                    {
-                        Debug.Log("파이어");
-                        itemSkill.Fire(hit.collider.gameObject.transform.position);
-                    }
-                    else if (itemSkill.isFireShot && Random.Range(0f, 100f) <= itemSkill.fireShotPercent)
-                    {
-                        Debug.Log("파이어샷");
-                        itemSkill.FireShot(hit.collider.gameObject.transform.position);
-                    }
-                    else if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
-                    {
-                        Debug.Log("홀리웨이브");
-                        itemSkill.HolyWave();
-                    }
-                    else if (itemSkill.isHolyShot && Random.Range(0f, 100f) <= itemSkill.holyShotPercent)
-                    {
-                        Debug.Log("홀리샷");
-                        itemSkill.HolyShot(hit.collider.gameObject.transform.position);
-                    }
-                    else if (itemSkill.isMelee && Random.Range(0f, 100f) <= itemSkill.meleePercent)
-                    {
-                        Debug.Log("난투");
-                        itemSkill.Melee(hit.collider.gameObject.transform.position, itemSkill.meleeNum);
-                    }
-                    else if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
-                    {
-                        Debug.Log("독");
-                        itemSkill.Posion(hit.collider.gameObject.transform.position);
-                    }
-                    else if (itemSkill.isRock && Random.Range(0f, 100f) <= itemSkill.rockPercent)
-                    {
-                        Debug.Log("돌");
-                        itemSkill.Rock(hit.collider.gameObject.transform.position);
-                    }
-                    else if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
-                    {
-                        Debug.Log("스턴");
-                        itemSkill.Sturn();
-                    }
+                {                  
+                    StartCoroutine(AttackMonster(monsterController));
                 }
             }
         }
+    }
 
+    IEnumerator AttackMonster(MonsterController monsterController)
+    {
+        isAttacking = true; // 공격 중으로 설정
+        
+        if (monsterController.attack)
+        {
+            if (monsterController.canTakeDamage)
+            {
+                audioManager.HitAudio();
+
+                playerHealth -= monsterController.damage;
+                monsterController.DamegeCoolDown(1f);
+            }
+        }
+        else
+        {
+            audioManager.AttackAudio();
+
+            monsterController.currentHealth -= damage;
+            itemSkill.SetCurrentAttackedMonster(monsterController.gameObject);
+            monsterController.HitMonster(0.5f, 0.2f);
+        }
+
+        if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
+        {
+            Debug.Log("파이어");
+            itemSkill.Fire(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isFireShot && Random.Range(0f, 100f) <= itemSkill.fireShotPercent)
+        {
+            Debug.Log("파이어샷");
+            itemSkill.FireShot(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
+        {
+            Debug.Log("홀리웨이브");
+            itemSkill.HolyWave();
+        }
+        if (itemSkill.isHolyShot && Random.Range(0f, 100f) <= itemSkill.holyShotPercent)
+        {
+            Debug.Log("홀리샷");
+            itemSkill.HolyShot(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isMelee && Random.Range(0f, 100f) <= itemSkill.meleePercent)
+        {
+            Debug.Log("난투");
+            itemSkill.Melee(monsterController.gameObject.transform.position, itemSkill.meleeNum);
+        }
+        if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
+        {
+            Debug.Log("독");
+            itemSkill.Posion(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isRock && Random.Range(0f, 100f) <= itemSkill.rockPercent)
+        {
+            Debug.Log("돌");
+            itemSkill.Rock(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
+        {
+            Debug.Log("스턴");
+            itemSkill.Sturn();
+        }
+
+        // 마우스를 때거나 0.2초뒤 공격가능
+        float startTime = Time.time;
+        yield return new WaitUntil(() => !Input.GetMouseButton(0) || Time.time - startTime > 0.2f);
+
+        isAttacking = false; // 공격이 끝남
     }
 
     void UpdateHealthUI()
@@ -185,6 +198,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator StartDefense()
     {
         defending = true;
+
+        audioManager.DefenseAudio();
+
         defenseEffect.SetActive(true);
         defenseCoolTime.SetActive(true);
         defenseTime = 6;

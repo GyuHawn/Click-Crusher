@@ -10,6 +10,7 @@ public class MonsterController : MonoBehaviour
     private MonsterSpwan monsterSpawn;
     private PlayerController playerController;
     private ItemSkill itemSkill;
+    private AudioManager audioManager;
 
     public int damage;
     public float maxHealth;
@@ -44,6 +45,7 @@ public class MonsterController : MonoBehaviour
         monsterSpawn = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
+        audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -84,87 +86,13 @@ public class MonsterController : MonoBehaviour
         {
             anim.enabled = true;
         }
-/*
-        if (Input.GetMouseButtonDown(0))
-        {
-            playerController.isDragging = true;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            playerController.isDragging = false;
-        }*/
-
-        /*if (playerController.isDragging)
-        {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
-
-            if (hit.collider != null && (hit.collider.gameObject.layer == monsterLayer || hit.collider.gameObject.layer == bossLayer))
-            {
-                if (attack)
-                {
-                    if (canTakeDamage)
-                    {
-                        playerController.playerHealth -= damage;
-                        StartCoroutine(DamageCooldown(1f));
-                    }
-                }
-                else
-                {
-                    currentHealth -= playerController.damage;
-                    itemSkill.SetCurrentAttackedMonster(hit.collider.gameObject);
-                    HitMonster(0.5f, 0.2f);
-                }
-
-                if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
-                {
-                    Debug.Log("파이어");
-                    itemSkill.Fire(hit.collider.gameObject.transform.position);
-                }
-                else if (itemSkill.isFireShot && Random.Range(0f, 100f) <= itemSkill.fireShotPercent)
-                {
-                    Debug.Log("파이어샷");
-                    itemSkill.FireShot(hit.collider.gameObject.transform.position);
-                }
-                else if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
-                {
-                    Debug.Log("홀리웨이브");
-                    itemSkill.HolyWave();
-                }
-                else if (itemSkill.isHolyShot && Random.Range(0f, 100f) <= itemSkill.holyShotPercent)
-                {
-                    Debug.Log("홀리샷");
-                    itemSkill.HolyShot(hit.collider.gameObject.transform.position);
-                }
-                else if (itemSkill.isMelee && Random.Range(0f, 100f) <= itemSkill.meleePercent)
-                {
-                    Debug.Log("난투");
-                    itemSkill.Melee(hit.collider.gameObject.transform.position, itemSkill.meleeNum);
-                }
-                else if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
-                {
-                    Debug.Log("독");
-                    itemSkill.Posion(hit.collider.gameObject.transform.position);
-                }
-                else if (itemSkill.isRock && Random.Range(0f, 100f) <= itemSkill.rockPercent)
-                {
-                    Debug.Log("돌");
-                    itemSkill.Rock(hit.collider.gameObject.transform.position);
-                }
-                else if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
-                {
-                    Debug.Log("스턴");
-                    itemSkill.Sturn();
-                }
-            }
-        }*/
 
         if (attackTime <= 0)
         {
             attack = true;
             if (gameObject.tag == "Monster")
             {
+                audioManager.MonsterAttackAudio();
                 StartCoroutine(MonsterAttack());
             }
             else if(gameObject.tag == "Boss" && bossAttackNum == 1)
@@ -265,7 +193,7 @@ public class MonsterController : MonoBehaviour
 
 
     IEnumerator MonsterAttack()
-    {
+    {     
         danager.SetActive(true);
         yield return new WaitForSeconds(1.0f);
 
@@ -273,7 +201,7 @@ public class MonsterController : MonoBehaviour
 
         anim.SetBool("Attack", true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         attack = false;
         anim.SetBool("Attack", false);
 

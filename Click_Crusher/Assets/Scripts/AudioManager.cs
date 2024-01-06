@@ -70,20 +70,17 @@ public class AudioManager : MonoBehaviour
             {
                 if (stageManager.subStage == 5)
                 {
-                    Debug.Log("보스");
                     bgmStage.Stop();
                     bgmBossStage.Play();
                 }
                 else
                 {
-                    Debug.Log("서브");
                     bgmBossStage.Stop();
                     bgmStage.Play();
                 }
             }
             else
             {
-                Debug.Log("서브8이상");
                 bgmStage.Stop();
                 bgmBossStage.Play();
             }
