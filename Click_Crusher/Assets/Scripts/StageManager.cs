@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class StageManager : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class StageManager : MonoBehaviour
 
     public bool selectingItem;
 
+    public float totalTime;
+    public int rewardMoney;
+    public TMP_Text totalTimeText;
+    public TMP_Text rewardMoneyText;
+    public TMP_Text finalWaveText;
+    
     private void Awake()
     {
         monsterSpawn = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
@@ -44,13 +51,15 @@ public class StageManager : MonoBehaviour
         if (!gameStart)
         {
             mainStage = 1;
-            subStage = 2;
+            subStage = 1;
             StageMonsterSetting();
             SpawnMonsters();
             selectingItem = false;
             gameStart = true;
-        }
 
+            totalTime = 0;
+            rewardMoney = 0;
+        }
     }
 
     void Update()
@@ -69,6 +78,26 @@ public class StageManager : MonoBehaviour
             playerController.gameover.SetActive(true);
             gameStart = false;
         }
+
+        totalTime = playerController.gameTime;
+        totalTimeText.text = string.Format("{0:00}:{1:00}", Mathf.Floor(totalTime / 60), totalTime % 60);
+        finalWaveText.text = mainStage + " - " + subStage;
+        rewardMoneyText.text = rewardMoney.ToString();
+    }
+
+    public void Reward()
+    {
+        if (gameStart)
+        {
+            rewardMoney += (int)(totalTime * 1);
+
+            int playerMoney = PlayerPrefs.GetInt("GameMoney", 0);
+
+            playerMoney += rewardMoney;
+
+            PlayerPrefs.SetInt("GameMoney", playerMoney);
+            PlayerPrefs.Save();
+        }       
     }
 
     public void StageMonsterSetting()
@@ -139,47 +168,47 @@ public class StageManager : MonoBehaviour
       
         if (mainStage < 8)
         {
-            subStage++;
+            NextSubStage();
 
             selectItem.ItemSelect();
             StartCoroutine(DelayStage());
-           /* if (mainStage >= 2 && mainStage < 8)
-            {
-                if (subStage == 2)
-                {
-                    selectingItem = true;
-                    selectPass.passMenu.SetActive(true);
-                }
-            }
+            /* if (mainStage >= 2 && mainStage < 8)
+             {
+                 if (subStage == 2)
+                 {
+                     selectingItem = true;
+                     selectPass.passMenu.SetActive(true);
+                 }
+             }
 
-            if (subStage == 3)
-            {
-                selectItem.ItemSelect();
-                StartCoroutine(DelayStage());
-            }
-            else if (subStage > 5)
-            {
-                subStage = 1;
-                mainStage++;
+             if (subStage == 3)
+             {
+                 selectItem.ItemSelect();
+                 StartCoroutine(DelayStage());
+             }
+             else if (subStage > 5)
+             {
+                 subStage = 1;
+                NextMainStage();
 
-                selectItem.ItemSelect();
-                StartCoroutine(DelayStage());
-            }
-        }
-        else
-        {
-            if (mainStage % 10 == 2 || mainStage % 10 == 5 || mainStage % 10 == 8)
-            {
-                selectingItem = true;
-                selectPass.passMenu.SetActive(true);
-            }
-            else if (mainStage % 10 == 0 || mainStage % 10 == 6)
-            {
-                selectItem.ItemSelect();
-                StartCoroutine(DelayStage());
-            }
+                 selectItem.ItemSelect();
+                 StartCoroutine(DelayStage());
+             }
+         }
+         else
+         {
+             if (mainStage % 10 == 2 || mainStage % 10 == 5 || mainStage % 10 == 8)
+             {
+                 selectingItem = true;
+                 selectPass.passMenu.SetActive(true);
+             }
+             else if (mainStage % 10 == 0 || mainStage % 10 == 6)
+             {
+                 selectItem.ItemSelect();
+                 StartCoroutine(DelayStage());
+             }
 
-            mainStage++;*/
+             NextMainStage();*/
         }
 
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
@@ -187,8 +216,32 @@ public class StageManager : MonoBehaviour
         SpawnMonsters();
     }
 
+    void NextSubStage()
+    {
+        subStage++;
+        rewardMoney += 10;
+    }
+
+    void NextMainStage()
+    {
+        mainStage++;
+        rewardMoney += 100;
+    }
+
     IEnumerator DelayStage()
     {
         yield return new WaitForSeconds(1f);
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverButton());
+    }
+
+    IEnumerator GameOverButton()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        LodingController.LoadScene("MainMenu");
     }
 }

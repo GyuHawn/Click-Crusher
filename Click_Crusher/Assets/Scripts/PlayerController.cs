@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public int money;
 
-    private float gameTime;
+    public float gameTime;
     public TMP_Text gameTimeText;
 
     public bool isDragging = false; // 드래그 중인지
@@ -168,6 +168,7 @@ public class PlayerController : MonoBehaviour
         {
             playerHealthUI[0].SetActive(true);
             Time.timeScale = 0f;
+            stageManager.Reward();
             stageManager.gameStart = false;
             gameover.SetActive(true);
         }
