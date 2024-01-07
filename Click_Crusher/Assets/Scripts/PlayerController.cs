@@ -6,7 +6,6 @@ using Unity.Burst.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
-    private Character character;
     private StageManager stageManager;
     private ItemSkill itemSkill;
     private AudioManager audioManager;
@@ -32,7 +31,6 @@ public class PlayerController : MonoBehaviour
     public bool isDragging = false; // 드래그 중인지
     void Start()
     {
-        character = GameObject.Find("Manager").GetComponent<Character>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
@@ -41,11 +39,6 @@ public class PlayerController : MonoBehaviour
 
         playerHealth = 8;
         UpdateHealthUI();
-
-        if (character.rock)
-        {
-            damage += character.rockDamage;
-        }
 
         gameTime = 0f;
     }

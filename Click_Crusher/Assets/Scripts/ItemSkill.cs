@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ItemSkill : MonoBehaviour
 {
     private SelectItem selectItem;
     private PlayerController playerController;
     private AudioManager audioManager;
+    private Character character;
 
     // fire
     private GameObject fireInstance;
@@ -83,12 +85,14 @@ public class ItemSkill : MonoBehaviour
         selectItem = GameObject.Find("Manager").GetComponent<SelectItem>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
+        character = GameObject.Find("Manager").GetComponent<Character>();
 
         // »ç¿ëÁßÀÎÁö
         holyWave = false;
 
         BasicSettings();
     }
+
 
     public void BasicSettings()
     {
@@ -121,15 +125,29 @@ public class ItemSkill : MonoBehaviour
         posionDuration = 5f;
         sturnDuration = 3f;
 
-        // È®·ü
-        firePercent = 10f;
-        fireShotPercent = 20f;
-        holyShotPercent = 10f;
-        holyWavePercent = 5f;
-        rockPercent = 30f;
-        posionPercent = 10f;
-        meleePercent = 60f;
-        sturnPercent = 30f;
+        // È®·ü      
+        if (character.currentCharacter == 4)
+        {
+            firePercent = 20f;
+            fireShotPercent = 30f;
+            holyShotPercent = 20f;
+            holyWavePercent = 15f;
+            rockPercent = 40f;
+            posionPercent = 20f;
+            meleePercent = 70f;
+            sturnPercent = 40f;
+        }
+        else
+        {
+            firePercent = 10f;
+            fireShotPercent = 20f;
+            holyShotPercent = 10f;
+            holyWavePercent = 5f;
+            rockPercent = 30f;
+            posionPercent = 10f;
+            meleePercent = 60f;
+            sturnPercent = 30f;
+        }
     }
 
     public void ItemValueUp()
@@ -216,14 +234,15 @@ public class ItemSkill : MonoBehaviour
         {
             audioManager.FireAudio();
 
-            fireInstance = Instantiate(fireEffect, targetPosition, Quaternion.Euler(-90, 0, 0));
+            Vector3 firePos = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z + 3f);
+            fireInstance = Instantiate(fireEffect, firePos, Quaternion.Euler(-90, 0, 0));
 
             Destroy(fireInstance, 3f);
         }      
     }
 
     // fireShot --------------------------------
-    public void FireShot (Vector3 targetPosition)
+    public void FireShot(Vector3 targetPosition)
     {
         if (isFireShot)
         {
@@ -235,20 +254,28 @@ public class ItemSkill : MonoBehaviour
 
             for (int i = 0; i < fireShotSubNum; i++)
             {
-                GameObject subShot = Instantiate(fireShotSub, targetPosition, Quaternion.identity);
+                Vector3 subPos = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - 1f);
+                GameObject subShot = Instantiate(fireShotSub, subPos, Quaternion.identity);
                 Vector2 randomDirection = Random.insideUnitCircle.normalized;
                 subShot.GetComponent<Rigidbody2D>().velocity = randomDirection * 5f;
 
                 sub.Add(subShot);
             }
 
-            foreach (GameObject delete in sub)
-            {
-                Destroy(delete);
-            }
+            StartCoroutine(DestroySubShots(sub, 3f));
 
-            Destroy(fireShotInstance, 3f);
-        }     
+            Destroy(fireShotInstance, 1f);
+        }
+    }
+
+    private IEnumerator DestroySubShots(List<GameObject> subShots, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        foreach (GameObject subShot in subShots)
+        {
+            Destroy(subShot);
+        }
     }
 
     // holyWave --------------------------------

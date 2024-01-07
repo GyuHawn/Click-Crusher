@@ -83,32 +83,21 @@ public class SelectItem : MonoBehaviour
 
     void CharacterInstant()
     {
-        if (newCharacter == null)
+        if (character.currentCharacter == 1)
         {
-            if (character.currentCharacter == 1)
-            {
-                newCharacter = Instantiate(characters[0], charPos.transform.position, Quaternion.identity);
-                newCharacter.transform.SetParent(canvas.transform, false);
-                newCharacter.transform.position = charPos.transform.position;
-            }
-            if (character.currentCharacter == 2)
-            {
-                newCharacter = Instantiate(characters[1], charPos.transform.position, Quaternion.identity);
-                newCharacter.transform.SetParent(canvas.transform, false);
-                newCharacter.transform.position = charPos.transform.position;
-            }
-            if (character.currentCharacter == 3)
-            {
-                newCharacter = Instantiate(characters[2], charPos.transform.position, Quaternion.identity);
-                newCharacter.transform.SetParent(canvas.transform, false);
-                newCharacter.transform.position = charPos.transform.position;
-            }
-            if (character.currentCharacter == 4)
-            {
-                newCharacter = Instantiate(characters[3], charPos.transform.position, Quaternion.identity);
-                newCharacter.transform.SetParent(canvas.transform, false);
-                newCharacter.transform.position = charPos.transform.position;
-            }
+            characters[0].transform.position = charPos.transform.position;
+        }
+        if (character.currentCharacter == 2)
+        {
+            characters[1].transform.position = charPos.transform.position;
+        }
+        if (character.currentCharacter == 3)
+        {
+            characters[2].transform.position = charPos.transform.position;
+        }
+        if (character.currentCharacter == 4)
+        {
+            characters[3].transform.position = charPos.transform.position;
         }
     }
 

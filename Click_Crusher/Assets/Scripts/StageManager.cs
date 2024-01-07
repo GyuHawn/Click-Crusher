@@ -51,7 +51,7 @@ public class StageManager : MonoBehaviour
         if (!gameStart)
         {
             mainStage = 1;
-            subStage = 1;
+            subStage = 2;
             StageMonsterSetting();
             SpawnMonsters();
             selectingItem = false;
@@ -108,28 +108,28 @@ public class StageManager : MonoBehaviour
             switch (subStage)
             {
                 case 1:
-                    base0Monster = 1;
+                    base0Monster = 2 + mainStage;
                     break;
                 case 2:
-                    base0Monster = 1;
-                    base1Monster = 1;
+                    base0Monster = 1 + mainStage;
+                    base1Monster = 2 + mainStage;
                     break;
                 case 3:
-                    base0Monster = 1;
-                    base1Monster = 1;
-                    base2Monster = 1;
+                    base0Monster = 1 + mainStage;
+                    base1Monster = 2 + mainStage;
+                    base2Monster = 2 + mainStage;
                     break;
                 case 4:
-                    base0Monster = 1;
-                    base1Monster = 1;
-                    base2Monster = 1;
-                    base3Monster = 1;
+                    base0Monster = 1 + mainStage;
+                    base1Monster = 2 + mainStage;
+                    base2Monster = 2 + mainStage;
+                    base3Monster = 3 + mainStage;
                     break;
                 case 5:
-                    base0Monster = 1;
-                    base1Monster = 1;
-                    base2Monster = 1;
-                    base3Monster = 1;
+                    base0Monster = 1 + mainStage;
+                    base1Monster = 1 + mainStage;
+                    base2Monster = 2 + mainStage;
+                    base3Monster = 3 + mainStage;
                     bossMonster = 1;
                     break;
             }
@@ -137,10 +137,10 @@ public class StageManager : MonoBehaviour
         else
         {
             // 8 스테이지 이후부터 InfiniteMonsters 사용
-            base0Monster = 1;
-            base1Monster = 1;
-            base2Monster = 1;
-            base3Monster = 1;
+            base0Monster = 1 + mainStage;
+            base1Monster = 1 + mainStage;
+            base2Monster = 1 + mainStage;
+            base3Monster = 1 + mainStage;
             bossMonster = 1;
         }
     }
@@ -170,9 +170,7 @@ public class StageManager : MonoBehaviour
         {
             NextSubStage();
 
-            selectItem.ItemSelect();
-            StartCoroutine(DelayStage());
-            /* if (mainStage >= 2 && mainStage < 8)
+            if (mainStage >= 2 && mainStage < 8)
              {
                  if (subStage == 2)
                  {
@@ -208,7 +206,7 @@ public class StageManager : MonoBehaviour
                  StartCoroutine(DelayStage());
              }
 
-             NextMainStage();*/
+             NextMainStage();
         }
 
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화

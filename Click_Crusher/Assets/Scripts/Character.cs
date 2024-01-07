@@ -6,12 +6,7 @@ using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
     public int currentCharacter;
-
-    public float rockDamage;
-
-    public GameObject waterEffect;
-    public float waterDamage;
-
+  
     public bool rock;
     public bool water;
     public bool lihgt;
@@ -48,12 +43,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void Water(Vector3 targetPosition)
-    {
-        GameObject waterInstance = Instantiate(waterEffect, targetPosition, Quaternion.Euler(90, 0, 0));
-
-        Destroy(waterInstance, 0.5f);
-    }  
+    
 
     public void MainMenu() // 테스트 오류시 이동용 버튼
     {

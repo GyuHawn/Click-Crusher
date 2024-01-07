@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
-    private Character character;
-    private StageManager stageManager;
     private MonsterSpwan monsterSpawn;
     private PlayerController playerController;
     private ItemSkill itemSkill;
@@ -40,8 +38,6 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
-        character = GameObject.Find("Manager").GetComponent<Character>();
-        stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         monsterSpawn = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
