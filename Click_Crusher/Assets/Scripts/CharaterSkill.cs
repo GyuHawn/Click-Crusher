@@ -54,6 +54,7 @@ public class CharaterSkill : MonoBehaviour
             {
                 GameObject rockInstance = Instantiate(itemSkill.rockEffect, monsterController.gameObject.transform.position, Quaternion.identity);
 
+                playerController.DamageText(monsterController);
                 monsterController.currentHealth -= rockDamage;
 
                 Destroy(rockInstance, 2f);
@@ -61,13 +62,13 @@ public class CharaterSkill : MonoBehaviour
         }
     }
 
-
+    
     public void Sturn()
     {
         audioManager.SturnAudio();
         SturnAttack();
     }
-
+    
     void SturnAttack()
     {
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
@@ -115,7 +116,6 @@ public class CharaterSkill : MonoBehaviour
     public void Water()
     {
         StartCoroutine(WaterAttack());
-        Debug.Log("물");
     }
 
     IEnumerator WaterAttack()
@@ -138,7 +138,6 @@ public class CharaterSkill : MonoBehaviour
                     selectedMonsters.Add(allMonsters[Random.Range(0, allMonsters.Count)]);
                 }
 
-                // 처음 선택한 몬스터들을 저장
                 MonsterList.AddRange(selectedMonsters);
             }
             else
@@ -157,7 +156,9 @@ public class CharaterSkill : MonoBehaviour
                 {
                     Vector3 waterPosition = new Vector3(monsterController.gameObject.transform.position.x, monsterController.gameObject.transform.position.y - 0.2f, monsterController.gameObject.transform.position.z);
                     GameObject waterInstance = Instantiate(waterEffect, waterPosition, Quaternion.Euler(90, 0, 0));
+                    audioManager.WaterAudio();
 
+                    playerController.DamageText(monsterController);
                     monsterController.currentHealth -= waterDamage;
 
                     Destroy(waterInstance, 2f);

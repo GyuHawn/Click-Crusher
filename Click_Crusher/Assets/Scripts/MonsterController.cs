@@ -31,7 +31,7 @@ public class MonsterController : MonoBehaviour
     public bool poisoned; // 중독   
 
     private int monsterLayer;
-    private int bossLayer;
+    private int bossLayer;    
 
     SpriteRenderer spriteRenderer;
     private Animator anim;
@@ -106,6 +106,8 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
+                playerController.DamageText(this);
+
                 currentHealth -= itemSkill.holyWaveDamage;
                 HitMonster(0.7f, 0.2f);
             }
@@ -117,6 +119,8 @@ public class MonsterController : MonoBehaviour
             {
                 if (itemSkill.posionDuration >= 0)
                 {
+                    playerController.DamageText(this);
+
                     currentHealth -= itemSkill.poisonDamage;
                     HitMonster(0.5f, 0.2f);
                 }
@@ -131,6 +135,8 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
+                playerController.DamageText(this);
+
                 currentHealth -= itemSkill.fireDamage;
                 HitMonster(0.3f, 0.2f);
                 StartCoroutine(DeleteFire());
@@ -264,7 +270,6 @@ public class MonsterController : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        //stageManager.monsterCount--;
         monsterSpawn.RemoveMonsterFromList(gameObject);
 
         if (stop)
@@ -283,6 +288,9 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
+                Debug.Log("파샷");
+                playerController.DamageText(this);
+
                 currentHealth -= itemSkill.holyShotDamage;
                 HitMonster(0.5f, 0.2f);
             }
@@ -297,8 +305,14 @@ public class MonsterController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "FireShotSub")
         {
-            currentHealth -= itemSkill.fireShotSubDamage;
-            HitMonster(0.5f, 0.2f);
+            if (canTakeDamage)
+            {
+                playerController.DamageText(this);
+
+                Debug.Log("파샷서브");
+                currentHealth -= itemSkill.fireShotSubDamage;
+                HitMonster(0.5f, 0.2f);
+            }
         }
     }
 }

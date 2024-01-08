@@ -34,7 +34,10 @@ public class AudioManager : MonoBehaviour
     public AudioSource posionAudio; // 독
     public AudioSource rockAudio; // 돌
     public AudioSource sturnAudio; // 스턴
-    
+
+    // Character
+    public AudioSource water;
+
    // public Slider audioSlider;
 
     private void Awake()
@@ -168,6 +171,11 @@ public class AudioManager : MonoBehaviour
         sturnAudio.Play();
     }
 
+    // Character
+    public void WaterAudio()
+    {
+        water.Play();
+    }
 
     // 시작시 소리 중복 제거용
     void StopAudio()
@@ -202,6 +210,8 @@ public class AudioManager : MonoBehaviour
             posionAudio.Stop();
             rockAudio.Stop();
             sturnAudio.Stop();
+
+            water.Stop();
         }
     }
 }

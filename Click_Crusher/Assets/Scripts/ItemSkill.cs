@@ -361,10 +361,8 @@ public class ItemSkill : MonoBehaviour
     {
         if(isPosion)
         {
-            Debug.Log("11");
             audioManager.PosionAudio();
 
-            Debug.Log("22");
             GameObject posionInstance = Instantiate(posionEffect, targetPosition, Quaternion.identity);
 
             Destroy(posionInstance, 5f);

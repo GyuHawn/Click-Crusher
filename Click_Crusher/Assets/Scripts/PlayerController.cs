@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour
     public int playerHealth;
     public GameObject gameover;
 
-    public float damage;
+    public int damage;
     private bool isAttacking = false;
+    public GameObject hubDamageText;
 
     public GameObject defenseEffect;
     public bool defending;
@@ -87,9 +88,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void DamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = damage;
+    }
+
     IEnumerator AttackMonster(MonsterController monsterController)
     {
-        isAttacking = true; // 공격 중으로 설정
+        isAttacking = true;
         
         if (monsterController.attack)
         {
@@ -106,6 +113,9 @@ public class PlayerController : MonoBehaviour
             audioManager.AttackAudio();
 
             monsterController.currentHealth -= damage;
+
+            DamageText(monsterController);
+
             itemSkill.SetCurrentAttackedMonster(monsterController.gameObject);
             monsterController.HitMonster(0.5f, 0.2f);
         }
@@ -134,7 +144,21 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("난투");
             itemSkill.Melee(monsterController.gameObject.transform.position, itemSkill.meleeNum);
+
+            StartCoroutine(MeleeAttack());            
         }
+        IEnumerator MeleeAttack()
+        {
+            for (int i = 0; i < itemSkill.meleeNum; i++)
+            {
+                monsterController.currentHealth -= damage;
+
+                DamageText(monsterController);
+
+                yield return new WaitForSeconds(0.15f);
+            }
+        }
+
         if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
         {
             Debug.Log("독");
