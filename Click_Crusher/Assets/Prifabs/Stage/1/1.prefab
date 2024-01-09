@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 8781184059867094308}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.67, y: 5.46, z: 0}
+  m_LocalPosition: {x: -5.67, y: 5.46, z: -4}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -314,6 +314,7 @@ MonoBehaviour:
   damage: 1
   maxHealth: 12
   currentHealth: 0
+  canTakeDamage: 1
   attack: 0
   attackTime: 3
   danager: {fileID: 1657825697424857272}

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8178022576003586372}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23000005, y: -0.19000006, z: 0}
+  m_LocalPosition: {x: -0.23000005, y: -0.19000006, z: -1}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -198,6 +198,7 @@ MonoBehaviour:
   damage: 2
   maxHealth: 150
   currentHealth: 0
+  canTakeDamage: 1
   attack: 0
   attackTime: 8
   danager: {fileID: 8586867242551321997}

@@ -8,6 +8,7 @@ using System;
 public class SelectItem : MonoBehaviour
 {
     private StageManager stageManager;
+    private PlayerController playerController;
     private Character character;
     private ItemSkill itemSkill;
 
@@ -69,6 +70,7 @@ public class SelectItem : MonoBehaviour
     {
         character = GameObject.Find("Manager").GetComponent<Character>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
+        playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
 
         itemSelecting = false;
@@ -104,6 +106,7 @@ public class SelectItem : MonoBehaviour
     public void ItemSelect()
     {
         stageManager.selectingItem = true;
+        playerController.isAttacking = true;
         selectItemMenu.SetActive(true);
         selectItems.Clear();
 
@@ -151,6 +154,8 @@ public class SelectItem : MonoBehaviour
         }
 
         selectNum = UnityEngine.Random.Range(0, selectItems.Count) + 1;
+
+        Time.timeScale = 0f;
     }
 
     public void CloseMenu()
@@ -196,6 +201,8 @@ public class SelectItem : MonoBehaviour
             itemSkill.GetItem();    
             itemSelecting = false;
             stageManager.selectingItem = false;
+            playerController.isAttacking = false;
+            Time.timeScale = 1f;
             selectItemMenu.SetActive(false);
         }
     }

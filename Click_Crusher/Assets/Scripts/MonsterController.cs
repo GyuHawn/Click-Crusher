@@ -24,6 +24,8 @@ public class MonsterController : MonoBehaviour
     public GameObject danager;
     public GameObject dieEffect;
     public GameObject sturn;
+    private bool isMonsterAttacking = false;
+    private bool isBossAttacking = false;
 
     // 플레이어 기술 관련
     public bool fired; // 불
@@ -88,12 +90,12 @@ public class MonsterController : MonoBehaviour
             attack = true;
             if (gameObject.tag == "Monster")
             {
-                audioManager.MonsterAttackAudio();
-                StartCoroutine(MonsterAttack());
+                audioManager.MonsterAttackAudio();               
+                StartCoroutine(MonsterAttackReady());
             }
             else if(gameObject.tag == "Boss" && bossAttackNum == 1)
             {
-                StartCoroutine(BossAttack());               
+                StartCoroutine(BossAttackReady());                           
             }
         }
         else
@@ -158,6 +160,21 @@ public class MonsterController : MonoBehaviour
         fired = false;
     }
 
+    IEnumerator BossAttackReady()
+    {
+        if (!isBossAttacking)
+        {
+            isBossAttacking = true;
+            danager.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            danager.SetActive(false);
+
+            yield return StartCoroutine(BossAttack());
+
+            isBossAttacking = false;
+        }
+    }
+
     IEnumerator BossAttack()
     {
         danager.SetActive(true);
@@ -193,17 +210,26 @@ public class MonsterController : MonoBehaviour
         bossAttackNum = 1;
     }
 
+    IEnumerator MonsterAttackReady()
+    {
+        if (!isMonsterAttacking)
+        {
+            isMonsterAttacking = true;
+            danager.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            danager.SetActive(false);
+
+            yield return StartCoroutine(MonsterAttack());
+
+            isMonsterAttacking = false;
+        }
+    }
 
     IEnumerator MonsterAttack()
-    {     
-        danager.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
-
-        danager.SetActive(false);
-
+    {
         anim.SetBool("Attack", true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         attack = false;
         anim.SetBool("Attack", false);
 
@@ -288,7 +314,6 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
-                Debug.Log("파샷");
                 playerController.DamageText(this);
 
                 currentHealth -= itemSkill.holyShotDamage;
@@ -309,7 +334,6 @@ public class MonsterController : MonoBehaviour
             {
                 playerController.DamageText(this);
 
-                Debug.Log("파샷서브");
                 currentHealth -= itemSkill.fireShotSubDamage;
                 HitMonster(0.5f, 0.2f);
             }

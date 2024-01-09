@@ -51,7 +51,7 @@ public class StageManager : MonoBehaviour
         if (!gameStart)
         {
             mainStage = 1;
-            subStage = 2;
+            subStage = 1;
             StageMonsterSetting();
             SpawnMonsters();
             selectingItem = false;
@@ -162,6 +162,13 @@ public class StageManager : MonoBehaviour
         monsterSpawn.MonsterInstantiate(base0Monster, base1Monster, base2Monster, base3Monster, bossMonster);
     }
 
+    void SelectPass()
+    {
+        selectPass.passMenu.SetActive(true);
+        playerController.isAttacking = true;
+        Time.timeScale = 0f;
+    }
+
     public void NextStage()
     {
         //if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
@@ -175,7 +182,7 @@ public class StageManager : MonoBehaviour
                  if (subStage == 2)
                  {
                      selectingItem = true;
-                     selectPass.passMenu.SetActive(true);
+                     SelectPass();
                  }
              }
 
@@ -198,7 +205,7 @@ public class StageManager : MonoBehaviour
              if (mainStage % 10 == 2 || mainStage % 10 == 5 || mainStage % 10 == 8)
              {
                  selectingItem = true;
-                 selectPass.passMenu.SetActive(true);
+                 SelectPass();
              }
              else if (mainStage % 10 == 0 || mainStage % 10 == 6)
              {

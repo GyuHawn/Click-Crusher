@@ -68,6 +68,8 @@ public class SelectPass : MonoBehaviour
         }
 
         stageManager.selectingItem = false;
+        playerController.isAttacking = false;
+        Time.timeScale = 1f;
         passMenu.SetActive(false);
     }
 }

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public GameObject gameover;
 
     public int damage;
-    private bool isAttacking = false;
+    public bool isAttacking = false;
     public GameObject hubDamageText;
 
     public GameObject defenseEffect;
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             isDragging = false;
         }
 
-        if (isDragging && !isAttacking) // 새로운 조건 추가
+        if (isDragging && !isAttacking)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);

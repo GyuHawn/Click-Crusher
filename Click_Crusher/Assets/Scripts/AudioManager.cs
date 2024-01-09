@@ -38,7 +38,8 @@ public class AudioManager : MonoBehaviour
     // Character
     public AudioSource water;
 
-   // public Slider audioSlider;
+    public Slider bgmSlider;
+    public Slider generalSlider;
 
     private void Awake()
     {
@@ -49,67 +50,88 @@ public class AudioManager : MonoBehaviour
     {
         StopAudio();
 
-        float volume = PlayerPrefs.GetFloat("Volume", 1.0f);
+        float bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 1.0f);
+        float genVolume = PlayerPrefs.GetFloat("GenVolume", 1.0f);
 
-        // audioSlider.value = volume;
+        bgmSlider.value = bgmVolume;
+        generalSlider.value = genVolume;
 
-        if (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "Loding")
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
-            bgmMainMenu.volume = volume;
+            bgmMainMenu.volume = bgmVolume;
+
+            startAudio.volume = genVolume;
+            buttonAudio.volume = genVolume;
             bgmMainMenu.Play();
+        }
+        else if (SceneManager.GetActiveScene().name == "Loding")
+        {
+            bgmMainMenu.volume = bgmVolume;
         }
         else if (SceneManager.GetActiveScene().name == "Character")
         {
-            bgmCharacterMenu.volume = volume;
+            bgmCharacterMenu.volume = bgmVolume;
+
+            startAudio.volume = genVolume;
+            buttonAudio.volume = genVolume;
         }
         else if (SceneManager.GetActiveScene().name == "Game")
         {
-            bgmStage.volume = volume;
-            bgmBossStage.volume = volume;
-            bgmSelectMenu.volume = volume;
-            bgmResultMenu.volume = volume;
-
-            if (stageManager.mainStage <= 8)
-            {
-                if (stageManager.subStage == 5)
-                {
-                    bgmStage.Stop();
-                    bgmBossStage.Play();
-                }
-                else
-                {
-                    bgmBossStage.Stop();
-                    bgmStage.Play();
-                }
-            }
-            else
-            {
-                bgmStage.Stop();
-                bgmBossStage.Play();
-            }
-
+            bgmStage.volume = bgmVolume;
+            bgmBossStage.volume = bgmVolume;
+            bgmSelectMenu.volume = bgmVolume;
+            bgmResultMenu.volume = bgmVolume;
         }
     }
-            
-    /*void Update()
+
+    void Update()
     {
-        if (bgmStage != null && bgmBossStage != null && bgmSelectMenu != null && bgmResultMenu != null)
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
-            bgmStage.volume = audioSlider.value;
-            bgmBossStage.volume = audioSlider.value;
-            bgmSelectMenu.volume = audioSlider.value;
-            bgmResultMenu.volume = audioSlider.value;
+            bgmMainMenu.volume = bgmSlider.value;
+
+            startAudio.volume = generalSlider.value;
+            buttonAudio.volume = generalSlider.value;
         }
-        else if (bgmMainMenu != null)
+        else if (SceneManager.GetActiveScene().name == "Loding")
         {
-            bgmMainMenu.volume = audioSlider.value;
+            bgmMainMenu.volume = bgmSlider.value;
         }
-        else if(bgmCharacterMenu != null)
+        else if (SceneManager.GetActiveScene().name == "Character")
         {
-            bgmCharacterMenu.volume = audioSlider.value;
+            bgmCharacterMenu.volume = bgmSlider.value;
+
+            startAudio.volume = generalSlider.value;
+            buttonAudio.volume = generalSlider.value;
         }
-        PlayerPrefs.SetFloat("Volume", audioSlider.value);
-    }*/  
+        else if (SceneManager.GetActiveScene().name == "Game")
+        {
+            bgmStage.volume = bgmSlider.value;
+            bgmBossStage.volume = bgmSlider.value;
+            bgmSelectMenu.volume = bgmSlider.value;
+            bgmResultMenu.volume = bgmSlider.value;
+
+            attackAudio.volume = generalSlider.value;
+            defenseAudio.volume = generalSlider.value;
+            hitAudio.volume = generalSlider.value;
+            monsterAttackAudio.volume = generalSlider.value;
+            buttonAudio.volume = generalSlider.value;
+
+            fireAudio.volume = generalSlider.value;
+            fireShotAudio.volume = generalSlider.value;
+            holyShotAudio.volume = generalSlider.value;
+            holyWaveAudio.volume = generalSlider.value;
+            meleeAudio.volume = generalSlider.value;
+            posionAudio.volume = generalSlider.value;
+            rockAudio.volume = generalSlider.value;
+            sturnAudio.volume = generalSlider.value;
+
+            water.volume = generalSlider.value;
+        }
+
+        PlayerPrefs.SetFloat("BGMVolume", bgmSlider.value);
+        PlayerPrefs.SetFloat("GenVolume", generalSlider.value);
+    }
 
     // function
     public void AttackAudio()
@@ -180,7 +202,7 @@ public class AudioManager : MonoBehaviour
     // 시작시 소리 중복 제거용
     void StopAudio()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "Loding")
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             buttonAudio.Stop();
             startAudio.Stop();
@@ -192,16 +214,35 @@ public class AudioManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Game")
         {
+            if (stageManager.mainStage <= 8)
+            {
+                if (stageManager.subStage == 5)
+                {
+                    bgmStage.Stop();
+                    bgmBossStage.Play();
+                }
+                else
+                {
+                    bgmBossStage.Stop();
+                    bgmStage.Play();
+                }
+            }
+            else
+            {
+                bgmStage.Stop();
+                bgmBossStage.Play();
+            }
+
             bgmBossStage.Stop();
             bgmSelectMenu.Stop();
             bgmResultMenu.Stop();
-            
+
             attackAudio.Stop();
             defenseAudio.Stop();
             hitAudio.Stop();
             monsterAttackAudio.Stop();
             buttonAudio.Stop();
-            
+
             fireAudio.Stop();
             fireShotAudio.Stop();
             holyShotAudio.Stop();

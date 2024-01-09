@@ -42,11 +42,4 @@ public class Character : MonoBehaviour
             luck = true;
         }
     }
-
-    
-
-    public void MainMenu() // 테스트 오류시 이동용 버튼
-    {
-        LodingController.LoadScene("MainMenu");
-    }
 }
