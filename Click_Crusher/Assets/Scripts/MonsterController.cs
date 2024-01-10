@@ -108,7 +108,7 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
-                playerController.DamageText(this);
+                playerController.HolyWaveDamageText(this);
 
                 currentHealth -= itemSkill.holyWaveDamage;
                 HitMonster(0.7f, 0.2f);
@@ -121,7 +121,7 @@ public class MonsterController : MonoBehaviour
             {
                 if (itemSkill.posionDuration >= 0)
                 {
-                    playerController.DamageText(this);
+                    playerController.PoisonDamageText(this);
 
                     currentHealth -= itemSkill.poisonDamage;
                     HitMonster(0.5f, 0.2f);
@@ -137,7 +137,7 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
-                playerController.DamageText(this);
+                playerController.FireDamageText(this);
 
                 currentHealth -= itemSkill.fireDamage;
                 HitMonster(0.3f, 0.2f);
@@ -178,9 +178,7 @@ public class MonsterController : MonoBehaviour
     IEnumerator BossAttack()
     {
         danager.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
-
-        danager.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
 
         anim.SetBool("Attack", true);
 
@@ -199,6 +197,7 @@ public class MonsterController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         anim.SetBool("Attack", false);
+        danager.SetActive(false);
 
         attackTime = Random.Range(8.0f, 10.0f);
         StartCoroutine(ReadyBossAttack());
@@ -314,7 +313,7 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
-                playerController.DamageText(this);
+                playerController.HolyShotDamageText(this);
 
                 currentHealth -= itemSkill.holyShotDamage;
                 HitMonster(0.5f, 0.2f);
@@ -332,7 +331,7 @@ public class MonsterController : MonoBehaviour
         {
             if (canTakeDamage)
             {
-                playerController.DamageText(this);
+                playerController.FireShotSubDamageText(this);
 
                 currentHealth -= itemSkill.fireShotSubDamage;
                 HitMonster(0.5f, 0.2f);

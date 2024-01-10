@@ -54,7 +54,7 @@ public class CharaterSkill : MonoBehaviour
             {
                 GameObject rockInstance = Instantiate(itemSkill.rockEffect, monsterController.gameObject.transform.position, Quaternion.identity);
 
-                playerController.DamageText(monsterController);
+                playerController.CRockDamageText(monsterController);
                 monsterController.currentHealth -= rockDamage;
 
                 Destroy(rockInstance, 2f);
@@ -158,7 +158,7 @@ public class CharaterSkill : MonoBehaviour
                     GameObject waterInstance = Instantiate(waterEffect, waterPosition, Quaternion.Euler(90, 0, 0));
                     audioManager.WaterAudio();
 
-                    playerController.DamageText(monsterController);
+                    playerController.CWaterDamageText(monsterController);
                     monsterController.currentHealth -= waterDamage;
 
                     Destroy(waterInstance, 2f);

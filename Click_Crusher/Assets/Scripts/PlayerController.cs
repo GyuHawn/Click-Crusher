@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private StageManager stageManager;
     private ItemSkill itemSkill;
     private AudioManager audioManager;
+    private CharaterSkill charaterSkill;
 
     public GameObject[] playerHealthUI;
     public int playerHealth;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
+        charaterSkill = GameObject.Find("Manager").GetComponent<CharaterSkill>();
 
         defending = false;
 
@@ -86,13 +88,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void DamageText(MonsterController monsterController)
-    {
-        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-        damegeText.GetComponent<DamageText>().damege = damage;
-    }
+    }   
 
     IEnumerator AttackMonster(MonsterController monsterController)
     {
@@ -114,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
             monsterController.currentHealth -= damage;
 
-            DamageText(monsterController);
+            PlayerDamageText(monsterController);
 
             itemSkill.SetCurrentAttackedMonster(monsterController.gameObject);
             monsterController.HitMonster(0.5f, 0.2f);
@@ -153,7 +149,7 @@ public class PlayerController : MonoBehaviour
             {
                 monsterController.currentHealth -= damage;
 
-                DamageText(monsterController);
+                PlayerDamageText(monsterController);
 
                 yield return new WaitForSeconds(0.15f);
             }
@@ -226,5 +222,63 @@ public class PlayerController : MonoBehaviour
 
         defending = false;
         defenseEffect.SetActive(false);
+    }
+
+    // 플레이어 공격 데미지 텍스트
+    public void PlayerDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = damage;
+    }
+
+
+    public void FireDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)itemSkill.fireDamage;
+    }
+
+    public void FireShotDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)itemSkill.fireShotDamage;
+    }
+    public void FireShotSubDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)itemSkill.fireShotSubDamage;
+    }
+
+    public void HolyShotDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)itemSkill.holyShotDamage;
+    }
+
+    public void HolyWaveDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)itemSkill.holyWaveDamage;
+    }
+    public void RockDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)itemSkill.rockDamage;
+    }
+    public void PoisonDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)itemSkill.poisonDamage;
+    }
+
+    public void CWaterDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)charaterSkill.waterDamage;
+    }
+    public void CRockDamageText(MonsterController monsterController)
+    {
+        GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        damegeText.GetComponent<DamageText>().damege = (int)charaterSkill.rockDamage;
     }
 }

@@ -443,5 +443,4 @@ public class ItemSkill : MonoBehaviour
 
         Destroy(monster);
     }
-
 }
