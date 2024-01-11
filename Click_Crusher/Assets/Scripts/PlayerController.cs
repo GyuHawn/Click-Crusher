@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private StageManager stageManager;
     private ItemSkill itemSkill;
     private AudioManager audioManager;
-    private CharaterSkill charaterSkill;
+    private CharacterSkill charaterSkill;
 
     public GameObject[] playerHealthUI;
     public int playerHealth;
@@ -31,12 +31,15 @@ public class PlayerController : MonoBehaviour
     public TMP_Text gameTimeText;
 
     public bool isDragging = false; // 드래그 중인지
+
+    public GameObject attckEffect;
+
     void Start()
     {
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
-        charaterSkill = GameObject.Find("Manager").GetComponent<CharaterSkill>();
+        charaterSkill = GameObject.Find("Manager").GetComponent<CharacterSkill>();
 
         defending = false;
 
@@ -88,7 +91,45 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }   
+    }
+
+    void AttackEffect(Vector3 targetPosition)
+    {
+        float xOffset = Random.Range(-0.5f, 0.5f);
+        float yOffset = Random.Range(-0.2f, 0.2f);
+        Vector3 spawnPosition = targetPosition + new Vector3(xOffset, yOffset, -5);
+
+        GameObject monsterHit = Instantiate(attckEffect, spawnPosition, Quaternion.identity);
+
+        StartCoroutine(RotateAndShrinkEffect(monsterHit.transform, 0.3f)); // 0.3초 후에 몬스터 히트 이펙트 제거
+    }
+
+    IEnumerator RotateAndShrinkEffect(Transform effectTransform, float destroyDelay)
+    {
+        float duration = 0.3f;
+        float elapsedTime = 0f;
+
+        Quaternion startRotation = effectTransform.rotation;
+        Quaternion targetRotation = startRotation * Quaternion.Euler(0, 0, 180);
+
+        Vector3 startScale = effectTransform.localScale;
+        Vector3 targetScale = Vector3.zero;
+
+        while (elapsedTime < duration)
+        {
+            effectTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / duration);
+            effectTransform.localScale = Vector3.Slerp(startScale, targetScale, elapsedTime / duration);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        effectTransform.rotation = targetRotation;
+        effectTransform.localScale = targetScale;
+
+        yield return new WaitForSeconds(destroyDelay);
+        Destroy(effectTransform.gameObject);
+    }
 
     IEnumerator AttackMonster(MonsterController monsterController)
     {
@@ -108,6 +149,7 @@ public class PlayerController : MonoBehaviour
         {
             audioManager.AttackAudio();
 
+            AttackEffect(monsterController.gameObject.transform.position);
             monsterController.currentHealth -= damage;
 
             PlayerDamageText(monsterController);

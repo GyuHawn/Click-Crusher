@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
     private SelectPass selectPass;
     private StageTimeLimit stageTimeLimit;
     private PlayerController playerController;
+    private CharacterSkill characterSkill;
 
     public bool gameStart = false; // 게임시작 여부
 
@@ -43,6 +44,7 @@ public class StageManager : MonoBehaviour
         selectPass = GameObject.Find("Manager").GetComponent<SelectPass>();
         stageTimeLimit = GameObject.Find("Manager").GetComponent<StageTimeLimit>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
+        characterSkill = GameObject.Find("Manager").GetComponent<CharacterSkill>();
     }
 
     void Start()
@@ -172,7 +174,9 @@ public class StageManager : MonoBehaviour
     public void NextStage()
     {
         //if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
-      
+
+        characterSkill.CharacterCoolTime();
+        
         if (mainStage < 8)
         {
             NextSubStage();

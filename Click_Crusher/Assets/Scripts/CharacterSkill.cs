@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CharaterSkill : MonoBehaviour
+public class CharacterSkill : MonoBehaviour
 {
     private ItemSkill itemSkill;
     private AudioManager audioManager;
     private PlayerController playerController;
 
     public float rockDamage;
+    public int rockTime;
+    public GameObject rockCoolTime;
+    public TMP_Text rockCoolTimeText;
 
     public GameObject waterEffect;
     public float waterDamage;
+    public int waterTime;
+    public GameObject waterCoolTime;
+    public TMP_Text waterCoolTimeText;
 
     public float sturnDuration;
+    public int sturnTime;
+    public GameObject sturnCoolTime;
+    public TMP_Text sturnCoolTimeText;
 
     void Start()
     {
@@ -25,6 +34,37 @@ public class CharaterSkill : MonoBehaviour
         BasicSettings();
     }
 
+    void Update()
+    {
+        if (rockTime > 0)
+        {
+            rockCoolTime.SetActive(true);
+            rockCoolTimeText.text = rockTime.ToString();
+        }
+        else
+        {
+           rockCoolTime.SetActive(false);
+        }
+        if (waterTime > 0)
+        {
+            waterCoolTime.SetActive(true);
+            waterCoolTimeText.text = waterTime.ToString();
+        }
+        else
+        {
+            waterCoolTime.SetActive(false);
+        }
+        if (sturnTime > 0)
+        {
+            sturnCoolTime.SetActive(true);
+            sturnCoolTimeText.text = sturnTime.ToString();
+        }
+        else
+        {
+            sturnCoolTime.SetActive(false);
+        }
+    }
+
     public void BasicSettings()
     {
         rockDamage = playerController.damage * 2f;
@@ -32,14 +72,19 @@ public class CharaterSkill : MonoBehaviour
         sturnDuration = 3f;
     }
 
-        public void Rock()
+    public void Rock()
     {
-        audioManager.RockAudio();
-        RockAttack();
+        if(rockTime <= 0)
+        {
+            audioManager.RockAudio();
+            RockAttack();
+        }
     }
 
     void RockAttack()
     {
+        rockTime = 2;
+
         GameObject[] mosters = GameObject.FindGameObjectsWithTag("Monster");
         GameObject[] bossMonsters = GameObject.FindGameObjectsWithTag("Boss");
 
@@ -56,6 +101,7 @@ public class CharaterSkill : MonoBehaviour
 
                 playerController.CRockDamageText(monsterController);
                 monsterController.currentHealth -= rockDamage;
+                ItemSkill(monsterController);
 
                 Destroy(rockInstance, 2f);
             }
@@ -65,12 +111,17 @@ public class CharaterSkill : MonoBehaviour
     
     public void Sturn()
     {
-        audioManager.SturnAudio();
-        SturnAttack();
+        if (sturnTime <= 0)
+        {
+            audioManager.SturnAudio();
+            SturnAttack();
+        }      
     }
     
     void SturnAttack()
     {
+        sturnTime = 2;
+
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
         foreach (GameObject monster in monsters)
@@ -115,11 +166,16 @@ public class CharaterSkill : MonoBehaviour
 
     public void Water()
     {
-        StartCoroutine(WaterAttack());
+        if (waterTime <= 0)
+        {
+            StartCoroutine(WaterAttack());
+        }       
     }
 
     IEnumerator WaterAttack()
     {
+        waterTime = 2;
+
         List<GameObject> MonsterList = new List<GameObject>();
 
         for (int i = 0; i < 20; i++)
@@ -160,6 +216,7 @@ public class CharaterSkill : MonoBehaviour
 
                     playerController.CWaterDamageText(monsterController);
                     monsterController.currentHealth -= waterDamage;
+                    ItemSkill(monsterController);
 
                     Destroy(waterInstance, 2f);
                 }
@@ -174,4 +231,58 @@ public class CharaterSkill : MonoBehaviour
         }
     }
 
+    void ItemSkill(MonsterController monsterController)
+    {
+        if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
+        {
+            Debug.Log("ÆÄÀÌ¾î");
+            itemSkill.Fire(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isFireShot && Random.Range(0f, 100f) <= itemSkill.fireShotPercent)
+        {
+            Debug.Log("ÆÄÀÌ¾î¼¦");
+            itemSkill.FireShot(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
+        {
+            Debug.Log("È¦¸®¿þÀÌºê");
+            itemSkill.HolyWave();
+        }
+        if (itemSkill.isHolyShot && Random.Range(0f, 100f) <= itemSkill.holyShotPercent)
+        {
+            Debug.Log("È¦¸®¼¦");
+            itemSkill.HolyShot(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
+        {
+            Debug.Log("µ¶");
+            itemSkill.Posion(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isRock && Random.Range(0f, 100f) <= itemSkill.rockPercent)
+        {
+            Debug.Log("µ¹");
+            itemSkill.Rock(monsterController.gameObject.transform.position);
+        }
+        if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
+        {
+            Debug.Log("½ºÅÏ");
+            itemSkill.Sturn();
+        }
+    }
+
+    public void CharacterCoolTime()
+    {
+        if (rockTime > 0)
+        {
+            rockTime--;
+        }
+        else if (waterTime > 0)
+        {
+            waterTime--;
+        }
+        else if (sturnTime > 0)
+        {
+            sturnTime--;
+        }
+    }
 }
