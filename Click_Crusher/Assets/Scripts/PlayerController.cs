@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public bool isDragging = false; // 드래그 중인지
 
     public GameObject attckEffect;
+    public GameObject dragEffect;
 
     void Start()
     {
@@ -69,25 +70,40 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isDragging = true;
+            dragEffect.SetActive(true);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
+            dragEffect.SetActive(false);
+        }
+
+        if (isDragging)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            dragEffect.transform.position = new Vector3(mousePosition.x, mousePosition.y, dragEffect.transform.position.z);
         }
 
         if (isDragging && !isAttacking)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
-
+            
             if (hit.collider != null)
             {
                 MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
 
                 if (monsterController != null)
-                {                  
-                    StartCoroutine(AttackMonster(monsterController));
+                {
+                    if (monsterController.boss1Defending)
+                    {
+
+                    }
+                    else
+                    {
+                        StartCoroutine(AttackMonster(monsterController));
+                    }
                 }
             }
         }
@@ -137,50 +153,53 @@ public class PlayerController : MonoBehaviour
         
         if (monsterController.attack)
         {
-            if (monsterController.canTakeDamage)
+            if (monsterController.playerTakeDamage)
             {
                 audioManager.HitAudio();
 
                 playerHealth -= monsterController.damage;
-                monsterController.DamegeCoolDown(1f);
+                monsterController.PlayerDamegeCoolDown(1f, 0f);
             }
         }
         else
         {
             audioManager.AttackAudio();
 
-            AttackEffect(monsterController.gameObject.transform.position);
-            monsterController.currentHealth -= damage;
-
-            PlayerDamageText(monsterController);
+            if (monsterController.playerTakeDamage)
+            {
+                AttackEffect(monsterController.gameObject.transform.position);
+                monsterController.currentHealth -= damage;
+                PlayerDamageText(monsterController);
+            }
 
             itemSkill.SetCurrentAttackedMonster(monsterController.gameObject);
-            monsterController.HitMonster(0.5f, 0.2f);
+            monsterController.PlayerDamegeCoolDown(0.5f, 0.2f);
         }
 
         if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
         {
-            Debug.Log("파이어");
             itemSkill.Fire(monsterController.gameObject.transform.position);
         }
         if (itemSkill.isFireShot && Random.Range(0f, 100f) <= itemSkill.fireShotPercent)
         {
-            Debug.Log("파이어샷");
             itemSkill.FireShot(monsterController.gameObject.transform.position);
+            if (monsterController.fireShotTakeDamage)
+            {
+                FireDamageText(monsterController);
+                monsterController.currentHealth -= itemSkill.fireShotDamage;
+                monsterController.FireShotDamegeCoolDown(0.5f, 0.2f);
+            }          
         }
         if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
         {
-            Debug.Log("홀리웨이브");
             itemSkill.HolyWave();
         }
         if (itemSkill.isHolyShot && Random.Range(0f, 100f) <= itemSkill.holyShotPercent)
         {
-            Debug.Log("홀리샷");
             itemSkill.HolyShot(monsterController.gameObject.transform.position);
         }
         if (itemSkill.isMelee && Random.Range(0f, 100f) <= itemSkill.meleePercent)
         {
-            Debug.Log("난투");
             itemSkill.Melee(monsterController.gameObject.transform.position, itemSkill.meleeNum);
 
             StartCoroutine(MeleeAttack());            
@@ -199,17 +218,20 @@ public class PlayerController : MonoBehaviour
 
         if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
         {
-            Debug.Log("독");
             itemSkill.Posion(monsterController.gameObject.transform.position);
         }
         if (itemSkill.isRock && Random.Range(0f, 100f) <= itemSkill.rockPercent)
         {
-            Debug.Log("돌");
             itemSkill.Rock(monsterController.gameObject.transform.position);
+            if (monsterController.rockTakeDamage)
+            {
+                RockDamageText(monsterController);
+                monsterController.currentHealth -= itemSkill.rockDamage;
+                monsterController.RockDamegeCoolDown(0.5f, 0.2f);
+            }          
         }
         if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
         {
-            Debug.Log("스턴");
             itemSkill.Sturn();
         }
 

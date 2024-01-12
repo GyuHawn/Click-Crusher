@@ -8,6 +8,7 @@ public class CharacterSkill : MonoBehaviour
     private ItemSkill itemSkill;
     private AudioManager audioManager;
     private PlayerController playerController;
+    private MonsterController monsterController;
 
     public float rockDamage;
     public int rockTime;
@@ -30,6 +31,7 @@ public class CharacterSkill : MonoBehaviour
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
+        monsterController = GameObject.Find("Manager").GetComponent<MonsterController>();
 
         BasicSettings();
     }
@@ -99,8 +101,13 @@ public class CharacterSkill : MonoBehaviour
             {
                 GameObject rockInstance = Instantiate(itemSkill.rockEffect, monsterController.gameObject.transform.position, Quaternion.identity);
 
-                playerController.CRockDamageText(monsterController);
-                monsterController.currentHealth -= rockDamage;
+                if (monsterController.pRockTakeDamage)
+                {
+                    playerController.CRockDamageText(monsterController);
+                    monsterController.currentHealth -= rockDamage;
+                    monsterController.PlayerRockDamegeCoolDown(0.5f, 0.2f);
+                }
+
                 ItemSkill(monsterController);
 
                 Destroy(rockInstance, 2f);
@@ -214,8 +221,13 @@ public class CharacterSkill : MonoBehaviour
                     GameObject waterInstance = Instantiate(waterEffect, waterPosition, Quaternion.Euler(90, 0, 0));
                     audioManager.WaterAudio();
 
-                    playerController.CWaterDamageText(monsterController);
-                    monsterController.currentHealth -= waterDamage;
+                    if (monsterController.pWaterTakeDamage)
+                    {
+                        playerController.CWaterDamageText(monsterController);
+                        monsterController.currentHealth -= waterDamage;
+                        monsterController.PlayerWaterDamegeCoolDown(0.5f, 0.1f);
+                    }
+
                     ItemSkill(monsterController);
 
                     Destroy(waterInstance, 2f);
@@ -235,37 +247,30 @@ public class CharacterSkill : MonoBehaviour
     {
         if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
         {
-            Debug.Log("ÆÄÀÌ¾î");
             itemSkill.Fire(monsterController.gameObject.transform.position);
         }
         if (itemSkill.isFireShot && Random.Range(0f, 100f) <= itemSkill.fireShotPercent)
         {
-            Debug.Log("ÆÄÀÌ¾î¼¦");
             itemSkill.FireShot(monsterController.gameObject.transform.position);
         }
         if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
         {
-            Debug.Log("È¦¸®¿þÀÌºê");
             itemSkill.HolyWave();
         }
         if (itemSkill.isHolyShot && Random.Range(0f, 100f) <= itemSkill.holyShotPercent)
         {
-            Debug.Log("È¦¸®¼¦");
             itemSkill.HolyShot(monsterController.gameObject.transform.position);
         }
         if (itemSkill.isPosion && Random.Range(0f, 100f) <= itemSkill.posionPercent)
         {
-            Debug.Log("µ¶");
             itemSkill.Posion(monsterController.gameObject.transform.position);
         }
         if (itemSkill.isRock && Random.Range(0f, 100f) <= itemSkill.rockPercent)
         {
-            Debug.Log("µ¹");
             itemSkill.Rock(monsterController.gameObject.transform.position);
         }
         if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
         {
-            Debug.Log("½ºÅÏ");
             itemSkill.Sturn();
         }
     }
