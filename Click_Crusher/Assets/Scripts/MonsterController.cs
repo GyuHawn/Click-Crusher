@@ -15,6 +15,7 @@ public class MonsterController : MonoBehaviour
     public float currentHealth;
 
     // 피격 간격
+    public bool monsterTakeDamage = true;
     public bool playerTakeDamage = true; // 기본공격
 
     // 아이템 피격
@@ -124,10 +125,20 @@ public class MonsterController : MonoBehaviour
         {
             if (holyWaveTakeDamage)
             {
-                playerController.HolyWaveDamageText(this);
+                if (boss1Defending)
+                {
+                    playerController.HolyWaveDamageText(this);
 
-                currentHealth -= itemSkill.holyWaveDamage;
-                StartCoroutine(HolyWaveDamageCooldown(0.7f, 0.2f));
+                    currentHealth -= itemSkill.holyWaveDamage * 0.5f;
+                    StartCoroutine(HolyWaveDamageCooldown(0.7f, 0.2f));
+                }
+                else
+                {
+                    playerController.HolyWaveDamageText(this);
+
+                    currentHealth -= itemSkill.holyWaveDamage;
+                    StartCoroutine(HolyWaveDamageCooldown(0.7f, 0.2f));
+                }           
             }
         }
 
@@ -137,10 +148,21 @@ public class MonsterController : MonoBehaviour
             {
                 if (itemSkill.posionDuration >= 0)
                 {
-                    playerController.PoisonDamageText(this);
+                    if (boss1Defending)
+                    {
+                        playerController.PoisonDamageText(this);
 
-                    currentHealth -= itemSkill.poisonDamage;
-                    StartCoroutine(PoisonDamageCooldown(0.5f, 0.2f));
+                        currentHealth -= itemSkill.poisonDamage * 0.5f;
+                        StartCoroutine(PoisonDamageCooldown(0.5f, 0.2f));
+                    }
+                    else
+                    {
+                        playerController.PoisonDamageText(this);
+
+                        currentHealth -= itemSkill.poisonDamage;
+                        StartCoroutine(PoisonDamageCooldown(0.5f, 0.2f));
+                    }
+                    
                 }
                 else
                 {
@@ -153,11 +175,22 @@ public class MonsterController : MonoBehaviour
         {
             if (fireTakeDamage)
             {
-                playerController.FireDamageText(this);
+                if (boss1Defending)
+                {
+                    playerController.FireDamageText(this);
 
-                currentHealth -= itemSkill.fireDamage;
-                StartCoroutine(FireDamageCooldown(0.3f, 0.2f));
-                StartCoroutine(DeleteFire());
+                    currentHealth -= itemSkill.fireDamage * 0.5f;
+                    StartCoroutine(FireDamageCooldown(0.3f, 0.2f));
+                    StartCoroutine(DeleteFire());
+                }
+                else
+                {
+                    playerController.FireDamageText(this);
+
+                    currentHealth -= itemSkill.fireDamage;
+                    StartCoroutine(FireDamageCooldown(0.3f, 0.2f));
+                    StartCoroutine(DeleteFire());
+                }
             }
         }
     }
@@ -258,46 +291,57 @@ public class MonsterController : MonoBehaviour
     }
 
     // 피격 간격 관리
+    public void MonsterDamegeCoolDown(float damageCooldown)
+    {
+        StartCoroutine(MonsterDamageCooldown(damageCooldown));
+    }
     public void PlayerDamegeCoolDown(float damageCooldown, float colorChangeTime) // 다른 스크립트용
     { 
         StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
     }
     public void FireDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(FireDamageCooldown(damageCooldown, colorChangeTime));
     }
     public void FireShotDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(FireShotDamageCooldown(damageCooldown, colorChangeTime));
     }
     public void FireShotSubDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(FireShotSubDamageCooldown(damageCooldown, colorChangeTime));
     }
     public void HolyWaveDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(HolyWaveDamageCooldown(damageCooldown, colorChangeTime));
     }
     public void HolyShotDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(HolyShotDamageCooldown(damageCooldown, colorChangeTime));
     }
     public void RockDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(RockDamageCooldown(damageCooldown, colorChangeTime));
     }
     public void PoisonDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(PoisonDamageCooldown(damageCooldown, colorChangeTime));
     }
     
     public void PlayerRockDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(PlayerRockDamageCooldown(damageCooldown, colorChangeTime));
     }
     public void PlayerWaterDamegeCoolDown(float damageCooldown, float colorChangeTime)
     {
-        StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));
+        StartCoroutine(PlayerWaterDamageCooldown(damageCooldown, colorChangeTime));
+    }
+
+    IEnumerator MonsterDamageCooldown(float damageCooldown)
+    {
+        monsterTakeDamage = false; 
+        yield return new WaitForSeconds(damageCooldown);
+        monsterTakeDamage = true;
     }
 
     IEnumerator PlayerDamageCooldown(float damageCooldown, float colorChangeTime)
@@ -399,7 +443,6 @@ public class MonsterController : MonoBehaviour
 
     IEnumerator MonsterDie()
     {
-
         if (dieEffect != null)
         {
             SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
@@ -428,9 +471,18 @@ public class MonsterController : MonoBehaviour
         {
             if (holyShotTakeDamage)
             {
-                playerController.HolyShotDamageText(this);
-                currentHealth -= itemSkill.holyShotDamage;
-                StartCoroutine(HolyShotDamageCooldown(0.5f, 0.2f));
+                if (boss1Defending)
+                {
+                    playerController.HolyShotDamageText(this);
+                    currentHealth -= itemSkill.holyShotDamage * 0.5f;
+                    StartCoroutine(HolyShotDamageCooldown(0.5f, 0.2f));
+                }
+                else
+                {
+                    playerController.HolyShotDamageText(this);
+                    currentHealth -= itemSkill.holyShotDamage;
+                    StartCoroutine(HolyShotDamageCooldown(0.5f, 0.2f));
+                }            
             }
         }
         else if (collision.gameObject.tag == "Fire")
@@ -445,9 +497,18 @@ public class MonsterController : MonoBehaviour
         {
             if (fireShotSubTakeDamage)
             {
-                playerController.FireShotSubDamageText(this);
-                currentHealth -= itemSkill.fireShotSubDamage;
-                StartCoroutine(FireShotSubDamageCooldown(0.5f, 0.2f));
+                if (boss1Defending)
+                {
+                    playerController.FireShotSubDamageText(this);
+                    currentHealth -= itemSkill.fireShotSubDamage * 0.5f;
+                    StartCoroutine(FireShotSubDamageCooldown(0.5f, 0.2f));
+                }
+                else
+                {
+                    playerController.FireShotSubDamageText(this);
+                    currentHealth -= itemSkill.fireShotSubDamage;
+                    StartCoroutine(FireShotSubDamageCooldown(0.5f, 0.2f));
+                }             
             }
         }
     }

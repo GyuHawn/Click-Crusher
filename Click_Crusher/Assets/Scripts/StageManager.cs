@@ -53,7 +53,7 @@ public class StageManager : MonoBehaviour
         if (!gameStart)
         {
             mainStage = 1;
-            subStage = 5;
+            subStage = 1;
             StageMonsterSetting();
             SpawnMonsters();
             selectingItem = false;
@@ -114,24 +114,24 @@ public class StageManager : MonoBehaviour
                     break;
                 case 2:
                     base0Monster = 1 + mainStage;
-                    base1Monster = 2 + mainStage;
+                    base1Monster = 1 + mainStage;
                     break;
                 case 3:
                     base0Monster = 1 + mainStage;
-                    base1Monster = 2 + mainStage;
-                    base2Monster = 2 + mainStage;
+                    base1Monster = 1 + mainStage;
+                    base2Monster = 1 + mainStage;
                     break;
                 case 4:
                     base0Monster = 1 + mainStage;
-                    base1Monster = 2 + mainStage;
-                    base2Monster = 2 + mainStage;
-                    base3Monster = 3 + mainStage;
+                    base1Monster = 1 + mainStage;
+                    base2Monster = 1 + mainStage;
+                    base3Monster = 1 + mainStage;
                     break;
                 case 5:
                     base0Monster = 1 + mainStage;
                     base1Monster = 1 + mainStage;
-                    base2Monster = 2 + mainStage;
-                    base3Monster = 3 + mainStage;
+                    base2Monster = 1 + mainStage;
+                    base3Monster = 1 + mainStage;
                     bossMonster = 1;
                     break;
             }

@@ -8,10 +8,10 @@ public class Stage1 : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("OnBossSkill", 5f, 10f);
+        InvokeRepeating("Stage1BossSkill", 5f, 10f);
     }
 
-    void OnBossSkill()
+    void Stage1BossSkill()
     {
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 

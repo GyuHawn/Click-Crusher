@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 5173297968084898993}
   - component: {fileID: 8550683713643366335}
   - component: {fileID: 2613183320614730375}
+  - component: {fileID: 2951338645910084170}
   m_Layer: 7
   m_Name: 4
   m_TagString: Boss
@@ -282,7 +283,16 @@ MonoBehaviour:
   damage: 2
   maxHealth: 70
   currentHealth: 0
-  canTakeDamage: 1
+  playerTakeDamage: 1
+  fireTakeDamage: 1
+  fireShotTakeDamage: 1
+  fireShotSubTakeDamage: 1
+  holyWaveTakeDamage: 1
+  holyShotTakeDamage: 1
+  rockTakeDamage: 1
+  poisonTakeDamage: 1
+  pRockTakeDamage: 1
+  pWaterTakeDamage: 1
   attack: 0
   attackTime: 8
   danager: {fileID: 2257476468509014871}
@@ -291,6 +301,23 @@ MonoBehaviour:
   fired: 0
   stop: 0
   poisoned: 0
+  boss1Defending: 0
+--- !u!114 &2951338645910084170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919562932522056561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30047ac736c1b8641a9096ffdad7ff06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subBoss: {fileID: 3991542408671558045, guid: d51ba89bf58ccf6448b0a678e6fe3061, type: 3}
+  bossEffect: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
+  onSkillHealth: 50
+  skillPos: {fileID: 0}
 --- !u!1001 &4830306517818634077
 PrefabInstance:
   m_ObjectHideFlags: 0

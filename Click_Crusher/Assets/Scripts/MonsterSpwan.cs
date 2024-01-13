@@ -21,7 +21,7 @@ public class MonsterSpwan : MonoBehaviour
     public GameObject[] monsterSpawnPoints; // 몬스터 소환 위치
     public GameObject[] bossStageSpawnPoints; // 보스 스테이지 몬스터 소환 위치
 
-    private List<GameObject> spawnedMonsters = new List<GameObject>();
+    public List<GameObject> spawnedMonsters = new List<GameObject>();
 
     public Transform pos;
 
@@ -168,7 +168,7 @@ public class MonsterSpwan : MonoBehaviour
         }
     }
 
-    void InstantiateRandom(GameObject monsterPrefab, GameObject[] spawnPoints)
+    public void InstantiateRandom(GameObject monsterPrefab, GameObject[] spawnPoints)
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
         Vector3 randomPosition = GetRandomPosition(spawnPoints[randomIndex].transform.position);
@@ -176,7 +176,7 @@ public class MonsterSpwan : MonoBehaviour
         spawnedMonsters.Add(spawnedMonster); // 몬스터를 리스트에 추가
     }
 
-    Vector3 GetRandomPosition(Vector3 center)
+    public Vector3 GetRandomPosition(Vector3 center)
     {
         float radius = 1.0f;
 

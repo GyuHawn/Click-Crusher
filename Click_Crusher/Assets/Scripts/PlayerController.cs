@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     public GameObject attckEffect;
     public GameObject dragEffect;
 
+    public bool stage5Debuff = false;
+    public bool isStage6Hit = true;
+
     void Start()
     {
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
@@ -89,24 +92,42 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+            MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
             
             if (hit.collider != null)
             {
-                MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
 
-                if (monsterController != null)
+                if (hit.collider.CompareTag("Stage6"))
                 {
-                    if (monsterController.boss1Defending)
-                    {
-
+                    if (isStage6Hit)
+                    {                    
+                        StartCoroutine(Stage6Hit());
                     }
-                    else
+                }
+                else
+                {
+                    if (monsterController != null)
                     {
-                        StartCoroutine(AttackMonster(monsterController));
+                        if (monsterController.boss1Defending)
+                        {
+
+                        }
+                        else
+                        {
+                            StartCoroutine(AttackMonster(monsterController));
+                        }
                     }
                 }
             }
         }
+    }
+
+    IEnumerator Stage6Hit()
+    {
+        isStage6Hit = false;      
+        playerHealth -= 1;
+        yield return new WaitForSeconds(1f);
+        isStage6Hit = true;
     }
 
     void AttackEffect(Vector3 targetPosition)
@@ -153,12 +174,12 @@ public class PlayerController : MonoBehaviour
         
         if (monsterController.attack)
         {
-            if (monsterController.playerTakeDamage)
+            if (monsterController.monsterTakeDamage)
             {
                 audioManager.HitAudio();
 
                 playerHealth -= monsterController.damage;
-                monsterController.PlayerDamegeCoolDown(1f, 0f);
+                monsterController.MonsterDamegeCoolDown(1f);
             }
         }
         else
@@ -173,7 +194,15 @@ public class PlayerController : MonoBehaviour
             }
 
             itemSkill.SetCurrentAttackedMonster(monsterController.gameObject);
-            monsterController.PlayerDamegeCoolDown(0.5f, 0.2f);
+
+            if (stage5Debuff)
+            {
+                monsterController.PlayerDamegeCoolDown(3f, 0.2f);
+            }
+            else
+            {
+                monsterController.PlayerDamegeCoolDown(0.5f, 0.2f);
+            }
         }
 
         if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
@@ -294,7 +323,6 @@ public class PlayerController : MonoBehaviour
         GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
         damegeText.GetComponent<DamageText>().damege = damage;
     }
-
 
     public void FireDamageText(MonsterController monsterController)
     {

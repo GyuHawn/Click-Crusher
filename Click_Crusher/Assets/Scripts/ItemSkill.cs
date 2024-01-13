@@ -93,7 +93,6 @@ public class ItemSkill : MonoBehaviour
         BasicSettings();
     }
 
-
     public void BasicSettings()
     {
         // 공격력 퍼센트

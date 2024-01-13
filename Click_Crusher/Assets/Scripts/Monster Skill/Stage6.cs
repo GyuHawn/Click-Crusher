@@ -1,18 +1,34 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Stage6 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject bossSkill;
+    public GameObject skillPos;
+
     void Start()
     {
-        
+        skillPos = GameObject.Find("BossSkillPos");
+        StartCoroutine(SpawnBossSkill());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SpawnBossSkill()
     {
-        
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            Vector3 randomPosition = new Vector3(
+                Random.Range(skillPos.transform.position.x - 4f, skillPos.transform.position.x + 4f),
+                Random.Range(skillPos.transform.position.y - 1f, skillPos.transform.position.y + 2.5f),
+                skillPos.transform.position.z - 8
+            );
+
+            GameObject skillInstance = Instantiate(bossSkill, randomPosition, Quaternion.identity);
+
+            yield return new WaitForSeconds(3f);
+
+            Destroy(skillInstance);
+        }
     }
 }

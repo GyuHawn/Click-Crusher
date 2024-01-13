@@ -11,6 +11,7 @@ TagManager:
   - HolyShot
   - Poison
   - FireShotSub
+  - Stage6
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - UI
   - Monster
   - Boss
-  - 
+  - Stage6
   - 
   - 
   - 
