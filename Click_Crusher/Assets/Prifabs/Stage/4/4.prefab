@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5631671004234733081}
   - component: {fileID: 5468079476250886796}
   - component: {fileID: 8244512549637456817}
+  - component: {fileID: 2325175294730364251}
   m_Layer: 7
   m_Name: 4
   m_TagString: Boss
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.42, y: 2.32, z: -1}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7663412676514626284}
@@ -198,7 +199,17 @@ MonoBehaviour:
   damage: 2
   maxHealth: 110
   currentHealth: 0
-  canTakeDamage: 1
+  monsterTakeDamage: 1
+  playerTakeDamage: 1
+  fireTakeDamage: 1
+  fireShotTakeDamage: 1
+  fireShotSubTakeDamage: 1
+  holyWaveTakeDamage: 1
+  holyShotTakeDamage: 1
+  rockTakeDamage: 1
+  poisonTakeDamage: 1
+  pRockTakeDamage: 1
+  pWaterTakeDamage: 1
   attack: 0
   attackTime: 8
   danager: {fileID: 4723184869395410401}
@@ -207,6 +218,20 @@ MonoBehaviour:
   fired: 0
   stop: 0
   poisoned: 0
+  boss1Defending: 0
+--- !u!114 &2325175294730364251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109762973971923499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8350b72b1921aee45962b41f12d3fb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossSkill: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
 --- !u!1 &4723184869395410401
 GameObject:
   m_ObjectHideFlags: 0

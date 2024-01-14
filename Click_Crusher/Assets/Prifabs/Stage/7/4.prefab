@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.38000003, y: -1.33, z: -1}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5101673408655933218}
@@ -198,7 +198,17 @@ MonoBehaviour:
   damage: 2
   maxHealth: 180
   currentHealth: 0
-  canTakeDamage: 1
+  monsterTakeDamage: 1
+  playerTakeDamage: 1
+  fireTakeDamage: 1
+  fireShotTakeDamage: 1
+  fireShotSubTakeDamage: 1
+  holyWaveTakeDamage: 1
+  holyShotTakeDamage: 1
+  rockTakeDamage: 1
+  poisonTakeDamage: 1
+  pRockTakeDamage: 1
+  pWaterTakeDamage: 1
   attack: 0
   attackTime: 8
   danager: {fileID: 2062538955941092513}
@@ -207,6 +217,7 @@ MonoBehaviour:
   fired: 0
   stop: 0
   poisoned: 0
+  boss1Defending: 0
 --- !u!1 &2062538955941092513
 GameObject:
   m_ObjectHideFlags: 0

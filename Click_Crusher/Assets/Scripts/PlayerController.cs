@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public GameObject dragEffect;
 
     public bool stage5Debuff = false;
-    public bool isStage6Hit = true;
+    public bool isStageHit = true;
 
     void Start()
     {
@@ -92,14 +92,13 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
-            MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
             
             if (hit.collider != null)
             {
-
-                if (hit.collider.CompareTag("Stage6"))
+                MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
+                if (hit.collider.CompareTag("Stage6") || hit.collider.CompareTag("Stage4"))
                 {
-                    if (isStage6Hit)
+                    if (isStageHit)
                     {                    
                         StartCoroutine(Stage6Hit());
                     }
@@ -124,10 +123,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Stage6Hit()
     {
-        isStage6Hit = false;      
+        isStageHit = false;      
         playerHealth -= 1;
         yield return new WaitForSeconds(1f);
-        isStage6Hit = true;
+        isStageHit = true;
     }
 
     void AttackEffect(Vector3 targetPosition)

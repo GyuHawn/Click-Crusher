@@ -314,7 +314,17 @@ MonoBehaviour:
   damage: 1
   maxHealth: 42
   currentHealth: 0
-  canTakeDamage: 1
+  monsterTakeDamage: 1
+  playerTakeDamage: 1
+  fireTakeDamage: 1
+  fireShotTakeDamage: 1
+  fireShotSubTakeDamage: 1
+  holyWaveTakeDamage: 1
+  holyShotTakeDamage: 1
+  rockTakeDamage: 1
+  poisonTakeDamage: 1
+  pRockTakeDamage: 1
+  pWaterTakeDamage: 1
   attack: 0
   attackTime: 3
   danager: {fileID: 5067729011574654265}
@@ -323,6 +333,7 @@ MonoBehaviour:
   fired: 0
   stop: 0
   poisoned: 0
+  boss1Defending: 0
 --- !u!1001 &8981414496072422855
 PrefabInstance:
   m_ObjectHideFlags: 0

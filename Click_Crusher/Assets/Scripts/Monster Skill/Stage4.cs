@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Stage4 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject bossSkill;
+
     void Start()
     {
-        
+        InvokeRepeating("Stage4BossSkill", 5f, 10f);
     }
 
-    // Update is called once per frame
-    void Update()
+    void Stage4BossSkill()
     {
-        
+        StartCoroutine(Skill());   
+    }
+
+    IEnumerator Skill()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 randomPosition = new Vector3(
+                Random.Range(gameObject.transform.position.x - 4f, gameObject.transform.position.x + 4f),
+                Random.Range(gameObject.transform.position.y - 1f, gameObject.transform.position.y + 3f),
+                gameObject.transform.position.z - 8
+            );
+            GameObject skill = Instantiate(bossSkill, randomPosition, Quaternion.identity);
+
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

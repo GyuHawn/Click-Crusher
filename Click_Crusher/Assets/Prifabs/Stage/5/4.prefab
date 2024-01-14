@@ -116,7 +116,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.27, y: 1.18, z: -1}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1876953698287259891}
@@ -283,6 +283,7 @@ MonoBehaviour:
   damage: 2
   maxHealth: 130
   currentHealth: 0
+  monsterTakeDamage: 1
   playerTakeDamage: 1
   fireTakeDamage: 1
   fireShotTakeDamage: 1

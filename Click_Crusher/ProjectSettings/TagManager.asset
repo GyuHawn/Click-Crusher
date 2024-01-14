@@ -12,6 +12,7 @@ TagManager:
   - Poison
   - FireShotSub
   - Stage6
+  - Stage4
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Monster
   - Boss
   - Stage6
-  - 
+  - Stage4
   - 
   - 
   - 
