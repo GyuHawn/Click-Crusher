@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3546967593946049355}
   - component: {fileID: 8239614281284738506}
   - component: {fileID: 7571979459542322921}
+  - component: {fileID: 4738266233779996257}
   m_Layer: 7
   m_Name: 4
   m_TagString: Boss
@@ -143,7 +144,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.055280685, y: 0.42954844}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -154,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.6, y: 9.6}
+  m_Size: {x: 6.3937263, y: 4.4511313}
   m_EdgeRadius: 0
 --- !u!50 &8239614281284738506
 Rigidbody2D:
@@ -218,6 +219,22 @@ MonoBehaviour:
   stop: 0
   poisoned: 0
   boss1Defending: 0
+--- !u!114 &4738266233779996257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655056140231936336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc299a011833233438d84ff89bce924e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossSkill: {fileID: 6294508013172393196, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
+  skills: []
+  pos: {fileID: 0}
+  boxSize: {x: -13.5, y: 6.5, z: 0}
 --- !u!1 &2062538955941092513
 GameObject:
   m_ObjectHideFlags: 0

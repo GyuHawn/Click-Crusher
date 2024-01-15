@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                monsterController.PlayerDamegeCoolDown(0.5f, 0.2f);
+                monsterController.PlayerDamegeCoolDown(0.2f, 0.2f);
             }
         }
 
