@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +12,22 @@ public class StageTimeLimit : MonoBehaviour
 
     public float stageTime;
     public float stageFail;
+    public TMP_Text timeText;
 
     private void Awake()
     {
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
     }
 
+    private void Start()
+    {
+        stageTime = 60;
+    }
+
     void Update()
     {
+        timeText.text = "스테이지 남은 시간 : " + (int)(stageTime - stageFail) + "초";
+
         if (stageManager.gameStart)
         {
             if (!stageManager.selectingItem)

@@ -245,6 +245,7 @@ public class MonsterController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
+        attack = false;
         anim.SetBool("Attack", false);
         danager.SetActive(false);
 
@@ -265,7 +266,6 @@ public class MonsterController : MonoBehaviour
             isMonsterAttacking = true;
             danager.SetActive(true);
             yield return new WaitForSeconds(1.0f);
-            danager.SetActive(false);
 
             yield return StartCoroutine(MonsterAttack());
 
@@ -279,6 +279,7 @@ public class MonsterController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         attack = false;
+        danager.SetActive(false);
         anim.SetBool("Attack", false);
 
         attackTime = Random.Range(3.0f, 5.0f);

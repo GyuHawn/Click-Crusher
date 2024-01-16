@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2384545458706778968}
   - component: {fileID: 5805500690764611608}
   - component: {fileID: 981412360623870071}
+  - component: {fileID: 4366111100442014253}
   m_Layer: 7
   m_Name: 6
   m_TagString: Boss
@@ -154,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.2525826, y: 3.7278442}
+  m_Size: {x: 8, y: 5}
   m_EdgeRadius: 0
 --- !u!50 &5805500690764611608
 Rigidbody2D:
@@ -218,6 +219,32 @@ MonoBehaviour:
   stop: 0
   poisoned: 0
   boss1Defending: 0
+--- !u!114 &4366111100442014253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4016259515766909551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f845b042932608846a8dcdd02acecc7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossEffect1: {fileID: 5912030732030198607, guid: ea83dccefc251d44c963c49b787396d8, type: 3}
+  bossEffect2: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
+  subBoss: {fileID: 2107571636955559519, guid: 02652311a70d8ff4db35afbc0d72146a, type: 3}
+  onSkillHealth: 70
+  skillPos2: {fileID: 0}
+  bossEffect3: {fileID: 354614109105902807, guid: 5a8d99fb95262ea458a7b580f2a1611c, type: 3}
+  bossEffect4: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
+  bossEffect5: {fileID: 5824670795371433373, guid: f6fd568b816c64943a44efc3add3a881, type: 3}
+  bossEffect6: {fileID: 9027514048236820045, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
+  skillPos6: {fileID: 0}
+  bossEffect7: {fileID: 6294508013172393196, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
+  skills: []
+  pos: {fileID: 0}
+  boxSize: {x: -13.5, y: 6.5, z: 0}
 --- !u!1 &8039514064142489938
 GameObject:
   m_ObjectHideFlags: 0

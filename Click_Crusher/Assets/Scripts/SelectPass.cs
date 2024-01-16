@@ -7,6 +7,7 @@ public class SelectPass : MonoBehaviour
 {
     private PlayerController playerController;
     private StageManager stageManager;
+    private StageTimeLimit stageTimeLimit;
 
     public GameObject passMenu;
 
@@ -19,6 +20,7 @@ public class SelectPass : MonoBehaviour
     {
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
+        stageTimeLimit = GameObject.Find("Manager").GetComponent<StageTimeLimit>();
 
         selecPass = 0;
     }
@@ -56,7 +58,7 @@ public class SelectPass : MonoBehaviour
         }
         else if (selecPass == 2)
         {
-            stageManager.timeLimit += 10;
+            stageTimeLimit.stageTime += 5;
         }
         else if (selecPass == 3)
         {

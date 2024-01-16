@@ -239,7 +239,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.188552, y: 3.6430855}
+  m_Size: {x: 8, y: 5}
   m_EdgeRadius: 0
 --- !u!50 &5165273761324808727
 Rigidbody2D:
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad89c79b8471ad14e8ac12818c01f24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossSkill: {fileID: 5912030732030198607, guid: ea83dccefc251d44c963c49b787396d8, type: 3}
+  bossEffect: {fileID: 5912030732030198607, guid: ea83dccefc251d44c963c49b787396d8, type: 3}
 --- !u!1001 &2499542608423092796
 PrefabInstance:
   m_ObjectHideFlags: 0

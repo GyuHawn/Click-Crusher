@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
             if (hit.collider != null)
             {
                 MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
-                if (hit.collider.CompareTag("Stage6") || hit.collider.CompareTag("Stage4"))
+                if (hit.collider.CompareTag("Stage6") || hit.collider.CompareTag("Stage4") || hit.collider.CompareTag("Stage7"))
                 {
                     if (isStageHit)
                     {                    
@@ -284,9 +284,19 @@ public class PlayerController : MonoBehaviour
 
         if (playerHealth <= 0)
         {
+            GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+            GameObject boss = GameObject.FindWithTag("Boss");
+            foreach(GameObject monster in monsters)
+            {
+                Destroy(monster);
+            }
+            Destroy(boss);
+
             playerHealthUI[0].SetActive(true);
             Time.timeScale = 0f;
             stageManager.Reward();
+            isDragging = false;
+            dragEffect.SetActive(false);
             stageManager.gameStart = false;
             gameover.SetActive(true);
         }

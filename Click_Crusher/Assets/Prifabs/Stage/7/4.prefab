@@ -155,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.3937263, y: 4.4511313}
+  m_Size: {x: 8, y: 5}
   m_EdgeRadius: 0
 --- !u!50 &8239614281284738506
 Rigidbody2D:
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc299a011833233438d84ff89bce924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossSkill: {fileID: 6294508013172393196, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
+  bossEffect: {fileID: 6294508013172393196, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
   skills: []
   pos: {fileID: 0}
   boxSize: {x: -13.5, y: 6.5, z: 0}

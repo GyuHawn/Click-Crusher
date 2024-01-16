@@ -155,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.5570707, y: 4.024159}
+  m_Size: {x: 8, y: 5}
   m_EdgeRadius: 0
 --- !u!50 &5104472233449859374
 Rigidbody2D:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  maxHealth: 120
+  maxHealth: 82
   currentHealth: 0
   monsterTakeDamage: 1
   playerTakeDamage: 1

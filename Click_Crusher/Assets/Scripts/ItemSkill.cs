@@ -235,6 +235,7 @@ public class ItemSkill : MonoBehaviour
 
             Vector3 firePos = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z + 3f);
             fireInstance = Instantiate(fireEffect, firePos, Quaternion.Euler(-90, 0, 0));
+            fireInstance.name = "PlayerSkill";
 
             Destroy(fireInstance, 3f);
         }      
@@ -255,6 +256,7 @@ public class ItemSkill : MonoBehaviour
             {
                 Vector3 subPos = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - 1f);
                 GameObject subShot = Instantiate(fireShotSub, subPos, Quaternion.identity);
+                subShot.name = "PlayerSkill";
                 Vector2 randomDirection = Random.insideUnitCircle.normalized;
                 subShot.GetComponent<Rigidbody2D>().velocity = randomDirection * 5f;
 
@@ -286,6 +288,7 @@ public class ItemSkill : MonoBehaviour
             audioManager.HolyWaveAudio();
 
             WaveInstance = Instantiate(holyWaveEffect, holyWavePos.position, Quaternion.identity);
+            WaveInstance.name = "PlayerSkill";
             holyWave = true;
 
             Destroy(WaveInstance, holyWaveDuration);
@@ -309,6 +312,7 @@ public class ItemSkill : MonoBehaviour
             audioManager.HolyShotAudio();
 
             GameObject holyShotInstance = Instantiate(holyShotEffect, targetPosition, Quaternion.identity);
+            holyShotInstance.name = "PlayerSkill";
 
             StartCoroutine(RotateHolyShot(holyShotInstance, 5f));
         }       
@@ -348,6 +352,7 @@ public class ItemSkill : MonoBehaviour
             Vector3 spawnPosition = targetPosition + randomOffset;
 
             GameObject meleeInstance = Instantiate(meleeEffect, spawnPosition, Quaternion.identity);
+            fireInstance.name = "PlayerSkill";
 
             Destroy(meleeInstance, 0.5f);
 

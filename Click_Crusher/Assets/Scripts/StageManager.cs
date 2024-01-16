@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Security.Cryptography;
 
 public class StageManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class StageManager : MonoBehaviour
     private StageTimeLimit stageTimeLimit;
     private PlayerController playerController;
     private CharacterSkill characterSkill;
+    private ItemSkill itemSkill;
 
     public bool gameStart = false; // 게임시작 여부
 
@@ -46,6 +48,7 @@ public class StageManager : MonoBehaviour
         stageTimeLimit = GameObject.Find("Manager").GetComponent<StageTimeLimit>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         characterSkill = GameObject.Find("Manager").GetComponent<CharacterSkill>();
+        itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
     }
 
     void Start()
@@ -241,9 +244,26 @@ public class StageManager : MonoBehaviour
               NextMainStage();
          }
 
+        ResetStageState();
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
         StageMonsterSetting();
         SpawnMonsters();
+    }
+
+    void ResetStageState()
+    {
+        GameObject[] skills = GameObject.FindObjectsOfType<GameObject>();
+
+        foreach (GameObject skill in skills)
+        {
+            if (skill.name == "BossSkill" || skill.name == "PlayerSkill")
+            {
+                Destroy(skill);
+            }
+        }
+
+        itemSkill.holyWave = false;
+        playerController.stage5Debuff = false;
     }
 
     void NextSubStage()

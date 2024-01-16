@@ -13,6 +13,8 @@ TagManager:
   - FireShotSub
   - Stage6
   - Stage4
+  - Stage7
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -24,12 +26,12 @@ TagManager:
   - Boss
   - Stage6
   - Stage4
+  - Stage7
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Bullet
   - 
   - 
   - 
