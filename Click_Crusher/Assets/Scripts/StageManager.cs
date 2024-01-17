@@ -134,7 +134,8 @@ public class StageManager : MonoBehaviour
             switch (subStage)
             {
                 case 1:
-                    base0Monster = 2 + mainStage;
+                   // base0Monster = 2 + mainStage;
+                    base0Monster =1;
                     break;
                 case 2:
                     base0Monster = 1 + mainStage;

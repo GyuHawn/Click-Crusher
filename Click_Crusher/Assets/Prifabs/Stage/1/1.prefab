@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 8706227488444729486}
   - component: {fileID: 5364112923308014964}
   - component: {fileID: 9023718564280385064}
+  - component: {fileID: 4817976871129378755}
   m_Layer: 6
   m_Name: 1
   m_TagString: Monster
@@ -334,6 +335,20 @@ MonoBehaviour:
   stop: 0
   poisoned: 0
   boss1Defending: 0
+--- !u!114 &4817976871129378755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8781184059867094308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3cab4b968fc4b945bafe2bd9c78fa51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8132084907646880729, guid: 4309bff3ee3efe54dada3aa20b927781, type: 3}
+  bulletSpeed: 3
 --- !u!1001 &1222896857547898383
 PrefabInstance:
   m_ObjectHideFlags: 0
