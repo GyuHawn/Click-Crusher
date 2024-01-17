@@ -21,7 +21,8 @@ public class Stage2_2 : MonoBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
-            GameObject bullet = Instantiate(bulletPrefabs[i % bulletPrefabs.Length], gameObject.transform.position, Quaternion.identity);
+            Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, +1f);
+            GameObject bullet = Instantiate(bulletPrefabs[i % bulletPrefabs.Length], bulletPos, Quaternion.identity);
 
             float randomAngle = Random.Range(0f, 360f);
             Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);

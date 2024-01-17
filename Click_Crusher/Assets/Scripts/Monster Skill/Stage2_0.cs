@@ -23,7 +23,8 @@ public class Stage2_0 : MonoBehaviour
             float randomAngle = Random.Range(0f, 360f);
 
             Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);
-            GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
+            Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, +1f);
+            GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
 
             bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
 

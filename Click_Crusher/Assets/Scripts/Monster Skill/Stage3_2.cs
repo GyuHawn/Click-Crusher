@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class Stage3_2 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private MonsterSpwan monsterSpwan;
+
+    public GameObject eggPrefab;
+    public GameObject monsterPrefab;
+
     void Start()
     {
-        
+        monsterSpwan = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
+
+        InvokeRepeating("Spwan", 3f, 10f);
     }
 
-    // Update is called once per frame
-    void Update()
+    void Spwan()
     {
-        
+        StartCoroutine(SpwanMonster());
+    }
+
+    IEnumerator SpwanMonster()
+    {
+        Vector3 randomPos = new Vector3(Random.Range(-4f, 4f), Random.Range(-1f, 2f), 1f);
+        GameObject egg = Instantiate(eggPrefab, randomPos, Quaternion.identity);
+
+        yield return new WaitForSeconds(3f);
+
+        Destroy(egg);
+
+        Vector3 monsterPos = new Vector3(randomPos.x, randomPos.y, -2f);
+        GameObject monster = Instantiate(monsterPrefab, randomPos, Quaternion.identity);
+        monsterSpwan.spawnedMonsters.Add(monster);
     }
 }
