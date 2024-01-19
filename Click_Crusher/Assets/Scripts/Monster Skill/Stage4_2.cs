@@ -7,7 +7,7 @@ public class Stage4_2 : MonoBehaviour
     public GameObject bulletsubPrefab;
     public float bulletSpd;
 
-    private Vector3 lastBulletPosition; // 변수 추가
+    private Vector3 lastBulletPos; // 변수 추가
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class Stage4_2 : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
 
         yield return new WaitForSeconds(2f);
-        lastBulletPosition = bullet.transform.position;
+        lastBulletPos = bullet.transform.position;
         Destroy(bullet);
 
         ShootBulletSub();
@@ -44,7 +44,7 @@ public class Stage4_2 : MonoBehaviour
         {
             float radianAngle = angle * Mathf.Deg2Rad;
             Vector3 direction = new Vector3(Mathf.Cos(radianAngle), Mathf.Sin(radianAngle), 1f);
-            Vector3 bulletsubPos = lastBulletPosition;
+            Vector3 bulletsubPos = lastBulletPos;
             GameObject bulletsub = Instantiate(bulletsubPrefab, bulletsubPos, Quaternion.identity);
             bulletsub.name = "BulletSub";
             bulletsub.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
