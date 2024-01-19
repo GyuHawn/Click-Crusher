@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     public bool stage5Debuff = false;
     public bool isStageHit = true;
 
+    public Vector3 lastClickPosition; // 마지막 클릭위치
+
     void Start()
     {
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
         UpdateHealthUI();
 
         gameTime = 0f;
+        lastClickPosition = Vector3.zero;
     }
 
     void Update()
@@ -92,7 +95,9 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
-            
+
+            lastClickPosition = worldPoint;
+
             if (hit.collider != null)
             {
                 MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
@@ -119,6 +124,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public Vector3 GetLastClickPosition()
+    {
+        return lastClickPosition;
     }
 
     IEnumerator Stage6Hit()

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2702834684047135156}
   - component: {fileID: 8030594117067592}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Stage5-1
-  m_TagString: Untagged
+  m_TagString: MonsterDenefe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
-  m_Color: {r: 0.8313726, g: 0.28235295, b: 0.5294118, a: 0.19607843}
+  m_Color: {r: 0.8313726, g: 0.28235295, b: 0.5294118, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

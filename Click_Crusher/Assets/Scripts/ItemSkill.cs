@@ -321,11 +321,11 @@ public class ItemSkill : MonoBehaviour
     private IEnumerator RotateHolyShot(GameObject holyShotInstance, float duration)
     {
         float elapsedTime = 0f;
-        float rotationSpeed = 360f / duration;
+        float rotationSpd = 360f / duration;
 
         while (elapsedTime < duration)
         {
-            holyShotInstance.transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f);
+            holyShotInstance.transform.Rotate(rotationSpd * Time.deltaTime, 0f, 0f);
             elapsedTime += Time.deltaTime;
             yield return null;
         }

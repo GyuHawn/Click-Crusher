@@ -23,7 +23,7 @@ public class Stage2_3 : MonoBehaviour
             Vector3 randomPosition = new Vector3(Random.Range(transform.position.x - 3f, transform.position.x + 3f), Random.Range(transform.position.y - 1f, transform.position.y + 1f), 5f);
 
             GameObject bullet = Instantiate(bulletPrefab, randomPosition, Quaternion.identity);
-
+            bullet.name = "MonsterAttack";
             Destroy(bullet, 3f);
             yield return new WaitForSeconds(0.1f);
         }

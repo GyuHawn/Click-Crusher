@@ -4,7 +4,7 @@ using UnityEngine;
 public class Stage2_1 : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float rotationSpeed = 180f;
+    public float bulletSpd = 180f;
 
     void Start()
     {
@@ -14,7 +14,7 @@ public class Stage2_1 : MonoBehaviour
     IEnumerator ActivateBulletAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        StartCoroutine(RotateAndDeactivate(bulletPrefab, new Vector3(0f, 0f, 1f), rotationSpeed, 3f));
+        StartCoroutine(RotateAndDeactivate(bulletPrefab, new Vector3(0f, 0f, 1f), bulletSpd, 3f));
     }
 
     IEnumerator RotateAndDeactivate(GameObject obj, Vector3 axis, float speed, float duration)

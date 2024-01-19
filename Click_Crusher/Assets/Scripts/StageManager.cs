@@ -56,7 +56,7 @@ public class StageManager : MonoBehaviour
         // 1-1 시작 설정 후 게임 시작
         if (!gameStart)
         {
-            mainStage = 1;
+            mainStage = 6;
             subStage = 1;
             StageMonsterSetting();
             SpawnMonsters();
@@ -147,17 +147,38 @@ public class StageManager : MonoBehaviour
                     base2Monster = 1 + mainStage;
                     break;
                 case 4:
-                    base0Monster = 1 + mainStage;
-                    base1Monster = 1 + mainStage;
-                    base2Monster = 1 + mainStage;
-                    base3Monster = 1 + mainStage;
+                    if (mainStage == 6)
+                    {
+                        base0Monster = 1 + mainStage;
+                        base1Monster = 1 + mainStage;
+                        base2Monster = 1 + mainStage;
+                        base3Monster = 1;
+                    }
+                    else
+                    {
+                        base0Monster = 1 + mainStage;
+                        base1Monster = 1 + mainStage;
+                        base2Monster = 1 + mainStage;
+                        base3Monster = 1 + mainStage;
+                    }
                     break;
                 case 5:
-                    base0Monster = 1 + mainStage;
-                    base1Monster = 1 + mainStage;
-                    base2Monster = 1 + mainStage;
-                    base3Monster = 1 + mainStage;
-                    bossMonster = 1;
+                    if (mainStage == 6)
+                    {
+                        base0Monster = 1 + mainStage;
+                        base1Monster = 1 + mainStage;
+                        base2Monster = 1 + mainStage;
+                        base3Monster = 2;
+                        bossMonster = 1;
+                    }
+                    else
+                    {
+                        base0Monster = 1 + mainStage;
+                        base1Monster = 1 + mainStage;
+                        base2Monster = 1 + mainStage;
+                        base3Monster = 1 + mainStage;
+                        bossMonster = 1;
+                    }        
                     break;
             }
         }
@@ -257,7 +278,7 @@ public class StageManager : MonoBehaviour
 
         foreach (GameObject skill in skills)
         {
-            if (skill.name == "BossSkill" || skill.name == "PlayerSkill")
+            if (skill.name == "BossSkill" || skill.name == "PlayerSkill" || skill.name == "MonsterAttack" || skill.name == "MonsterDefense")
             {
                 Destroy(skill);
             }
