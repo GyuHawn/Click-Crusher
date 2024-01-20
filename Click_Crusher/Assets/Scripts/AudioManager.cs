@@ -114,7 +114,7 @@ public class AudioManager : MonoBehaviour
             attackAudio.volume = generalSlider.value;
             defenseAudio.volume = generalSlider.value;
             hitAudio.volume = generalSlider.value;
-            monsterAttackAudio.volume = generalSlider.value;
+           // monsterAttackAudio.volume = generalSlider.value;
             buttonAudio.volume = generalSlider.value;
 
             fireAudio.volume = generalSlider.value;

@@ -267,7 +267,7 @@ public class ItemSkill : MonoBehaviour
 
             Destroy(fireShotInstance, 1f);
         }
-    }
+    } 
 
     private IEnumerator DestroySubShots(List<GameObject> subShots, float delay)
     {
@@ -314,7 +314,10 @@ public class ItemSkill : MonoBehaviour
             GameObject holyShotInstance = Instantiate(holyShotEffect, targetPosition, Quaternion.identity);
             holyShotInstance.name = "PlayerSkill";
 
-            StartCoroutine(RotateHolyShot(holyShotInstance, 5f));
+            if (holyShotInstance != null) 
+            {
+                StartCoroutine(RotateHolyShot(holyShotInstance, 5f));       
+            }
         }       
     }
 
@@ -352,7 +355,6 @@ public class ItemSkill : MonoBehaviour
             Vector3 spawnPosition = targetPosition + randomOffset;
 
             GameObject meleeInstance = Instantiate(meleeEffect, spawnPosition, Quaternion.identity);
-            fireInstance.name = "PlayerSkill";
 
             Destroy(meleeInstance, 0.5f);
 
@@ -402,13 +404,15 @@ public class ItemSkill : MonoBehaviour
                 {
                     GameObject sturnInstance = Instantiate(sturnEffect, currentAttackedMonster.transform.position, Quaternion.identity);
                     GameObject sturnimageInstance = Instantiate(sturnImage, monsterController.sturn.transform.position, Quaternion.identity);
+                    sturnimageInstance.name = "PlayerSkill";
+
 
                     monsterController.stop = true;
                     monsterController.attackTime += 5;
 
                     monsterToSturnImage[currentAttackedMonster] = sturnimageInstance;
 
-                    Destroy(sturnimageInstance, 3f);
+                    Destroy(sturnimageInstance, 2f);
                 }
             }
 

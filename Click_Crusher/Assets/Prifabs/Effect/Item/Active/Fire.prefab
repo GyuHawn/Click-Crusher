@@ -23988,7 +23988,6 @@ GameObject:
   - component: {fileID: 6307077563147918245}
   - component: {fileID: 3667645577920032147}
   - component: {fileID: 8642664078530567640}
-  - component: {fileID: 4756706366458811130}
   m_Layer: 0
   m_Name: Square
   m_TagString: Fire
@@ -24108,19 +24107,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0088491, y: 1.1304867}
   m_EdgeRadius: 0
---- !u!114 &4756706366458811130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5448338292500787821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5b49bc691b3b3443969637d848bff95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canTakeDamage: 0
 --- !u!1 &7624442251439514462
 GameObject:
   m_ObjectHideFlags: 0

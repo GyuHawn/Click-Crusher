@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 198159274938206214}
   - component: {fileID: 199368054502676096}
   - component: {fileID: 114960206652300638}
-  - component: {fileID: 2183608892701441275}
   m_Layer: 0
   m_Name: Holy Shot
   m_TagString: HolyShot
@@ -4779,18 +4778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyDeactivate: 0
---- !u!114 &2183608892701441275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545806602296978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5d623fccf2c85244b613219c9165194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1611160775618410
 GameObject:
   m_ObjectHideFlags: 0
@@ -14135,7 +14122,6 @@ GameObject:
   - component: {fileID: 6014898117186395773}
   - component: {fileID: 6852655387065065909}
   - component: {fileID: 1756987683667811322}
-  - component: {fileID: 4426127891915698372}
   m_Layer: 0
   m_Name: Circle
   m_TagString: HolyShot
@@ -14245,15 +14231,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4426127891915698372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6918546270680313159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5d623fccf2c85244b613219c9165194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public int damage;
     public bool isAttacking = false;
+    public bool hitBullet = true;
     public GameObject hubDamageText;
 
     public GameObject defenseEffect;
@@ -110,7 +111,14 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    if (monsterController != null)
+                    if (hit.collider.CompareTag("Bullet") && hitBullet)
+                    {
+                        audioManager.HitAudio();
+
+                        playerHealth -= 1;
+                        StartCoroutine(BulletHitCooldown(0.2f));
+                    }
+                    else if (monsterController != null)
                     {
                         if (monsterController.boss1Defending)
                         {
@@ -124,6 +132,13 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator BulletHitCooldown(float damageCooldown)
+    {
+        hitBullet = false;
+        yield return new WaitForSeconds(damageCooldown);
+        hitBullet = true;
     }
 
     public Vector3 GetLastClickPosition()
@@ -180,39 +195,27 @@ public class PlayerController : MonoBehaviour
     IEnumerator AttackMonster(MonsterController monsterController)
     {
         isAttacking = true;
-        
-        if (monsterController.attack)
-        {
-            if (monsterController.monsterTakeDamage)
-            {
-                audioManager.HitAudio();
 
-                playerHealth -= monsterController.damage;
-                monsterController.MonsterDamegeCoolDown(1f);
-            }
+        audioManager.AttackAudio();
+
+        if (monsterController.playerTakeDamage)
+        {
+            AttackEffect(monsterController.gameObject.transform.position);
+            monsterController.currentHealth -= damage;
+            PlayerDamageText(monsterController);
+        }
+
+        itemSkill.SetCurrentAttackedMonster(monsterController.gameObject);
+
+        if (stage5Debuff)
+        {
+            monsterController.PlayerDamegeCoolDown(3f, 0.2f);
         }
         else
         {
-            audioManager.AttackAudio();
-
-            if (monsterController.playerTakeDamage)
-            {
-                AttackEffect(monsterController.gameObject.transform.position);
-                monsterController.currentHealth -= damage;
-                PlayerDamageText(monsterController);
-            }
-
-            itemSkill.SetCurrentAttackedMonster(monsterController.gameObject);
-
-            if (stage5Debuff)
-            {
-                monsterController.PlayerDamegeCoolDown(3f, 0.2f);
-            }
-            else
-            {
-                monsterController.PlayerDamegeCoolDown(0.2f, 0.2f);
-            }
+            monsterController.PlayerDamegeCoolDown(0.2f, 0.2f);
         }
+
 
         if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
         {
@@ -226,7 +229,7 @@ public class PlayerController : MonoBehaviour
                 FireDamageText(monsterController);
                 monsterController.currentHealth -= itemSkill.fireShotDamage;
                 monsterController.FireShotDamegeCoolDown(0.5f, 0.2f);
-            }          
+            }
         }
         if (itemSkill.isHolyWave && Random.Range(0f, 100f) <= itemSkill.holyWavePercent)
         {
@@ -240,7 +243,7 @@ public class PlayerController : MonoBehaviour
         {
             itemSkill.Melee(monsterController.gameObject.transform.position, itemSkill.meleeNum);
 
-            StartCoroutine(MeleeAttack());            
+            StartCoroutine(MeleeAttack());
         }
         IEnumerator MeleeAttack()
         {
@@ -266,9 +269,9 @@ public class PlayerController : MonoBehaviour
                 RockDamageText(monsterController);
                 monsterController.currentHealth -= itemSkill.rockDamage;
                 monsterController.RockDamegeCoolDown(0.5f, 0.2f);
-            }          
+            }
         }
-        if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent)
+        if (itemSkill.isSturn && Random.Range(0f, 100f) <= itemSkill.sturnPercent && monsterController.CompareTag("Monster"))
         {
             itemSkill.Sturn();
         }

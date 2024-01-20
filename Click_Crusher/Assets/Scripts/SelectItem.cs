@@ -120,16 +120,33 @@ public class SelectItem : MonoBehaviour
                 int randomIndex = UnityEngine.Random.Range(0, playerItems.Count);
                 GameObject selectedItem = playerItems[randomIndex];
 
-                selectItems.Add(selectedItem);
+                if (!selectItems.Contains(selectedItem))
+                {
+                    selectItems.Add(selectedItem);
 
-                GameObject itemFromItems = Array.Find(items, item => item.name == selectedItem.name);
+                    GameObject itemFromItems = Array.Find(items, item => (item.name + "Pltem") == selectedItem.name);
 
-                GameObject itemPos = null;
-                if (selectItems.Count == 1) itemPos = itemPos1;
-                else if (selectItems.Count == 2) itemPos = itemPos2;
-                else if (selectItems.Count == 3) itemPos = itemPos3;
+                    while (itemFromItems == null || selectItems.Contains(itemFromItems))
+                    {
+                        randomIndex = UnityEngine.Random.Range(0, playerItems.Count);
+                        selectedItem = playerItems[randomIndex];
 
-                itemFromItems.transform.position = itemPos.transform.position;
+                        if (!selectItems.Contains(selectedItem))
+                        {
+                            selectItems.RemoveAt(selectItems.Count - 1);
+                            selectItems.Add(selectedItem);
+
+                            itemFromItems = Array.Find(items, item => (item.name + "Pltem") == selectedItem.name);
+                        }
+                    }
+
+                    GameObject itemPos = null;
+                    if (selectItems.Count == 1) itemPos = itemPos1;
+                    else if (selectItems.Count == 2) itemPos = itemPos2;
+                    else if (selectItems.Count == 3) itemPos = itemPos3;
+
+                    itemFromItems.transform.position = itemPos.transform.position;
+                }
             }
         }
         else
@@ -139,7 +156,7 @@ public class SelectItem : MonoBehaviour
                 int randomIndex = UnityEngine.Random.Range(0, items.Length);
                 GameObject selectedItem = items[randomIndex];
 
-                if (!selectItems.Contains(selectedItem))
+                if (!selectItems.Contains(selectedItem) && !playerItems.Exists(item => item.name == selectedItem.name + "Pltem"))
                 {
                     selectItems.Add(selectedItem);
 
@@ -152,6 +169,8 @@ public class SelectItem : MonoBehaviour
                 }
             }
         }
+
+
 
         selectNum = UnityEngine.Random.Range(0, selectItems.Count) + 1;
 
@@ -174,7 +193,7 @@ public class SelectItem : MonoBehaviour
             }
 
             if (!isItemExist && playerItems.Count < 4)
-            {
+            {            
                 InstantiateItem();
             }
 

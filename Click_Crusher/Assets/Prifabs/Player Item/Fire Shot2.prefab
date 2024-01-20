@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5946510022824432633}
   - component: {fileID: 5234102658218867462}
   - component: {fileID: 3652574924033429351}
-  - component: {fileID: 8255437985532830830}
   m_Layer: 0
   m_Name: Fire Shot2
   m_TagString: FireShotSub
@@ -159,15 +158,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.95, y: 0.95}
   m_EdgeRadius: 0
---- !u!114 &8255437985532830830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377886417881520460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aa7cc9191670ff4886f9c40636f0200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

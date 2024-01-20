@@ -31,7 +31,7 @@ public class MonsterController : MonoBehaviour
     public bool pRockTakeDamage = true; // 돌
     public bool pWaterTakeDamage = true; // 물
 
-    public bool attack;
+   // public bool attack;
     private int bossAttackNum;
     public float attackTime;
 
@@ -69,7 +69,7 @@ public class MonsterController : MonoBehaviour
 
         danager.SetActive(false);
         stop = false;
-        attack = false;
+       // attack = false;
         bossAttackNum = 1;
 
         monsterLayer = LayerMask.NameToLayer("Monster");
@@ -104,10 +104,10 @@ public class MonsterController : MonoBehaviour
 
         if (attackTime <= 0)
         {
-            attack = true;
+            //attack = true;
             if (gameObject.tag == "Monster")
             {
-                audioManager.MonsterAttackAudio();               
+                //audioManager.MonsterAttackAudio();               
                 StartCoroutine(MonsterAttackReady());
             }
             else if(gameObject.tag == "Boss" && bossAttackNum == 1)
@@ -245,7 +245,7 @@ public class MonsterController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
-        attack = false;
+       // attack = false;
         anim.SetBool("Attack", false);
         danager.SetActive(false);
 
@@ -276,10 +276,10 @@ public class MonsterController : MonoBehaviour
     IEnumerator MonsterAttack()
     {
         anim.SetBool("Attack", true);
+        danager.SetActive(false);
 
         yield return new WaitForSeconds(1f);
-        attack = false;
-        danager.SetActive(false);
+       // attack = false;
         anim.SetBool("Attack", false);
 
         attackTime = Random.Range(3.0f, 5.0f);
@@ -292,10 +292,6 @@ public class MonsterController : MonoBehaviour
     }
 
     // 피격 간격 관리
-    public void MonsterDamegeCoolDown(float damageCooldown)
-    {
-        StartCoroutine(MonsterDamageCooldown(damageCooldown));
-    }
     public void PlayerDamegeCoolDown(float damageCooldown, float colorChangeTime) // 다른 스크립트용
     { 
         StartCoroutine(PlayerDamageCooldown(damageCooldown, colorChangeTime));

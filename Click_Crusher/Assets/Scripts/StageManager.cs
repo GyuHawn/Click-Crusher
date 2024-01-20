@@ -227,27 +227,30 @@ public class StageManager : MonoBehaviour
          {
              NextSubStage();
 
-             if (mainStage >= 2 && mainStage < 8)
+            selectItem.ItemSelect();
+            StartCoroutine(DelayStage());
+
+            if (mainStage >= 2 && mainStage < 8)
               {
                   if (subStage == 2)
                   {
                       selectingItem = true;
-                      SelectPass();
+                     // SelectPass();
                   }
               }
 
               if (subStage == 3)
               {
-                  selectItem.ItemSelect();
-                  StartCoroutine(DelayStage());
+                 // selectItem.ItemSelect();
+                 // StartCoroutine(DelayStage());
               }
               else if (subStage > 5)
               {
                   subStage = 1;
                  NextMainStage();
 
-                  selectItem.ItemSelect();
-                  StartCoroutine(DelayStage());
+                 // selectItem.ItemSelect();
+                //  StartCoroutine(DelayStage());
               }
           }
           else

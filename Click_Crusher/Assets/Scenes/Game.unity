@@ -667,8 +667,9 @@ MonoBehaviour:
   - {fileID: 1521765857}
   playerHealth: 0
   gameover: {fileID: 909437216}
-  damage: 10
+  damage: 1000
   isAttacking: 0
+  hitBullet: 1
   hubDamageText: {fileID: 5731957617961231814, guid: aa615103c4892a34ba9918ab7b799ceb, type: 3}
   defenseEffect: {fileID: 1671184088}
   defending: 0
@@ -20829,7 +20830,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 4.699951, y: -9.300049}
+  m_AnchoredPosition: {x: 4.699707, y: -9.300049}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &376532611
@@ -21965,7 +21966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -11.300049, y: -68.599976}
+  m_AnchoredPosition: {x: -11.300293, y: -68.59985}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &385418519
@@ -67045,7 +67046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 162.13, y: 22.900024}
+  m_AnchoredPosition: {x: 162.13, y: 22.900146}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1056341589
