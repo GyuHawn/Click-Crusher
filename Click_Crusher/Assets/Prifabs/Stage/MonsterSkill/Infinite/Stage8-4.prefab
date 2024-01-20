@@ -221,7 +221,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage8-0 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3506923829663789201, guid: fccf364a85f444f458a4fcb85ef8086f, type: 3}
+    - {fileID: 5556645851460447183, guid: fccf364a85f444f458a4fcb85ef8086f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

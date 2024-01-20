@@ -4,15 +4,63 @@ using UnityEngine;
 
 public class Stage8_5 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject bulletPrefab;
+    public GameObject bulletSubPrefab;
+    public float bulletSpd;
+    public float bulletSubSpd;
+    public float sizeReduction;
+
     void Start()
     {
-        
+        InvokeRepeating("MonsterAttack", 1f, 8f);
     }
 
-    // Update is called once per frame
-    void Update()
+    void MonsterAttack()
     {
-        
+        float randomAngle = Random.Range(0f, 360f);
+
+        Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);
+        Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1.2f, +1f);
+        GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
+
+        bullet.name = "MonsterAttack";
+
+        StartCoroutine(DestroyBullet(bullet, direction, bulletSpd));
+
+        StartCoroutine(FireSubBullet(bullet.transform, bulletSubSpd));
+    }
+
+    IEnumerator DestroyBullet(GameObject bullet, Vector3 direction, float bulletSpeed)
+    {
+        SpriteRenderer spriteRenderer = bullet.GetComponent<SpriteRenderer>();
+        Rigidbody2D rigidbody = bullet.GetComponent<Rigidbody2D>();
+
+        while (spriteRenderer.transform.localScale.x > 0)
+        {
+            Vector3 newScale = spriteRenderer.transform.localScale - Vector3.one * sizeReduction * Time.deltaTime;
+            spriteRenderer.transform.localScale = newScale;
+
+            rigidbody.velocity = direction * bulletSpeed;
+
+            yield return null;
+        }
+
+        Destroy(bullet);
+    }
+
+    IEnumerator FireSubBullet(Transform parentTransform, float bulletSubSpeed)
+    {
+        for(int i = 0; i < 10; i++) 
+        {
+            float randomAngle = Random.Range(0f, 360f);
+            Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);
+
+            GameObject bulletSub = Instantiate(bulletSubPrefab, parentTransform.position, Quaternion.identity);
+            bulletSub.name = "MonsterAttack";
+            bulletSub.GetComponent<Rigidbody2D>().velocity = direction * bulletSubSpeed;
+
+            yield return new WaitForSeconds(0.5f);
+            Destroy(bulletSub,2f);
+        }
     }
 }
