@@ -10,6 +10,7 @@ public class Stage5_2 : MonoBehaviour
     void Start()
     {
         pos = GameObject.Find("Stage7 SkillPos"); // ¸Ê Áß¾Ó À§Ä¡ ºó ¿ÀºêÁ§Æ®
+        boxSize = new Vector3(-13.5f, 6.5f, 0);
         StartCoroutine(RandomMovement());
     }
 

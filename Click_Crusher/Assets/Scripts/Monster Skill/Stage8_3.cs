@@ -3,44 +3,55 @@ using UnityEngine;
 
 public class Stage8_3 : MonoBehaviour
 {
-    public GameObject effectPrifab;
-    public GameObject PoisonPrefab;
-    public GameObject pos;
-    public Vector3 boxSize;
+    public GameObject effectPrefab;   
+    public GameObject poisonPrefab;   
+    public GameObject skillPos;      
+    public Vector3 boxSize;          
+    public float moveSpeed = 3f;     
 
-    private Vector3 beforePos;
+    private Vector3 beforePos;       
 
     void Start()
     {
-        pos = GameObject.Find("Stage7 SkillPos");
-        beforePos = gameObject.transform.position;
+        skillPos = GameObject.Find("Stage7 SkillPos");
+        boxSize = new Vector3(-13.5f, 6.5f, 0);
+        beforePos = new Vector3 (transform.position.x, transform.position.y, transform.position.z + 3f);
+    }
+
+    public void Attack()
+    {
         StartCoroutine(RandomMovement());
     }
 
     IEnumerator RandomMovement()
     {
-        yield return new WaitForSeconds(3f);
+        StartCoroutine(SpawnEffect(beforePos));
 
-        while (true)
+        float randomX = Random.Range(skillPos.transform.position.x - boxSize.x / 2, skillPos.transform.position.x + boxSize.x / 2);
+        float randomY = Random.Range(skillPos.transform.position.y - boxSize.y / 2, skillPos.transform.position.y + boxSize.y / 2);
+        float randomZ = -2f;
+
+        Vector3 targetPosition = new Vector3(randomX, randomY, randomZ);
+
+        float distance = Vector3.Distance(transform.position, targetPosition);
+        float duration = distance / moveSpeed;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
         {
-            float randomX = Random.Range(pos.transform.position.x - boxSize.x / 2, pos.transform.position.x + boxSize.x / 2);
-            float randomY = Random.Range(pos.transform.position.y - boxSize.y / 2, pos.transform.position.y + boxSize.y / 2);
-            float randomZ = -2f;
-
-            transform.position = new Vector3(randomX, randomY, randomZ);
-
-            StartCoroutine(SpawnEffect(beforePos));
-
-            beforePos = transform.position;
-
-            yield return new WaitForSeconds(5f);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
+        beforePos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 3f);
     }
 
     IEnumerator SpawnEffect(Vector3 position)
     {
-        GameObject poison = Instantiate(PoisonPrefab, position, Quaternion.identity);
-        GameObject effect = Instantiate(effectPrifab, position, Quaternion.Euler(60f, 0f, 0f));
+        Vector3 newPosition = new Vector3(position.x, position.y, position.z + 3f);
+        GameObject poison = Instantiate(poisonPrefab, newPosition, Quaternion.identity);
+        GameObject effect = Instantiate(effectPrefab, newPosition, Quaternion.Euler(60f, 0f, 0f));
         poison.name = "MonsterAttack";
 
         yield return new WaitForSeconds(8f);

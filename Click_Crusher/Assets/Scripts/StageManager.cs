@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Security.Cryptography;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -138,45 +139,45 @@ public class StageManager : MonoBehaviour
                     base0Monster =1;
                     break;
                 case 2:
-                    base0Monster = 1 + mainStage;
-                    base1Monster = 1 + mainStage;
+                    base0Monster = 1;
+                    base1Monster = 1;
                     break;
                 case 3:
-                    base0Monster = 1 + mainStage;
-                    base1Monster = 1 + mainStage;
-                    base2Monster = 1 + mainStage;
+                    base0Monster = 1    ;
+                    base1Monster = 1;
+                    base2Monster = 1;
                     break;
                 case 4:
                     if (mainStage == 6)
                     {
-                        base0Monster = 1 + mainStage;
-                        base1Monster = 1 + mainStage;
-                        base2Monster = 1 + mainStage;
+                        base0Monster = 1;
+                        base1Monster = 1;
+                        base2Monster = 1;
                         base3Monster = 1;
                     }
                     else
                     {
-                        base0Monster = 1 + mainStage;
-                        base1Monster = 1 + mainStage;
-                        base2Monster = 1 + mainStage;
-                        base3Monster = 1 + mainStage;
+                        base0Monster = 1;
+                        base1Monster = 1;
+                        base2Monster = 1;
+                        base3Monster = 1;
                     }
                     break;
                 case 5:
                     if (mainStage == 6)
                     {
-                        base0Monster = 1 + mainStage;
-                        base1Monster = 1 + mainStage;
-                        base2Monster = 1 + mainStage;
+                        base0Monster = 1;
+                        base1Monster = 1;
+                        base2Monster = 1;
                         base3Monster = 2;
                         bossMonster = 1;
                     }
                     else
                     {
-                        base0Monster = 1 + mainStage;
-                        base1Monster = 1 + mainStage;
-                        base2Monster = 1 + mainStage;
-                        base3Monster = 1 + mainStage;
+                        base0Monster = 1;
+                        base1Monster = 1;
+                        base2Monster = 1;
+                        base3Monster = 1;
                         bossMonster = 1;
                     }        
                     break;
@@ -185,10 +186,10 @@ public class StageManager : MonoBehaviour
         else
         {
             // 8 스테이지 이후부터 InfiniteMonsters 사용
-            base0Monster = 1 + mainStage;
-            base1Monster = 1 + mainStage;
-            base2Monster = 1 + mainStage;
-            base3Monster = 1 + mainStage;
+            base0Monster = 1;
+            base1Monster = 1;
+            base2Monster = 1;
+            base3Monster = 1;
             bossMonster = 1;
         }
     }
@@ -310,13 +311,6 @@ public class StageManager : MonoBehaviour
 
     public void GameOver()
     {
-        StartCoroutine(GameOverButton());
-    }
-
-    IEnumerator GameOverButton()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        LodingController.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 }

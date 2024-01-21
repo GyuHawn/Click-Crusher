@@ -115,7 +115,7 @@ public class ItemSkill : MonoBehaviour
 
         // °¹¼ö
         fireShotSubNum = 3;
-        meleeNum = 5;
+        meleeNum = 2;
 
         // ½Ã°£
         fireDuration = 3f;
@@ -355,7 +355,7 @@ public class ItemSkill : MonoBehaviour
             Vector3 spawnPosition = targetPosition + randomOffset;
 
             GameObject meleeInstance = Instantiate(meleeEffect, spawnPosition, Quaternion.identity);
-
+            meleeInstance.name = "PlayerSkill";
             Destroy(meleeInstance, 0.5f);
 
             yield return new WaitForSeconds(0.1f);

@@ -66,8 +66,8 @@ public class Stage8 : MonoBehaviour
 
         // Skill 7
         pos = GameObject.Find("Stage7 SkillPos");
-
-        if(randomSkillIndex == 1)
+        boxSize = new Vector3(-13.5f, 6.5f, 0);
+        if (randomSkillIndex == 1)
         {
             InvokeRepeating("Stage1BossSkill", 5f, 10f);
         }

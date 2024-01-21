@@ -211,8 +211,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attack: 0
   attackTime: 3
+  selectedAttackTime: 3
   danager: {fileID: 4391919054091873470}
   dieEffect: {fileID: 5737373629686173505}
   sturn: {fileID: 6408499362193438820}
@@ -232,10 +232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cab956768cafe459e22716cb1c93d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrifab: {fileID: 831321576462570383, guid: d38f2344f2f9e484ebb7e2654d8a0fef, type: 3}
-  PoisonPrefab: {fileID: 6749750316152388779, guid: c744f9b52b4da6647b406d61e598393c, type: 3}
-  pos: {fileID: 0}
+  effectPrefab: {fileID: 831321576462570383, guid: d38f2344f2f9e484ebb7e2654d8a0fef, type: 3}
+  poisonPrefab: {fileID: 6749750316152388779, guid: c744f9b52b4da6647b406d61e598393c, type: 3}
+  skillPos: {fileID: 0}
   boxSize: {x: -13.5, y: 6.5, z: 0}
+  moveSpeed: 3
 --- !u!1 &4391919054091873470
 GameObject:
   m_ObjectHideFlags: 0

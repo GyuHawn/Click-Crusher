@@ -12,10 +12,10 @@ public class Stage8_5 : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("MonsterAttack", 1f, 8f);
+        //InvokeRepeating("Attack", 6.5f, 5.5f);
     }
 
-    void MonsterAttack()
+    public void Attack()
     {
         float randomAngle = Random.Range(0f, 360f);
 

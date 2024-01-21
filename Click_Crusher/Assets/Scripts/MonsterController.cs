@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class MonsterController : MonoBehaviour
@@ -34,6 +35,7 @@ public class MonsterController : MonoBehaviour
    // public bool attack;
     private int bossAttackNum;
     public float attackTime;
+    public float selectedAttackTime;
 
     public GameObject danager;
     public GameObject dieEffect;
@@ -69,21 +71,22 @@ public class MonsterController : MonoBehaviour
 
         danager.SetActive(false);
         stop = false;
-       // attack = false;
+        // attack = false;
+        attackTime = selectedAttackTime;
         bossAttackNum = 1;
 
         monsterLayer = LayerMask.NameToLayer("Monster");
         bossLayer = LayerMask.NameToLayer("Boss");
 
 
-        if (gameObject.tag == "Monster")
+/*        if (gameObject.tag == "Monster")
         {
             attackTime = Random.Range(3.0f, 6.0f);
         }
         else if (gameObject.tag == "Boss")
         {
             attackTime = Random.Range(7.0f, 10.0f);
-        }
+        }*/
     }
 
     void Update()
@@ -278,12 +281,40 @@ public class MonsterController : MonoBehaviour
         anim.SetBool("Attack", true);
         danager.SetActive(false);
 
-        yield return new WaitForSeconds(1f);
-       // attack = false;
-        anim.SetBool("Attack", false);
+        yield return new WaitForSeconds(0.2f);
 
-        attackTime = Random.Range(3.0f, 5.0f);
+        // 각 몬스터당 공격 사용
+        MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+
+        MonoBehaviour stageScript = null;
+        foreach (MonoBehaviour script in scripts)
+        {
+            if (script.GetType().Name.Contains("Stage"))
+            {
+                stageScript = script;
+                break;
+            }
+        }
+        if (stageScript != null)
+        {
+            System.Reflection.MethodInfo method = stageScript.GetType().GetMethod("Attack");
+            if (method != null)
+            {
+                method.Invoke(stageScript, null);
+            }
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        anim.SetBool("Attack", false);
+        danager.SetActive(false);
+
+        attackTime = selectedAttackTime;
     }
+
+
+
+
 
     IEnumerator BackColor(float time)
     {

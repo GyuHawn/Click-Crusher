@@ -7,39 +7,51 @@ public class Stage8_2 : MonoBehaviour
     public GameObject bulletPrefab; // ÃÑ¾Ë ÇÁ¸®ÆÕ
     public float bulletSpd;
 
-    private Vector3 lastBulletPos;
-    
+    public GameObject pos;
+    public Vector3 boxSize;
+
     void Start()
     {
-        InvokeRepeating("Attack", 1f, 3f);
+        pos = GameObject.Find("Stage7 SkillPos"); // ¸Ê Áß¾Ó À§Ä¡ ºó ¿ÀºêÁ§Æ®
+        boxSize = new Vector3(-13.5f, 6.5f, 0);
     }
 
-    void Attack()
+    public void Attack()
     {
         StartCoroutine(MonsterAttack());
     }
 
     IEnumerator MonsterAttack()
     {
-        float randomAngle = Random.Range(0f, 360f);
+        float randomX = Random.Range(pos.transform.position.x - boxSize.x / 2, pos.transform.position.x + boxSize.x / 2);
+        float randomY = Random.Range(pos.transform.position.y - boxSize.y / 2, pos.transform.position.y + boxSize.y / 2);
+        float randomZ = -2f;
 
-        Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);
         Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, +1f);
         GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
         bullet.name = "MonsterAttack";
-        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
 
-        yield return new WaitForSeconds(2f);
-        lastBulletPos = bullet.transform.position;
+        Vector3 targetPosition = new Vector3(randomX, randomY, randomZ);
+        float distance = Vector3.Distance(bullet.transform.position, targetPosition);
+        float duration = distance / bulletSpd;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            bullet.transform.position = Vector3.Lerp(bullet.transform.position, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
         Destroy(bullet);
 
-        StartCoroutine(SpawnEffect(lastBulletPos));
+        StartCoroutine(SpawnEffect(targetPosition));
     }
 
     IEnumerator SpawnEffect(Vector3 position)
     {
         GameObject effect = Instantiate(attackEffectPrefab, position, Quaternion.identity);
-
+        effect.name = "MonsterAttack";
         yield return new WaitForSeconds(10f);
 
         Destroy(effect);

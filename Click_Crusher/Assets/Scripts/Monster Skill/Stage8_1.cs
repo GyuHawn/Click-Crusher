@@ -13,10 +13,10 @@ public class Stage8_1 : MonoBehaviour
     void Start()
     {
         pos = GameObject.Find("Stage7 SkillPos"); // ¸Ê Áß¾Ó À§Ä¡ ºó ¿ÀºêÁ§Æ®
-        InvokeRepeating("Attack", 1f, 5f);     
+        boxSize = new Vector3(-13.5f, 6.5f, 0);    
     }
 
-    void Attack()
+    public void Attack()
     {
         StartCoroutine(MonsterAttack());
     }

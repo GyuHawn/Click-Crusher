@@ -295,8 +295,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attack: 0
   attackTime: 3
+  selectedAttackTime: 3
   danager: {fileID: 2294215874236966164}
   dieEffect: {fileID: 8377820851058637465}
   sturn: {fileID: 8069959187811598087}
@@ -318,7 +318,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackEffectPrefab: {fileID: 7718994689528233569, guid: 7a535c86a5fd5424ca57af6c929f4537, type: 3}
   bulletPrefab: {fileID: 2486820605952984932, guid: d99a57cf60884ce44a42c1924b714589, type: 3}
-  bulletSpd: 1
+  bulletSpd: 3
+  pos: {fileID: 0}
+  boxSize: {x: 0, y: 0, z: 0}
 --- !u!1 &8069959187811598087
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,8 +21,8 @@ public class Stage5_0 : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            float randomY = Random.Range(-1f, 1f);
-            Vector3 bulletPos = new Vector3(-1.5f, randomY, +1f);
+            float randomY = transform.position.y + Random.Range(-1f, 1f);
+            Vector3 bulletPos = new Vector3(transform.position.x - 1.5f, randomY, + 1f);
             Vector2 direction = Vector2.right;
 
             GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);

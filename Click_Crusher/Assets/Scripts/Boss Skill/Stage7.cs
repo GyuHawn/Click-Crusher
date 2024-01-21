@@ -17,7 +17,7 @@ public class Stage7 : MonoBehaviour
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
 
         pos = GameObject.Find("Stage7 SkillPos");
-
+        boxSize = new Vector3(-13.5f, 6.5f, 0);
         InvokeRepeating("Stage7BossSkill", 5f, 10f);
     }
 

@@ -326,7 +326,6 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attack: 0
   attackTime: 3
   danager: {fileID: 634831937084792690}
   dieEffect: {fileID: 3706242535784589473}
@@ -348,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pos: {fileID: 0}
-  boxSize: {x: 0, y: 0, z: 0}
+  boxSize: {x: -13.5, y: 6.5, z: 0}
 --- !u!1001 &5696907867694141489
 PrefabInstance:
   m_ObjectHideFlags: 0

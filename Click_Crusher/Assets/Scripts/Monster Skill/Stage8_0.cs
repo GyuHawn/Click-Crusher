@@ -7,12 +7,7 @@ public class Stage8_0 : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpd;
 
-    void Start()
-    {
-        InvokeRepeating("MonsterAttack", 1f, 1f);
-    }
-
-    void MonsterAttack()
+    public void Attack()
     {
         float randomAngle = Random.Range(0f, 360f);
 
