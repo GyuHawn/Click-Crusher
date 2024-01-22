@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 5682010407817249349}
   - component: {fileID: 8142252984684377876}
   - component: {fileID: 1338036504701133099}
-  - component: {fileID: 2827439838359493734}
-  m_Layer: 15
+  - component: {fileID: 8840024524958123294}
+  - component: {fileID: 9084569896949704161}
+  m_Layer: 16
   m_Name: Stage3-2
-  m_TagString: Bullet
+  m_TagString: MonsterDenefe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +32,8 @@ Transform:
   m_LocalPosition: {x: -5.36, y: -3.31, z: -4.66}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8515921569106528581}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8142252984684377876
@@ -121,30 +123,90 @@ CapsuleCollider2D:
   m_Offset: {x: 0.014091492, y: 0.093004525}
   m_Size: {x: 0.6190294, y: 0.6190294}
   m_Direction: 0
---- !u!50 &2827439838359493734
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &8840024524958123294
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5636193059206043607}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712808c28a7bd86428971fb5ab087bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  maxHealth: 30
+  currentHealth: 30
+  monsterTakeDamage: 1
+  playerTakeDamage: 1
+  fireTakeDamage: 1
+  fireShotTakeDamage: 1
+  fireShotSubTakeDamage: 1
+  holyWaveTakeDamage: 1
+  holyShotTakeDamage: 1
+  rockTakeDamage: 1
+  poisonTakeDamage: 1
+  pRockTakeDamage: 1
+  pWaterTakeDamage: 1
+  attackTime: 0
+  selectedAttackTime: 0
+  danager: {fileID: 7411533926735593766}
+  dieEffect: {fileID: 7411533926735593766}
+  sturn: {fileID: 7411533926735593766}
+  fired: 0
+  stop: 0
+  poisoned: 0
+  boss1Defending: 0
+--- !u!95 &9084569896949704161
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636193059206043607}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7411533926735593766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8515921569106528581}
+  m_Layer: 16
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8515921569106528581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411533926735593766}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5682010407817249349}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

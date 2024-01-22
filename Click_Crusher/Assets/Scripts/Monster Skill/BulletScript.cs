@@ -7,7 +7,7 @@ public class BulletScript : MonoBehaviour
     private StageManager stageManager;
     private PlayerController playerController;
 
-    public float rotationSpeed;
+    public float rotationSpd;
     public float moveSpeed;
 
     private void Start()
@@ -20,7 +20,7 @@ public class BulletScript : MonoBehaviour
     {
         if (stageManager.mainStage == 4)
         {
-            transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.forward * rotationSpd * Time.deltaTime);
         }
         else if (stageManager.mainStage == 6)
         {

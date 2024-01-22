@@ -119,6 +119,10 @@ public class PlayerController : MonoBehaviour
                         playerHealth -= 1;
                         StartCoroutine(BulletHitCooldown(0.2f));
                     }
+                    else if (hit.collider.CompareTag("MonsterDenefe"))
+                    {
+                        Destroy(hit.collider.gameObject);
+                    }
                     else if (monsterController != null)
                     {
                         if (monsterController.boss1Defending)
@@ -196,6 +200,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator AttackMonster(MonsterController monsterController)
     {
         isAttacking = true;
+
+        if (monsterController.defense)
+        {
+            isAttacking = false;
+            yield break;
+        }
 
         audioManager.AttackAudio();
 

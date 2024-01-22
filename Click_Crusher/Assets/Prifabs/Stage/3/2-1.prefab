@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5621950814403923715}
   - component: {fileID: 4869008052413288441}
   - component: {fileID: 3102380834303211291}
+  - component: {fileID: 4922577291672962417}
   m_Layer: 6
   m_Name: 2-1
   m_TagString: Monster
@@ -241,8 +242,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attack: 0
-  attackTime: 3
+  attackTime: 2
+  selectedAttackTime: 3
   danager: {fileID: 8526877936979663972}
   dieEffect: {fileID: 6064539783437498564}
   sturn: {fileID: 4261893609394783864}
@@ -250,6 +251,20 @@ MonoBehaviour:
   stop: 0
   poisoned: 0
   boss1Defending: 0
+--- !u!114 &4922577291672962417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492479412641622319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68f4bf61f39bf747bbfdd521bec04ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8622239201560514732, guid: fccf364a85f444f458a4fcb85ef8086f, type: 3}
+  bulletSpd: 3
 --- !u!1 &8526877936979663972
 GameObject:
   m_ObjectHideFlags: 0

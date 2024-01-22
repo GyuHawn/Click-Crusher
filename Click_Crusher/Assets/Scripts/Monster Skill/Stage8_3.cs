@@ -7,7 +7,7 @@ public class Stage8_3 : MonoBehaviour
     public GameObject poisonPrefab;   
     public GameObject skillPos;      
     public Vector3 boxSize;          
-    public float moveSpeed = 3f;     
+    public float moveSpd = 3f;     
 
     private Vector3 beforePos;       
 
@@ -34,7 +34,7 @@ public class Stage8_3 : MonoBehaviour
         Vector3 targetPosition = new Vector3(randomX, randomY, randomZ);
 
         float distance = Vector3.Distance(transform.position, targetPosition);
-        float duration = distance / moveSpeed;
+        float duration = distance / moveSpd;
 
         float elapsedTime = 0f;
         while (elapsedTime < duration)

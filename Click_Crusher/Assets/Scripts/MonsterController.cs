@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class MonsterController : MonoBehaviour
@@ -53,6 +52,9 @@ public class MonsterController : MonoBehaviour
 
     // 보스 스킬 관련
     public bool boss1Defending = false;
+
+    // 몬스터 스킬 관련
+    public bool defense = false;
 
     SpriteRenderer spriteRenderer;
     private Animator anim;

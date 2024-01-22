@@ -20,25 +20,43 @@ public class Stage5_1 : MonoBehaviour
                 Monsters.Remove(previousMonster);
             }
 
-            GameObject randomMonster = Monsters[Random.Range(0, Monsters.Count)];
+            if (Monsters.Count > 0)
+            {
+                GameObject randomMonster = Monsters[Random.Range(0, Monsters.Count)];
 
-            previousMonster = randomMonster;
-
-            StartCoroutine(FollowMonster(randomMonster));
+                StartCoroutine(DefenseMonster(randomMonster));
+            }
         }
     }
 
-    IEnumerator FollowMonster(GameObject monster)
+    IEnumerator DefenseMonster(GameObject monster)
     {
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet.name = "MonsterDefense";
 
-        while (monster != null)
+        while (bullet != null && monster != null)
         {
             bullet.transform.position = new Vector3(monster.transform.position.x, monster.transform.position.y, -6);
+
+            MonsterController monsterController = monster.GetComponent<MonsterController>();
+            if (monsterController != null)
+            {
+                monsterController.defense = true;
+            }
+
             yield return null;
         }
 
         Destroy(bullet);
+
+        if (monster != null)
+        {
+            MonsterController monsterController = monster.GetComponent<MonsterController>();
+            if (monsterController != null)
+            {
+                yield return new WaitForSeconds(0.5f);
+                monsterController.defense = false;
+            }
+        }
     }
 }

@@ -30,7 +30,7 @@ public class Stage8_5 : MonoBehaviour
         StartCoroutine(FireSubBullet(bullet.transform, bulletSubSpd));
     }
 
-    IEnumerator DestroyBullet(GameObject bullet, Vector3 direction, float bulletSpeed)
+    IEnumerator DestroyBullet(GameObject bullet, Vector3 direction, float bulletSpd)
     {
         SpriteRenderer spriteRenderer = bullet.GetComponent<SpriteRenderer>();
         Rigidbody2D rigidbody = bullet.GetComponent<Rigidbody2D>();
@@ -40,7 +40,7 @@ public class Stage8_5 : MonoBehaviour
             Vector3 newScale = spriteRenderer.transform.localScale - Vector3.one * sizeReduction * Time.deltaTime;
             spriteRenderer.transform.localScale = newScale;
 
-            rigidbody.velocity = direction * bulletSpeed;
+            rigidbody.velocity = direction * bulletSpd;
 
             yield return null;
         }
@@ -48,7 +48,7 @@ public class Stage8_5 : MonoBehaviour
         Destroy(bullet);
     }
 
-    IEnumerator FireSubBullet(Transform parentTransform, float bulletSubSpeed)
+    IEnumerator FireSubBullet(Transform parentTransform, float bulletSubSpd)
     {
         for(int i = 0; i < 10; i++) 
         {
@@ -57,7 +57,7 @@ public class Stage8_5 : MonoBehaviour
 
             GameObject bulletSub = Instantiate(bulletSubPrefab, parentTransform.position, Quaternion.identity);
             bulletSub.name = "MonsterAttack";
-            bulletSub.GetComponent<Rigidbody2D>().velocity = direction * bulletSubSpeed;
+            bulletSub.GetComponent<Rigidbody2D>().velocity = direction * bulletSubSpd;
 
             yield return new WaitForSeconds(0.5f);
             Destroy(bulletSub,2f);
