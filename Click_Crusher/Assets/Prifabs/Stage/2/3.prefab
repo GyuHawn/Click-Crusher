@@ -242,8 +242,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attack: 0
-  attackTime: 3
+  attackTime: 1
+  selectedAttackTime: 3
   danager: {fileID: 8095172810283508295}
   dieEffect: {fileID: 6862734793652591220}
   sturn: {fileID: 410238745336815156}

@@ -6,13 +6,7 @@ public class Stage6_2 : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float bulletSpd;
-
-    void Start()
-    {
-        InvokeRepeating("MonsterAttack", 1f, 8f);
-    }
-
-    void MonsterAttack()
+    public void Attack()
     {
         float randomAngle = Random.Range(0f, 360f);
 
@@ -22,6 +16,6 @@ public class Stage6_2 : MonoBehaviour
         bullet.name = "MonsterAttack";
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
 
-        Destroy(bullet, 6f);
+        Destroy(bullet, 5f);
     }
 }

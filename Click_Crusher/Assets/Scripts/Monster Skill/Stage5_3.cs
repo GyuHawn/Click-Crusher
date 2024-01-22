@@ -6,27 +6,31 @@ public class Stage5_3 : MonoBehaviour
 {
     public GameObject pos;
     public Vector3 boxSize;
+    public float moveSpd;
 
     void Start()
     {
-        pos = GameObject.Find("Stage7 SkillPos"); // ¸Ê Áß¾Ó À§Ä¡ ºó ¿ÀºêÁ§Æ®
+        pos = GameObject.Find("Stage7 SkillPos");
         boxSize = new Vector3(-13.5f, 6.5f, 0);
-        StartCoroutine(RandomMovement());
     }
 
-    IEnumerator RandomMovement()
+    public void Attack()
     {
-        yield return new WaitForSeconds(5f);
+        float randomX = Random.Range(pos.transform.position.x - boxSize.x / 2, pos.transform.position.x + boxSize.x / 2);
+        float randomY = Random.Range(pos.transform.position.y - boxSize.y / 2, pos.transform.position.y + boxSize.y / 2);
+        float randomZ = -2f;
 
-        while (true)
+        Vector3 targetPosition = new Vector3(randomX, randomY, randomZ);
+
+        StartCoroutine(MoveToPosition(targetPosition));
+    }
+
+    IEnumerator MoveToPosition(Vector3 targetPosition)
+    {
+        while (transform.position != targetPosition)
         {
-            float randomX = Random.Range(pos.transform.position.x - boxSize.x / 2, pos.transform.position.x + boxSize.x / 2);
-            float randomY = Random.Range(pos.transform.position.y - boxSize.y / 2, pos.transform.position.y + boxSize.y / 2);
-            float randomZ = -2f;
-
-            transform.position = new Vector3(randomX, randomY, randomZ);
-
-            yield return new WaitForSeconds(5f);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpd * Time.deltaTime);
+            yield return null;
         }
     }
 }

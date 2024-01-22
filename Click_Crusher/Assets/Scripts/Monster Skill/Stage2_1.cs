@@ -6,14 +6,8 @@ public class Stage2_1 : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpd = 180f;
 
-    void Start()
+    public void Attack()
     {
-        StartCoroutine(ActivateBulletAfterDelay(2f));
-    }
-
-    IEnumerator ActivateBulletAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
         StartCoroutine(RotateAndDeactivate(bulletPrefab, new Vector3(0f, 0f, 1f), bulletSpd, 3f));
     }
 
@@ -31,6 +25,5 @@ public class Stage2_1 : MonoBehaviour
         obj.SetActive(false);
 
         yield return new WaitForSeconds(3f);
-        StartCoroutine(ActivateBulletAfterDelay(0f));
     }
 }

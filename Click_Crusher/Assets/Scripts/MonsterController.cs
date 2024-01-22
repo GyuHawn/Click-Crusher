@@ -72,7 +72,6 @@ public class MonsterController : MonoBehaviour
         danager.SetActive(false);
         stop = false;
         // attack = false;
-        attackTime = selectedAttackTime;
         bossAttackNum = 1;
 
         monsterLayer = LayerMask.NameToLayer("Monster");

@@ -7,14 +7,9 @@ public class Stage4_2 : MonoBehaviour
     public GameObject bulletsubPrefab;
     public float bulletSpd;
 
-    private Vector3 lastBulletPos; // 변수 추가
+    private Vector3 lastBulletPos;
 
-    void Start()
-    {
-        InvokeRepeating("Attack", 1f, 5f);
-    }
-
-    void Attack()
+    public void Attack()
     {
         StartCoroutine(MonsterAttack());
     }
@@ -49,7 +44,7 @@ public class Stage4_2 : MonoBehaviour
             bulletsub.name = "BulletSub";
             bulletsub.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
 
-            Destroy(bulletsub, 3f);
+            Destroy(bulletsub, 2f);
         }
     }
 }

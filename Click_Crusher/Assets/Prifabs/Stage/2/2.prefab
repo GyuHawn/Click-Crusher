@@ -243,6 +243,7 @@ MonoBehaviour:
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
   attackTime: 3
+  selectedAttackTime: 3
   danager: {fileID: 7626922747286395046}
   dieEffect: {fileID: 5979515290319914446}
   sturn: {fileID: 5780735662326528683}

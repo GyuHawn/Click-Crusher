@@ -11,22 +11,15 @@ public class Stage7_1 : MonoBehaviour
     {
         pos = GameObject.Find("Stage7 SkillPos"); // ¸Ê Áß¾Ó À§Ä¡ ºó ¿ÀºêÁ§Æ®
         boxSize = new Vector3(-13.5f, 6.5f, 0);
-        StartCoroutine(RandomMovement());
     }
 
-    IEnumerator RandomMovement()
+    public void Attack()
     {
-        yield return new WaitForSeconds(4f);
+        float randomY = Random.Range(pos.transform.position.y - boxSize.y / 2, pos.transform.position.y + boxSize.y / 2);
 
-        while (true)
-        {
-            float randomY = Random.Range(pos.transform.position.y - boxSize.y / 2, pos.transform.position.y + boxSize.y / 2);
+        Vector3 newPosition = new Vector3(transform.position.x, randomY, transform.position.z);
 
-            Vector3 newPosition = new Vector3(transform.position.x, randomY, transform.position.z);
-
-            transform.position = newPosition;
-
-            yield return new WaitForSeconds(5f);
-        }
+        transform.position = newPosition;
     }
+
 }

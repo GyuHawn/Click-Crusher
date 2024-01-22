@@ -12,11 +12,9 @@ public class Stage3_2 : MonoBehaviour
     void Start()
     {
         monsterSpwan = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
-
-        InvokeRepeating("Spwan", 3f, 10f);
     }
 
-    void Spwan()
+    public void Attack()
     {
         StartCoroutine(SpwanMonster());
     }

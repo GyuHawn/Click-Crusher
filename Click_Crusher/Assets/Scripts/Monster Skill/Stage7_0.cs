@@ -9,11 +9,10 @@ public class Stage7_0 : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("MonsterAttack", 1f, 8f);
         monsterPos = gameObject.transform.position;
     }
 
-    void MonsterAttack()
+    public void Attack()
     {
         float[] angles = { 0f, 90f, 180f, 270f };
 

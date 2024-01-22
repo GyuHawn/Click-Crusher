@@ -211,8 +211,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attack: 0
   attackTime: 3
+  selectedAttackTime: 4
   danager: {fileID: 8104270321988937610}
   dieEffect: {fileID: 7644239954712696311}
   sturn: {fileID: 8386943327262915188}
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6867718615120195388, guid: e18e4e9ee6885a8429962fddb6fbee39, type: 3}
-  bulletSpd: 1
+  bulletSpd: 2
 --- !u!1 &8104270321988937610
 GameObject:
   m_ObjectHideFlags: 0

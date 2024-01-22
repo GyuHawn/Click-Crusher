@@ -211,8 +211,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attack: 0
-  attackTime: 3
+  attackTime: 5
+  selectedAttackTime: 5
   danager: {fileID: 1330577078359349591}
   dieEffect: {fileID: 4664539380267432329}
   sturn: {fileID: 5834602228666288437}
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pos: {fileID: 0}
   boxSize: {x: -13.5, y: 6.5, z: 0}
+  moveSpd: 10
 --- !u!1 &1330577078359349591
 GameObject:
   m_ObjectHideFlags: 0

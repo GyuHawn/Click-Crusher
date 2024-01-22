@@ -5,13 +5,7 @@ public class Stage2_0 : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float bulletSpd;
-
-    void Start()
-    {
-        InvokeRepeating("Attack", 1f, 3f);
-    }
-
-    void Attack()
+    public void Attack()
     {
         StartCoroutine(MonsterAttack());
     }

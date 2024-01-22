@@ -6,27 +6,28 @@ public class Stage5_2 : MonoBehaviour
 {
     public GameObject pos;
     public Vector3 boxSize;
+    public float moveSpd;
 
     void Start()
     {
-        pos = GameObject.Find("Stage7 SkillPos"); // ¸Ê Áß¾Ó À§Ä¡ ºó ¿ÀºêÁ§Æ®
+        pos = GameObject.Find("Stage7 SkillPos");
         boxSize = new Vector3(-13.5f, 6.5f, 0);
-        StartCoroutine(RandomMovement());
     }
 
-    IEnumerator RandomMovement()
+    public void Attack()
     {
-        yield return new WaitForSeconds(5f);
+        float randomX = Random.Range(pos.transform.position.x - boxSize.x / 2, pos.transform.position.x + boxSize.x / 2);
+        Vector3 targetPosition = new Vector3(randomX, transform.position.y, transform.position.z);
 
-        while (true)
+        StartCoroutine(MoveToPosition(targetPosition));
+    }
+
+    IEnumerator MoveToPosition(Vector3 targetPosition)
+    {
+        while (transform.position != targetPosition)
         {
-            float randomX = Random.Range(pos.transform.position.x - boxSize.x / 2, pos.transform.position.x + boxSize.x / 2);
-
-            Vector3 newPosition = new Vector3(randomX, transform.position.y, transform.position.z);
-
-            transform.position = newPosition;
-
-            yield return new WaitForSeconds(5f);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpd * Time.deltaTime);
+            yield return null;
         }
     }
 }

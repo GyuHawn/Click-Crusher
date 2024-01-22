@@ -7,12 +7,7 @@ public class Stage3_0 : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpd;
 
-    void Start()
-    {
-        InvokeRepeating("Attack", 1f, 5f);
-    }
-
-    void Attack()
+    public void Attack()
     {
         StartCoroutine(MonsterAttack());
     }
@@ -31,7 +26,7 @@ public class Stage3_0 : MonoBehaviour
 
             yield return new WaitForSeconds(0.2f);
 
-            Destroy(bullet, 5f);
+            Destroy(bullet, 4f);
         }
     }
 }

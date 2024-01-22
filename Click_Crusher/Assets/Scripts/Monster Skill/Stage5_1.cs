@@ -6,15 +6,9 @@ public class Stage5_1 : MonoBehaviour
 {
     public GameObject bulletPrefab;
 
-    // 변수 추가: 이전에 선택한 몬스터
     private GameObject previousMonster;
 
-    void Start()
-    {
-        InvokeRepeating("MonsterAttack", 5f, 15f);
-    }
-
-    void MonsterAttack()
+    public void Attack()
     {
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 

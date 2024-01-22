@@ -7,12 +7,7 @@ public class Stage4_1 : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpd;
 
-    void Start()
-    {
-        InvokeRepeating("MonsterAttack", 1f, 3f);
-    }
-
-    void MonsterAttack()
+    public void Attack()
     {
         float[] angles = { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f, 360f };
 
@@ -26,7 +21,7 @@ public class Stage4_1 : MonoBehaviour
             bullet.name = "MonsterAttack";
             bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
 
-            Destroy(bullet, 5f);
+            Destroy(bullet, 4f);
         }
     }
 }
