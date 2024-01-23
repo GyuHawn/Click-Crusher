@@ -335,6 +335,7 @@ MonoBehaviour:
   stop: 0
   poisoned: 0
   boss1Defending: 0
+  defense: 0
 --- !u!114 &2189950425490024405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pos: {fileID: 0}
   boxSize: {x: -13.5, y: 6.5, z: 0}
+  moveSpd: 10
 --- !u!1001 &5696907867694141489
 PrefabInstance:
   m_ObjectHideFlags: 0

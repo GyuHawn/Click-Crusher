@@ -16,20 +16,24 @@ public class Stage3_2 : MonoBehaviour
 
     public void Attack()
     {
-        StartCoroutine(SpwanMonster());
+        StartCoroutine(SpawnEggAndMonster());
     }
 
-    IEnumerator SpwanMonster()
+    IEnumerator SpawnEggAndMonster()
     {
         Vector3 randomPos = new Vector3(Random.Range(-4f, 4f), Random.Range(-1f, 2f), 1f);
         GameObject egg = Instantiate(eggPrefab, randomPos, Quaternion.identity);
         egg.name = "MonsterAttack";
+
         yield return new WaitForSeconds(3f);
 
-        Destroy(egg);
+        if (egg != null)
+        {
+            Destroy(egg);
 
-        Vector3 monsterPos = new Vector3(randomPos.x, randomPos.y, -2f);
-        GameObject monster = Instantiate(monsterPrefab, randomPos, Quaternion.identity);
-        monsterSpwan.spawnedMonsters.Add(monster);
+            Vector3 monsterPos = new Vector3(randomPos.x, randomPos.y, -2f);
+            GameObject monster = Instantiate(monsterPrefab, randomPos, Quaternion.identity);
+            monsterSpwan.spawnedMonsters.Add(monster);
+        }
     }
 }

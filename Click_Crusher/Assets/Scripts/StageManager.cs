@@ -57,7 +57,7 @@ public class StageManager : MonoBehaviour
         // 1-1 시작 설정 후 게임 시작
         if (!gameStart)
         {
-            mainStage = 1;
+            mainStage = 4;
             subStage = 1;
             StageMonsterSetting();
             SpawnMonsters();
@@ -311,6 +311,6 @@ public class StageManager : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene("MainMenu");
+        LodingController.LoadScene("MainMenu");
     }
 }

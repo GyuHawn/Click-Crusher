@@ -86,7 +86,8 @@ public class MonsterSpwan : MonoBehaviour
                 }
                 if (bossCount > 0)
                 {
-                    GameObject bossMonster = Instantiate(currentStageMonsters[4], pos.position, Quaternion.identity);
+                    Vector3 bossPos = new Vector3(pos.position.x, pos.position.y, pos.position.z -5);
+                    GameObject bossMonster = Instantiate(currentStageMonsters[4], bossPos, Quaternion.identity);
                     spawnedMonsters.Add(bossMonster);
                 }
             }
@@ -161,7 +162,8 @@ public class MonsterSpwan : MonoBehaviour
                 }
                 if (bossCount > 0)
                 {
-                    GameObject bossMonster = Instantiate(InfiniteMonsters[6], pos.position, Quaternion.identity);
+                    Vector3 bossPos = new Vector3(pos.position.x, pos.position.y, pos.position.z + -5);
+                    GameObject bossMonster = Instantiate(InfiniteMonsters[6], bossPos, Quaternion.identity);
                     spawnedMonsters.Add(bossMonster);
                 }
             }
@@ -182,7 +184,7 @@ public class MonsterSpwan : MonoBehaviour
 
         float x = Random.Range(center.x - radius, center.x + radius);
         float y = Random.Range(center.y - radius, center.y + radius);
-        float z = center.z;
+        float z = -5;
 
         return new Vector3(x, y, z);
     }

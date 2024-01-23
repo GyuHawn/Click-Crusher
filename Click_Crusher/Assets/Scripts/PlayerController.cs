@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private CharacterSkill charaterSkill;
 
     public GameObject[] playerHealthUI;
+    public GameObject healthEffect;
     public int playerHealth;
     public GameObject gameover;
     public bool die = false;
@@ -117,6 +118,8 @@ public class PlayerController : MonoBehaviour
                         audioManager.HitAudio();
 
                         playerHealth -= 1;
+                        Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z -8f);
+                        GameObject effect = Instantiate(healthEffect, effectPos, Quaternion.identity);
                         StartCoroutine(BulletHitCooldown(0.2f));
                     }
                     else if (hit.collider.CompareTag("MonsterDenefe"))
@@ -155,6 +158,8 @@ public class PlayerController : MonoBehaviour
     {
         isStageHit = false;      
         playerHealth -= 1;
+        Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 8f);
+        GameObject effect = Instantiate(healthEffect, effectPos, Quaternion.identity);
         yield return new WaitForSeconds(1f);
         isStageHit = true;
     }

@@ -323,19 +323,29 @@ public class ItemSkill : MonoBehaviour
 
     private IEnumerator RotateHolyShot(GameObject holyShotInstance, float duration)
     {
+        if (holyShotInstance == null)
+        {
+            yield break;
+        }
+
         float elapsedTime = 0f;
         float rotationSpd = 360f / duration;
 
         while (elapsedTime < duration)
         {
+            if (holyShotInstance == null)
+            {
+                yield break;
+            }
+
             holyShotInstance.transform.Rotate(rotationSpd * Time.deltaTime, 0f, 0f);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        Destroy(holyShotInstance); 
     }
-  
+
+
+
     // melee --------------------------------
     public void Melee(Vector3 targetPosition, int numEffects)
     {
