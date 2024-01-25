@@ -335,6 +335,7 @@ MonoBehaviour:
   stop: 0
   poisoned: 0
   boss1Defending: 0
+  defense: 0
 --- !u!114 &4817976871129378755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cab4b968fc4b945bafe2bd9c78fa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8132084907646880729, guid: 4309bff3ee3efe54dada3aa20b927781, type: 3}
+  bulletPrefab: {fileID: 4847932809853826723, guid: 92435882fb0eec24ea45ba8644996581, type: 3}
   bulletSpd: 3
 --- !u!1001 &1222896857547898383
 PrefabInstance:

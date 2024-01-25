@@ -26,7 +26,7 @@ public class StageTimeLimit : MonoBehaviour
 
     void Update()
     {
-        timeText.text = "스테이지 남은 시간 : " + (int)(stageTime - stageFail) + "초";
+        timeText.text = ((int)(stageTime - stageFail)).ToString();
 
         if (stageManager.gameStart)
         {

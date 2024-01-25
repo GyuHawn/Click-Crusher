@@ -298,7 +298,7 @@ public class SelectItem : MonoBehaviour
         if (playerItems.Count > 0)
         {
             int item1Level = GetItemLevel(playerItems[0]);
-            item1LvText.text = "Lv." + item1Level.ToString();
+            item1LvText.text = item1Level.ToString();
             item1LvText.gameObject.SetActive(true);
         }
         else
@@ -309,7 +309,7 @@ public class SelectItem : MonoBehaviour
         if (playerItems.Count > 1)
         {
             int item2Level = GetItemLevel(playerItems[1]);
-            item2LvText.text = "Lv." + item2Level.ToString();
+            item2LvText.text = item2Level.ToString();
             item2LvText.gameObject.SetActive(true);
         }
         else
@@ -320,7 +320,7 @@ public class SelectItem : MonoBehaviour
         if (playerItems.Count > 2)
         {
             int item3Level = GetItemLevel(playerItems[2]);
-            item3LvText.text = "Lv." + item3Level.ToString();
+            item3LvText.text = item3Level.ToString();
             item3LvText.gameObject.SetActive(true);
         }
         else
@@ -331,7 +331,7 @@ public class SelectItem : MonoBehaviour
         if (playerItems.Count > 3)
         {
             int item4Level = GetItemLevel(playerItems[3]);
-            item4LvText.text = "Lv." + item4Level.ToString();
+            item4LvText.text = item4Level.ToString();
             item4LvText.gameObject.SetActive(true);
         }
         else

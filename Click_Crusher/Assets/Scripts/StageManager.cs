@@ -311,6 +311,6 @@ public class StageManager : MonoBehaviour
 
     public void GameOver()
     {
-        LodingController.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 }
