@@ -254,8 +254,7 @@ public class ItemSkill : MonoBehaviour
 
             for (int i = 0; i < fireShotSubNum; i++)
             {
-                Vector3 subPos = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - 1f);
-                GameObject subShot = Instantiate(fireShotSub, subPos, Quaternion.identity);
+                GameObject subShot = Instantiate(fireShotSub, targetPosition, Quaternion.identity);
                 subShot.name = "PlayerSkill";
                 Vector2 randomDirection = Random.insideUnitCircle.normalized;
                 subShot.GetComponent<Rigidbody2D>().velocity = randomDirection * 5f;
@@ -413,6 +412,7 @@ public class ItemSkill : MonoBehaviour
                 if (monsterController != null)
                 {
                     GameObject sturnInstance = Instantiate(sturnEffect, currentAttackedMonster.transform.position, Quaternion.identity);
+                    Vector3 imagePos = new Vector3(monsterController.sturn.transform.position.x, monsterController.sturn.transform.position.y, monsterController.sturn.transform.position.z - 0.5f);
                     GameObject sturnimageInstance = Instantiate(sturnImage, monsterController.sturn.transform.position, Quaternion.identity);
                     sturnimageInstance.name = "PlayerSkill";
 

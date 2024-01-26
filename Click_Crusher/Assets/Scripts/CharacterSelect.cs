@@ -28,17 +28,33 @@ public class CharacterSelect : MonoBehaviour
     public GameObject lightOpenBtn;
     public GameObject luckOpenBtn;
 
+    public bool enter;
+    public TMP_Text enterText;
+
     private void Start()
     {
         waterChar = PlayerPrefs.GetInt("WaterCharOpen", 0) == 1;
         lightChar = PlayerPrefs.GetInt("LightCharOpen", 0) == 1;
         luckChar = PlayerPrefs.GetInt("LuckCharOpen", 0) == 1;
+
+        enter = false;
     }
 
     void Update()
     {
         playerMoney = PlayerPrefs.GetInt("GameMoney", 0);
         playerMoneyText.text = playerMoney.ToString();
+
+        if (!enter)
+        {
+            enterText.fontSize = 35f;
+            enterText.text = "캐릭터를" + "\n" + "선택해 주세요.";
+        }
+        else
+        {
+            enterText.fontSize = 60f;
+            enterText.text = "Start";
+        }
 
         if (waterChar)
         {
@@ -64,6 +80,7 @@ public class CharacterSelect : MonoBehaviour
         lightEx.SetActive(false);
         luckEx.SetActive(false);
 
+        enter = true;
         selectChar = 1;
     }
 
@@ -76,6 +93,7 @@ public class CharacterSelect : MonoBehaviour
             lightEx.SetActive(false);
             luckEx.SetActive(false);
 
+            enter = true;
             selectChar = 2;
         }
     }
@@ -89,6 +107,7 @@ public class CharacterSelect : MonoBehaviour
             waterEx.SetActive(false);
             luckEx.SetActive(false);
 
+            enter = true;
             selectChar = 3;
         }
     }
@@ -102,6 +121,7 @@ public class CharacterSelect : MonoBehaviour
             waterEx.SetActive(false);
             lightEx.SetActive(false);
 
+            enter = true;
             selectChar = 4;
         }
     }
@@ -141,8 +161,11 @@ public class CharacterSelect : MonoBehaviour
 
     public void GameStart()
     {
-        PlayerPrefs.SetInt("SelectChar", selectChar);
-        StartCoroutine(GameStartButton());
+        if (enter)
+        {
+            PlayerPrefs.SetInt("SelectChar", selectChar);
+            StartCoroutine(GameStartButton());
+        }
     }
 
     IEnumerator GameStartButton()

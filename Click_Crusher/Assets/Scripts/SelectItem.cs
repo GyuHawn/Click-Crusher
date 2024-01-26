@@ -385,7 +385,7 @@ public class SelectItem : MonoBehaviour
             //items[0]
             selectedItem = true;
             selectNum = 1;
-            itemName.text = "화염소환";
+            itemName.text = "불";
             itemEx.text = "일정확률로 공격한 위치에 불기둥을 소환합니다.";
         }
     }
@@ -396,7 +396,7 @@ public class SelectItem : MonoBehaviour
             //items[1]
             selectedItem = true;
             selectNum = 2;
-            itemName.text = "폭발하는 불꽃";
+            itemName.text = "폭탄";
             itemEx.text = "일정확률로 강력한 데미지를 주고 파편을 날려 주위에 데미지를 입힘니다.";
         }
     }
@@ -407,7 +407,7 @@ public class SelectItem : MonoBehaviour
             //items[2]
             selectedItem = true;
             selectNum = 3;
-            itemName.text = "빛의 파동";
+            itemName.text = "별";
             itemEx.text = "일정확률로 빛의 파동이 일렁이며, 일정 시간 동안 전체 적들에게 지속적인 피해를 입힙니다.";
         }
     }
@@ -418,7 +418,7 @@ public class SelectItem : MonoBehaviour
             //items[3]
             selectedItem = true;
             selectNum = 4;
-            itemName.text = "빛의 심판";
+            itemName.text = "전구";
             itemEx.text = "일정확률로 공격한 범위에 빛을 집중하여 일정 시간 동안 데미지를 입힘니다.";
         }
     }
@@ -429,7 +429,7 @@ public class SelectItem : MonoBehaviour
             //items[4]
             selectedItem = true;
             selectNum = 5;
-            itemName.text = "폭풍의 일격";
+            itemName.text = "난타";
             itemEx.text = "일정확률로 적에게 추가적으로 공격을 합니다.";
         }
     }
@@ -451,7 +451,7 @@ public class SelectItem : MonoBehaviour
             //items[6]
             selectedItem = true;
             selectNum = 7;
-            itemName.text = "압도적인 힘";
+            itemName.text = "벽돌";
             itemEx.text = "일정확률로 강력한 데미지를 입힘니다.";
         }
     }
@@ -462,7 +462,7 @@ public class SelectItem : MonoBehaviour
             //items[7]
             selectedItem = true;
             selectNum = 8;
-            itemName.text = "흙의 강타";
+            itemName.text = "번개";
             itemEx.text = "일정확률로 적을 공격하여 일정 시간 동안 기절 상태로 만듭니다.";
         }
     }
