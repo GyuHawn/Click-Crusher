@@ -62,7 +62,7 @@ public class StageManager : MonoBehaviour
             mainStage = 1;
             subStage = 1;
             StageMonsterSetting();
-            SpawnMonsters();
+            StartCoroutine(SpawnMonsters());
             selectingItem = false;
             gameStart = true;
 
@@ -207,10 +207,12 @@ public class StageManager : MonoBehaviour
         stageTimeLimit.stageFail = 0f;
     }
 
-    void SpawnMonsters()
+    IEnumerator SpawnMonsters()
     {
         //monsterCount = base0Monster + base1Monster + base2Monster + base3Monster + bossMonster; // 몬스터 수 설정
         monsterSpawn.MonsterInstantiate(base0Monster, base1Monster, base2Monster, base3Monster, bossMonster);
+
+        yield return new WaitForSeconds(0.5f);
     }
 
     void SelectPass()
@@ -276,10 +278,10 @@ public class StageManager : MonoBehaviour
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
         StageMonsterSetting();
 
+        StartCoroutine(SpawnMonsters());
+
         stageStatus.ResetStatus();
         stageStatus.BuffStatus();
-
-        SpawnMonsters();
     }
 
     void ResetStageState()
