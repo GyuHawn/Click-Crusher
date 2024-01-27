@@ -11,10 +11,13 @@ public class Stage3 : MonoBehaviour
 
     public GameObject bossEffect;
 
-    void Start()
+    private void Awake()
     {
         monsterSpwan = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
-
+    }
+   
+    void Start()
+    {
         if(spwanMonster == null)
         {
             spwanMonster = monsterSpwan.stage3Monsters.Take(4).ToArray();

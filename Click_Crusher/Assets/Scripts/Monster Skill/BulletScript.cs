@@ -10,7 +10,7 @@ public class BulletScript : MonoBehaviour
     public float rotationSpd;
     public float moveSpeed;
 
-    private void Start()
+    private void Awake()
     {
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();

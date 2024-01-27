@@ -14,11 +14,13 @@ public class Stage2 : MonoBehaviour
     private bool onSkill = false;
     public GameObject skillPos;
 
-    void Start()
+    private void Awake()
     {
         monsterSpwan = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
         monsterController = gameObject.GetComponent<MonsterController>();
-
+    }
+    void Start()
+    {
         skillPos = GameObject.Find("Stage2BossSkill");
     }
     

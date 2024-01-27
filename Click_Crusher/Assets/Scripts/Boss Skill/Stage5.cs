@@ -8,9 +8,13 @@ public class Stage5 : MonoBehaviour
 
     public GameObject bossEffect;
 
-    void Start()
+    private void Awake()
     {
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
+    }
+
+    void Start()
+    {
         InvokeRepeating("Stage5bossSkill", 5f, 10f);
     }
 

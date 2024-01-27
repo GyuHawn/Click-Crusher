@@ -16,7 +16,7 @@ public class LodingController : MonoBehaviour
         nextScene = sceneName;
         SceneManager.LoadScene("Loding");
     }
-
+    
     void Start()
     {
         StartCoroutine(LoadSceneProcess());

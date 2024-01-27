@@ -42,14 +42,16 @@ public class Stage8 : MonoBehaviour
     public GameObject pos;
     public Vector3 boxSize;
 
-    void Start()
+    private void Awake()
     {
         monsterController = gameObject.GetComponent<MonsterController>();
         monsterSpwan = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
+    }
 
-        //randomSkillIndex = Random.Range(1, 7);
+    void Start()
+    {
         randomSkillIndex = Random.Range(1, 7);
 
         // Skill 2

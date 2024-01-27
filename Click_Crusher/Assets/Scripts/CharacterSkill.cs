@@ -26,13 +26,16 @@ public class CharacterSkill : MonoBehaviour
     public GameObject sturnCoolTime;
     public TMP_Text sturnCoolTimeText;
 
-    void Start()
+    private void Awake()
     {
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         monsterController = GameObject.Find("Manager").GetComponent<MonsterController>();
+    }
 
+    void Start()
+    {
         BasicSettings();
     }
 

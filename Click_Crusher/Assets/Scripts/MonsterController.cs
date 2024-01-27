@@ -59,13 +59,16 @@ public class MonsterController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     private Animator anim;
 
-    void Start()
+    private void Awake()
     {
         monsterSpawn = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
+    }
 
+    void Start()
+    {
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 

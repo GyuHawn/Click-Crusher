@@ -16,12 +16,15 @@ public class SelectPass : MonoBehaviour
     public TMP_Text passName;
     public TMP_Text passEx;
 
-    private void Start()
+    private void Awake()
     {
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         stageTimeLimit = GameObject.Find("Manager").GetComponent<StageTimeLimit>();
+    }
 
+    private void Start()
+    {
         selecPass = 0;
     }
 

@@ -80,13 +80,16 @@ public class ItemSkill : MonoBehaviour
     public bool isSturn;
     private GameObject currentAttackedMonster;
 
-    void Start()
+    private void Awake()
     {
         selectItem = GameObject.Find("Manager").GetComponent<SelectItem>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
         character = GameObject.Find("Manager").GetComponent<Character>();
+    }
 
+    void Start()
+    {
         // 사용중인지
         holyWave = false;
 

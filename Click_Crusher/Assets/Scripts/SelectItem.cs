@@ -66,13 +66,16 @@ public class SelectItem : MonoBehaviour
 
     public Canvas canvas;
 
-    private void Start()
+    private void Awake()
     {
         character = GameObject.Find("Manager").GetComponent<Character>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
+    }
 
+    private void Start()
+    {
         itemSelecting = false;
         newCharacter = null; // 초기화 추가
     }

@@ -43,13 +43,16 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 lastClickPosition; // 마지막 클릭위치
 
-    void Start()
+    private void Awake()
     {
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
         charaterSkill = GameObject.Find("Manager").GetComponent<CharacterSkill>();
+    }
 
+    void Start()
+    {
         defending = false;
 
         playerHealth = 8;

@@ -6,9 +6,13 @@ public class Stage6 : MonoBehaviour
     public GameObject bossEffect;
     public GameObject skillPos;
 
-    void Start()
+    private void Awake()
     {
         skillPos = GameObject.Find("BossSkillPos");
+    }
+
+    void Start()
+    {
         StartCoroutine(SpawnBossSkill());
     }
 

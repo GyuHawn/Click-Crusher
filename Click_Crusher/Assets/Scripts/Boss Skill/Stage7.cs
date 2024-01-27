@@ -12,10 +12,13 @@ public class Stage7 : MonoBehaviour
     public GameObject pos;
     public Vector3 boxSize;
 
-    void Start()
+    private void Awake()
     {
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
+    }
 
+    void Start()
+    {
         pos = GameObject.Find("Stage7 SkillPos");
         boxSize = new Vector3(-13.5f, 6.5f, 0);
         InvokeRepeating("Stage7BossSkill", 5f, 10f);

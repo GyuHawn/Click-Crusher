@@ -9,7 +9,7 @@ public class Stage3_2 : MonoBehaviour
     public GameObject eggPrefab;
     public GameObject monsterPrefab;
 
-    void Start()
+    void Awake()
     {
         monsterSpwan = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
     }

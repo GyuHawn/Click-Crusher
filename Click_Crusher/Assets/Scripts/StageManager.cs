@@ -15,6 +15,7 @@ public class StageManager : MonoBehaviour
     private PlayerController playerController;
     private CharacterSkill characterSkill;
     private ItemSkill itemSkill;
+    private StageStatus stageStatus;
 
     public bool gameStart = false; // 게임시작 여부
 
@@ -50,6 +51,7 @@ public class StageManager : MonoBehaviour
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         characterSkill = GameObject.Find("Manager").GetComponent<CharacterSkill>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
+        stageStatus = GameObject.Find("Manager").GetComponent<StageStatus>();
     }
 
     void Start()
@@ -273,6 +275,10 @@ public class StageManager : MonoBehaviour
         ResetStageState();
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
         StageMonsterSetting();
+
+        stageStatus.ResetStatus();
+        stageStatus.BuffStatus();
+
         SpawnMonsters();
     }
 
