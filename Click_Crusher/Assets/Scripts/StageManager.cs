@@ -29,13 +29,15 @@ public class StageManager : MonoBehaviour
     public int base2Monster; // 스테이지 몬스터 [2]의 수
     public int base3Monster; // 스테이지 몬스터 [3]의 수
     public int bossMonster; // 보스몬스터 수
+    public bool allMonstersSpawned = false; // 모든 몬스터 소환 확인
 
-   // public int monsterCount = 0; // 소환된 몬스터 수
+
+    // public int monsterCount = 0; // 소환된 몬스터 수
 
     public float timeLimit; // 스테이지당 제한시간
 
     public bool selectingItem;
-
+    
     public float totalTime;
     public int rewardMoney;
     public TMP_Text totalTimeText;
@@ -62,7 +64,7 @@ public class StageManager : MonoBehaviour
             mainStage = 1;
             subStage = 1;
             StageMonsterSetting();
-            StartCoroutine(SpawnMonsters());
+            SpawnMonsters();
             selectingItem = false;
             gameStart = true;
 
@@ -207,12 +209,12 @@ public class StageManager : MonoBehaviour
         stageTimeLimit.stageFail = 0f;
     }
 
-    IEnumerator SpawnMonsters()
+    void SpawnMonsters()
     {
         //monsterCount = base0Monster + base1Monster + base2Monster + base3Monster + bossMonster; // 몬스터 수 설정
         monsterSpawn.MonsterInstantiate(base0Monster, base1Monster, base2Monster, base3Monster, bossMonster);
 
-        yield return new WaitForSeconds(0.5f);
+        allMonstersSpawned = true;
     }
 
     void SelectPass()
@@ -226,36 +228,34 @@ public class StageManager : MonoBehaviour
     {
         //if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
 
+        allMonstersSpawned = false;
         characterSkill.CharacterCoolTime();
 
          if (mainStage < 8)
          {
              NextSubStage();
 
-            selectItem.ItemSelect();
-            StartCoroutine(DelayStage());
-
             if (mainStage >= 2 && mainStage < 8)
               {
                   if (subStage == 2)
                   {
                       selectingItem = true;
-                     // SelectPass();
+                      SelectPass();
                   }
               }
 
               if (subStage == 3)
               {
-                 // selectItem.ItemSelect();
-                 // StartCoroutine(DelayStage());
+                  selectItem.ItemSelect();
+                  StartCoroutine(DelayStage());
               }
               else if (subStage > 5)
               {
                   subStage = 1;
-                 NextMainStage();
+                  NextMainStage();
 
-                 // selectItem.ItemSelect();
-                //  StartCoroutine(DelayStage());
+                  selectItem.ItemSelect();
+                  StartCoroutine(DelayStage());
               }
           }
           else
@@ -275,13 +275,13 @@ public class StageManager : MonoBehaviour
          }
 
         ResetStageState();
+        stageStatus.ResetStatus();
+
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
         StageMonsterSetting();
+        SpawnMonsters();
 
-        StartCoroutine(SpawnMonsters());
-
-        stageStatus.ResetStatus();
-        stageStatus.BuffStatus();
+        stageStatus.BuffStatus(allMonstersSpawned);
     }
 
     void ResetStageState()
@@ -290,7 +290,7 @@ public class StageManager : MonoBehaviour
 
         foreach (GameObject skill in skills)
         {
-            if (skill.name == "BossSkill" || skill.name == "PlayerSkill" || skill.name == "MonsterAttack" || skill.name == "MonsterDefense")
+            if (skill.name == "BossSkill" || skill.name == "PlayerSkill" || skill.name == "MonsterAttack" || skill.name == "MonsterDefense" || skill.name == "HealthUpItem")
             {
                 Destroy(skill);
             }

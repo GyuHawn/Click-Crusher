@@ -9,6 +9,8 @@ public class GameStart : MonoBehaviour
     public GameObject settingMenu;
     public GameObject resetMenu;
 
+    public GameObject source;
+
     public void NewGame()
     {
         StartCoroutine(GameStartButton());
@@ -36,5 +38,15 @@ public class GameStart : MonoBehaviour
         PlayerPrefs.DeleteAll();
         resetMenu.SetActive(false);
         settingMenu.SetActive(false);
+    }
+
+    public void OnSource()
+    {
+        source.SetActive(!source.activeSelf);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

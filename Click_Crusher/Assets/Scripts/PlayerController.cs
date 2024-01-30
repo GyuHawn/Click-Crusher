@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         defending = false;
 
+        damage = 10;
         playerHealth = 8;
         UpdateHealthUI();
 
@@ -114,6 +115,18 @@ public class PlayerController : MonoBehaviour
                         StartCoroutine(Stage6Hit());
                     }
                 }
+                else if (hit.collider.CompareTag("HealthUp"))
+                {
+                    if(playerHealth >= 8)
+                    {
+                        Destroy(hit.collider.gameObject);
+                    }
+                    else
+                    {
+                        playerHealth++;
+                        Destroy(hit.collider.gameObject);
+                    }
+                }
                 else
                 {
                     if (hit.collider.CompareTag("Bullet") && hitBullet)
@@ -124,10 +137,6 @@ public class PlayerController : MonoBehaviour
                         Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z -6f);
                         GameObject effect = Instantiate(healthEffect, transform.position, Quaternion.identity);
                         StartCoroutine(BulletHitCooldown(0.2f));
-                    }
-                    else if (hit.collider.CompareTag("MonsterDenefe"))
-                    {
-                        Destroy(hit.collider.gameObject);
                     }
                     else if (monsterController != null)
                     {

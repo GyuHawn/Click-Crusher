@@ -9,6 +9,7 @@ public class MonsterController : MonoBehaviour
     private PlayerController playerController;
     private ItemSkill itemSkill;
     private AudioManager audioManager;
+    private StageManager stageManager;
 
     public int damage;
     public float maxHealth;
@@ -56,6 +57,10 @@ public class MonsterController : MonoBehaviour
     // 몬스터 스킬 관련
     public bool defense = false;
 
+    // 몬스터 사망시 아이템 생성
+    public GameObject healthUpItem;
+    private bool itemSpawn = false;
+
     SpriteRenderer spriteRenderer;
     private Animator anim;
 
@@ -65,6 +70,7 @@ public class MonsterController : MonoBehaviour
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
+        stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
     }
 
     void Start()
@@ -95,6 +101,15 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
+        if(stageManager.mainStage == 1 && stageManager.subStage == 5)
+        {
+            GameObject boss = GameObject.Find("4(Clone)");
+            if(boss == null)
+            {
+                boss1Defending = false;
+            }
+        }
+
         if (currentHealth <= 0)
         {
             Die();
@@ -316,10 +331,6 @@ public class MonsterController : MonoBehaviour
         attackTime = selectedAttackTime;
     }
 
-
-
-
-
     IEnumerator BackColor(float time)
     {
         yield return new WaitForSeconds(time);
@@ -475,6 +486,20 @@ public class MonsterController : MonoBehaviour
 
     IEnumerator MonsterDie()
     {
+        if (gameObject.CompareTag("Monster"))
+        {
+            if (!itemSpawn)
+            {
+                itemSpawn = true;
+
+                if (Random.Range(0f, 100f) <= 10)
+                {
+                    GameObject item = Instantiate(healthUpItem, gameObject.transform.position, Quaternion.identity);
+                    item.name = "HealthUpItem";
+                }
+            }
+        }
+
         if (dieEffect != null)
         {
             SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();

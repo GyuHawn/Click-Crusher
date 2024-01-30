@@ -220,6 +220,8 @@ MonoBehaviour:
   stop: 0
   poisoned: 0
   boss1Defending: 0
+  defense: 0
+  healthUpItem: {fileID: 4325409970368951848, guid: 626a59ccdf8aa4b468737a270c6eb42a, type: 3}
 --- !u!114 &325293797844193393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +238,7 @@ MonoBehaviour:
   poisonPrefab: {fileID: 6749750316152388779, guid: c744f9b52b4da6647b406d61e598393c, type: 3}
   skillPos: {fileID: 0}
   boxSize: {x: -13.5, y: 6.5, z: 0}
-  moveSpeed: 3
+  moveSpd: 3
 --- !u!1 &4391919054091873470
 GameObject:
   m_ObjectHideFlags: 0

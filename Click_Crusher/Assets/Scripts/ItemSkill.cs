@@ -117,7 +117,7 @@ public class ItemSkill : MonoBehaviour
         rockDamage = playerController.damage * rockDamagePercent;
 
         // °¹¼ö
-        fireShotSubNum = 3;
+        fireShotSubNum = 2;
         meleeNum = 2;
 
         // ½Ã°£

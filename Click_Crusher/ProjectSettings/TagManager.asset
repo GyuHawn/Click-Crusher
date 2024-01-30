@@ -16,6 +16,7 @@ TagManager:
   - Stage7
   - Bullet
   - MonsterDenefe
+  - HealthUp
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - 
   - Bullet
   - MonsterDenefe
-  - 
+  - HealthUp
   - 
   - 
   - 

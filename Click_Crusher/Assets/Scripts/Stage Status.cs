@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StageStatus : MonoBehaviour
 {
@@ -18,9 +18,13 @@ public class StageStatus : MonoBehaviour
 
     // 버프
     public GameObject damageUp; // 기본데미지 증가
+    public bool isDamageUp; // 기본데미지 증가
     public GameObject monsterHealthDown; // 몬스터 체력 감소
+    public bool isMonsterHealthDown; // 몬스터 체력 감소
     public GameObject timeUp; // 제한시간 증가
+    public bool isTimeUp; // 제한시간 증가
     public GameObject percentUp; // 확률 증가
+    public bool isPercentUp; // 확률 증가
     public GameObject monsterDie; // 일정시간 마다 몬스터 제거
     private float timer = 0f;
     private float delay = 10f;
@@ -28,15 +32,21 @@ public class StageStatus : MonoBehaviour
 
     // 디버프
     public GameObject damageDown; // 기본데미지 감소
+    public bool isDamageDown; // 기본데미지 감소
     public GameObject monsterHealthUP; // 몬스터 체력 증가
+    public bool isMonsterHealthUP; // 몬스터 체력 증가
     public GameObject timeDown; // 제한시간 감소
+    public bool isTimeDown; // 제한시간 감소
     public GameObject percentDown; // 확률감소
+    public bool isPercentDown; // 확률감소
     public GameObject monsterAttackSpdUp; // 투사체 속도 증가
-    public GameObject monsterDamageUp; // 몬스터 데미지 증가
+    public bool isMonsterAttackSpdUp; // 투사체 속도 증가
     public GameObject monsterSizeUp;// 몬스터 크기 감소
+    public bool isMonsterSizeUp;// 몬스터 크기 감소
     private List<GameObject> deBuffList = new List<GameObject>(); // 디버프 리스트
 
     private GameObject selectedEffect; // 선택된 버프
+    public TMP_Text buffText;
 
     private void Awake()
     {
@@ -62,97 +72,153 @@ public class StageStatus : MonoBehaviour
         deBuffList.Add(timeDown);
         deBuffList.Add(percentDown);
         deBuffList.Add(monsterAttackSpdUp);
-        deBuffList.Add(monsterDamageUp);
         deBuffList.Add(monsterSizeUp);
+
+        // 버프 적용않함
+        isDamageUp = false;
+        isMonsterHealthDown = false;
+        isTimeUp = false;
+        isPercentUp = false;
+        isDamageDown = false;
+        isMonsterHealthUP = false;
+        isTimeDown = false;
+        isPercentDown = false;
+        isMonsterAttackSpdUp = false;
+        isMonsterSizeUp = false;
     }
-    
+
     void Update()
     {
         Debug.Log("buff " + buff);
         Debug.Log("status " + status);
 
-        if(buff == 1)
+        if (buff == 1)
         {
-            if(status == 1)
+            if (status == 1)
             {
-                DamageUP();
+                buffText.text = "플레이어의 기본 공격력이 증가합니다.";
+                if (!isDamageUp)
+                {
+                    DamageUP();
+                }
             }
             else if (status == 2)
             {
-                MonsterHealthDown();
+                buffText.text = "몬스터의 기본 체력이 감소합니다.";
+                if (!isMonsterHealthDown)
+                {
+                    MonsterHealthDown();
+                }
             }
             else if (status == 3)
             {
-                TimeUp();
+                 buffText.text = "스테이지 제한 시간이 증가합니다.";
+                if (!isTimeUp)
+                {
+                    TimeUp();
+                }
             }
             else if (status == 4)
             {
-                PercentUp();
+                buffText.text = "아이템 발동 확률이 증가합니다.";
+                if (!isPercentUp)
+                {
+                    PercentUp();
+                }
             }
             else if (status == 5)
             {
+                buffText.text = "일정 시간마다 몬스터가 사망합니다.";
                 timer += Time.deltaTime;
 
                 if (timer >= delay)
                 {
                     MonsterDie();
+
                     timer = 0f;
                 }
             }
         }
-        else if(buff == 2)
+        else if (buff == 2)
         {
             if (status == 1)
             {
-                DamageDown();
+                buffText.text = "플레이어의 기본 공격력이 감소합니다.";
+                if (!isDamageDown)
+                {
+                    DamageDown();
+                }
             }
             else if (status == 2)
             {
-                MonsterHealthUP();
+                buffText.text = "몬스터의 기본 체력이 증가합니다.";
+                if (!isMonsterHealthUP)
+                {
+                    MonsterHealthUP();
+                }
             }
             else if (status == 3)
             {
-                TimeDown();
+                buffText.text = "스테이지 제한 시간이 감소합니다.";
+                if (!isTimeDown)
+                {
+                    TimeDown();
+                }
             }
             else if (status == 4)
             {
-                PercentDown();
+                buffText.text = "아이템 발동 확률이 감소합니다.";
+                if (!isPercentDown)
+                {
+                    PercentDown();
+                }
             }
             else if (status == 5)
             {
-                MonsterAttackSpdUp();
+                buffText.text = "투사체 속도가 증가합니다.";
+                if (!isMonsterAttackSpdUp)
+                {
+                    MonsterAttackSpdUp();
+                }
             }
             else if (status == 6)
             {
-                MonsterDamageUp();
-            }
-            else if (status == 7)
-            {
-                MonsterSizeUp();
+                buffText.text = "몬스터의 사이즈가 증가합니다.";
+                if (!isMonsterSizeUp)
+                {
+                    MonsterSizeUp();
+                }
             }
         }
     }
-
-    // 스킬 한번만 값 변하도록
 
     // 버프
     // 기본데미지증가
     public void DamageUP()
     {
         Debug.Log("기본데미지증가");
+        isDamageUp = true;
         playerController.damage += (int)(playerController.damage * 0.5f);
+    }
+    // 기본데미지증가 리셋
+    public void ResetDamageUP()
+    {
+        Debug.Log("기본데미지증가 리셋");
+        isDamageUp = true;
+        playerController.damage -= (int)(playerController.damage * 0.5f);
     }
 
     // 몬스터 체력 감소
     public void MonsterHealthDown()
     {
         Debug.Log("몬스터 체력 감소");
+        isMonsterHealthDown = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
         foreach(GameObject monster in monsters)
         {
             MonsterController monsterController = monster.GetComponent<MonsterController>();
-            monsterController.currentHealth = (monsterController.currentHealth * 0.7f);
+            monsterController.currentHealth -= (monsterController.currentHealth * 0.3f);
         }
     }
 
@@ -160,13 +226,23 @@ public class StageStatus : MonoBehaviour
     public void TimeUp()
     {
         Debug.Log("제한시간 증가");
+        isTimeUp = true;
         stageTimeLimit.stageTime += 10;
+    }
+    // 제한시간 증가 리셋
+    public void ResetTimeUp()
+    {
+        Debug.Log("제한시간 증가 리셋");
+        isTimeUp = true;
+        stageTimeLimit.stageTime -= 10;
     }
 
     // 확률 증가
     public void PercentUp()
     {
         Debug.Log("확률 증가");
+        isPercentUp = true;
+
         itemSkill.firePercent += 5f;
         itemSkill.fireShotPercent += 5f;
         itemSkill.holyShotPercent += 5f;
@@ -175,6 +251,21 @@ public class StageStatus : MonoBehaviour
         itemSkill.posionPercent += 5f;
         itemSkill.meleePercent += 5f;
         itemSkill.sturnPercent += 5f;
+    }
+    // 확률 증가 리셋
+    public void ResetPercentUp()
+    {
+        Debug.Log("확률 증가 리셋");
+        isPercentUp = true;
+
+        itemSkill.firePercent -= 5f;
+        itemSkill.fireShotPercent -= 5f;
+        itemSkill.holyShotPercent -= 5f;
+        itemSkill.holyWavePercent -= 5f;
+        itemSkill.rockPercent -= 5f;
+        itemSkill.posionPercent -= 5f;
+        itemSkill.meleePercent -= 5f;
+        itemSkill.sturnPercent -= 5f;
     }
 
     // 일정시간 마다 몬스터 제거
@@ -200,13 +291,22 @@ public class StageStatus : MonoBehaviour
     public void DamageDown()
     {
         Debug.Log("기본데미지 감소");
+        isDamageDown = true;
         playerController.damage -= (int)(playerController.damage * 0.5f);
+    }
+    // 기본데미지 감소 리셋
+    public void ResetDamageDown()
+    {
+        Debug.Log("기본데미지 감소 리셋");
+        isDamageDown = true;
+        playerController.damage += (int)(playerController.damage * 0.5f);
     }
 
     // 몬스터 체력 증가
     public void MonsterHealthUP()
     {
         Debug.Log("몬스터 체력 증가");
+        isMonsterHealthUP = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
         foreach (GameObject monster in monsters)
@@ -220,13 +320,23 @@ public class StageStatus : MonoBehaviour
     public void TimeDown()
     {
         Debug.Log("제한시간 감소");
+        isTimeDown = true;
         stageTimeLimit.stageTime -= 10;
+    }
+    // 제한시간 감소 리셋
+    public void ResetTimeDown()
+    {
+        Debug.Log("제한시간 감소 리셋");
+        isTimeDown = true;
+        stageTimeLimit.stageTime += 10;
     }
 
     // 확률감소
     public void PercentDown()
     {
         Debug.Log("확률감소");
+        isPercentDown = true;
+
         itemSkill.firePercent -= 5f;
         itemSkill.fireShotPercent -= 5f;
         itemSkill.holyShotPercent -= 5f;
@@ -236,11 +346,27 @@ public class StageStatus : MonoBehaviour
         itemSkill.meleePercent -= 5f;
         itemSkill.sturnPercent -= 5f;
     }
+    // 확률감소 리셋
+    public void ResetPercentDown()
+    {
+        Debug.Log("확률감소 리셋");
+        isPercentDown = true;
+
+        itemSkill.firePercent += 5f;
+        itemSkill.fireShotPercent += 5f;
+        itemSkill.holyShotPercent += 5f;
+        itemSkill.holyWavePercent += 5f;
+        itemSkill.rockPercent += 5f;
+        itemSkill.posionPercent += 5f;
+        itemSkill.meleePercent += 5f;
+        itemSkill.sturnPercent += 5f;
+    }
 
     // 투사체 속도 증가
     public void MonsterAttackSpdUp()
     {
         Debug.Log("투사체 속도 증가");
+        isMonsterAttackSpdUp = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
         foreach (GameObject monster in monsters)
@@ -262,30 +388,11 @@ public class StageStatus : MonoBehaviour
         }
     }
 
-    // 몬스터 데미지 증가
-    public void MonsterDamageUp()
-    {
-        Debug.Log("몬스터 데미지 증가");
-        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-
-        foreach (GameObject monster in monsters)
-        {
-            MonsterController monsterController = monster.GetComponent<MonsterController>();
-            if(stageManager.mainStage < 8)
-            {
-                monsterController.damage = 2;
-            }
-            else if(stageManager.mainStage >= 8)
-            {
-                monsterController.damage = 3;
-            }
-        }
-    }
-
-    // 몬스터 크기 감소
+    // 몬스터 크기 증가
     public void MonsterSizeUp()
     {
         Debug.Log("몬스터 크기 감소");
+        isMonsterSizeUp = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
         foreach (GameObject monster in monsters)
@@ -296,30 +403,33 @@ public class StageStatus : MonoBehaviour
         }
     }
 
-    public void BuffStatus()
+    public void BuffStatus(bool execution)
     {
-        List<GameObject> selectedList = (Random.Range(0, 2) == 0) ? buffList : deBuffList;
-
-        if(selectedList == buffList)
+        if(execution)
         {
-            buff = 1;
-            Buff();
-        }
-        else if(selectedList == deBuffList)
-        {
-            buff = 2;
-            DeBuff();
-        }
+            List<GameObject> selectedList = (Random.Range(0, 2) == 0) ? buffList : deBuffList;
 
-        if (selectedList.Count > 0)
-        {
-            int randomIndex = Random.Range(0, selectedList.Count);
+            if(selectedList == buffList)
+            {
+                buff = 1;
+                Buff();
+            }
+            else if(selectedList == deBuffList)
+            {
+                buff = 2;
+                DeBuff();
+            }
 
-            status = randomIndex + 1;
+            if (selectedList.Count > 0)
+            {
+                int randomIndex = Random.Range(0, selectedList.Count);
 
-            selectedEffect = selectedList[randomIndex];
+                status = randomIndex + 1;
 
-            selectedEffect.transform.position = statusPos.transform.position;
+                selectedEffect = selectedList[randomIndex];
+
+                selectedEffect.transform.position = statusPos.transform.position;
+            }
         }
     }
 
@@ -328,6 +438,66 @@ public class StageStatus : MonoBehaviour
         if (selectedEffect != null)
         {
             selectedEffect.transform.position = new Vector3(100, 1500, 0);
+
+            if (buff == 1)
+            {
+                if (status == 1)
+                {
+                    if (isDamageUp)
+                    {
+                        ResetDamageUP();
+                    }
+                }
+                else if (status == 3)
+                {
+                    if (isTimeUp)
+                    {
+                        ResetTimeUp();
+                    }
+                }
+                else if (status == 4)
+                {
+                    if (isPercentUp)
+                    {
+                        ResetPercentUp();
+                    }
+                }
+            }
+            else if (buff == 2)
+            {
+                if (status == 1)
+                {
+                    if (isDamageDown)
+                    {
+                        ResetDamageDown();
+                    }
+                }
+                else if (status == 3)
+                {
+                    if (isTimeDown)
+                    {
+                        ResetTimeDown();
+                    }
+                }
+                else if (status == 4)
+                {
+                    if (isPercentDown)
+                    {
+                        ResetPercentDown();
+                    }
+                }
+            }
+
+            isDamageUp = false;
+            isMonsterHealthDown = false;
+            isTimeUp = false;
+            isPercentUp = false;
+            isDamageDown = false;
+            isMonsterHealthUP = false;
+            isTimeDown = false;
+            isPercentDown = false;
+            isMonsterAttackSpdUp = false;
+            isMonsterSizeUp = false;
 
             buff = 0;
             status = 0;
@@ -339,10 +509,12 @@ public class StageStatus : MonoBehaviour
     void Buff()
     {
         stageStatus.color = new Color(0f, 0.49f, 1f);
+        buffText.color = new Color(0f, 0.49f, 1f);
     }
 
     void DeBuff()
     {
         stageStatus.color = Color.red;
+        buffText.color = Color.red;
     }
 }

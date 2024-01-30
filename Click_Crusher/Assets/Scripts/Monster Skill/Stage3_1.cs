@@ -9,14 +9,23 @@ public class Stage3_1 : MonoBehaviour
 
     public void Attack()
     {
-        float randomAngle = Random.Range(45f, 135f);
+        StartCoroutine(MonsterAttack());
+    }
 
-        Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);
-        Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, +1f);
-        GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
-        bullet.name = "MonsterAttack";
-        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
+    IEnumerator MonsterAttack()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            float randomAngle = Random.Range(45f, 135f);
 
-        Destroy(bullet, 5f);
+            Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);
+            Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, +1f);
+            GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
+            bullet.name = "MonsterAttack";
+            bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
+
+            Destroy(bullet, 3f);
+            yield return new WaitForSeconds(0.2f);
+        }     
     }
 }
