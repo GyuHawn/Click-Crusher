@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -9,14 +8,14 @@ public class LodingController : MonoBehaviour
     [SerializeField]
     Image lodingBar;
 
-    static string nextScene;
+    private static string nextScene;
 
-    public static void LoadScene(string sceneName)
+    public static void LoadNextScene(string sceneName)
     {
         nextScene = sceneName;
         SceneManager.LoadScene("Loding");
     }
-    
+
     void Start()
     {
         StartCoroutine(LoadSceneProcess());
@@ -41,10 +40,9 @@ public class LodingController : MonoBehaviour
             {
                 timer += Time.unscaledDeltaTime;
                 lodingBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
+
                 if (lodingBar.fillAmount >= 1f)
                 {
-                    yield return new WaitForSeconds(1f);
-
                     op.allowSceneActivation = true;
                     yield break;
                 }

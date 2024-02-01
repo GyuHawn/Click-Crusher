@@ -172,6 +172,6 @@ public class CharacterSelect : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        LodingController.LoadScene("Game");
+        LodingController.LoadNextScene("Game");
     }
 }

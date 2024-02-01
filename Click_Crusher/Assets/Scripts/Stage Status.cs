@@ -89,9 +89,6 @@ public class StageStatus : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("buff " + buff);
-        Debug.Log("status " + status);
-
         if (buff == 1)
         {
             if (status == 1)
@@ -196,14 +193,12 @@ public class StageStatus : MonoBehaviour
     // 기본데미지증가
     public void DamageUP()
     {
-        Debug.Log("기본데미지증가");
         isDamageUp = true;
         playerController.damage += (int)(playerController.damage * 0.5f);
     }
     // 기본데미지증가 리셋
     public void ResetDamageUP()
     {
-        Debug.Log("기본데미지증가 리셋");
         isDamageUp = true;
         playerController.damage -= (int)(playerController.damage * 0.5f);
     }
@@ -211,7 +206,6 @@ public class StageStatus : MonoBehaviour
     // 몬스터 체력 감소
     public void MonsterHealthDown()
     {
-        Debug.Log("몬스터 체력 감소");
         isMonsterHealthDown = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
@@ -225,14 +219,12 @@ public class StageStatus : MonoBehaviour
     // 제한시간 증가
     public void TimeUp()
     {
-        Debug.Log("제한시간 증가");
         isTimeUp = true;
         stageTimeLimit.stageTime += 10;
     }
     // 제한시간 증가 리셋
     public void ResetTimeUp()
     {
-        Debug.Log("제한시간 증가 리셋");
         isTimeUp = true;
         stageTimeLimit.stageTime -= 10;
     }
@@ -240,7 +232,6 @@ public class StageStatus : MonoBehaviour
     // 확률 증가
     public void PercentUp()
     {
-        Debug.Log("확률 증가");
         isPercentUp = true;
 
         itemSkill.firePercent += 5f;
@@ -255,7 +246,6 @@ public class StageStatus : MonoBehaviour
     // 확률 증가 리셋
     public void ResetPercentUp()
     {
-        Debug.Log("확률 증가 리셋");
         isPercentUp = true;
 
         itemSkill.firePercent -= 5f;
@@ -271,7 +261,6 @@ public class StageStatus : MonoBehaviour
     // 일정시간 마다 몬스터 제거
     public void MonsterDie()
     {
-        Debug.Log("일정시간 마다 몬스터 제거");
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
         foreach (GameObject monster in monsters)
@@ -290,14 +279,12 @@ public class StageStatus : MonoBehaviour
     // 기본데미지 감소
     public void DamageDown()
     {
-        Debug.Log("기본데미지 감소");
         isDamageDown = true;
         playerController.damage -= (int)(playerController.damage * 0.5f);
     }
     // 기본데미지 감소 리셋
     public void ResetDamageDown()
     {
-        Debug.Log("기본데미지 감소 리셋");
         isDamageDown = true;
         playerController.damage += (int)(playerController.damage * 0.5f);
     }
@@ -305,7 +292,6 @@ public class StageStatus : MonoBehaviour
     // 몬스터 체력 증가
     public void MonsterHealthUP()
     {
-        Debug.Log("몬스터 체력 증가");
         isMonsterHealthUP = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
@@ -319,14 +305,12 @@ public class StageStatus : MonoBehaviour
     // 제한시간 감소
     public void TimeDown()
     {
-        Debug.Log("제한시간 감소");
         isTimeDown = true;
         stageTimeLimit.stageTime -= 10;
     }
     // 제한시간 감소 리셋
     public void ResetTimeDown()
     {
-        Debug.Log("제한시간 감소 리셋");
         isTimeDown = true;
         stageTimeLimit.stageTime += 10;
     }
@@ -334,7 +318,6 @@ public class StageStatus : MonoBehaviour
     // 확률감소
     public void PercentDown()
     {
-        Debug.Log("확률감소");
         isPercentDown = true;
 
         itemSkill.firePercent -= 5f;
@@ -349,7 +332,6 @@ public class StageStatus : MonoBehaviour
     // 확률감소 리셋
     public void ResetPercentDown()
     {
-        Debug.Log("확률감소 리셋");
         isPercentDown = true;
 
         itemSkill.firePercent += 5f;
@@ -365,7 +347,6 @@ public class StageStatus : MonoBehaviour
     // 투사체 속도 증가
     public void MonsterAttackSpdUp()
     {
-        Debug.Log("투사체 속도 증가");
         isMonsterAttackSpdUp = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
@@ -391,7 +372,6 @@ public class StageStatus : MonoBehaviour
     // 몬스터 크기 증가
     public void MonsterSizeUp()
     {
-        Debug.Log("몬스터 크기 감소");
         isMonsterSizeUp = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 

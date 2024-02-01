@@ -109,6 +109,14 @@ public class MonsterController : MonoBehaviour
                 boss1Defending = false;
             }
         }
+        else if(stageManager.mainStage >= 8)
+        {
+            GameObject boss = GameObject.Find("6(Clone)");
+            if (boss == null)
+            {
+                boss1Defending = false;
+            }
+        }
 
         if (currentHealth <= 0)
         {

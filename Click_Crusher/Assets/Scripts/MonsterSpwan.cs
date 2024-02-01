@@ -144,21 +144,10 @@ public class MonsterSpwan : MonoBehaviour
             else
             {
                 // 8스테이지 이후부터는 InfiniteMonsters만 사용
-                for (int i = 0; i < base0Count; i++)
+                for (int i = 0; i < (base0Count + base1Count + base2Count + base3Count); i++)
                 {
-                    InstantiateRandom(InfiniteMonsters[0], monsterSpawnPoints);
-                }
-                for (int i = 0; i < base1Count; i++)
-                {
-                    InstantiateRandom(InfiniteMonsters[1], monsterSpawnPoints);
-                }
-                for (int i = 0; i < base2Count; i++)
-                {
-                    InstantiateRandom(InfiniteMonsters[2], monsterSpawnPoints);
-                }
-                for (int i = 0; i < base3Count; i++)
-                {
-                    InstantiateRandom(InfiniteMonsters[3], monsterSpawnPoints);
+                    int randomIndex = Random.Range(0, 6);
+                    InstantiateRandom(InfiniteMonsters[randomIndex], monsterSpawnPoints);
                 }
                 if (bossCount > 0)
                 {

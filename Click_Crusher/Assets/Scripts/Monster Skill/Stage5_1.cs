@@ -5,58 +5,35 @@ using UnityEngine;
 public class Stage5_1 : MonoBehaviour
 {
     public GameObject bulletPrefab;
-
-    private GameObject previousMonster;
+    public GameObject bulletsubPrefab;
+    public float bulletSpd;
 
     public void Attack()
     {
-        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-
-        if (monsters.Length > 0)
-        {
-            List<GameObject> Monsters = new List<GameObject>(monsters);
-            if (previousMonster != null)
-            {
-                Monsters.Remove(previousMonster);
-            }
-
-            if (Monsters.Count > 0)
-            {
-                GameObject randomMonster = Monsters[Random.Range(0, Monsters.Count)];
-
-                StartCoroutine(DefenseMonster(randomMonster));
-            }
-        }
+        StartCoroutine(MonsterAttack());
     }
 
-    IEnumerator DefenseMonster(GameObject monster)
+    IEnumerator MonsterAttack()
     {
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        bullet.name = "MonsterDefense";
+        Vector3 randomPos = new Vector3(Random.Range(-3f, 3f), Random.Range(-1f, 2f), 1f);
+        GameObject skill = Instantiate(bulletPrefab, randomPos, Quaternion.identity);
+        skill.name = "MonsterAttack";
 
-        while (bullet != null && monster != null)
+        yield return new WaitForSeconds(1f);
+
+        Destroy(skill);
+
+        for (int i = 0; i < 5; i++)
         {
-            bullet.transform.position = new Vector3(monster.transform.position.x, monster.transform.position.y, -6);
+            float randomAngle = Random.Range(0f, 360f);
 
-            MonsterController monsterController = monster.GetComponent<MonsterController>();
-            if (monsterController != null)
-            {
-                monsterController.defense = true;
-            }
+            Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);
+            Vector3 bulletPos = new Vector3(randomPos.x, randomPos.y, + 1f);
+            GameObject bulletSub = Instantiate(bulletsubPrefab, bulletPos, Quaternion.identity);
+            bulletSub.name = "MonsterAttack";
+            bulletSub.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
 
-            yield return null;
-        }
-
-        Destroy(bullet);
-
-        if (monster != null)
-        {
-            MonsterController monsterController = monster.GetComponent<MonsterController>();
-            if (monsterController != null)
-            {
-                yield return new WaitForSeconds(0.5f);
-                monsterController.defense = false;
-            }
+            Destroy(bulletSub, 5f);
         }
     }
 }

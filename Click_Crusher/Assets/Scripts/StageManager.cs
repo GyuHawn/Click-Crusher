@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class StageManager : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class StageManager : MonoBehaviour
     public TMP_Text totalTimeText;
     public TMP_Text rewardMoneyText;
     public TMP_Text finalWaveText;
+    public TMP_Text clearText;
     
     private void Awake()
     {
@@ -75,6 +77,16 @@ public class StageManager : MonoBehaviour
 
     void Update()
     {
+        if(mainStage >= 20)
+        {
+            clearText.text = "Game Clear";
+            clearText.fontSize = 40;
+            Time.timeScale = 0f;
+            Reward();
+            gameStart = false;
+            playerController.gameover.SetActive(true);
+        }
+
         if (mainStage <= 8)
         {
             for (int i = 0; i < mainStage - 1; ++i)
@@ -189,11 +201,11 @@ public class StageManager : MonoBehaviour
         }
         else
         {
-            // 8 스테이지 이후부터 InfiniteMonsters 사용
+            // 8 스테이지 이후
             base0Monster = 1;
             base1Monster = 1;
             base2Monster = 1;
-            base3Monster = 1;
+            base3Monster = mainStage - 7; // 8 스테이지 이후부터 몬스터 증가를 위한 값  
             bossMonster = 1;
         }
     }
@@ -290,7 +302,7 @@ public class StageManager : MonoBehaviour
 
         foreach (GameObject skill in skills)
         {
-            if (skill.name == "BossSkill" || skill.name == "PlayerSkill" || skill.name == "MonsterAttack" || skill.name == "MonsterDefense" || skill.name == "HealthUpItem")
+            if (skill.name == "BossSkill" || skill.name == "PlayerSkill" || skill.name == "MonsterAttack" || skill.name == "HealthUpItem")
             {
                 Destroy(skill);
             }
