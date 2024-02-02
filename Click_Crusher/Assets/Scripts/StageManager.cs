@@ -243,7 +243,7 @@ public class StageManager : MonoBehaviour
         allMonstersSpawned = false;
         characterSkill.CharacterCoolTime();
 
-         if (mainStage < 8)
+        if (mainStage < 8)
          {
              NextSubStage();
 

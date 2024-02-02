@@ -25,7 +25,7 @@ public class Stage6 : MonoBehaviour
             Vector3 randomPosition = new Vector3(
                 Random.Range(skillPos.transform.position.x - 4f, skillPos.transform.position.x + 4f),
                 Random.Range(skillPos.transform.position.y - 1f, skillPos.transform.position.y + 2.5f),
-                skillPos.transform.position.z - 8
+                skillPos.transform.position.z - 5
             );
 
             GameObject skill = Instantiate(bossEffect, randomPosition, Quaternion.identity);

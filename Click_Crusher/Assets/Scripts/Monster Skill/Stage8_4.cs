@@ -15,7 +15,7 @@ public class Stage8_4 : MonoBehaviour
     void Start()
     {
         pos = GameObject.Find("Stage7 SkillPos"); // ¸Ê Áß¾Ó À§Ä¡ ºó ¿ÀºêÁ§Æ®
-        boxSize = new Vector3(-13.5f, 6.5f, 0);
+        boxSize = new Vector3(-13f, 5.5f, 0);
     }
 
     public void Attack()

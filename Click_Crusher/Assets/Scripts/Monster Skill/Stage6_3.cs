@@ -13,7 +13,7 @@ public class Stage6_3 : MonoBehaviour
     {
         pos = GameObject.Find("Stage7 SkillPos"); // ¸Ê Áß¾Ó À§Ä¡ ºó ¿ÀºêÁ§Æ®
         newPos = new Vector3(pos.transform.position.x, pos.transform.position.y + 2, pos.transform.position.z);
-        boxSize = new Vector3(-13.5f, 6.5f, 0);
+        boxSize = new Vector3(-13f, 5.5f, 0);
     }
 
     public void Attack()

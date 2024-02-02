@@ -115,7 +115,8 @@ public class PlayerController : MonoBehaviour
                         StartCoroutine(Stage6Hit());
                     }
                 }
-                else if (hit.collider.CompareTag("HealthUp"))
+
+                if (hit.collider.CompareTag("HealthUp"))
                 {
                     if(playerHealth >= 8)
                     {
@@ -127,27 +128,33 @@ public class PlayerController : MonoBehaviour
                         Destroy(hit.collider.gameObject);
                     }
                 }
-                else
-                {
-                    if (hit.collider.CompareTag("Bullet") && hitBullet)
-                    {
-                        audioManager.HitAudio();
 
+                if (hit.collider.CompareTag("Bullet") && hitBullet)
+                {
+                    audioManager.HitAudio();
+
+                    playerHealth -= 1;
+                    Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 6f);
+                    GameObject effect = Instantiate(healthEffect, transform.position, Quaternion.identity);
+                    StartCoroutine(BulletHitCooldown(0.2f));
+                }
+
+                if (monsterController != null)
+                {
+                    if (monsterController.boss1Defending)
+                    {
+
+                    }
+                    else if (monsterController.moved && hitBullet)
+                    {
                         playerHealth -= 1;
-                        Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z -6f);
+                        Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 6f);
                         GameObject effect = Instantiate(healthEffect, transform.position, Quaternion.identity);
                         StartCoroutine(BulletHitCooldown(0.2f));
                     }
-                    else if (monsterController != null)
+                    else
                     {
-                        if (monsterController.boss1Defending)
-                        {
-
-                        }
-                        else
-                        {
-                            StartCoroutine(AttackMonster(monsterController));
-                        }
+                        StartCoroutine(AttackMonster(monsterController));
                     }
                 }
             }

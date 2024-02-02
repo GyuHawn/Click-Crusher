@@ -20,7 +20,7 @@ public class Stage7 : MonoBehaviour
     void Start()
     {
         pos = GameObject.Find("Stage7 SkillPos");
-        boxSize = new Vector3(-13.5f, 6.5f, 0);
+        boxSize = new Vector3(-13f, 5.5f, 0);
         InvokeRepeating("Stage7BossSkill", 5f, 10f);
     }
 

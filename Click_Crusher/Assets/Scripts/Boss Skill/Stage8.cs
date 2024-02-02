@@ -10,7 +10,7 @@ public class Stage8 : MonoBehaviour
     private PlayerController playerController;
     private StageManager stageManager;
 
-    private int randomSkillIndex;
+    public int randomSkillIndex;
 
     // Skill 1 
     public GameObject bossEffect1;
@@ -68,7 +68,7 @@ public class Stage8 : MonoBehaviour
 
         // Skill 7
         pos = GameObject.Find("Stage7 SkillPos");
-        boxSize = new Vector3(-13.5f, 6.5f, 0);
+        boxSize = new Vector3(-13f, 5.5f, 0);
         if (randomSkillIndex == 1)
         {
             InvokeRepeating("Stage1BossSkill", 5f, 10f);
@@ -152,7 +152,7 @@ public class Stage8 : MonoBehaviour
             int randomIndex = Random.Range(0, monsterSpwan.bossStageSpawnPoints.Length);
 
             Vector3 randomPosition = monsterSpwan.GetRandomPosition(monsterSpwan.bossStageSpawnPoints[randomIndex].transform.position);
-            Vector3 bossEffectPosition = new Vector3(randomPosition.x, randomPosition.y - 0.3f, randomPosition.z - 8);
+            Vector3 bossEffectPosition = new Vector3(randomPosition.x, randomPosition.y - 0.3f, randomPosition.z);
 
             GameObject skill = Instantiate(bossEffect3, bossEffectPosition, Quaternion.Euler(-90, 0, 0));
             skill.name = "BossSkill";
@@ -176,7 +176,7 @@ public class Stage8 : MonoBehaviour
             Vector3 randomPosition = new Vector3(
                 Random.Range(gameObject.transform.position.x - 4f, gameObject.transform.position.x + 4f),
                 Random.Range(gameObject.transform.position.y - 1f, gameObject.transform.position.y + 3f),
-                gameObject.transform.position.z - 8
+                gameObject.transform.position.z
             );
             GameObject skill = Instantiate(bossEffect4, randomPosition, Quaternion.identity);
             skill.name = "BossSkill";
@@ -213,7 +213,7 @@ public class Stage8 : MonoBehaviour
             Vector3 randomPosition = new Vector3(
                 Random.Range(skillPos6.transform.position.x - 4f, skillPos6.transform.position.x + 4f),
                 Random.Range(skillPos6.transform.position.y - 1f, skillPos6.transform.position.y + 2.5f),
-                skillPos6.transform.position.z - 8
+                skillPos6.transform.position.z - 5
             );
 
             GameObject skill = Instantiate(bossEffect6, randomPosition, Quaternion.identity);

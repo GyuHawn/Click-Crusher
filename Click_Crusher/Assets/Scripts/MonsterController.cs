@@ -56,6 +56,7 @@ public class MonsterController : MonoBehaviour
 
     // 몬스터 스킬 관련
     public bool defense = false;
+    public bool moved = false;
 
     // 몬스터 사망시 아이템 생성
     public GameObject healthUpItem;
@@ -101,22 +102,51 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-        if(stageManager.mainStage == 1 && stageManager.subStage == 5)
+        if ((stageManager.mainStage == 1 && stageManager.subStage == 5) || stageManager.mainStage >= 8)
         {
             GameObject boss = GameObject.Find("4(Clone)");
-            if(boss == null)
-            {
-                boss1Defending = false;
-            }
-        }
-        else if(stageManager.mainStage >= 8)
-        {
-            GameObject boss = GameObject.Find("6(Clone)");
             if (boss == null)
             {
                 boss1Defending = false;
             }
         }
+        if (stageManager.mainStage == 7 && stageManager.subStage == 5)
+        {
+            GameObject boss = GameObject.Find("4(Clone)");
+            GameObject[] bossSkill = GameObject.FindObjectsOfType<GameObject>();
+            if (boss == null)
+            {
+                if (bossSkill != null)
+                {
+                    foreach (GameObject skill in bossSkill)
+                    {
+                        if (skill.name == "BossSkill")
+                        {
+                            Destroy(skill);
+                        }
+                    }
+                }
+            }
+        }
+        if (stageManager.mainStage >= 8)
+        {
+            GameObject boss = GameObject.Find("6(Clone)");
+            GameObject[] bossSkill = GameObject.FindObjectsOfType<GameObject>();
+            if (boss == null)
+            {
+                if (bossSkill != null)
+                {
+                    foreach (GameObject skill in bossSkill)
+                    {
+                        if (skill.name == "BossSkill")
+                        {
+                            Destroy(skill);
+                        }
+                    }
+                }
+            }
+        }
+        
 
         if (currentHealth <= 0)
         {

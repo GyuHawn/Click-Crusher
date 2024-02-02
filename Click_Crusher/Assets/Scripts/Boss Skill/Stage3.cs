@@ -43,7 +43,7 @@ public class Stage3 : MonoBehaviour
             int randomIndex = Random.Range(0, monsterSpwan.bossStageSpawnPoints.Length);
 
             Vector3 randomPosition = monsterSpwan.GetRandomPosition(monsterSpwan.bossStageSpawnPoints[randomIndex].transform.position);
-            Vector3 bossEffectPosition = new Vector3(randomPosition.x, randomPosition.y - 0.3f, randomPosition.z - 8);
+            Vector3 bossEffectPosition = new Vector3(randomPosition.x, randomPosition.y - 0.3f, randomPosition.z);
 
             GameObject skill = Instantiate(bossEffect, bossEffectPosition, Quaternion.Euler(-90, 0, 0));
             skill.name = "BossSkill";

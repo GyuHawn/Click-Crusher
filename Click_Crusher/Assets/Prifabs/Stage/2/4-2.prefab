@@ -219,6 +219,7 @@ MonoBehaviour:
   poisoned: 0
   boss1Defending: 0
   defense: 0
+  moved: 0
   healthUpItem: {fileID: 0}
 --- !u!1 &4568588002263109657
 GameObject:
@@ -246,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 4568588002263109657}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0037523643, w: 0.99999297}
-  m_LocalPosition: {x: 0.22, y: -0.02, z: -1}
+  m_LocalPosition: {x: 0.22, y: -0.02, z: 0}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
