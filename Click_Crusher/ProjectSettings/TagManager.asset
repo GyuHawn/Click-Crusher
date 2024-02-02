@@ -17,11 +17,13 @@ TagManager:
   - Bullet
   - HealthUp
   - MonsterDefense
+  - MonsterDenefe
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - Monster

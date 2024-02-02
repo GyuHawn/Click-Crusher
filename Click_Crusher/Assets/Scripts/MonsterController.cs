@@ -547,7 +547,7 @@ public class MonsterController : MonoBehaviour
                     playerController.HolyShotDamageText(this);
                     currentHealth -= itemSkill.holyShotDamage;
                     StartCoroutine(HolyShotDamageCooldown(0.5f, 0.2f));
-                }            
+                }
             }
         }
         else if (collision.gameObject.tag == "Fire")
@@ -573,7 +573,54 @@ public class MonsterController : MonoBehaviour
                     playerController.FireShotSubDamageText(this);
                     currentHealth -= itemSkill.fireShotSubDamage;
                     StartCoroutine(FireShotSubDamageCooldown(0.5f, 0.2f));
-                }             
+                }
+            }
+        }
+        else if ((collision.gameObject.tag == "Monster" || collision.gameObject.tag == "Boss") && !isColliding)
+        {
+            StartCoroutine(MoveWithRandomDirection()); // 유닛 겹치지 않도록
+        }
+        else if (collision.gameObject.tag == "Wall")
+        {
+            transform.position = Vector3.zero;
+        }
+    }
+    private bool isColliding = false;
+
+
+    private IEnumerator MoveWithRandomDirection()
+    {
+        isColliding = true;
+
+        Rigidbody2D playerRb = GetComponent<Rigidbody2D>();
+
+        if (playerRb != null)
+        {
+            float randomAngle = Random.Range(0f, 360f);
+            float randomAngleInRadians = Mathf.Deg2Rad * randomAngle;
+            Vector2 randomDirection = new Vector2(Mathf.Cos(randomAngleInRadians), Mathf.Sin(randomAngleInRadians));
+
+            playerRb.velocity = randomDirection * 3f;
+
+            yield return new WaitForSeconds(1f);
+
+            if (isColliding)
+            {
+                StartCoroutine(MoveWithRandomDirection());
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Monster")
+        {
+            isColliding = false;
+            Rigidbody2D playerRb = GetComponent<Rigidbody2D>();
+
+            if (playerRb != null)
+            {
+                playerRb.velocity = Vector2.zero;
             }
         }
     }

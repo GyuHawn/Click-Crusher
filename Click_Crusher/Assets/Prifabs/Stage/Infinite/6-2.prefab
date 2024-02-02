@@ -238,7 +238,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 5}
+  m_Size: {x: 6, y: 4}
   m_EdgeRadius: 0
 --- !u!50 &3711554170193993942
 Rigidbody2D:
@@ -293,8 +293,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attack: 0
   attackTime: 7
+  selectedAttackTime: 0
   danager: {fileID: 669149358356594341}
   dieEffect: {fileID: 57738481482245821}
   sturn: {fileID: 0}
@@ -302,6 +302,8 @@ MonoBehaviour:
   stop: 0
   poisoned: 0
   boss1Defending: 0
+  defense: 0
+  healthUpItem: {fileID: 0}
 --- !u!1001 &8983956271601622573
 PrefabInstance:
   m_ObjectHideFlags: 0
