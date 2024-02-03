@@ -28,7 +28,7 @@ public class Stage8_1 : MonoBehaviour
             float randomX = Random.Range(-boxSize.x / 2f, boxSize.x / 2f);
             float randomY = Random.Range(-boxSize.y / 2f, boxSize.y / 2f);
 
-            GameObject bullet = Instantiate(bulletPrefab, pos.transform.position + new Vector3(randomX, randomY, 1f), Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, pos.transform.position + new Vector3(randomX, randomY, -10f), Quaternion.identity);
             bullet.name = "MonsterAttack";
 
             bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletSpd;

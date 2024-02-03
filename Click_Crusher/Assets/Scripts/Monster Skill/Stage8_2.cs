@@ -25,9 +25,9 @@ public class Stage8_2 : MonoBehaviour
     {
         float randomX = Random.Range(pos.transform.position.x - boxSize.x / 2, pos.transform.position.x + boxSize.x / 2);
         float randomY = Random.Range(pos.transform.position.y - boxSize.y / 2, pos.transform.position.y + boxSize.y / 2);
-        float randomZ = -2f;
+        float randomZ = 2f;
 
-        Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, +1f);
+        Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10f);
         GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
         bullet.name = "MonsterAttack";
 

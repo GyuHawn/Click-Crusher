@@ -17,7 +17,7 @@ public class Stage6_0 : MonoBehaviour
         {
             float randomX = transform.position.x + Random.Range(-2f, 2f);
 
-            Vector3 bulletPos = new Vector3(randomX, transform.position.y - 0.5f, + 1f);
+            Vector3 bulletPos = new Vector3(randomX, transform.position.y - 0.5f, -10f);
             Vector2 direction = Vector2.up;
 
             GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);

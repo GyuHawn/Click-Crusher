@@ -15,7 +15,7 @@ public class Stage5_1 : MonoBehaviour
 
     IEnumerator MonsterAttack()
     {
-        Vector3 randomPos = new Vector3(Random.Range(-3f, 3f), Random.Range(-1f, 2f), 1f);
+        Vector3 randomPos = new Vector3(Random.Range(-3f, 3f), Random.Range(-1f, 2f), -10f);
         GameObject skill = Instantiate(bulletPrefab, randomPos, Quaternion.identity);
         skill.name = "MonsterAttack";
 
@@ -27,8 +27,8 @@ public class Stage5_1 : MonoBehaviour
         {
             float randomAngle = Random.Range(0f, 360f);
 
-            Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), 1f);
-            Vector3 bulletPos = new Vector3(randomPos.x, randomPos.y, + 1f);
+            Vector3 direction = new Vector3(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad), +1f);
+            Vector3 bulletPos = new Vector3(randomPos.x, randomPos.y, -10f);
             GameObject bulletSub = Instantiate(bulletsubPrefab, bulletPos, Quaternion.identity);
             bulletSub.name = "MonsterAttack";
             bulletSub.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;

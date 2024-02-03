@@ -75,6 +75,9 @@ public class SelectPass : MonoBehaviour
         stageManager.selectingItem = false;
         playerController.isAttacking = false;
         Time.timeScale = 1f;
+        selecPass = 0;
+        passName.text = "";
+        passEx.text = "";
         passMenu.SetActive(false);
     }
 }

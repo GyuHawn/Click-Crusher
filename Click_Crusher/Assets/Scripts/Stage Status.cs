@@ -15,6 +15,7 @@ public class StageStatus : MonoBehaviour
     public int status;
     public Image stageStatus;
     public GameObject statusPos;
+    public int saveDamage;
 
     // 버프
     public GameObject damageUp; // 기본데미지 증가
@@ -194,13 +195,14 @@ public class StageStatus : MonoBehaviour
     public void DamageUP()
     {
         isDamageUp = true;
+        saveDamage = playerController.damage;
         playerController.damage += (int)(playerController.damage * 0.5f);
     }
     // 기본데미지증가 리셋
     public void ResetDamageUP()
     {
         isDamageUp = true;
-        playerController.damage -= (int)(playerController.damage * 0.5f);
+        playerController.damage = saveDamage;
     }
 
     // 몬스터 체력 감소
@@ -280,13 +282,14 @@ public class StageStatus : MonoBehaviour
     public void DamageDown()
     {
         isDamageDown = true;
+        saveDamage = playerController.damage;
         playerController.damage -= (int)(playerController.damage * 0.5f);
     }
     // 기본데미지 감소 리셋
     public void ResetDamageDown()
     {
         isDamageDown = true;
-        playerController.damage += (int)(playerController.damage * 0.5f);
+        playerController.damage = saveDamage;
     }
 
     // 몬스터 체력 증가

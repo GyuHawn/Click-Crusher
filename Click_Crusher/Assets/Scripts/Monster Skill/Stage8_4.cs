@@ -30,7 +30,7 @@ public class Stage8_4 : MonoBehaviour
             float randomX = Random.Range(-boxSize.x / 2f, boxSize.x / 2f);
             float randomY = Random.Range(-boxSize.y / 2f, boxSize.y / 2f);
 
-            GameObject bullet = Instantiate(bulletPrefab, pos.transform.position + new Vector3(randomX, randomY, 1f), Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, pos.transform.position + new Vector3(randomX, randomY, -10f), Quaternion.identity);
             bullet.name = "MonsterAttack";
             bulletList.Add(bullet);
 
@@ -40,10 +40,9 @@ public class Stage8_4 : MonoBehaviour
 
         foreach (GameObject bullet in bulletList)
         {
-            float randomAngle = Random.Range(0f, 360f); // 0~360도 중 랜덤한 각도 설정
+            float randomAngle = Random.Range(0f, 360f);
             Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * randomAngle), Mathf.Sin(Mathf.Deg2Rad * randomAngle));
 
-            // 총알에 대해 방향을 설정하여 날아가도록 함
             bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;
             Destroy(bullet, 3f);
         }

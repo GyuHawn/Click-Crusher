@@ -15,7 +15,7 @@ public class Stage2_3 : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            Vector3 randomPosition = new Vector3(Random.Range(transform.position.x - 3f, transform.position.x + 3f), Random.Range(transform.position.y - 1f, transform.position.y + 1f), 5f);
+            Vector3 randomPosition = new Vector3(Random.Range(transform.position.x - 3f, transform.position.x + 3f), Random.Range(transform.position.y - 1f, transform.position.y + 1f), -10f);
 
             GameObject bullet = Instantiate(bulletPrefab, randomPosition, Quaternion.identity);
             bullet.name = "MonsterAttack";

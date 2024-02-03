@@ -41,6 +41,10 @@ public class CharacterSkill : MonoBehaviour
 
     void Update()
     {
+        rockDamage = playerController.damage * 2;
+        waterDamage = playerController.damage * 0.3f;
+        sturnTime = 5;
+
         if (rockTime > 0)
         {
             rockCoolTime.SetActive(true);

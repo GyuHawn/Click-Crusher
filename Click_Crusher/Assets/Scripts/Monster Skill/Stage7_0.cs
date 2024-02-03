@@ -24,7 +24,8 @@ public class Stage7_0 : MonoBehaviour
 
     IEnumerator MoveBullet(float angle, float spd, float duration)
     {
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle));
+        Vector3 bulletPos = new Vector3(transform.position.x, transform.position.y, -10f);
+        GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.Euler(0, 0, angle));
         bullet.name = "MonsterAttack";
         Vector3 bulletDirection = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0f);
         bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection * spd;

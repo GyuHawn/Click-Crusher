@@ -29,7 +29,7 @@ public class Stage8_3 : MonoBehaviour
 
         float randomX = Random.Range(skillPos.transform.position.x - boxSize.x / 2, skillPos.transform.position.x + boxSize.x / 2);
         float randomY = Random.Range(skillPos.transform.position.y - boxSize.y / 2, skillPos.transform.position.y + boxSize.y / 2);
-        float randomZ = -2f;
+        float randomZ = -10f;
 
         Vector3 targetPosition = new Vector3(randomX, randomY, randomZ);
 

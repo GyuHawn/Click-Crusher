@@ -16,7 +16,7 @@ public class Stage4_1 : MonoBehaviour
             float radianAngle = angle * Mathf.Deg2Rad;
             Vector3 direction = new Vector3(Mathf.Cos(radianAngle), Mathf.Sin(radianAngle), 1f);
 
-            Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, +1f);
+            Vector3 bulletPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10f);
             GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.Euler(0, 0, angle - 90));
             bullet.name = "MonsterAttack";
             bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpd;

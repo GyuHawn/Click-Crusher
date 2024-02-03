@@ -27,7 +27,7 @@ public class Stage6_3 : MonoBehaviour
         { 
             float randomX = Random.Range(newPos.x - boxSize.x / 2, newPos.x + boxSize.x / 2);
             float randomY = Random.Range(newPos.y - boxSize.y / 2, newPos.y + boxSize.y / 2);
-            float randomZ = -2f;
+            float randomZ = -10f;
 
            Vector3 bulletPos = new Vector3(randomX, randomY, randomZ);
 
