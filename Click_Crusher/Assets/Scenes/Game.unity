@@ -576,19 +576,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a26f162e2398c84ebc49a97da850600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rockLevel: 0
   rockDamage: 0
   rockTime: 0
   rockCoolTime: {fileID: 1698753149}
   rockCoolTimeText: {fileID: 1031743697}
+  waterLevel: 0
   waterEffect: {fileID: 1687118924408352, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
   waterDamage: 5
   waterTime: 0
   waterCoolTime: {fileID: 796974863}
   waterCoolTimeText: {fileID: 1182218095}
+  sturnLevel: 0
   sturnDuration: 0
   sturnTime: 0
   sturnCoolTime: {fileID: 1311951535}
   sturnCoolTimeText: {fileID: 357623729}
+  luckLevel: 0
 --- !u!114 &4910551
 MonoBehaviour:
   m_ObjectHideFlags: 0

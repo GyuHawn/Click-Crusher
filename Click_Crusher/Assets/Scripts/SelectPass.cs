@@ -50,14 +50,14 @@ public class SelectPass : MonoBehaviour
     {
         selecPass = 4;
         passName.text = "∏”¥œ »πµÊ";
-        passEx.text = "∞‘¿” ∏”¥œ∏¶ 200ø¯ »πµÊ«’¥œ¥Ÿ.";
+        passEx.text = "∞‘¿” ∏”¥œ∏¶ 100ø¯ »πµÊ«’¥œ¥Ÿ.";
     }
 
     public void EnterPass()
     {
         if (selecPass == 1)
         {
-            playerController.damage += 10;
+            playerController.damage += 5;
         }
         else if (selecPass == 2)
         {
@@ -69,7 +69,7 @@ public class SelectPass : MonoBehaviour
         }
         else if (selecPass == 4)
         {
-            PlayerPrefs.SetInt("GameMoney", PlayerPrefs.GetInt("GameMoney", 0) + 200);
+            PlayerPrefs.SetInt("GameMoney", PlayerPrefs.GetInt("GameMoney", 0) + 100);
         }
 
         stageManager.selectingItem = false;

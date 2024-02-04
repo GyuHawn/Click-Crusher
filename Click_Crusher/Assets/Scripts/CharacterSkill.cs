@@ -10,21 +10,26 @@ public class CharacterSkill : MonoBehaviour
     private PlayerController playerController;
     private MonsterController monsterController;
 
+    public int rockLevel;
     public float rockDamage;
     public int rockTime;
     public GameObject rockCoolTime;
     public TMP_Text rockCoolTimeText;
 
+    public int waterLevel;
     public GameObject waterEffect;
     public float waterDamage;
     public int waterTime;
     public GameObject waterCoolTime;
     public TMP_Text waterCoolTimeText;
 
+    public int sturnLevel;
     public float sturnDuration;
-    public int sturnTime;
+    public float sturnTime;
     public GameObject sturnCoolTime;
     public TMP_Text sturnCoolTimeText;
+
+    public int luckLevel;
 
     private void Awake()
     {
@@ -36,14 +41,19 @@ public class CharacterSkill : MonoBehaviour
 
     void Start()
     {
+        rockLevel = PlayerPrefs.GetInt("rockLevel", 1);
+        waterLevel = PlayerPrefs.GetInt("waterLevel", 1);
+        sturnLevel = PlayerPrefs.GetInt("lightLevel", 1);
+        luckLevel = PlayerPrefs.GetInt("luckLevel", 1);
+
         BasicSettings();
     }
 
     void Update()
     {
-        rockDamage = playerController.damage * 2;
-        waterDamage = playerController.damage * 0.3f;
-        sturnTime = 5;
+        rockDamage = playerController.damage + (playerController.damage * (0.5f * rockLevel));
+        waterDamage = playerController.damage + (playerController.damage * (0.15f * waterLevel));
+        sturnTime = 3 + (0.1f * sturnLevel);
 
         if (rockTime > 0)
         {

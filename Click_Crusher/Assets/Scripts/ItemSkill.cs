@@ -11,6 +11,7 @@ public class ItemSkill : MonoBehaviour
     private PlayerController playerController;
     private AudioManager audioManager;
     private Character character;
+    private CharacterSkill characterSkill;
 
     // fire
     private GameObject fireInstance;
@@ -86,6 +87,7 @@ public class ItemSkill : MonoBehaviour
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
         character = GameObject.Find("Manager").GetComponent<Character>();
+        characterSkill = GameObject.Find("Manager").GetComponent<CharacterSkill>();
     }
 
     void Start()
@@ -130,14 +132,14 @@ public class ItemSkill : MonoBehaviour
         // È®·ü      
         if (character.currentCharacter == 4)
         {
-            firePercent = 20f;
-            fireShotPercent = 30f;
-            holyShotPercent = 20f;
-            holyWavePercent = 15f;
-            rockPercent = 40f;
-            posionPercent = 20f;
-            meleePercent = 70f;
-            sturnPercent = 40f;
+            firePercent = 10f + (0.5f * characterSkill.luckLevel);
+            fireShotPercent = 20f + (0.5f * characterSkill.luckLevel);
+            holyShotPercent = 10f + (0.5f * characterSkill.luckLevel);
+            holyWavePercent = 5f + (0.5f * characterSkill.luckLevel);
+            rockPercent = 30f + (0.5f * characterSkill.luckLevel);
+            posionPercent = 10f + (0.5f * characterSkill.luckLevel);
+            meleePercent = 60f + (0.5f * characterSkill.luckLevel);
+            sturnPercent = 30f + (0.5f * characterSkill.luckLevel);
         }
         else
         {
@@ -368,7 +370,7 @@ public class ItemSkill : MonoBehaviour
 
             GameObject meleeInstance = Instantiate(meleeEffect, spawnPosition, Quaternion.identity);
             meleeInstance.name = "PlayerSkill";
-            Destroy(meleeInstance, 0.5f);
+            Destroy(meleeInstance, 0.2f);
 
             yield return new WaitForSeconds(0.1f);
         }

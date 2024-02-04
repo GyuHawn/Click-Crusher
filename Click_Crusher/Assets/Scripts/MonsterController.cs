@@ -102,9 +102,17 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-        if ((stageManager.mainStage == 1 && stageManager.subStage == 5) || stageManager.mainStage >= 8)
+        if (stageManager.mainStage == 1 && stageManager.subStage == 5)
         {
             GameObject boss = GameObject.Find("4(Clone)");
+            if (boss == null)
+            {
+                boss1Defending = false;
+            }
+        }
+        else if (stageManager.mainStage >= 8)
+        {
+            GameObject boss = GameObject.Find("6(Clone)");
             if (boss == null)
             {
                 boss1Defending = false;
@@ -128,7 +136,7 @@ public class MonsterController : MonoBehaviour
                 }
             }
         }
-        if (stageManager.mainStage >= 8)
+        else if (stageManager.mainStage >= 8)
         {
             GameObject boss = GameObject.Find("6(Clone)");
             GameObject[] bossSkill = GameObject.FindObjectsOfType<GameObject>();

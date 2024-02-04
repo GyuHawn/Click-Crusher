@@ -28,6 +28,19 @@ public class CharacterSelect : MonoBehaviour
     public GameObject lightOpenBtn;
     public GameObject luckOpenBtn;
 
+    public GameObject rockLevelUPButton;
+    public int rockLevel;
+    public TMP_Text rockLevelText;
+    public GameObject waterLevelUPButton;
+    public int waterLevel;
+    public TMP_Text waterLevelText;
+    public GameObject lightLevelUPButton;
+    public int lightLevel;
+    public TMP_Text lightLevelText;
+    public GameObject luckLevelUPButton;
+    public int luckLevel;
+    public TMP_Text luckLevelText;
+
     public bool enter;
     public TMP_Text enterText;
 
@@ -36,6 +49,11 @@ public class CharacterSelect : MonoBehaviour
         waterChar = PlayerPrefs.GetInt("WaterCharOpen", 0) == 1;
         lightChar = PlayerPrefs.GetInt("LightCharOpen", 0) == 1;
         luckChar = PlayerPrefs.GetInt("LuckCharOpen", 0) == 1;
+
+        rockLevel = PlayerPrefs.GetInt("rockLevel", 1);
+        waterLevel = PlayerPrefs.GetInt("waterLevel", 1);
+        lightLevel = PlayerPrefs.GetInt("lightLevel", 1);
+        luckLevel = PlayerPrefs.GetInt("luckLevel", 1);
 
         enter = false;
     }
@@ -60,16 +78,44 @@ public class CharacterSelect : MonoBehaviour
         {
             useWater.SetActive(false);
             waterOpenBtn.SetActive(false);
+            waterLevelUPButton.SetActive(true);
+            waterLevelText.gameObject.SetActive(true);
         }
         if (lightChar)
         {
             useLight.SetActive(false);
             lightOpenBtn.SetActive(false);
+            lightLevelUPButton.SetActive(true);
+            lightLevelText.gameObject.SetActive(true);
         }
         if (luckChar)
         {
             useLuck.SetActive(false);
             luckOpenBtn.SetActive(false);
+            luckLevelUPButton.SetActive(true);
+            luckLevelText.gameObject.SetActive(true);
+        }
+
+        rockLevelText.text = "Lv. " + rockLevel.ToString();
+        waterLevelText.text = "Lv. " + waterLevel.ToString();
+        lightLevelText.text = "Lv. " + lightLevel.ToString();
+        luckLevelText.text = "Lv. " + luckLevel.ToString();
+
+        if (rockLevel > 20)
+        {
+            rockLevelUPButton.SetActive(false);
+        }
+        else if (waterLevel > 20)
+        {
+            waterLevelUPButton.SetActive(false);
+        }
+        else if (lightLevel > 20)
+        {
+            lightLevelUPButton.SetActive(false);
+        }
+        else if (luckLevel > 20)
+        {
+            luckLevelUPButton.SetActive(false);
         }
     }
 
@@ -82,6 +128,9 @@ public class CharacterSelect : MonoBehaviour
 
         enter = true;
         selectChar = 1;
+
+        playerMoney += 10000;
+        PlayerPrefs.SetInt("GameMoney", playerMoney);
     }
 
     public void WaterChar()
@@ -131,7 +180,7 @@ public class CharacterSelect : MonoBehaviour
         if (playerMoney >= 100)
         {
             waterChar = true;
-            playerMoney -= 100;
+            playerMoney -= 100;     
             PlayerPrefs.SetInt("WaterCharOpen", 1);
             PlayerPrefs.SetInt("GameMoney", playerMoney);
         }
@@ -155,6 +204,47 @@ public class CharacterSelect : MonoBehaviour
             luckChar = true;
             playerMoney -= 1000;
             PlayerPrefs.SetInt("LuckCharOpen", 1);
+            PlayerPrefs.SetInt("GameMoney", playerMoney);
+        }
+    }
+
+    public void LevelUpRock()
+    {
+        if (rockLevel <= 20)
+        {
+            rockLevel++;
+            playerMoney -= 1000;
+            PlayerPrefs.SetInt("rockLevel", rockLevel);
+            PlayerPrefs.SetInt("GameMoney", playerMoney);
+        }
+    }
+    public void LevelUpWater()
+    {
+        if (waterLevel <= 20)
+        {
+            waterLevel++;
+            playerMoney -= 1000;
+            PlayerPrefs.SetInt("waterLevel", waterLevel);
+            PlayerPrefs.SetInt("GameMoney", playerMoney);
+        }
+    }
+    public void LevelUpLight()
+    {
+        if (lightLevel <= 20)
+        {
+            lightLevel++;
+            playerMoney -= 1000;
+            PlayerPrefs.SetInt("lightLevel", lightLevel);
+            PlayerPrefs.SetInt("GameMoney", playerMoney);
+        }
+    }
+    public void LevelUpLuck()
+    {
+        if (luckLevel <= 20)
+        {
+            luckLevel++;
+            playerMoney -= 1000;
+            PlayerPrefs.SetInt("luckLevel", luckLevel);
             PlayerPrefs.SetInt("GameMoney", playerMoney);
         }
     }

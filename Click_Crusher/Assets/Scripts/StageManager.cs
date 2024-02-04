@@ -151,51 +151,29 @@ public class StageManager : MonoBehaviour
             switch (subStage)
             {
                 case 1:
-                   // base0Monster = 2 + mainStage;
-                    base0Monster =1;
+                    base0Monster = 2;
                     break;
                 case 2:
-                    base0Monster = 1;
-                    base1Monster = 1;
+                    base0Monster = 2;
+                    base1Monster = 2;
                     break;
                 case 3:
-                    base0Monster = 1    ;
-                    base1Monster = 1;
-                    base2Monster = 1;
+                    base0Monster = 2;
+                    base1Monster = 2;
+                    base2Monster = 2;
                     break;
                 case 4:
-                    if (mainStage == 6)
-                    {
-                        base0Monster = 1;
-                        base1Monster = 1;
-                        base2Monster = 1;
-                        base3Monster = 1;
-                    }
-                    else
-                    {
-                        base0Monster = 1;
-                        base1Monster = 1;
-                        base2Monster = 1;
-                        base3Monster = 1;
-                    }
+                    base0Monster = 2;
+                    base1Monster = 2;
+                    base2Monster = 2;
+                    base3Monster = 2;
                     break;
                 case 5:
-                    if (mainStage == 6)
-                    {
-                        base0Monster = 1;
-                        base1Monster = 1;
-                        base2Monster = 1;
-                        base3Monster = 2;
-                        bossMonster = 1;
-                    }
-                    else
-                    {
-                        base0Monster = 1;
-                        base1Monster = 1;
-                        base2Monster = 1;
-                        base3Monster = 1;
-                        bossMonster = 1;
-                    }        
+                    base0Monster = 2;
+                    base1Monster = 2;
+                    base2Monster = 2;
+                    base3Monster = 2;
+                    bossMonster = 1;
                     break;
             }
         }
