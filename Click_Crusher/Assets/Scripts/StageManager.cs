@@ -15,6 +15,7 @@ public class StageManager : MonoBehaviour
     private StageTimeLimit stageTimeLimit;
     private PlayerController playerController;
     private CharacterSkill characterSkill;
+    private Character character;
     private ItemSkill itemSkill;
     private StageStatus stageStatus;
 
@@ -54,6 +55,7 @@ public class StageManager : MonoBehaviour
         stageTimeLimit = GameObject.Find("Manager").GetComponent<StageTimeLimit>();
         playerController = GameObject.Find("Manager").GetComponent<PlayerController>();
         characterSkill = GameObject.Find("Manager").GetComponent<CharacterSkill>();
+        character = GameObject.Find("Manager").GetComponent<Character>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         stageStatus = GameObject.Find("Manager").GetComponent<StageStatus>();
     }
@@ -64,7 +66,7 @@ public class StageManager : MonoBehaviour
         if (!gameStart)
         {
             mainStage = 1;
-            subStage = 1;
+            subStage = 2;
             StageMonsterSetting();
             SpawnMonsters();
             selectingItem = false;
@@ -221,6 +223,11 @@ public class StageManager : MonoBehaviour
         allMonstersSpawned = false;
         characterSkill.CharacterCoolTime();
 
+        if(character.currentCharacter == 2)
+        {
+            characterSkill.useWaterSkill = false;
+        }
+
         if (mainStage < 8)
          {
              NextSubStage();
@@ -263,7 +270,7 @@ public class StageManager : MonoBehaviour
 
               NextMainStage();
          }
-
+        
         ResetStageState();
         stageStatus.ResetStatus();
 

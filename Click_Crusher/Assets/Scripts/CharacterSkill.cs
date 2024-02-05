@@ -11,14 +11,15 @@ public class CharacterSkill : MonoBehaviour
     private MonsterController monsterController;
 
     public int rockLevel;
-    public float rockDamage;
+    public int rockDamage;
     public int rockTime;
     public GameObject rockCoolTime;
     public TMP_Text rockCoolTimeText;
 
+    public bool useWaterSkill = false;
     public int waterLevel;
     public GameObject waterEffect;
-    public float waterDamage;
+    public int waterDamage;
     public int waterTime;
     public GameObject waterCoolTime;
     public TMP_Text waterCoolTimeText;
@@ -45,14 +46,12 @@ public class CharacterSkill : MonoBehaviour
         waterLevel = PlayerPrefs.GetInt("waterLevel", 1);
         sturnLevel = PlayerPrefs.GetInt("lightLevel", 1);
         luckLevel = PlayerPrefs.GetInt("luckLevel", 1);
-
-        BasicSettings();
     }
 
     void Update()
     {
-        rockDamage = playerController.damage + (playerController.damage * (0.5f * rockLevel));
-        waterDamage = playerController.damage + (playerController.damage * (0.15f * waterLevel));
+        rockDamage = (int)(playerController.damage + (playerController.damage * (0.1f * rockLevel)));
+        waterDamage = (int)(playerController.damage * (0.1f * waterLevel));
         sturnTime = 3 + (0.1f * sturnLevel);
 
         if (rockTime > 0)
@@ -84,13 +83,6 @@ public class CharacterSkill : MonoBehaviour
         }
     }
 
-    public void BasicSettings()
-    {
-        rockDamage = playerController.damage * 2f;
-        waterDamage = playerController.damage * 0.3f;
-        sturnDuration = 3f;
-    }
-
     public void Rock()
     {
         if(rockTime <= 0)
@@ -102,7 +94,7 @@ public class CharacterSkill : MonoBehaviour
 
     void RockAttack()
     {
-        rockTime = 2;
+        rockTime = 4;
 
         GameObject[] mosters = GameObject.FindGameObjectsWithTag("Monster");
         GameObject[] bossMonsters = GameObject.FindGameObjectsWithTag("Boss");
@@ -144,7 +136,7 @@ public class CharacterSkill : MonoBehaviour
     
     void SturnAttack()
     {
-        sturnTime = 2;
+        sturnTime = 4;
 
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
@@ -192,71 +184,81 @@ public class CharacterSkill : MonoBehaviour
     {
         if (waterTime <= 0)
         {
+            useWaterSkill = true;
             StartCoroutine(WaterAttack());
         }       
     }
 
     IEnumerator WaterAttack()
     {
-        waterTime = 2;
-
-        List<GameObject> MonsterList = new List<GameObject>();
-
-        for (int i = 0; i < 20; i++)
+        if (useWaterSkill)
         {
-            List<GameObject> selectedMonsters = new List<GameObject>();
-            if (MonsterList.Count == 0)
+
+            waterTime = 4;
+
+            List<GameObject> MonsterList = new List<GameObject>();
+
+            for (int i = 0; i < 20; i++)
             {
-                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-                GameObject[] bossMonsters = GameObject.FindGameObjectsWithTag("Boss");
-
-                List<GameObject> allMonsters = new List<GameObject>(monsters);
-                allMonsters.AddRange(bossMonsters);
-
-                if (allMonsters.Count > 0)
+                List<GameObject> selectedMonsters = new List<GameObject>();
+                if (MonsterList.Count == 0)
                 {
-                    selectedMonsters.Add(allMonsters[Random.Range(0, allMonsters.Count)]);
-                }
+                    GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                    GameObject[] bossMonsters = GameObject.FindGameObjectsWithTag("Boss");
 
-                MonsterList.AddRange(selectedMonsters);
-            }
-            else
-            {
-                if (MonsterList.Count > 0)
-                {
-                    selectedMonsters.Add(MonsterList[Random.Range(0, MonsterList.Count)]);
-                }
-            }
+                    List<GameObject> allMonsters = new List<GameObject>(monsters);
+                    allMonsters.AddRange(bossMonsters);
 
-            foreach (GameObject monster in selectedMonsters)
-            {
-                MonsterController monsterController = monster.GetComponent<MonsterController>();
-
-                if (monsterController != null)
-                {
-                    Vector3 waterPosition = new Vector3(monsterController.gameObject.transform.position.x, monsterController.gameObject.transform.position.y - 0.2f, monsterController.gameObject.transform.position.z);
-                    GameObject waterInstance = Instantiate(waterEffect, waterPosition, Quaternion.Euler(90, 0, 0));
-                    audioManager.WaterAudio();
-
-                    if (monsterController.pWaterTakeDamage)
+                    if (allMonsters.Count > 0)
                     {
-                        playerController.CWaterDamageText(monsterController);
-                        monsterController.currentHealth -= waterDamage;
-                        monsterController.PlayerWaterDamegeCoolDown(0.5f, 0.1f);
+                        selectedMonsters.Add(allMonsters[Random.Range(0, allMonsters.Count)]);
                     }
 
-                    ItemSkill(monsterController);
-
-                    Destroy(waterInstance, 2f);
+                    MonsterList.AddRange(selectedMonsters);
                 }
-            }
+                else
+                {
+                    if (MonsterList.Count > 0)
+                    {
+                        selectedMonsters.Add(MonsterList[Random.Range(0, MonsterList.Count)]);
+                    }
+                }
 
-            if (MonsterList.Count > 0)
-            {
-                MonsterList.Clear();
-            }
+                foreach (GameObject monster in selectedMonsters)
+                {
+                    MonsterController monsterController = monster.GetComponent<MonsterController>();
 
-            yield return new WaitForSeconds(0.1f);
+                    if (monsterController != null)
+                    {
+                        Vector3 waterPosition = new Vector3(monsterController.gameObject.transform.position.x, monsterController.gameObject.transform.position.y - 0.2f, monsterController.gameObject.transform.position.z);
+                        GameObject waterInstance = Instantiate(waterEffect, waterPosition, Quaternion.Euler(90, 0, 0));
+                        audioManager.WaterAudio();
+
+                        if (monsterController.pWaterTakeDamage)
+                        {
+                            playerController.CWaterDamageText(monsterController);
+                            monsterController.currentHealth -= waterDamage;
+                            monsterController.PlayerWaterDamegeCoolDown(0.5f, 0.1f);
+                        }
+
+                        ItemSkill(monsterController);
+
+                        Destroy(waterInstance, 2f);
+                    }
+                }
+
+                if (MonsterList.Count > 0)
+                {
+                    MonsterList.Clear();
+                }
+
+                if (!useWaterSkill)
+                {
+                    yield break;
+                }
+
+                yield return new WaitForSeconds(0.15f);
+            }
         }
     }
 

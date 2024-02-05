@@ -212,8 +212,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attackTime: 2
-  selectedAttackTime: 6
+  attackTime: 1
+  selectedAttackTime: 5
   danager: {fileID: 4229953420157135508}
   dieEffect: {fileID: 404845134687991277}
   sturn: {fileID: 8076464557253674517}
@@ -222,6 +222,7 @@ MonoBehaviour:
   poisoned: 0
   boss1Defending: 0
   defense: 0
+  moved: 0
   healthUpItem: {fileID: 4325409970368951848, guid: 626a59ccdf8aa4b468737a270c6eb42a, type: 3}
 --- !u!114 &7952427105928614971
 MonoBehaviour:

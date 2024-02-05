@@ -95,10 +95,10 @@ public class ItemSkill : MonoBehaviour
         // 사용중인지
         holyWave = false;
 
-        BasicSettings();
+        //BasicSettings();
     }
 
-    public void BasicSettings()
+    /*public void BasicSettings()
     {
         // 공격력 퍼센트
         fireDamagePercent = 0.5f;
@@ -152,39 +152,96 @@ public class ItemSkill : MonoBehaviour
             meleePercent = 60f;
             sturnPercent = 30f;
         }
-    }
+    }*/
 
-    public void ItemValueUp()
+    private void Update()
     {
-        // fire
-        fireDamagePercent += 0.1f;
-        fireDuration += 0.5f;
+        // 공격력 퍼센트
+        fireDamagePercent = 0.4f + (0.1f * selectItem.fireLv);
+        fireShotDamagePercent = 1.3f + (0.2f * selectItem.fireShotLv);
+        fireShotSubDamagePercent = 0.3f + (0.2f * selectItem.fireShotLv);
+        holyWaveDamagePercent = 0.25f + (0.05f * selectItem.holyWaveLv);
+        holyShotDamagePercent = 0.5f + (0.2f * selectItem.holyShotLv);
+        poisonDamagePercent = 0.35f + (0.05f * selectItem.posionLv);
+        rockDamagePercent = 1.5f + (0.5f * selectItem.rockLv);
 
-        // fireShot
-        fireShotDamagePercent += 0.2f;
-        fireShotSubDamagePercent += 0.2f;
-        fireShotSubNum++;
+        // 공격력
+        fireDamage = playerController.damage * fireDamagePercent;
+        fireShotDamage = playerController.damage * fireShotDamagePercent;
+        fireShotSubDamage = playerController.damage * fireShotSubDamagePercent;
+        holyWaveDamage = playerController.damage * holyWaveDamagePercent;
+        holyShotDamage = playerController.damage * holyShotDamagePercent;
+        poisonDamage = playerController.damage * poisonDamagePercent;
+        rockDamage = playerController.damage * rockDamagePercent;
 
-        // holyWave
-        holyWaveDamagePercent += 0.05f;
-        holyWaveDuration += 0.5f;
+        // 갯수
+        fireShotSubNum = 2 + (1 * selectItem.fireShotLv);
+        meleeNum = 2 + (1 * selectItem.meleeLv);
 
-        // holyShot
-        holyShotDamagePercent += 0.2f;
-        holyShotDuration += 0.5f;
+        // 시간
+        fireDuration = 2.5f + (0.5f * selectItem.fireLv);
+        holyShotDuration = 1.5f + (0.5f * selectItem.holyShotLv);
+        holyWaveDuration = 3.5f + (0.5f * selectItem.holyWaveLv);
+        posionDuration = 5f;
+        sturnDuration = 2f + (1 * selectItem.sturnLv);
 
-        // rock
-        rockDamagePercent += 0.5f;
-
-        // poison
-        poisonDamagePercent += 0.05f;
-
-        // melee
-        meleeNum++;
-
-        // sturn
-        sturnDuration += 1f;
+        // 확률      
+        if (character.currentCharacter == 4)
+        {
+            firePercent = 10f + (0.5f * characterSkill.luckLevel);
+            fireShotPercent = 20f + (0.5f * characterSkill.luckLevel);
+            holyShotPercent = 10f + (0.5f * characterSkill.luckLevel);
+            holyWavePercent = 5f + (0.5f * characterSkill.luckLevel);
+            rockPercent = 30f + (0.5f * characterSkill.luckLevel);
+            posionPercent = 10f + (0.5f * characterSkill.luckLevel);
+            meleePercent = 60f + (0.5f * characterSkill.luckLevel);
+            sturnPercent = 30f + (0.5f * characterSkill.luckLevel);
+        }
+        else
+        {
+            firePercent = 10f;
+            fireShotPercent = 20f;
+            holyShotPercent = 10f;
+            holyWavePercent = 5f;
+            rockPercent = 30f;
+            //posionPercent = 10f;
+            posionPercent = 100f;
+            meleePercent = 60f;
+            sturnPercent = 30f;
+        }
     }
+
+    /*    public void ItemValueUp()
+        {
+            // fire
+            fireDamagePercent += 0.1f;
+            fireDuration += 0.5f;
+
+            // fireShot
+            fireShotDamagePercent += 0.2f;
+            fireShotSubDamagePercent += 0.2f;
+            fireShotSubNum++;
+
+            // holyWave
+            holyWaveDamagePercent += 0.05f;
+            holyWaveDuration += 0.5f;
+
+            // holyShot
+            holyShotDamagePercent += 0.2f;
+            holyShotDuration += 0.5f;
+
+            // rock
+            rockDamagePercent += 0.5f;
+
+            // poison
+            poisonDamagePercent += 0.05f;
+
+            // melee
+            meleeNum++;
+
+            // sturn
+            sturnDuration += 1f;
+        }*/
 
     public void GetItem()
     {

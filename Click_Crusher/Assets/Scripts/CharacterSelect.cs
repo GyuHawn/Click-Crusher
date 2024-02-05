@@ -212,40 +212,52 @@ public class CharacterSelect : MonoBehaviour
     {
         if (rockLevel <= 20)
         {
-            rockLevel++;
-            playerMoney -= 1000;
-            PlayerPrefs.SetInt("rockLevel", rockLevel);
-            PlayerPrefs.SetInt("GameMoney", playerMoney);
+            if (playerMoney >= 1000)
+            {
+                rockLevel++;
+                playerMoney -= 1000;
+                PlayerPrefs.SetInt("rockLevel", rockLevel);
+                PlayerPrefs.SetInt("GameMoney", playerMoney);
+            }
         }
     }
     public void LevelUpWater()
     {
         if (waterLevel <= 20)
         {
-            waterLevel++;
-            playerMoney -= 1000;
-            PlayerPrefs.SetInt("waterLevel", waterLevel);
-            PlayerPrefs.SetInt("GameMoney", playerMoney);
+            if (playerMoney >= 1000) 
+            {
+                waterLevel++;
+                playerMoney -= 1000;
+                PlayerPrefs.SetInt("waterLevel", waterLevel);
+                PlayerPrefs.SetInt("GameMoney", playerMoney);
+            }
         }
     }
     public void LevelUpLight()
     {
         if (lightLevel <= 20)
         {
-            lightLevel++;
-            playerMoney -= 1000;
-            PlayerPrefs.SetInt("lightLevel", lightLevel);
-            PlayerPrefs.SetInt("GameMoney", playerMoney);
+            if (playerMoney >= 1000)
+            {
+                lightLevel++;
+                playerMoney -= 1000;
+                PlayerPrefs.SetInt("lightLevel", lightLevel);
+                PlayerPrefs.SetInt("GameMoney", playerMoney);
+            }
         }
     }
     public void LevelUpLuck()
     {
         if (luckLevel <= 20)
         {
-            luckLevel++;
-            playerMoney -= 1000;
-            PlayerPrefs.SetInt("luckLevel", luckLevel);
-            PlayerPrefs.SetInt("GameMoney", playerMoney);
+            if (playerMoney >= 1000)
+            {
+                luckLevel++;
+                playerMoney -= 1000;
+                PlayerPrefs.SetInt("luckLevel", luckLevel);
+                PlayerPrefs.SetInt("GameMoney", playerMoney);
+            }
         }
     }
 

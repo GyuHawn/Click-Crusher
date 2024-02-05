@@ -581,6 +581,7 @@ MonoBehaviour:
   rockTime: 0
   rockCoolTime: {fileID: 1698753149}
   rockCoolTimeText: {fileID: 1031743697}
+  useWaterSkill: 0
   waterLevel: 0
   waterEffect: {fileID: 1687118924408352, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
   waterDamage: 5
@@ -643,8 +644,8 @@ MonoBehaviour:
   isPercentDown: 0
   monsterAttackSpdUp: {fileID: 1566930176}
   isMonsterAttackSpdUp: 0
-  monsterSizeUp: {fileID: 61836396}
-  isMonsterSizeUp: 0
+  monsterSizeDown: {fileID: 61836396}
+  isMonsterSizeDown: 0
   buffText: {fileID: 930810558}
 --- !u!1 &5875218
 GameObject:

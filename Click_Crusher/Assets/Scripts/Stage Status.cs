@@ -42,8 +42,8 @@ public class StageStatus : MonoBehaviour
     public bool isPercentDown; // 확률감소
     public GameObject monsterAttackSpdUp; // 투사체 속도 증가
     public bool isMonsterAttackSpdUp; // 투사체 속도 증가
-    public GameObject monsterSizeUp;// 몬스터 크기 감소
-    public bool isMonsterSizeUp;// 몬스터 크기 감소
+    public GameObject monsterSizeDown;// 몬스터 크기 감소
+    public bool isMonsterSizeDown;// 몬스터 크기 감소
     private List<GameObject> deBuffList = new List<GameObject>(); // 디버프 리스트
 
     private GameObject selectedEffect; // 선택된 버프
@@ -73,7 +73,7 @@ public class StageStatus : MonoBehaviour
         deBuffList.Add(timeDown);
         deBuffList.Add(percentDown);
         deBuffList.Add(monsterAttackSpdUp);
-        deBuffList.Add(monsterSizeUp);
+        deBuffList.Add(monsterSizeDown);
 
         // 버프 적용않함
         isDamageUp = false;
@@ -85,7 +85,7 @@ public class StageStatus : MonoBehaviour
         isTimeDown = false;
         isPercentDown = false;
         isMonsterAttackSpdUp = false;
-        isMonsterSizeUp = false;
+        isMonsterSizeDown = false;
     }
 
     void Update()
@@ -181,10 +181,10 @@ public class StageStatus : MonoBehaviour
             }
             else if (status == 6)
             {
-                buffText.text = "몬스터의 사이즈가 증가합니다.";
-                if (!isMonsterSizeUp)
+                buffText.text = "몬스터의 사이즈가 감소합니다.";
+                if (!isMonsterSizeDown)
                 {
-                    MonsterSizeUp();
+                    MonsterSizeDown();
                 }
             }
         }
@@ -373,15 +373,15 @@ public class StageStatus : MonoBehaviour
     }
 
     // 몬스터 크기 증가
-    public void MonsterSizeUp()
+    public void MonsterSizeDown()
     {
-        isMonsterSizeUp = true;
+        isMonsterSizeDown = true;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
         foreach (GameObject monster in monsters)
         {
             Transform monsterTransform = monster.transform;
-            Vector3 newScale = monsterTransform.localScale + new Vector3(0.1f, 0.1f, 0f);
+            Vector3 newScale = monsterTransform.localScale - new Vector3(0.05f, 0.05f, 0f);
             monsterTransform.localScale = newScale;
         }
     }
@@ -480,7 +480,7 @@ public class StageStatus : MonoBehaviour
             isTimeDown = false;
             isPercentDown = false;
             isMonsterAttackSpdUp = false;
-            isMonsterSizeUp = false;
+            isMonsterSizeDown = false;
 
             buff = 0;
             status = 0;

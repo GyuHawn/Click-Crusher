@@ -312,11 +312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8622239201560514732, guid: fccf364a85f444f458a4fcb85ef8086f, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8622239201560514732, guid: fccf364a85f444f458a4fcb85ef8086f, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: MonsterDenefe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

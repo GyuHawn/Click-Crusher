@@ -219,7 +219,7 @@ public class SelectItem : MonoBehaviour
 
             ItemTextClear();
             ItemLevelUp();
-            itemSkill.ItemValueUp();
+            //itemSkill.ItemValueUp();
             itemSkill.GetItem();    
             itemSelecting = false;
             stageManager.selectingItem = false;
