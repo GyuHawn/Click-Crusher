@@ -79,7 +79,6 @@ public class MonsterController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
-        currentHealth = maxHealth;
 
         danager.SetActive(false);
         stop = false;
@@ -88,6 +87,27 @@ public class MonsterController : MonoBehaviour
 
         monsterLayer = LayerMask.NameToLayer("Monster");
         bossLayer = LayerMask.NameToLayer("Boss");
+
+        if (stageManager.mainStage > 8)
+        {
+            maxHealth = maxHealth + ((stageManager.mainStage - 8) * 10);
+
+            if (gameObject.name == "6(Clone)")
+            {
+                maxHealth = maxHealth + ((stageManager.mainStage - 8) * 20);
+            }
+            else if (gameObject.name == "6-2(Clone)")
+            {
+                GameObject monster = GameObject.Find("6(Clone)");
+
+                if(monster != null)
+                {
+                    MonsterController monsterController = monster.GetComponent<MonsterController>();
+                    maxHealth = monsterController.currentHealth / 2;
+                }
+            }
+        }
+        currentHealth = maxHealth;
 
 
 /*        if (gameObject.tag == "Monster")

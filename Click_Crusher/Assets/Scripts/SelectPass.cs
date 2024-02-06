@@ -78,6 +78,9 @@ public class SelectPass : MonoBehaviour
         selecPass = 0;
         passName.text = "";
         passEx.text = "";
+
+        stageManager.passing = true;
+
         passMenu.SetActive(false);
     }
 }

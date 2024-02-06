@@ -33,7 +33,6 @@ public class StageManager : MonoBehaviour
     public int bossMonster; // 보스몬스터 수
     public bool allMonstersSpawned = false; // 모든 몬스터 소환 확인
 
-
     // public int monsterCount = 0; // 소환된 몬스터 수
 
     public float timeLimit; // 스테이지당 제한시간
@@ -46,7 +45,15 @@ public class StageManager : MonoBehaviour
     public TMP_Text rewardMoneyText;
     public TMP_Text finalWaveText;
     public TMP_Text clearText;
-    
+
+    // 스테이지 타일
+    public GameObject tileMap;
+    public GameObject[] stageTile;
+
+    public int tileNum;
+
+    public bool passing;
+
     private void Awake()
     {
         monsterSpawn = GameObject.Find("Manager").GetComponent<MonsterSpwan>();
@@ -66,7 +73,7 @@ public class StageManager : MonoBehaviour
         if (!gameStart)
         {
             mainStage = 1;
-            subStage = 2;
+            subStage = 1;
             StageMonsterSetting();
             SpawnMonsters();
             selectingItem = false;
@@ -74,6 +81,8 @@ public class StageManager : MonoBehaviour
 
             totalTime = 0;
             rewardMoney = 0;
+
+            tileNum = 0;
         }
     }
 
@@ -219,59 +228,107 @@ public class StageManager : MonoBehaviour
     public void NextStage()
     {
         //if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
-
-        allMonstersSpawned = false;
-        characterSkill.CharacterCoolTime();
-
-        if(character.currentCharacter == 2)
+        if (mainStage <= 20)
         {
-            characterSkill.useWaterSkill = false;
+
+            allMonstersSpawned = false;
+            characterSkill.CharacterCoolTime();
+            ResetStageState();
+            
+
+            if (character.currentCharacter == 2)
+            {
+                characterSkill.useWaterSkill = false;
+            }
+
+            if (mainStage < 8)
+            {
+                NextSubStage();
+
+                if (mainStage >= 2)
+                {
+                    if (subStage == 2)
+                    {
+                        selectingItem = true;
+                        SelectPass();
+                    }
+                }
+
+                if (subStage == 3)
+                {
+                    selectItem.ItemSelect();
+                    StartCoroutine(DelayStage());
+                }
+                else if (subStage > 5)
+                {
+                    subStage = 1;
+                    NextMainStage();
+
+                    selectItem.ItemSelect();
+                    StartCoroutine(DelayStage());
+                }
+            }
+            else
+            {
+                if (mainStage % 10 == 2 || mainStage % 10 == 5 || mainStage % 10 == 8)
+                {
+                    selectingItem = true;
+                    SelectPass();
+                }
+                else if (mainStage % 10 == 0 || mainStage % 10 == 6)
+                {
+                    selectItem.ItemSelect();
+                    StartCoroutine(DelayStage());
+                }
+
+                NextMainStage();
+            }
+
+            if (!(mainStage >= 2 && subStage == 2) || !(subStage == 3) || !(subStage > 5))
+            {
+                passing = true;
+            }
+            else if(mainStage >= 8)
+            {
+                if (!(mainStage % 10 == 2) || !(mainStage % 10 == 5) || !(mainStage % 10 == 8) || !(mainStage % 10 == 0) || !(mainStage % 10 == 6))
+                {
+                    passing = true;
+                }
+            }
+            NextStage2();
+        }
+    }
+
+    public void NextStage2()
+    {
+        if (passing)
+        {
+            StartCoroutine(NextStageOrTile());
+        }
+    }
+
+    IEnumerator NextStageOrTile()
+    {
+        tileMap.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+
+        tileNum++;
+
+        for (int i = 0; i <= 3; i++)
+        {
+            stageTile[tileNum].SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            stageTile[tileNum].SetActive(false);
+            yield return new WaitForSeconds(0.5f);
         }
 
-        if (mainStage < 8)
-         {
-             NextSubStage();
+        stageTile[tileNum].SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        passing = false;
+        tileMap.SetActive(false);
 
-            if (mainStage >= 2 && mainStage < 8)
-              {
-                  if (subStage == 2)
-                  {
-                      selectingItem = true;
-                      SelectPass();
-                  }
-              }
+        yield return new WaitForSeconds(0.2f);
 
-              if (subStage == 3)
-              {
-                  selectItem.ItemSelect();
-                  StartCoroutine(DelayStage());
-              }
-              else if (subStage > 5)
-              {
-                  subStage = 1;
-                  NextMainStage();
-
-                  selectItem.ItemSelect();
-                  StartCoroutine(DelayStage());
-              }
-          }
-          else
-          {
-              if (mainStage % 10 == 2 || mainStage % 10 == 5 || mainStage % 10 == 8)
-              {
-                  selectingItem = true;
-                  SelectPass();
-              }
-              else if (mainStage % 10 == 0 || mainStage % 10 == 6)
-              {
-                  selectItem.ItemSelect();
-                  StartCoroutine(DelayStage());
-              }
-
-              NextMainStage();
-         }
-        
-        ResetStageState();
         stageStatus.ResetStatus();
 
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화

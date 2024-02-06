@@ -223,6 +223,7 @@ public class SelectItem : MonoBehaviour
             itemSkill.GetItem();    
             itemSelecting = false;
             stageManager.selectingItem = false;
+            stageManager.passing = true;
             playerController.isAttacking = false;
             Time.timeScale = 1f;
             selectItemMenu.SetActive(false);

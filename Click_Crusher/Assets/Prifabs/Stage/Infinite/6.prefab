@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  maxHealth: 150
+  maxHealth: 200
   currentHealth: 0
   monsterTakeDamage: 1
   playerTakeDamage: 1
