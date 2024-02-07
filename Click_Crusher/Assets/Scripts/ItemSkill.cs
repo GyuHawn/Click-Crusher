@@ -204,8 +204,7 @@ public class ItemSkill : MonoBehaviour
             holyShotPercent = 10f;
             holyWavePercent = 5f;
             rockPercent = 30f;
-            //posionPercent = 10f;
-            posionPercent = 100f;
+            posionPercent = 10f;
             meleePercent = 60f;
             sturnPercent = 30f;
         }

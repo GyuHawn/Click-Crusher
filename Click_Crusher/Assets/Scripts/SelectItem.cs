@@ -173,8 +173,6 @@ public class SelectItem : MonoBehaviour
             }
         }
 
-
-
         selectNum = UnityEngine.Random.Range(0, selectItems.Count) + 1;
 
         Time.timeScale = 0f;
@@ -223,7 +221,10 @@ public class SelectItem : MonoBehaviour
             itemSkill.GetItem();    
             itemSelecting = false;
             stageManager.selectingItem = false;
+
             stageManager.passing = true;
+            stageManager.NextStage2();
+
             playerController.isAttacking = false;
             Time.timeScale = 1f;
             selectItemMenu.SetActive(false);

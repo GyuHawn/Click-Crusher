@@ -80,6 +80,7 @@ public class SelectPass : MonoBehaviour
         passEx.text = "";
 
         stageManager.passing = true;
+        stageManager.NextStage2();
 
         passMenu.SetActive(false);
     }

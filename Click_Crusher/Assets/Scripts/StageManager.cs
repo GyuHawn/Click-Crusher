@@ -25,6 +25,7 @@ public class StageManager : MonoBehaviour
     public int mainStage; // 메인스테이지 (1, 2, 3...)
     public int subStage; // 서브스테이지 (1-1, 1-2...)
     public TMP_Text stageText;
+    private bool isNextStageAvailable = true;
 
     public int base0Monster; // 스테이지 몬스터 [0]의 수
     public int base1Monster; // 스테이지 몬스터 [1]의 수
@@ -53,6 +54,8 @@ public class StageManager : MonoBehaviour
     public int tileNum;
 
     public bool passing;
+
+    public Canvas canvas;
 
     private void Awake()
     {
@@ -88,7 +91,7 @@ public class StageManager : MonoBehaviour
 
     void Update()
     {
-        if(mainStage >= 20)
+        if(mainStage > 20)
         {
             clearText.text = "Game Clear";
             clearText.fontSize = 40;
@@ -228,104 +231,131 @@ public class StageManager : MonoBehaviour
     public void NextStage()
     {
         //if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
-        if (mainStage <= 20)
+        if (isNextStageAvailable)
         {
-
-            allMonstersSpawned = false;
-            characterSkill.CharacterCoolTime();
-            ResetStageState();
-            
-
-            if (character.currentCharacter == 2)
+            if (mainStage <= 20)
             {
-                characterSkill.useWaterSkill = false;
-            }
 
-            if (mainStage < 8)
-            {
-                NextSubStage();
+                allMonstersSpawned = false;
+                characterSkill.CharacterCoolTime();
+                ResetStageState();
 
-                if (mainStage >= 2)
+
+                if (character.currentCharacter == 2)
                 {
-                    if (subStage == 2)
+                    characterSkill.useWaterSkill = false;
+                }
+
+                if (mainStage < 8)
+                {
+                    NextSubStage();
+
+                    if (mainStage >= 2)
+                    {
+                        if (subStage == 2)
+                        {
+                            selectingItem = true;
+                            SelectPass();
+                        }
+                    }
+
+                    if (subStage == 3)
+                    {
+                        selectItem.ItemSelect();
+                        StartCoroutine(DelayStage());
+                    }
+                    else if (subStage > 5)
+                    {
+                        subStage = 1;
+                        NextMainStage();
+
+                        selectItem.ItemSelect();
+                        StartCoroutine(DelayStage());
+                    }
+                }
+                else
+                {
+                    NextMainStage();
+                    if (mainStage == 12 || mainStage == 15 || mainStage == 18)
                     {
                         selectingItem = true;
                         SelectPass();
                     }
+                    else if (mainStage == 10 || mainStage == 16)
+                    {
+                        selectItem.ItemSelect();
+                        StartCoroutine(DelayStage());
+                    }
                 }
 
-                if (subStage == 3)
+                if (mainStage >= 8)
                 {
-                    selectItem.ItemSelect();
-                    StartCoroutine(DelayStage());
+                    if (mainStage == 10 || mainStage == 12 || mainStage == 15 || mainStage == 16 || mainStage == 18)
+                    {
+                    }
+                    else
+                    {
+                        passing = true;
+                        NextStage2();
+                    }
                 }
-                else if (subStage > 5)
+                else
                 {
-                    subStage = 1;
-                    NextMainStage();
-
-                    selectItem.ItemSelect();
-                    StartCoroutine(DelayStage());
-                }
-            }
-            else
-            {
-                if (mainStage % 10 == 2 || mainStage % 10 == 5 || mainStage % 10 == 8)
-                {
-                    selectingItem = true;
-                    SelectPass();
-                }
-                else if (mainStage % 10 == 0 || mainStage % 10 == 6)
-                {
-                    selectItem.ItemSelect();
-                    StartCoroutine(DelayStage());
+                    if ((mainStage >= 2 && (subStage == 1 || subStage == 2)) || subStage == 3)
+                    {
+                    }
+                    else
+                    {
+                        passing = true;
+                        NextStage2();
+                    }
                 }
 
-                NextMainStage();
             }
-
-            if (!(mainStage >= 2 && subStage == 2) || !(subStage == 3) || !(subStage > 5))
-            {
-                passing = true;
-            }
-            else if(mainStage >= 8)
-            {
-                if (!(mainStage % 10 == 2) || !(mainStage % 10 == 5) || !(mainStage % 10 == 8) || !(mainStage % 10 == 0) || !(mainStage % 10 == 6))
-                {
-                    passing = true;
-                }
-            }
-            NextStage2();
+            StartCoroutine(DelayNextStage());
         }
+    }
+
+    IEnumerator DelayNextStage()
+    {
+        isNextStageAvailable = false;
+        yield return new WaitForSeconds(1f); 
+
+        isNextStageAvailable = true; 
     }
 
     public void NextStage2()
     {
-        if (passing)
+        if(mainStage <= 20)
         {
-            StartCoroutine(NextStageOrTile());
+            if (passing)
+            {
+                StartCoroutine(NextStageOrTile());
+            }
         }
     }
 
     IEnumerator NextStageOrTile()
     {
+        canvas.enabled = !canvas.enabled;
         tileMap.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-
+        stageTimeLimit.stageFail = 0f;
         tileNum++;
+        yield return new WaitForSeconds(0.1f);
 
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= 2; i++)
         {
             stageTile[tileNum].SetActive(true);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
             stageTile[tileNum].SetActive(false);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
 
         stageTile[tileNum].SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         passing = false;
         tileMap.SetActive(false);
+        canvas.enabled = !canvas.enabled;
 
         yield return new WaitForSeconds(0.2f);
 
