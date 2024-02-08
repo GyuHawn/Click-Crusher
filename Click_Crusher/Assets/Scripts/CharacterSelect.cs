@@ -101,19 +101,19 @@ public class CharacterSelect : MonoBehaviour
         lightLevelText.text = "Lv. " + lightLevel.ToString();
         luckLevelText.text = "Lv. " + luckLevel.ToString();
 
-        if (rockLevel > 20)
+        if (rockLevel >= 20)
         {
             rockLevelUPButton.SetActive(false);
         }
-        else if (waterLevel > 20)
+        if (waterLevel >= 20)
         {
             waterLevelUPButton.SetActive(false);
         }
-        else if (lightLevel > 20)
+        if (lightLevel >= 20)
         {
             lightLevelUPButton.SetActive(false);
         }
-        else if (luckLevel > 20)
+        if (luckLevel >= 20)
         {
             luckLevelUPButton.SetActive(false);
         }
@@ -128,9 +128,6 @@ public class CharacterSelect : MonoBehaviour
 
         enter = true;
         selectChar = 1;
-
-        playerMoney += 10000;
-        PlayerPrefs.SetInt("GameMoney", playerMoney);
     }
 
     public void WaterChar()

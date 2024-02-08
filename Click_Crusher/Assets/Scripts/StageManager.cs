@@ -50,6 +50,7 @@ public class StageManager : MonoBehaviour
     // 스테이지 타일
     public GameObject tileMap;
     public GameObject[] stageTile;
+    public TMP_Text tileMapStageText;
 
     public int tileNum;
 
@@ -136,6 +137,15 @@ public class StageManager : MonoBehaviour
             gameStart = false;
         }
 
+        if(mainStage <= 9)
+        {
+            tileMapStageText.text = "(0" + mainStage + "/20)";
+        }
+        else
+        {
+            tileMapStageText.text = "(" + mainStage + "/20)";
+        }
+
         totalTime = playerController.gameTime;
         totalTimeText.text = string.Format("{0:00}:{1:00}", Mathf.Floor(totalTime / 60), totalTime % 60);
         finalWaveText.text = mainStage + " - " + subStage;
@@ -174,19 +184,19 @@ public class StageManager : MonoBehaviour
                 case 3:
                     base0Monster = 2;
                     base1Monster = 2;
-                    base2Monster = 2;
+                    base2Monster = 3;
                     break;
                 case 4:
                     base0Monster = 2;
                     base1Monster = 2;
-                    base2Monster = 2;
-                    base3Monster = 2;
+                    base2Monster = 3;
+                    base3Monster = 3;
                     break;
                 case 5:
-                    base0Monster = 2;
+                    base0Monster = 1;
                     base1Monster = 2;
-                    base2Monster = 2;
-                    base3Monster = 2;
+                    base2Monster = 3;
+                    base3Monster = 3;
                     bossMonster = 1;
                     break;
             }
@@ -194,7 +204,7 @@ public class StageManager : MonoBehaviour
         else
         {
             // 8 스테이지 이후
-            base0Monster = 1;
+            base0Monster = 2;
             base1Monster = 1;
             base2Monster = 1;
             base3Monster = mainStage - 7; // 8 스테이지 이후부터 몬스터 증가를 위한 값  
@@ -266,6 +276,7 @@ public class StageManager : MonoBehaviour
                     }
                     else if (subStage > 5)
                     {
+                        Debug.Log("aa");
                         subStage = 1;
                         NextMainStage();
 
@@ -290,7 +301,7 @@ public class StageManager : MonoBehaviour
 
                 if (mainStage >= 8)
                 {
-                    if (mainStage == 10 || mainStage == 12 || mainStage == 15 || mainStage == 16 || mainStage == 18)
+                    if (mainStage == 8 || mainStage == 10 || mainStage == 12 || mainStage == 15 || mainStage == 16 || mainStage == 18)
                     {
                     }
                     else
