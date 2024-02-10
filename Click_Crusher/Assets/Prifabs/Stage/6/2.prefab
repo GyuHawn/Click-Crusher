@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.82, y: -0.13999999, z: -3}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2455747431062757484}
@@ -211,8 +211,8 @@ MonoBehaviour:
   poisonTakeDamage: 1
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
-  attackTime: 2
-  selectedAttackTime: 4
+  attackTime: 1
+  selectedAttackTime: 3
   danager: {fileID: 8476018115513472215}
   dieEffect: {fileID: 5350379968872011371}
   sturn: {fileID: 7810337223986926240}

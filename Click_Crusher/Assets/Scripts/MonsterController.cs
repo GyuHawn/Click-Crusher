@@ -90,11 +90,11 @@ public class MonsterController : MonoBehaviour
 
         if (stageManager.mainStage > 8)
         {
-            maxHealth = maxHealth + ((stageManager.mainStage - 8) * 10);
+            maxHealth = maxHealth + ((stageManager.mainStage - 8) * 15);
 
             if (gameObject.name == "6(Clone)")
             {
-                maxHealth = maxHealth + ((stageManager.mainStage - 8) * 20);
+                maxHealth = maxHealth + ((stageManager.mainStage - 8) * 25);
             }
             else if (gameObject.name == "6-2(Clone)")
             {
@@ -558,7 +558,7 @@ public class MonsterController : MonoBehaviour
             {
                 itemSpawn = true;
 
-                if (Random.Range(0f, 100f) <= 10)
+                if (Random.Range(0f, 100f) <= 5)
                 {
                     GameObject item = Instantiate(healthUpItem, gameObject.transform.position, Quaternion.identity);
                     item.name = "HealthUpItem";

@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -95,5 +95,11 @@ public class GameStart : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+
+
+    public void Vibrate()
+    {
+        Handheld.Vibrate();
     }
 }

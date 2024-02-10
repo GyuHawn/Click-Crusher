@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4910542}
+  - component: {fileID: 4910554}
   - component: {fileID: 4910540}
   - component: {fileID: 4910552}
   - component: {fileID: 4910550}
@@ -192,7 +193,7 @@ MonoBehaviour:
   finalWaveText: {fileID: 1353557512}
   clearText: {fileID: 1022787922}
   tileMap: {fileID: 1350008338}
-  stageTile:
+  stageTiles:
   - {fileID: 1024929471}
   - {fileID: 825873996}
   - {fileID: 624073685}
@@ -714,6 +715,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b397404511f372e41b8f5ca80fd2b746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4910554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e3e24c817b1384e91438d512a60047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextStageText: {fileID: 609683639}
+  stageNext: 0
 --- !u!1 &5875218
 GameObject:
   m_ObjectHideFlags: 0
@@ -24076,7 +24091,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1.96}
-  m_SizeDelta: {x: 20, y: 5}
+  m_SizeDelta: {x: 3.8718, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609683639
 MonoBehaviour:
@@ -24132,7 +24147,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -42891,7 +42906,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 54e88d71e14310d4584c0abdc2548858, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 74de445c6c721cc44b2da6cf27afacf7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -69022,7 +69037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551733586645691044, guid: 954b77fd3bf1fa249b03ce391bce8ce1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 5551733586645691044, guid: 954b77fd3bf1fa249b03ce391bce8ce1, type: 3}
       propertyPath: m_LocalRotation.w

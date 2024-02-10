@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.96, y: 2.53, z: -3}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5526989048669597594}
@@ -243,7 +243,7 @@ MonoBehaviour:
   pRockTakeDamage: 1
   pWaterTakeDamage: 1
   attackTime: 1
-  selectedAttackTime: 3
+  selectedAttackTime: 2.5
   danager: {fileID: 5020511910771679942}
   dieEffect: {fileID: 3724697955075721016}
   sturn: {fileID: 3534169743688409722}

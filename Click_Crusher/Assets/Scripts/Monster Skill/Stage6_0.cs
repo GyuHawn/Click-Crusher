@@ -13,7 +13,7 @@ public class Stage6_0 : MonoBehaviour
 
     IEnumerator MonsterAttack()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 8; i++)
         {
             float randomX = transform.position.x + Random.Range(-2f, 2f);
 

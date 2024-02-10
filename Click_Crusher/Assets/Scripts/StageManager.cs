@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
     private Character character;
     private ItemSkill itemSkill;
     private StageStatus stageStatus;
+    private StageTile stageTile;
 
     public bool gameStart = false; // 게임시작 여부
 
@@ -49,7 +50,7 @@ public class StageManager : MonoBehaviour
 
     // 스테이지 타일
     public GameObject tileMap;
-    public GameObject[] stageTile;
+    public GameObject[] stageTiles;
     public TMP_Text tileMapStageText;
 
     public int tileNum;
@@ -69,6 +70,7 @@ public class StageManager : MonoBehaviour
         character = GameObject.Find("Manager").GetComponent<Character>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         stageStatus = GameObject.Find("Manager").GetComponent<StageStatus>();
+        stageTile = GameObject.Find("Manager").GetComponent<StageTile>();
     }
 
     void Start()
@@ -350,22 +352,24 @@ public class StageManager : MonoBehaviour
     {
         canvas.enabled = !canvas.enabled;
         tileMap.SetActive(true);
+        stageTile.stageNext = true;
         stageTimeLimit.stageFail = 0f;
         tileNum++;
         yield return new WaitForSeconds(0.1f);
 
         for (int i = 0; i <= 2; i++)
         {
-            stageTile[tileNum].SetActive(true);
+            stageTiles[tileNum].SetActive(true);
             yield return new WaitForSeconds(0.3f);
-            stageTile[tileNum].SetActive(false);
+            stageTiles[tileNum].SetActive(false);
             yield return new WaitForSeconds(0.3f);
         }
 
-        stageTile[tileNum].SetActive(true);
+        stageTiles[tileNum].SetActive(true);
         yield return new WaitForSeconds(1f);
         passing = false;
         tileMap.SetActive(false);
+        stageTile.stageNext = false;
         canvas.enabled = !canvas.enabled;
 
         yield return new WaitForSeconds(0.2f);
