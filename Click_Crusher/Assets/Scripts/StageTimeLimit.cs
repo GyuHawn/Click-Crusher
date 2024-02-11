@@ -21,7 +21,7 @@ public class StageTimeLimit : MonoBehaviour
 
     private void Start()
     {
-        stageTime = 60;
+        stageTime = 20;
     }
 
     void Update()

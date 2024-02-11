@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private ItemSkill itemSkill;
     private AudioManager audioManager;
     private CharacterSkill charaterSkill;
+    private Combo combo;
 
     public GameObject[] playerHealthUI;
     public GameObject healthEffect;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public bool die = false;
 
     public int damage;
+    public int comboDamage;
+    public bool comboDamageUP;
     public bool isAttacking = false;
     public bool hitBullet = true;
     public GameObject hubDamageText;
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
         charaterSkill = GameObject.Find("Manager").GetComponent<CharacterSkill>();
+        combo = GameObject.Find("Manager").GetComponent<Combo>();
     }
 
     void Start()
@@ -58,6 +62,7 @@ public class PlayerController : MonoBehaviour
         damage = 10;
         playerHealth = 8;
         UpdateHealthUI();
+        comboDamageUP = false;
 
         gameTime = 0f;
         lastClickPosition = Vector3.zero;
@@ -134,6 +139,7 @@ public class PlayerController : MonoBehaviour
                     audioManager.HitAudio();
 
                     playerHealth -= 1;
+                    combo.comboNum = 0;
                     Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 6f);
                     GameObject effect = Instantiate(healthEffect, transform.position, Quaternion.identity);
                     StartCoroutine(BulletHitCooldown(0.2f));
@@ -148,6 +154,7 @@ public class PlayerController : MonoBehaviour
                     else if (monsterController.moved && hitBullet)
                     {
                         playerHealth -= 1;
+                        combo.comboNum = 0;
                         Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 6f);
                         GameObject effect = Instantiate(healthEffect, transform.position, Quaternion.identity);
                         StartCoroutine(BulletHitCooldown(0.2f));
@@ -157,6 +164,19 @@ public class PlayerController : MonoBehaviour
                         StartCoroutine(AttackMonster(monsterController));
                     }
                 }
+            }
+        }
+
+        if (comboDamageUP)
+        {
+            if(combo.comboNum >= 5) 
+            {
+                comboDamage += 5;
+                comboDamageUP = false;
+            }
+            else if(combo.comboNum < 5)
+            {
+                comboDamage = 0;
             }
         }
     }
@@ -177,6 +197,7 @@ public class PlayerController : MonoBehaviour
     {
         isStageHit = false;      
         playerHealth -= 1;
+        combo.comboNum = 0;
         Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 6f);
         GameObject effect = Instantiate(healthEffect, effectPos, Quaternion.identity);
         yield return new WaitForSeconds(1f);
@@ -236,7 +257,7 @@ public class PlayerController : MonoBehaviour
         if (monsterController.playerTakeDamage)
         {
             AttackEffect(monsterController.gameObject.transform.position);
-            monsterController.currentHealth -= damage;
+            monsterController.currentHealth -= damage + comboDamage;
             PlayerDamageText(monsterController);
         }
 
@@ -284,7 +305,7 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < itemSkill.meleeNum; i++)
             {
-                monsterController.currentHealth -= damage;
+                monsterController.currentHealth -= damage + comboDamage;
 
                 PlayerDamageText(monsterController);
 
@@ -332,6 +353,8 @@ public class PlayerController : MonoBehaviour
 
         if (playerHealth <= 0)
         {
+            Handheld.Vibrate();
+
             GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
             GameObject boss = GameObject.FindWithTag("Boss");
             foreach(GameObject monster in monsters)
@@ -380,7 +403,7 @@ public class PlayerController : MonoBehaviour
         if(monsterController != null)
         {
             GameObject damegeText = Instantiate(hubDamageText, monsterController.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-            damegeText.GetComponent<DamageText>().damege = damage;
+            damegeText.GetComponent<DamageText>().damege = (damage + comboDamage);
         }
     }
 

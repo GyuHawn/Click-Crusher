@@ -19,6 +19,7 @@ public class StageManager : MonoBehaviour
     private ItemSkill itemSkill;
     private StageStatus stageStatus;
     private StageTile stageTile;
+    private Combo combo;
 
     public bool gameStart = false; // 게임시작 여부
 
@@ -46,6 +47,7 @@ public class StageManager : MonoBehaviour
     public TMP_Text totalTimeText;
     public TMP_Text rewardMoneyText;
     public TMP_Text finalWaveText;
+    public TMP_Text maxComboText;
     public TMP_Text clearText;
 
     // 스테이지 타일
@@ -71,6 +73,7 @@ public class StageManager : MonoBehaviour
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         stageStatus = GameObject.Find("Manager").GetComponent<StageStatus>();
         stageTile = GameObject.Find("Manager").GetComponent<StageTile>();
+        combo = GameObject.Find("Manager").GetComponent<Combo>();
     }
 
     void Start()
@@ -150,7 +153,15 @@ public class StageManager : MonoBehaviour
 
         totalTime = playerController.gameTime;
         totalTimeText.text = string.Format("{0:00}:{1:00}", Mathf.Floor(totalTime / 60), totalTime % 60);
-        finalWaveText.text = mainStage + " - " + subStage;
+        if(mainStage < 8)
+        {
+            finalWaveText.text = mainStage + " - " + subStage + " Wave";
+        }
+        else if(mainStage >= 8)
+        {
+            finalWaveText.text = mainStage + " Wave";
+        }
+        maxComboText.text = combo.maxComboNum.ToString();
         rewardMoneyText.text = rewardMoney.ToString();
     }
 
@@ -159,6 +170,7 @@ public class StageManager : MonoBehaviour
         if (gameStart)
         {
             rewardMoney += (int)(totalTime * 1);
+            rewardMoney += combo.maxComboNum;
 
             int playerMoney = PlayerPrefs.GetInt("GameMoney", 0);
 

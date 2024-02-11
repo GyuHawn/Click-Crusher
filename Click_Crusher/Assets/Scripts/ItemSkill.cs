@@ -166,13 +166,13 @@ public class ItemSkill : MonoBehaviour
         rockDamagePercent = 1.5f + (0.5f * selectItem.rockLv);
 
         // °ø°Ý·Â
-        fireDamage = playerController.damage * fireDamagePercent;
-        fireShotDamage = playerController.damage * fireShotDamagePercent;
-        fireShotSubDamage = playerController.damage * fireShotSubDamagePercent;
-        holyWaveDamage = playerController.damage * holyWaveDamagePercent;
-        holyShotDamage = playerController.damage * holyShotDamagePercent;
-        poisonDamage = playerController.damage * poisonDamagePercent;
-        rockDamage = playerController.damage * rockDamagePercent;
+        fireDamage = (playerController.damage + playerController.comboDamage) * fireDamagePercent;
+        fireShotDamage = (playerController.damage + playerController.comboDamage) * fireShotDamagePercent;
+        fireShotSubDamage = (playerController.damage + playerController.comboDamage) * fireShotSubDamagePercent;
+        holyWaveDamage = (playerController.damage + playerController.comboDamage) * holyWaveDamagePercent;
+        holyShotDamage = (playerController.damage + playerController.comboDamage) * holyShotDamagePercent;
+        poisonDamage = (playerController.damage + playerController.comboDamage) * poisonDamagePercent;
+        rockDamage = (playerController.damage + playerController.comboDamage) * rockDamagePercent;
 
         // °¹¼ö
         fireShotSubNum = 2 + (1 * selectItem.fireShotLv);

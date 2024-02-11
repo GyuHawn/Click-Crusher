@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class MonsterController : MonoBehaviour
@@ -10,6 +11,7 @@ public class MonsterController : MonoBehaviour
     private ItemSkill itemSkill;
     private AudioManager audioManager;
     private StageManager stageManager;
+    private Combo combo;
 
     public int damage;
     public float maxHealth;
@@ -42,6 +44,7 @@ public class MonsterController : MonoBehaviour
     public GameObject sturn;
     private bool isMonsterAttacking = false;
     private bool isBossAttacking = false;
+    private bool isDie = false;
 
     // 플레이어 기술 관련
     public bool fired; // 불
@@ -72,6 +75,7 @@ public class MonsterController : MonoBehaviour
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         audioManager = GameObject.Find("Manager").GetComponent<AudioManager>();
         stageManager = GameObject.Find("Manager").GetComponent<StageManager>();
+        combo = GameObject.Find("Manager").GetComponent<Combo>();
     }
 
     void Start()
@@ -329,6 +333,7 @@ public class MonsterController : MonoBehaviour
             {
                 bossAttackNum = 0;
                 playerController.playerHealth -= damage;
+                combo.comboNum = 0;
             }         
         }
 
@@ -562,7 +567,20 @@ public class MonsterController : MonoBehaviour
                 {
                     GameObject item = Instantiate(healthUpItem, gameObject.transform.position, Quaternion.identity);
                     item.name = "HealthUpItem";
-                }
+                }               
+            }
+        }
+
+        if (!isDie)
+        {
+            isDie = true;
+            
+            combo.comboNum++;
+            combo.ComboUp();
+
+            if(combo.comboNum % 5 == 0)
+            {
+                playerController.comboDamageUP = true;
             }
         }
 
@@ -584,6 +602,7 @@ public class MonsterController : MonoBehaviour
         }
         else
         {
+            
             Destroy(gameObject);
         }
     }

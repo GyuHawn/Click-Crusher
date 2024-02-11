@@ -96,10 +96,4 @@ public class GameStart : MonoBehaviour
     {
         Application.Quit();
     }
-
-
-    public void Vibrate()
-    {
-        Handheld.Vibrate();
-    }
 }

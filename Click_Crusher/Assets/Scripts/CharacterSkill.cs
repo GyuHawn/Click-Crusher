@@ -50,8 +50,8 @@ public class CharacterSkill : MonoBehaviour
 
     void Update()
     {
-        rockDamage = (int)(playerController.damage + (playerController.damage * (0.1f * rockLevel)));
-        waterDamage = (int)(playerController.damage * (0.1f * waterLevel));
+        rockDamage = (int)((playerController.damage + playerController.comboDamage) + (playerController.damage * (0.1f * rockLevel)));
+        waterDamage = (int)((playerController.damage + playerController.comboDamage) * (0.1f * waterLevel));
         sturnTime = 3 + (0.1f * sturnLevel);
 
         if (rockTime > 0)
