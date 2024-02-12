@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject healthEffect;
     public int playerHealth;
     public GameObject gameover;
-    public bool die = false;
+    public bool die;
 
     public int damage;
     public int comboDamage;
@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        die = false;
+
         defending = false;
 
         damage = 10;
@@ -351,8 +353,9 @@ public class PlayerController : MonoBehaviour
             playerHealthUI[playerHealth].SetActive(true);
         }
 
-        if (playerHealth <= 0)
+        if (playerHealth <= 0 && !die)
         {
+            die = true;
             Handheld.Vibrate();
 
             GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
@@ -372,7 +375,6 @@ public class PlayerController : MonoBehaviour
             gameover.SetActive(true);
         }
     }
-
     public void Defense()
     {
         if (defenseTime <= 0)

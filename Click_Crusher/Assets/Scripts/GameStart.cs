@@ -16,9 +16,19 @@ public class GameStart : MonoBehaviour
 
     public GameObject source;
 
+    public GameObject startPoint;
+    public GameObject settingPoint;
+    public GameObject tutorialPoint;
+    public GameObject exitPoint;
+
     private void Start()
     {
         onSetting = false;
+
+        startPoint.SetActive(false);
+        settingPoint.SetActive(false);
+        tutorialPoint.SetActive(false);
+        exitPoint.SetActive(false);
 
         startMenuPos = new Vector3(870f, settingMenu.transform.localPosition.y, settingMenu.transform.localPosition.z);
         endMenuPos = new Vector3(540f, settingMenu.transform.localPosition.y, settingMenu.transform.localPosition.z);
@@ -26,14 +36,7 @@ public class GameStart : MonoBehaviour
 
     public void NewGame()
     {
-        LodingController.LoadNextScene("Character");
-        //   StartCoroutine(GameStartButton());
-    }
-    
-    IEnumerator GameStartButton()
-    {
-        yield return new WaitForSeconds(1f);
-
+        startPoint.SetActive(true);
         LodingController.LoadNextScene("Character");
     }
 
@@ -44,6 +47,8 @@ public class GameStart : MonoBehaviour
 
     IEnumerator MoveSettingMenu()
     {
+        settingPoint.SetActive(true);
+
         if (!onSetting)
         {
             float elapsed = 0f;
@@ -72,7 +77,8 @@ public class GameStart : MonoBehaviour
             settingMenu.transform.localPosition = startMenuPos;
             onSetting = false;
         }
-        
+
+        settingPoint.SetActive(false);
     }
 
     public void OnResetMenu()
@@ -94,6 +100,7 @@ public class GameStart : MonoBehaviour
 
     public void Exit()
     {
+        exitPoint.SetActive(true);
         Application.Quit();
     }
 }
