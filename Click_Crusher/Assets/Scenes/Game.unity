@@ -28135,7 +28135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Reward Money : '
+  m_text: "\uD68D\uB4DD \uBA38\uB2C8 : "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
   m_sharedMaterial: {fileID: 7150721134416835561, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
@@ -31549,7 +31549,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\rTotal Time : "
+  m_text: "\uCD1D \uC2DC\uAC04 : "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
   m_sharedMaterial: {fileID: 7150721134416835561, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
@@ -34478,7 +34478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Max Combo :'
+  m_text: "\uCD5C\uACE0 \uCF64\uBCF4 :"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
   m_sharedMaterial: {fileID: 7150721134416835561, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
@@ -35950,7 +35950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &899482101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38753,7 +38753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: "\uC120\uD0DD"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 58516f511ee860544814fc6780df36d5, type: 2}
   m_sharedMaterial: {fileID: 5459239460594059912, guid: 58516f511ee860544814fc6780df36d5, type: 2}
@@ -40818,7 +40818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Result
+  m_text: "\uAC8C\uC784 \uC885\uB8CC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
   m_sharedMaterial: {fileID: 7150721134416835561, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
@@ -55979,7 +55979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1521765858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61122,7 +61122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Main
+  m_text: "\uBA54\uC778\uC73C\uB85C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
   m_sharedMaterial: {fileID: 7150721134416835561, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
@@ -66515,7 +66515,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Final Wave :'
+  m_text: "\uCD5C\uCD1D \uC2A4\uD14C\uC774\uC9C0 :"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
   m_sharedMaterial: {fileID: 7150721134416835561, guid: c7fd215e1e3603b439d33d3dcf5c45e4, type: 2}
@@ -68390,7 +68390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: "\uC120 \uD0DD"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 58516f511ee860544814fc6780df36d5, type: 2}
   m_sharedMaterial: {fileID: 5459239460594059912, guid: 58516f511ee860544814fc6780df36d5, type: 2}
@@ -72003,14 +72003,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 1}
+  m_Color: {r: 0.30588236, g: 0.30588236, b: 0.30588236, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 46ede435fa317c4478735b47e947bb95, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3da058a5994840a459c872e913b477bd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -99,7 +99,7 @@ public class StageManager : MonoBehaviour
     {
         if(mainStage > 20)
         {
-            clearText.text = "Game Clear";
+            clearText.text = "게임 클리어!!";
             clearText.fontSize = 40;
             Time.timeScale = 0f;
             Reward();

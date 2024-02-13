@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.ComponentModel;
+using UnityEditor;
+using TMPro;
 
 public class GameStart : MonoBehaviour
 {
@@ -16,27 +19,48 @@ public class GameStart : MonoBehaviour
 
     public GameObject source;
 
-    public GameObject startPoint;
-    public GameObject settingPoint;
-    public GameObject tutorialPoint;
-    public GameObject exitPoint;
+    public GameObject tutorialMenu;
+    public GameObject[] tutorials;
+    public int tutorialNum;
+
+    public TMP_Text startMenuText;
+    public TMP_Text settingMenuText;
+    public TMP_Text tutorialMenuText;
+    public TMP_Text exitMenuText;
+
+
 
     private void Start()
     {
         onSetting = false;
 
-        startPoint.SetActive(false);
-        settingPoint.SetActive(false);
-        tutorialPoint.SetActive(false);
-        exitPoint.SetActive(false);
+        tutorialNum = -1;
 
         startMenuPos = new Vector3(870f, settingMenu.transform.localPosition.y, settingMenu.transform.localPosition.z);
         endMenuPos = new Vector3(540f, settingMenu.transform.localPosition.y, settingMenu.transform.localPosition.z);
+
+        startMenuText.color = Color.black;
+        settingMenuText.color = Color.black;
+        tutorialMenuText.color = Color.black;
+        exitMenuText.color = Color.black;
+    }
+    private void Update()
+    {
+        for (int i = 0; i < tutorials.Length; i++)
+        {
+            tutorials[i].SetActive(i == tutorialNum);
+        }
+
+        if(tutorialNum >= 6)
+        {
+            tutorialMenuText.color = Color.black;
+            tutorialMenu.SetActive(false);
+        }
     }
 
     public void NewGame()
     {
-        startPoint.SetActive(true);
+        startMenuText.color = Color.white;
         LodingController.LoadNextScene("Character");
     }
 
@@ -47,7 +71,7 @@ public class GameStart : MonoBehaviour
 
     IEnumerator MoveSettingMenu()
     {
-        settingPoint.SetActive(true);
+        settingMenuText.color = Color.white;
 
         if (!onSetting)
         {
@@ -78,7 +102,7 @@ public class GameStart : MonoBehaviour
             onSetting = false;
         }
 
-        settingPoint.SetActive(false);
+        settingMenuText.color = Color.black;
     }
 
     public void OnResetMenu()
@@ -92,6 +116,28 @@ public class GameStart : MonoBehaviour
         resetMenu.SetActive(false);
         settingMenu.SetActive(false);
     }
+    public void OnTutorial()
+    {
+        tutorialMenuText.color = Color.white;
+        tutorialMenu.SetActive(true);
+        tutorialNum = 0;
+    }
+
+    public void NextTutorial()
+    {
+        if(tutorialNum < tutorials.Length)
+        {
+            tutorialNum++;
+        }
+    }
+    
+    public void BeforeTutorial()
+    {
+        if (tutorialNum > 0)
+        {
+            tutorialNum--;
+        }     
+    }
 
     public void OnSource()
     {
@@ -100,7 +146,7 @@ public class GameStart : MonoBehaviour
 
     public void Exit()
     {
-        exitPoint.SetActive(true);
+        exitMenuText.color = Color.black;
         Application.Quit();
     }
 }

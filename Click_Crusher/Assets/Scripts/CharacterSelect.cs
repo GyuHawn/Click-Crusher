@@ -56,6 +56,7 @@ public class CharacterSelect : MonoBehaviour
         luckLevel = PlayerPrefs.GetInt("luckLevel", 1);
 
         enter = false;
+        enterText.color = Color.black;
     }
 
     void Update()
@@ -70,8 +71,8 @@ public class CharacterSelect : MonoBehaviour
         }
         else
         {
-            enterText.fontSize = 60f;
-            enterText.text = "Start";
+            enterText.fontSize = 50f;
+            enterText.text = "게임시작";
         }
 
         if (waterChar)
@@ -262,9 +263,21 @@ public class CharacterSelect : MonoBehaviour
     {
         if (enter)
         {
+            enterText.color = Color.white;
             PlayerPrefs.SetInt("SelectChar", selectChar);
             StartCoroutine(GameStartButton());
         }
+        else
+        {
+            StartCoroutine(EnterTextColor());
+        }
+    }
+
+    IEnumerator EnterTextColor()
+    {
+        enterText.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        enterText.color = Color.black;
     }
 
     IEnumerator GameStartButton()
