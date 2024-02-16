@@ -6,18 +6,20 @@ using TMPro;
 public class Combo : MonoBehaviour
 {
     public GameObject comboObj;
-    public int comboNum;
-    public int maxComboNum;
-    public TMP_Text comboText;
+    public int comboNum; // 현재 콤보수
+    public int maxComboNum; // 최대 콤보수
+    public TMP_Text comboText; // 콤보 텍스트
 
-    public float maxScale;
-    public float minScale;
-    public float scaleSpeed;
+    // 콤보수 변경시 텍스트 크기 관리
+    public float maxScale; // 크기 증가
+    public float minScale; // 크기 감소
+    public float scaleSpeed; // 증감 속도
 
     void Start()
     {
-        comboObj.SetActive(false);
+        comboObj.SetActive(false); 
 
+        // 텍스트 크기 및 콤보수 초기화
         maxScale = 100f;
         minScale = 60f;
         scaleSpeed = 400f;
@@ -26,8 +28,9 @@ public class Combo : MonoBehaviour
 
     void Update()
     {
-        comboText.text = comboNum.ToString();
+        comboText.text = comboNum.ToString(); // 콤보수 변경
 
+        // 콤보수 0일시 비활성화
         if (comboNum <= 0)
         {
             comboObj.SetActive(false);
@@ -42,12 +45,14 @@ public class Combo : MonoBehaviour
     {
         StartCoroutine(ScaleComboText());
 
+        // 최대 콤보수 관리
         if (comboNum > maxComboNum)
         {
             maxComboNum = comboNum;
         }
     }
 
+    // 콤보수 변경시 텍스트의 크기가 키웠다가 줄어듬
     IEnumerator ScaleComboText()
     {
         float currentScale = comboText.fontSize;

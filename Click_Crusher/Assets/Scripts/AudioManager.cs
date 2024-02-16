@@ -50,6 +50,7 @@ public class AudioManager : MonoBehaviour
     {
         StopAudio();
 
+        // 전체 볼륨 조절
         float bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 1.0f);
         float genVolume = PlayerPrefs.GetFloat("GenVolume", 1.0f);
 
@@ -86,6 +87,7 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
+        // 전체 볼륨 조절
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             bgmMainMenu.volume = bgmSlider.value;
@@ -133,7 +135,7 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetFloat("GenVolume", generalSlider.value);
     }
 
-    // function
+    // 소리 재생
     public void AttackAudio()
     {
         attackAudio.Play();

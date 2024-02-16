@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraResolution : MonoBehaviour
 {
+    // 화면 비율 조절
     private void Awake()
     {
         Camera camera = GetComponent<Camera>();

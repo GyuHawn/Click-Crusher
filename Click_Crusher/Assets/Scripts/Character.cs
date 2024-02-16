@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
-    public int currentCharacter;
+    public int currentCharacter; // 현재 선택한 캐릭터
   
+    // 캐릭터
     public bool rock;
     public bool water;
     public bool lihgt;
@@ -16,6 +17,7 @@ public class Character : MonoBehaviour
     {
         currentCharacter = PlayerPrefs.GetInt("SelectChar");
 
+        // 캐릭터 초기화
         rock = false;
         water = false;
         lihgt = false;
@@ -25,6 +27,7 @@ public class Character : MonoBehaviour
     
     void Update()
     {
+        // 선택한 캐릭터
         if(currentCharacter == 1) 
         {
             rock = true;

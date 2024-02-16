@@ -8,10 +8,10 @@ public class StageTimeLimit : MonoBehaviour
 {
     private StageManager stageManager;
 
-    public Image timeImage;
+    public Image timeImage; // 제한시간 시각적 관리용 이미지
 
-    public float stageTime;
-    public float stageFail;
+    public float stageTime; // 제한시간
+    public float stageFail; // 경과한 시간
     public TMP_Text timeText;
 
     private void Awake()
@@ -21,17 +21,19 @@ public class StageTimeLimit : MonoBehaviour
 
     private void Start()
     {
-        stageTime = 20;
+        stageTime = 20; // 제한시간 설정
     }
 
     void Update()
     {
+        // 남은 시간 표시
         timeText.text = ((int)(stageTime - stageFail)).ToString();
 
         if (stageManager.gameStart)
         {
             if (!stageManager.selectingItem)
             {
+                // 시간 관리
                 if (stageFail > stageTime)
                 {
                     stageFail = 0.0f;

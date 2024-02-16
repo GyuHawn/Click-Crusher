@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Option : MonoBehaviour
 {
-    public GameObject settingMenu;
-    public float moveDuration = 1.0f;
-    private Vector3 startMenuPos;
+    public GameObject settingMenu; // 옵션 버튼
+    public float moveDuration = 1.0f; // 옵션창 이동시간
+    private Vector3 startMenuPos; // 옵션창 위치관리
     private Vector3 endMenuPos;
-    private bool onSetting;
+    private bool onSetting; // 옵션 활성화
 
     private void Start()
     {
@@ -24,6 +24,7 @@ public class Option : MonoBehaviour
 
     IEnumerator MoveSettingMenu()
     {
+        // 옵션창 비활성화시 처음 위치로 이동
         if (!onSetting)
         {
             float elapsed = 0f;
@@ -38,7 +39,7 @@ public class Option : MonoBehaviour
             settingMenu.transform.localPosition = endMenuPos;
             onSetting = true;
         }
-        else
+        else // 옵션창 활성화시 정해진 위치로 이동
         {
             float elapsed = 0f;
 
