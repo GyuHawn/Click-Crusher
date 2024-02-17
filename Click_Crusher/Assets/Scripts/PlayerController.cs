@@ -12,37 +12,37 @@ public class PlayerController : MonoBehaviour
     private CharacterSkill charaterSkill;
     private Combo combo;
 
-    public GameObject[] playerHealthUI;
-    public GameObject healthEffect;
-    public int playerHealth;
-    public GameObject gameover;
-    public bool die;
+    public GameObject[] playerHealthUI; // 체력 표시
+    public GameObject healthEffect; // 피격 표시 이펙트
+    public int playerHealth; // 현재 체력
+    public GameObject gameover; // 게임 종료 표시
+    public bool die; // 사망 하였는지
 
-    public int damage;
-    public int comboDamage;
-    public bool comboDamageUP;
-    public bool isAttacking = false;
-    public bool hitBullet = true;
-    public GameObject hubDamageText;
+    public int damage; // 데미지
+    public int comboDamage; // 콤보로 증가한 데미지
+    public bool comboDamageUP; // 데미지 무한 증가 방지 변수
+    public bool isAttacking = false; // 공격 속도 (다음 공격까지 시간을 주기위함)
+    public bool hitBullet = true; // 몬스터에게 공격 받았는지
+    public GameObject hubDamageText; // 데미지 시각적 표시
 
-    public GameObject defenseEffect;
-    public bool defending;
-    public float defenseTime;
-    public GameObject defenseCoolTime;
+    public GameObject defenseEffect; // 방어 이펙트
+    public bool defending; // 방어 중인지
+    public float defenseTime; // 방어 쿨타임
+    public GameObject defenseCoolTime; // 쿨타임 표시
     public TMP_Text defenseCoolTimeText;
 
     public int money;
 
-    public float gameTime;
+    public float gameTime; // 총시간 표시
     public TMP_Text gameTimeText;
 
     public bool isDragging = false; // 드래그 중인지
 
-    public GameObject attckEffect;
+    public GameObject attckEffect; // 공격 이펙트
     public GameObject dragEffect;
 
-    public bool stage5Debuff = false;
-    public bool isStageHit = true;
+    public bool stage5Debuff = false; //보스 스킬 관련
+    public bool isStageHit = true; 
 
     public Vector3 lastClickPosition; // 마지막 클릭위치
 
@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateHealthUI();
 
+        // 방어 쿨타임 관련
         if (defenseTime >= 0)
         {
             defenseCoolTimeText.text = ((int)defenseTime).ToString();
@@ -84,9 +85,11 @@ public class PlayerController : MonoBehaviour
             defenseCoolTime.SetActive(false);
         }
 
+        // 총 시간 표시
         gameTime += Time.deltaTime;
         gameTimeText.text = string.Format("{0:00}:{1:00}", Mathf.Floor(gameTime / 60), gameTime % 60);
         
+        // 드래그 공격 관련
         if (Input.GetMouseButtonDown(0))
         {
             isDragging = true;
@@ -99,12 +102,14 @@ public class PlayerController : MonoBehaviour
             dragEffect.SetActive(false);
         }
 
+        // 드래그 공격 이펙트
         if (isDragging)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dragEffect.transform.position = new Vector3(mousePosition.x, mousePosition.y, dragEffect.transform.position.z);
         }
 
+        // 공격 관련
         if (isDragging && !isAttacking)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -112,17 +117,21 @@ public class PlayerController : MonoBehaviour
 
             lastClickPosition = worldPoint;
 
+            // 공격 시
             if (hit.collider != null)
             {
                 MonsterController monsterController = hit.collider.GetComponent<MonsterController>();
+
+                // 보스 스킬에 공격이 닿았을시
                 if (hit.collider.CompareTag("Stage6") || hit.collider.CompareTag("Stage4") || hit.collider.CompareTag("Stage7"))
                 {
                     if (isStageHit)
                     {                    
-                        StartCoroutine(Stage6Hit());
+                        StartCoroutine(StageBossHit());
                     }
                 }
 
+                // 회복 아이템 획득
                 if (hit.collider.CompareTag("HealthUp"))
                 {
                     if(playerHealth >= 8)
@@ -136,24 +145,26 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                // 몬스터 공격에 닿을시
                 if (hit.collider.CompareTag("Bullet") && hitBullet)
                 {
                     audioManager.HitAudio();
 
-                    playerHealth -= 1;
-                    combo.comboNum = 0;
-                    Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 6f);
+                    playerHealth -= 1; // 체력 감소
+                    combo.comboNum = 0; // 콤보 초기화
+                    Vector3 effectPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 6f); // 피격 이펙트
                     GameObject effect = Instantiate(healthEffect, transform.position, Quaternion.identity);
-                    StartCoroutine(BulletHitCooldown(0.2f));
+                    StartCoroutine(BulletHitCooldown(0.2f)); // 재 피격가능까지 시간
                 }
 
+                // 몬스터 공격시
                 if (monsterController != null)
                 {
                     if (monsterController.boss1Defending)
                     {
-
+                        // 1스테이지 보스 스킬중 몬스터 공격 불가
                     }
-                    else if (monsterController.moved && hitBullet)
+                    else if (monsterController.moved && hitBullet) // 이동관련 공격 몬스터
                     {
                         playerHealth -= 1;
                         combo.comboNum = 0;
@@ -163,12 +174,13 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        StartCoroutine(AttackMonster(monsterController));
+                        StartCoroutine(AttackMonster(monsterController)); // 몬스터 공격 성공
                     }
                 }
             }
         }
 
+        // 콤보 증가시 데미지 증가
         if (comboDamageUP)
         {
             if(combo.comboNum >= 5) 
@@ -183,6 +195,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // 플레이어 재 피격가능까지 시간
     IEnumerator BulletHitCooldown(float damageCooldown)
     {
         hitBullet = false;
@@ -190,12 +203,14 @@ public class PlayerController : MonoBehaviour
         hitBullet = true;
     }
 
+    // 플레이어가 클릭중인 위치 (플레이어 드래그를 따라가는 몬스터용)
     public Vector3 GetLastClickPosition()
     {
         return lastClickPosition;
     }
 
-    IEnumerator Stage6Hit()
+    // 보스 스킬에 피격시
+    IEnumerator StageBossHit()
     {
         isStageHit = false;      
         playerHealth -= 1;
@@ -206,6 +221,7 @@ public class PlayerController : MonoBehaviour
         isStageHit = true;
     }
 
+    // 몬스터 공격시 몬스터 주위에 공격 이펙트 생성
     void AttackEffect(Vector3 targetPosition)
     {
         float xOffset = Random.Range(-0.5f, 0.5f);
@@ -244,11 +260,12 @@ public class PlayerController : MonoBehaviour
         Destroy(effectTransform.gameObject);
     }
 
+    // 몬스터 공격
     IEnumerator AttackMonster(MonsterController monsterController)
     {
         isAttacking = true;
 
-        if (monsterController.defense)
+        if (monsterController.defense) // 몬스터가 방어중일때 공격 불가
         {
             isAttacking = false;
             yield break;
@@ -256,15 +273,17 @@ public class PlayerController : MonoBehaviour
 
         audioManager.AttackAudio();
 
+        // 몬스터 공격 가능시 공격성공
         if (monsterController.playerTakeDamage)
         {
-            AttackEffect(monsterController.gameObject.transform.position);
-            monsterController.currentHealth -= damage + comboDamage;
-            PlayerDamageText(monsterController);
+            AttackEffect(monsterController.gameObject.transform.position); // 공격 이펙트 생성
+            monsterController.currentHealth -= damage + comboDamage; // 몬스터 체력 감소
+            PlayerDamageText(monsterController); // 데미지 표시
         }
 
         itemSkill.SetCurrentAttackedMonster(monsterController.gameObject);
 
+        // 플레이어 공격 속도 감소 (스테이지 5보스 스킬 - 공격 속도 감소)
         if (stage5Debuff)
         {
             monsterController.PlayerDamegeCoolDown(3f, 0.2f);
@@ -274,7 +293,7 @@ public class PlayerController : MonoBehaviour
             monsterController.PlayerDamegeCoolDown(0.2f, 0.2f);
         }
 
-
+        // 공격시 확률적으로 아이템 발동
         if (itemSkill.isFire && Random.Range(0f, 100f) <= itemSkill.firePercent)
         {
             itemSkill.Fire(monsterController.gameObject.transform.position);
@@ -341,24 +360,26 @@ public class PlayerController : MonoBehaviour
         isAttacking = false; // 공격이 끝남
     }
 
+    // 체력 관련
     void UpdateHealthUI()
     {
-        for (int i = 0; i < playerHealthUI.Length; i++)
+        for (int i = 0; i < playerHealthUI.Length; i++) // 나머지 체력 비활성화
         {
             playerHealthUI[i].SetActive(false);
         }
 
-        if (playerHealth >= 0)
+        if (playerHealth >= 0) // 체력 표시
         {
             playerHealthUI[playerHealth].SetActive(true);
         }
 
+        // 사망
         if (playerHealth <= 0 && !die)
         {
             die = true;
-            Handheld.Vibrate();
+            Handheld.Vibrate(); // 사망시 진동
 
-            GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+            GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); // 맵의 몬스터 전체 삭제
             GameObject boss = GameObject.FindWithTag("Boss");
             foreach(GameObject monster in monsters)
             {
@@ -367,14 +388,16 @@ public class PlayerController : MonoBehaviour
             Destroy(boss);
 
             playerHealthUI[0].SetActive(true);
-            Time.timeScale = 0f;
-            stageManager.Reward();
-            isDragging = false;
+            Time.timeScale = 0f; // 게임 멈추기
+            stageManager.Reward(); // 종료 결과
+            isDragging = false; 
             dragEffect.SetActive(false);
-            stageManager.gameStart = false;
-            gameover.SetActive(true);
+            stageManager.gameStart = false; // 게임종료 상태로 변경
+            gameover.SetActive(true); // 결과창 표시
         }
     }
+
+    // 방어
     public void Defense()
     {
         if (defenseTime <= 0)

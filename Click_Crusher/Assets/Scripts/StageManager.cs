@@ -40,10 +40,10 @@ public class StageManager : MonoBehaviour
 
     public float timeLimit; // 스테이지당 제한시간
 
-    public bool selectingItem;
+    public bool selectingPass; // 패시브 선택중인지
     
-    public float totalTime;
-    public int rewardMoney;
+    public float totalTime; // 총 시간
+    public int rewardMoney; // 획득 머니
     public TMP_Text totalTimeText;
     public TMP_Text rewardMoneyText;
     public TMP_Text finalWaveText;
@@ -55,9 +55,9 @@ public class StageManager : MonoBehaviour
     public GameObject[] stageTiles;
     public TMP_Text tileMapStageText;
 
-    public int tileNum;
+    public int tileNum; // 현재 스테이지 표시
 
-    public bool passing;
+    public bool passing; // 스테이지 타일 표시 중
 
     public Canvas canvas;
 
@@ -85,7 +85,7 @@ public class StageManager : MonoBehaviour
             subStage = 1;
             StageMonsterSetting();
             SpawnMonsters();
-            selectingItem = false;
+            selectingPass = false;
             gameStart = true;
 
             totalTime = 0;
@@ -97,6 +97,7 @@ public class StageManager : MonoBehaviour
 
     void Update()
     {
+        // 게임 클리어
         if(mainStage > 20)
         {
             clearText.text = "게임 클리어!!";
@@ -107,6 +108,7 @@ public class StageManager : MonoBehaviour
             playerController.gameover.SetActive(true);
         }
 
+        // 스테이지 맵 변경
         if (mainStage <= 8)
         {
             for (int i = 0; i < mainStage - 1; ++i)
@@ -126,7 +128,7 @@ public class StageManager : MonoBehaviour
             map[7].SetActive(true);
         }
 
-
+        // 스테이지 표시 텍스트 변경
         if (mainStage <= 7)
         {
             stageText.text = "Stage " + mainStage + "-" + subStage;
@@ -136,12 +138,14 @@ public class StageManager : MonoBehaviour
             stageText.text = "Stage " + mainStage;
         }
 
+        // 제한시간 초과시 게임종료
         if(stageTimeLimit.stageFail >= stageTimeLimit.stageTime)
         {
             playerController.gameover.SetActive(true);
             gameStart = false;
         }
 
+        // 스테이지타일에서 현재 스테이지 표시
         if(mainStage <= 9)
         {
             tileMapStageText.text = "(0" + mainStage + "/20)";
@@ -151,6 +155,7 @@ public class StageManager : MonoBehaviour
             tileMapStageText.text = "(" + mainStage + "/20)";
         }
 
+        // 게임종료 결과 표시, 집계
         totalTime = playerController.gameTime;
         totalTimeText.text = string.Format("{0:00}:{1:00}", Mathf.Floor(totalTime / 60), totalTime % 60);
         if(mainStage < 8)
@@ -165,6 +170,7 @@ public class StageManager : MonoBehaviour
         rewardMoneyText.text = rewardMoney.ToString();
     }
 
+    // 게임중 머니 획득 (결과 머니 게임중 획득)
     public void Reward()
     {
         if (gameStart)
@@ -181,6 +187,7 @@ public class StageManager : MonoBehaviour
         }       
     }
 
+    // 스테이지 몬스터 수 설정
     public void StageMonsterSetting()
     {
         if (mainStage <= 7)
@@ -226,6 +233,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    // 몬스터 수 초기화
     void NextStageSetting()
     {
         base0Monster = 1;
@@ -237,6 +245,7 @@ public class StageManager : MonoBehaviour
         stageTimeLimit.stageFail = 0f;
     }
 
+    // 몬스터 스폰
     void SpawnMonsters()
     {
         //monsterCount = base0Monster + base1Monster + base2Monster + base3Monster + bossMonster; // 몬스터 수 설정
@@ -245,6 +254,7 @@ public class StageManager : MonoBehaviour
         allMonstersSpawned = true;
     }
 
+    // 패시브 선택
     void SelectPass()
     {
         selectPass.passMenu.SetActive(true);
@@ -252,18 +262,16 @@ public class StageManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    // 스테이지 변경
     public void NextStage()
     {
-        //if (monsterCount > 0) return; // 몬스터가 남아있다면 실행되지 않음
         if (isNextStageAvailable)
         {
             if (mainStage <= 20)
             {
-
                 allMonstersSpawned = false;
                 characterSkill.CharacterCoolTime();
                 ResetStageState();
-
 
                 if (character.currentCharacter == 2)
                 {
@@ -278,7 +286,7 @@ public class StageManager : MonoBehaviour
                     {
                         if (subStage == 2)
                         {
-                            selectingItem = true;
+                            selectingPass = true;
                             SelectPass();
                         }
                     }
@@ -290,7 +298,6 @@ public class StageManager : MonoBehaviour
                     }
                     else if (subStage > 5)
                     {
-                        Debug.Log("aa");
                         subStage = 1;
                         NextMainStage();
 
@@ -303,7 +310,7 @@ public class StageManager : MonoBehaviour
                     NextMainStage();
                     if (mainStage == 12 || mainStage == 15 || mainStage == 18)
                     {
-                        selectingItem = true;
+                        selectingPass = true;
                         SelectPass();
                     }
                     else if (mainStage == 10 || mainStage == 16)
@@ -321,7 +328,7 @@ public class StageManager : MonoBehaviour
                     else
                     {
                         passing = true;
-                        NextStage2();
+                        NextSetting();
                     }
                 }
                 else
@@ -332,7 +339,7 @@ public class StageManager : MonoBehaviour
                     else
                     {
                         passing = true;
-                        NextStage2();
+                        NextSetting();
                     }
                 }
 
@@ -341,6 +348,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    // 스테이지 변경 전 초기화 시간 
     IEnumerator DelayNextStage()
     {
         isNextStageAvailable = false;
@@ -349,7 +357,8 @@ public class StageManager : MonoBehaviour
         isNextStageAvailable = true; 
     }
 
-    public void NextStage2()
+    // 스테이지 변경전 초기화 및 설정
+    public void NextSetting()
     {
         if(mainStage <= 20)
         {
@@ -362,8 +371,8 @@ public class StageManager : MonoBehaviour
 
     IEnumerator NextStageOrTile()
     {
-        canvas.enabled = !canvas.enabled;
-        tileMap.SetActive(true);
+        canvas.enabled = !canvas.enabled; // 스테이지 타일 표시중 캔버스 비시각화
+        tileMap.SetActive(true); // 스테이지 타일 오픈, 스테이지 변경 표시
         stageTile.stageNext = true;
         stageTimeLimit.stageFail = 0f;
         tileNum++;
@@ -386,15 +395,16 @@ public class StageManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        stageStatus.ResetStatus();
+        stageStatus.ResetStatus(); // 버프 초기화
 
         NextStageSetting(); // 스테이지 이동시 몬스터수 초기화
-        StageMonsterSetting();
-        SpawnMonsters();
+        StageMonsterSetting(); // 스테이지 몬스터 수 설정
+        SpawnMonsters(); // 몬스터 스폰
 
-        stageStatus.BuffStatus(allMonstersSpawned);
+        stageStatus.BuffStatus(allMonstersSpawned); // 버프 설정
     }
 
+    // 맵에 남아있는 이전 스테이지 데이터 제거
     void ResetStageState()
     {
         GameObject[] skills = GameObject.FindObjectsOfType<GameObject>();
@@ -411,6 +421,7 @@ public class StageManager : MonoBehaviour
         playerController.stage5Debuff = false;
     }
 
+    // 스테이지 클리어시 머니 획득
     void NextSubStage()
     {
         subStage++;
@@ -428,6 +439,7 @@ public class StageManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
+    // 게임에서 메인으로 돌아가기
     public void GameOver()
     {
         SceneManager.LoadScene("MainMenu");

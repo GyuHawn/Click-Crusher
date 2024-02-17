@@ -6,10 +6,10 @@ public class MonsterSpwan : MonoBehaviour
 {
     private StageManager stagerManage;
 
-    private int stage;
+    private int stage; // 현재 스테이지
 
     // sub == 1 -> [0] / sub == 2 -> [0,1] / sub == 3 -> [0,1,2] / sub == 4 -> [0,1,2,3] / sub == 5 -> [0,1,2,3,4(Boss)] 
-    public GameObject[] stage1Monsters;
+    public GameObject[] stage1Monsters; // 스테이지 별 몬스터
     public GameObject[] stage2Monsters;
     public GameObject[] stage3Monsters;
     public GameObject[] stage4Monsters;
@@ -21,7 +21,7 @@ public class MonsterSpwan : MonoBehaviour
     public GameObject[] monsterSpawnPoints; // 몬스터 소환 위치
     public GameObject[] bossStageSpawnPoints; // 보스 스테이지 몬스터 소환 위치
 
-    public List<GameObject> spawnedMonsters = new List<GameObject>();
+    public List<GameObject> spawnedMonsters = new List<GameObject>(); // 소환한 몬스터
 
     public Transform pos;
 
@@ -35,8 +35,10 @@ public class MonsterSpwan : MonoBehaviour
         stage = stagerManage.mainStage;
     }
 
+    // 몬스터 소환
     public void MonsterInstantiate(int base0Count, int base1Count, int base2Count, int base3Count, int bossCount)
     {
+        // 보스 스테이지 O
         if (stagerManage.subStage == 5)
         {
             GameObject[] currentStageMonsters = null;
@@ -92,7 +94,8 @@ public class MonsterSpwan : MonoBehaviour
                 }
             }
         }
-
+        
+        // 보스 스테이지 X
         if (stagerManage.subStage != 5)
         {
             GameObject[] currentStageMonsters = null;
@@ -143,7 +146,7 @@ public class MonsterSpwan : MonoBehaviour
             }
             else
             {
-                // 8스테이지 이후부터는 InfiniteMonsters만 사용
+                // 8스테이지 이후부터는 InfiniteMonsters[]만 사용
                 for (int i = 0; i < (base0Count + base1Count + base2Count + base3Count); i++)
                 {
                     int randomIndex = Random.Range(0, 6);
@@ -159,6 +162,7 @@ public class MonsterSpwan : MonoBehaviour
         }
     }
 
+    // 스테이지 몬스터를 랜덤위치로 소환
     public void InstantiateRandom(GameObject monsterPrefab, GameObject[] spawnPoints)
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
@@ -178,6 +182,7 @@ public class MonsterSpwan : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
+    // 몬스터 사망시 소환한 몬스터 리스트에서 제거
     public void RemoveMonsterFromList(GameObject monster)
     {
         spawnedMonsters.Remove(monster);

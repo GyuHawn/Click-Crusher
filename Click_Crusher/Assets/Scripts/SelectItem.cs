@@ -12,35 +12,34 @@ public class SelectItem : MonoBehaviour
     private Character character;
     private ItemSkill itemSkill;
 
-    public bool itemSelecting;
+    public bool itemSelecting; // 아이템 선택중
 
-    public GameObject[] items;
-    public GameObject itemPos1;
+    public GameObject[] items; // 전체 아이템
+    public GameObject itemPos1; // 아이템 선택 표시 위치
     public GameObject itemPos2;
     public GameObject itemPos3;
-    public List<GameObject> selectItems;
-    public List<GameObject> playerItems;
+    public List<GameObject> selectItems; // 아이템 선택지 3개 설정 리스트
+    public List<GameObject> playerItems; // 획득한 아이템 리스트
 
-    public GameObject selectItemPos1;
+    public GameObject selectItemPos1; // 획득한 아이템 표시
     public GameObject selectItemPos2;
     public GameObject selectItemPos3;
     public GameObject selectItemPos4;
-    public int selectNum;
+    public int selectNum; // 선택한 아이템
 
-    public TMP_Text itemName;
+    public TMP_Text itemName; // 선택한 아이템 이름과 설명
     public TMP_Text itemEx;
-
-    public TMP_Text passLvText;
-    public TMP_Text item1LvText;
+    
+    public TMP_Text item1LvText; // 획득한 아이템 레벨 표시
     public TMP_Text item2LvText;
     public TMP_Text item3LvText;
     public TMP_Text item4LvText;
 
-    public GameObject[] characters;
-    public GameObject charPos;
+    public GameObject[] characters; // 캐릭터 리스트
+    public GameObject charPos; // 캐릭터 표시 위치
+    public bool selectChar;
 
-    private GameObject newCharacter; // 수정된 부분
-
+    // 레벨관리
     public int passLv;
     public int fireLv;
     public int fireShotLv;
@@ -51,6 +50,7 @@ public class SelectItem : MonoBehaviour
     public int rockLv;
     public int sturnLv;
 
+    // 아이템 선택 관리
     public bool fireSelect;
     public bool fireShotSelect;
     public bool holyWaveSelect;
@@ -62,7 +62,7 @@ public class SelectItem : MonoBehaviour
 
     public GameObject selectItemMenu;
 
-    public bool selectedItem;
+    public bool selectedItem; // 아이템을 선택하였는지 확인
 
     public Canvas canvas;
 
@@ -77,7 +77,7 @@ public class SelectItem : MonoBehaviour
     private void Start()
     {
         itemSelecting = false;
-        newCharacter = null; // 초기화 추가
+        selectChar = false;
     }
 
     private void Update()
@@ -86,29 +86,36 @@ public class SelectItem : MonoBehaviour
         CharacterInstant();
     }
 
+    // 선택한 캐릭터 위치 선택
     void CharacterInstant()
     {
-        if (character.currentCharacter == 1)
+        if (!selectChar)
         {
-            characters[0].transform.position = charPos.transform.position;
-        }
-        if (character.currentCharacter == 2)
-        {
-            characters[1].transform.position = charPos.transform.position;
-        }
-        if (character.currentCharacter == 3)
-        {
-            characters[2].transform.position = charPos.transform.position;
-        }
-        if (character.currentCharacter == 4)
-        {
-            characters[3].transform.position = charPos.transform.position;
+            if (character.currentCharacter == 1)
+            {
+                characters[0].transform.position = charPos.transform.position;
+            }
+            if (character.currentCharacter == 2)
+            {
+                characters[1].transform.position = charPos.transform.position;
+            }
+            if (character.currentCharacter == 3)
+            {
+                characters[2].transform.position = charPos.transform.position;
+            }
+            if (character.currentCharacter == 4)
+            {
+                characters[3].transform.position = charPos.transform.position;
+            }
+
+            selectChar = true;
         }
     }
 
+    // 아이템 선택
     public void ItemSelect()
     {
-        stageManager.selectingItem = true;
+        stageManager.selectingPass = true;
         playerController.isAttacking = true;
         selectItemMenu.SetActive(true);
         selectItems.Clear();
@@ -178,6 +185,7 @@ public class SelectItem : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    // 아이템 선택 결정
     public void CloseMenu()
     {
         if (selectedItem)
@@ -220,10 +228,10 @@ public class SelectItem : MonoBehaviour
             //itemSkill.ItemValueUp();
             itemSkill.GetItem();    
             itemSelecting = false;
-            stageManager.selectingItem = false;
+            stageManager.selectingPass = false;
 
             stageManager.passing = true;
-            stageManager.NextStage2();
+            stageManager.NextSetting();
 
             playerController.isAttacking = false;
             Time.timeScale = 1f;
@@ -231,6 +239,7 @@ public class SelectItem : MonoBehaviour
         }
     }
     
+    // 획득한 아이템 생성
     void InstantiateItem()
     {
         GameObject newItem = null;
@@ -282,6 +291,7 @@ public class SelectItem : MonoBehaviour
         }
     }
 
+    // 획득한 아이템과 맞는 레벨 할당
     int GetItemLevel(GameObject item)
     {
         switch (item.name)
@@ -298,6 +308,7 @@ public class SelectItem : MonoBehaviour
         }
     }
 
+    // 획득한 아이템의 레벨표시 오픈
     void ItemLevelOpen()
     {
         if (playerItems.Count > 0)
@@ -345,6 +356,7 @@ public class SelectItem : MonoBehaviour
         }
     }
 
+    // 아이템 레벨업
     public void ItemLevelUp()
     {
         switch (selectNum)
@@ -376,6 +388,7 @@ public class SelectItem : MonoBehaviour
         }
     }
     
+    // 선택한 아이템 텍스트 초기화
 
     void ItemTextClear()
     {
@@ -383,6 +396,7 @@ public class SelectItem : MonoBehaviour
         itemEx.text = "";
     }
 
+    // 선택한 아이템 설명 표시
     public void Fire()
     {
         if (itemSelecting)

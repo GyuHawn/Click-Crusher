@@ -94,65 +94,7 @@ public class ItemSkill : MonoBehaviour
     {
         // 사용중인지
         holyWave = false;
-
-        //BasicSettings();
     }
-
-    /*public void BasicSettings()
-    {
-        // 공격력 퍼센트
-        fireDamagePercent = 0.5f;
-        fireShotDamagePercent = 1.5f;
-        fireShotSubDamagePercent = 0.5f;
-        holyWaveDamagePercent = 0.3f;
-        holyShotDamagePercent = 0.7f;
-        poisonDamagePercent = 0.4f;
-        rockDamagePercent = 2f;
-
-        // 공격력
-        fireDamage = playerController.damage * fireDamagePercent;
-        fireShotDamage = playerController.damage * fireShotDamagePercent;
-        fireShotSubDamage = playerController.damage * fireShotSubDamagePercent;
-        holyWaveDamage = playerController.damage * holyWaveDamagePercent;
-        holyShotDamage = playerController.damage * holyShotDamagePercent;
-        poisonDamage = playerController.damage * poisonDamagePercent;
-        rockDamage = playerController.damage * rockDamagePercent;
-
-        // 갯수
-        fireShotSubNum = 2;
-        meleeNum = 2;
-
-        // 시간
-        fireDuration = 3f;
-        holyShotDuration = 2f;
-        holyWaveDuration = 4f;
-        posionDuration = 5f;
-        sturnDuration = 3f;
-
-        // 확률      
-        if (character.currentCharacter == 4)
-        {
-            firePercent = 10f + (0.5f * characterSkill.luckLevel);
-            fireShotPercent = 20f + (0.5f * characterSkill.luckLevel);
-            holyShotPercent = 10f + (0.5f * characterSkill.luckLevel);
-            holyWavePercent = 5f + (0.5f * characterSkill.luckLevel);
-            rockPercent = 30f + (0.5f * characterSkill.luckLevel);
-            posionPercent = 10f + (0.5f * characterSkill.luckLevel);
-            meleePercent = 60f + (0.5f * characterSkill.luckLevel);
-            sturnPercent = 30f + (0.5f * characterSkill.luckLevel);
-        }
-        else
-        {
-            firePercent = 10f;
-            fireShotPercent = 20f;
-            holyShotPercent = 10f;
-            holyWavePercent = 5f;
-            rockPercent = 30f;
-            posionPercent = 10f;
-            meleePercent = 60f;
-            sturnPercent = 30f;
-        }
-    }*/
 
     private void Update()
     {
@@ -210,38 +152,7 @@ public class ItemSkill : MonoBehaviour
         }
     }
 
-    /*    public void ItemValueUp()
-        {
-            // fire
-            fireDamagePercent += 0.1f;
-            fireDuration += 0.5f;
-
-            // fireShot
-            fireShotDamagePercent += 0.2f;
-            fireShotSubDamagePercent += 0.2f;
-            fireShotSubNum++;
-
-            // holyWave
-            holyWaveDamagePercent += 0.05f;
-            holyWaveDuration += 0.5f;
-
-            // holyShot
-            holyShotDamagePercent += 0.2f;
-            holyShotDuration += 0.5f;
-
-            // rock
-            rockDamagePercent += 0.5f;
-
-            // poison
-            poisonDamagePercent += 0.05f;
-
-            // melee
-            meleeNum++;
-
-            // sturn
-            sturnDuration += 1f;
-        }*/
-
+    // 아이템 획득
     public void GetItem()
     {
         GameObject fireObj = GameObject.Find("FirePltem");
@@ -287,7 +198,7 @@ public class ItemSkill : MonoBehaviour
         }
     }
 
-    // fire --------------------------------
+    // fire
     public void Fire(Vector3 targetPosition)
     {
         if(isFire)
@@ -302,7 +213,7 @@ public class ItemSkill : MonoBehaviour
         }      
     }
 
-    // fireShot --------------------------------
+    // fireShot
     public void FireShot(Vector3 targetPosition)
     {
         if (isFireShot)
@@ -339,7 +250,7 @@ public class ItemSkill : MonoBehaviour
         }
     }
 
-    // holyWave --------------------------------
+    // holyWave 
 
     public void HolyWave()
     {
@@ -363,7 +274,7 @@ public class ItemSkill : MonoBehaviour
         holyWave = false;
     }
 
-    // holyShot --------------------------------
+    // holyShot 
 
     public void HolyShot(Vector3 targetPosition)
     {
@@ -406,7 +317,7 @@ public class ItemSkill : MonoBehaviour
 
 
 
-    // melee --------------------------------
+    // melee 
     public void Melee(Vector3 targetPosition, int numEffects)
     {
         if (isMelee)
@@ -432,7 +343,7 @@ public class ItemSkill : MonoBehaviour
         }
     }
 
-    // posion --------------------------------
+    // posion 
     public void Posion(Vector3 targetPosition)
     {
         if(isPosion)
@@ -445,7 +356,7 @@ public class ItemSkill : MonoBehaviour
         }       
     }
 
-    // rock --------------------------------
+    // rock 
     public void Rock(Vector3 targetPosition)
     {
         if(isRock)
@@ -458,7 +369,7 @@ public class ItemSkill : MonoBehaviour
         }       
     }
 
-    // sturn --------------------------------
+    // sturn 
     private Dictionary<GameObject, GameObject> monsterToSturnImage = new Dictionary<GameObject, GameObject>();
 
     public void Sturn()
@@ -512,6 +423,7 @@ public class ItemSkill : MonoBehaviour
         currentAttackedMonster = monster;
     }
 
+    // 기절중인 몬스터 사망시 기절 이미지도 삭제
     public void DestroyMonster(GameObject monster)
     {
         if (monsterToSturnImage.ContainsKey(monster))

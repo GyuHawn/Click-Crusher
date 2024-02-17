@@ -31,7 +31,7 @@ public class StageTimeLimit : MonoBehaviour
 
         if (stageManager.gameStart)
         {
-            if (!stageManager.selectingItem)
+            if (!stageManager.selectingPass)
             {
                 // 시간 관리
                 if (stageFail > stageTime)

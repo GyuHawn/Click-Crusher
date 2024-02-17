@@ -11,11 +11,11 @@ public class StageStatus : MonoBehaviour
     private ItemSkill itemSkill;
     private StageManager stageManager;
 
-    public int buff;
-    public int status;
-    public Image stageStatus;
+    public int buff; // 버프, 디버프 구분
+    public int status; // 버프 종류 선택
+    public Image stageStatus; 
     public GameObject statusPos;
-    public int saveDamage;
+    public int saveDamage; // 공격력 관련 버프 데미지
 
     // 버프
     public GameObject damageUp; // 기본데미지 증가
@@ -90,6 +90,7 @@ public class StageStatus : MonoBehaviour
 
     void Update()
     {
+        // 버프 적용
         if (buff == 1)
         {
             if (status == 1)
@@ -137,7 +138,7 @@ public class StageStatus : MonoBehaviour
                 }
             }
         }
-        else if (buff == 2)
+        else if (buff == 2) // 디버프 적용
         {
             if (status == 1)
             {
@@ -386,7 +387,8 @@ public class StageStatus : MonoBehaviour
         }
     }
 
-    public void BuffStatus(bool execution)
+    // 버프 선택
+    public void BuffStatus(bool execution) 
     {
         if(execution)
         {
@@ -416,6 +418,7 @@ public class StageStatus : MonoBehaviour
         }
     }
 
+    // 버프 리셋
     public void ResetStatus()
     {
         if (selectedEffect != null)
@@ -489,6 +492,7 @@ public class StageStatus : MonoBehaviour
         }
     }
 
+    // 버프, 디버프 시각적 표시
     void Buff()
     {
         stageStatus.color = new Color(0f, 0.49f, 1f);

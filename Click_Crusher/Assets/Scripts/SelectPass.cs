@@ -11,7 +11,7 @@ public class SelectPass : MonoBehaviour
 
     public GameObject passMenu;
 
-    public int selecPass;
+    public int selecPass; // 선택한 패시브
 
     public TMP_Text passName;
     public TMP_Text passEx;
@@ -28,6 +28,7 @@ public class SelectPass : MonoBehaviour
         selecPass = 0;
     }
 
+    // 패시브 선택, 설명표시
     public void powerUP()
     {
         selecPass = 1;
@@ -53,6 +54,7 @@ public class SelectPass : MonoBehaviour
         passEx.text = "게임 머니를 100원 획득합니다.";
     }
 
+    // 패시브 선택 결정
     public void EnterPass()
     {
         if (selecPass == 1)
@@ -72,7 +74,7 @@ public class SelectPass : MonoBehaviour
             PlayerPrefs.SetInt("GameMoney", PlayerPrefs.GetInt("GameMoney", 0) + 100);
         }
 
-        stageManager.selectingItem = false;
+        stageManager.selectingPass = false;
         playerController.isAttacking = false;
         Time.timeScale = 1f;
         selecPass = 0;
@@ -80,7 +82,7 @@ public class SelectPass : MonoBehaviour
         passEx.text = "";
 
         stageManager.passing = true;
-        stageManager.NextStage2();
+        stageManager.NextSetting();
 
         passMenu.SetActive(false);
     }

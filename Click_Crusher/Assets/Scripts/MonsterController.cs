@@ -34,11 +34,11 @@ public class MonsterController : MonoBehaviour
     public bool pRockTakeDamage = true; // 돌
     public bool pWaterTakeDamage = true; // 물
 
-   // public bool attack;
     private int bossAttackNum;
     public float attackTime;
     public float selectedAttackTime;
 
+    // 몬스터 상태 관련
     public GameObject danager;
     public GameObject dieEffect;
     public GameObject sturn;
@@ -83,15 +83,15 @@ public class MonsterController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
-
         danager.SetActive(false);
         stop = false;
-        // attack = false;
-        bossAttackNum = 1;
+
+        bossAttackNum = 1; // 보스 연속 공격 방지용 (1 = 평소, 0 = 공격)
 
         monsterLayer = LayerMask.NameToLayer("Monster");
         bossLayer = LayerMask.NameToLayer("Boss");
 
+        // 스테이지 몬스터 체력관리
         if (stageManager.mainStage > 8)
         {
             maxHealth = maxHealth + ((stageManager.mainStage - 8) * 15);
@@ -112,20 +112,11 @@ public class MonsterController : MonoBehaviour
             }
         }
         currentHealth = maxHealth;
-
-
-/*        if (gameObject.tag == "Monster")
-        {
-            attackTime = Random.Range(3.0f, 6.0f);
-        }
-        else if (gameObject.tag == "Boss")
-        {
-            attackTime = Random.Range(7.0f, 10.0f);
-        }*/
     }
 
     void Update()
     {
+        // 몬스터 사망시 상태 및 오브젝트 제거
         if (stageManager.mainStage == 1 && stageManager.subStage == 5)
         {
             GameObject boss = GameObject.Find("4(Clone)");
@@ -179,12 +170,13 @@ public class MonsterController : MonoBehaviour
             }
         }
         
-
+        // 사망
         if (currentHealth <= 0)
         {
             Die();
         }
 
+        // 기절시 멈추도록
         if (stop)
         {
             anim.enabled = false;
@@ -193,13 +185,12 @@ public class MonsterController : MonoBehaviour
         {
             anim.enabled = true;
         }
-
+        
+        // 몬스터 공격
         if (attackTime <= 0)
         {
-            //attack = true;
             if (gameObject.tag == "Monster")
-            {
-                //audioManager.MonsterAttackAudio();               
+            {             
                 StartCoroutine(MonsterAttackReady());
             }
             else if(gameObject.tag == "Boss" && bossAttackNum == 1)
@@ -287,6 +278,7 @@ public class MonsterController : MonoBehaviour
         }
     }
 
+    // 기절종료
     IEnumerator Removestun()
     {
         yield return new WaitForSeconds(3f);
@@ -301,6 +293,7 @@ public class MonsterController : MonoBehaviour
         fired = false;
     }
 
+    // 보스 공격 준비
     IEnumerator BossAttackReady()
     {
         if (!isBossAttacking)
@@ -316,6 +309,7 @@ public class MonsterController : MonoBehaviour
         }
     }
 
+    // 보스 공격
     IEnumerator BossAttack()
     {
         danager.SetActive(true);
@@ -346,12 +340,14 @@ public class MonsterController : MonoBehaviour
         StartCoroutine(ReadyBossAttack());
     }
 
+    // 보스 상태 초기화
     IEnumerator ReadyBossAttack()
     {
         yield return new WaitForSeconds(attackTime);
         bossAttackNum = 1;
     }
 
+    // 몬스터 공격 준비
     IEnumerator MonsterAttackReady()
     {
         if (!isMonsterAttacking)
@@ -366,6 +362,7 @@ public class MonsterController : MonoBehaviour
         }
     }
 
+    // 몬스터 공격
     IEnumerator MonsterAttack()
     {
         anim.SetBool("Attack", true);
@@ -402,6 +399,7 @@ public class MonsterController : MonoBehaviour
         attackTime = selectedAttackTime;
     }
 
+    // 공격 받을시 색 변경 (피격 표시)
     IEnumerator BackColor(float time)
     {
         yield return new WaitForSeconds(time);
@@ -549,7 +547,7 @@ public class MonsterController : MonoBehaviour
         pWaterTakeDamage = true;
     }
 
-
+    // 사망
     public void Die()
     {
         StartCoroutine(MonsterDie());
@@ -557,6 +555,7 @@ public class MonsterController : MonoBehaviour
 
     IEnumerator MonsterDie()
     {
+        // 사망시 확률적으로 회복 아이템 생성
         if (gameObject.CompareTag("Monster"))
         {
             if (!itemSpawn)
@@ -571,6 +570,7 @@ public class MonsterController : MonoBehaviour
             }
         }
 
+        // 사망시 콤보수 증가
         if (!isDie)
         {
             isDie = true;
@@ -584,6 +584,7 @@ public class MonsterController : MonoBehaviour
             }
         }
 
+        // 사망시 사망 이펙트 생성
         if (dieEffect != null)
         {
             SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
@@ -594,21 +595,23 @@ public class MonsterController : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
+        // 사망시 총 소환 몬스터 리스트에서 제거
         monsterSpawn.RemoveMonsterFromList(gameObject);
 
+        // 기절 관련
         if (stop)
         {
             itemSkill.DestroyMonster(gameObject);
         }
         else
         {
-            
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // 플레이어 아이템에 피격
         if (collision.gameObject.tag == "HolyShot")
         {
             if (holyShotTakeDamage)
@@ -653,6 +656,7 @@ public class MonsterController : MonoBehaviour
                 }
             }
         }
+        // 몬스터 위치 관리
         else if ((collision.gameObject.tag == "Monster" || collision.gameObject.tag == "Boss") && !isColliding)
         {
             StartCoroutine(MoveWithRandomDirection()); // 유닛 겹치지 않도록
@@ -664,7 +668,7 @@ public class MonsterController : MonoBehaviour
     }
     private bool isColliding = false;
 
-
+    // 몬스터가 겹칠시 랜덤한 위치로 이동
     private IEnumerator MoveWithRandomDirection()
     {
         isColliding = true;
@@ -690,6 +694,7 @@ public class MonsterController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // 겹치지 않을시 멈춤
         if (collision.gameObject.tag == "Monster")
         {
             isColliding = false;
