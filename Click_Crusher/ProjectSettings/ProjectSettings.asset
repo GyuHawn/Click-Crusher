@@ -252,19 +252,18 @@ PlayerSettings:
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   useCustomMainManifest: 0
   useCustomLauncherManifest: 1
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
   useCustomGradleSettingsTemplate: 0
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: "C:/Users/Kim/Desktop/Project/\uB9C8\uBB34\uB9AC\uD55C \uD504\uB85C\uC81D\uD2B8/\uC2AC\uB77C\uC784
-    \uD06C\uB7EC\uC154/user.keystore"
-  AndroidKeyaliasName: kghkey
+  AndroidKeystoreName: "C:/Users/Kim/Desktop/Project/\uD0A4\uC2A4\uD1A0\uC5B4/user.keystore"
+  AndroidKeyaliasName: kgh
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
