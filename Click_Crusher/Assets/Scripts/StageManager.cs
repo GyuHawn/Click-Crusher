@@ -493,7 +493,17 @@ public class StageManager : MonoBehaviour
     // ±¤°í Ç¥½Ã
     public void ShowInterstitialAd()
     {
-        if (_interstitialAd != null && _interstitialAd.CanShowAd())
+        StartCoroutine(showInterstitial());
+
+        IEnumerator showInterstitial()
+        {
+            while (_interstitialAd == null && !_interstitialAd.CanShowAd())
+            {
+                yield return new WaitForSeconds(0.2f);
+            }
+            _interstitialAd.Show();
+        }
+        /*if (_interstitialAd != null && _interstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");
             _interstitialAd.Show();
@@ -501,7 +511,7 @@ public class StageManager : MonoBehaviour
         else
         {
             Debug.LogError("Interstitial ad is not ready yet.");
-        }
+        }*/
     }
 
     private void RegisterReloadHandler(InterstitialAd interstitialAd)
