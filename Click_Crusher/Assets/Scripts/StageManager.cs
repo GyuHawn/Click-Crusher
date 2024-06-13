@@ -1,13 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
-using System.Security.Cryptography;
-using UnityEngine.SceneManagement;
-using System.Threading;
-using GoogleMobileAds;
-using GoogleMobileAds.Api;
 
 public class StageManager : MonoBehaviour
 {
@@ -94,14 +87,7 @@ public class StageManager : MonoBehaviour
             rewardMoney = 0;
 
             tileNum = 0;
-        }
-
-        MobileAds.Initialize((InitializationStatus initStatus) =>
-        {
-            // 광고가 초기화된 후 호출.
-            Debug.Log("Google Mobile Ads SDK 초기화 완료");
-            LoadInterstitialAd(); // SDK 초기화 후 광고 로드
-        });
+        }   
     }
 
     void Update()
@@ -447,7 +433,7 @@ public class StageManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
     }
-
+    /*
     //-----------[광고 관련]------------
     #if UNITY_ANDROID
         private string _adUnitId = "ca-app-pub-4956833096962057~1338843571";
@@ -503,7 +489,7 @@ public class StageManager : MonoBehaviour
             }
             _interstitialAd.Show();
         }
-        /*if (_interstitialAd != null && _interstitialAd.CanShowAd())
+        *//*if (_interstitialAd != null && _interstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");
             _interstitialAd.Show();
@@ -511,7 +497,7 @@ public class StageManager : MonoBehaviour
         else
         {
             Debug.LogError("Interstitial ad is not ready yet.");
-        }*/
+        }*//*
     }
 
     private void RegisterReloadHandler(InterstitialAd interstitialAd)
@@ -576,5 +562,5 @@ public class StageManager : MonoBehaviour
     public void GameOver()
     {
         ShowInterstitialAd();
-    }
+    }*/
 }
