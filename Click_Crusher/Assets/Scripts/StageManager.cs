@@ -126,11 +126,11 @@ public class StageManager : MonoBehaviour
         // 스테이지 표시 텍스트 변경
         if (mainStage <= 7)
         {
-            stageText.text = "Stage " + mainStage + "-" + subStage;
+            stageText.text = "스테이지 " + mainStage + "-" + subStage;
         }
         else if(mainStage >= 8)
         {
-            stageText.text = "Stage " + mainStage;
+            stageText.text = "스테이지 " + mainStage;
         }
 
         // 제한시간 초과시 게임종료

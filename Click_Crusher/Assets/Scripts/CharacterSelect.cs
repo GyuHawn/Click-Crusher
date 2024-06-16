@@ -111,10 +111,10 @@ public class CharacterSelect : MonoBehaviour
         }
 
         // 캐릭터 레벨 텍스트
-        rockLevelText.text = "Lv. " + rockLevel.ToString();
-        waterLevelText.text = "Lv. " + waterLevel.ToString();
-        lightLevelText.text = "Lv. " + lightLevel.ToString();
-        luckLevelText.text = "Lv. " + luckLevel.ToString();
+        rockLevelText.text = rockLevel.ToString();
+        waterLevelText.text = waterLevel.ToString();
+        lightLevelText.text = lightLevel.ToString();
+        luckLevelText.text = luckLevel.ToString();
 
         // 캐릭터 레벨 상한
         if (rockLevel >= 20)

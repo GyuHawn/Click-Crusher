@@ -21,14 +21,14 @@ public class Combo : MonoBehaviour
 
         // 텍스트 크기 및 콤보수 초기화
         maxScale = 100f;
-        minScale = 60f;
+        minScale = 55f;
         scaleSpeed = 400f;
         maxComboNum = 0;
     }
 
     void Update()
     {
-        comboText.text = comboNum.ToString(); // 콤보수 변경
+        comboText.text = "x " + comboNum.ToString(); // 콤보수 변경
 
         // 콤보수 0일시 비활성화
         if (comboNum <= 0)

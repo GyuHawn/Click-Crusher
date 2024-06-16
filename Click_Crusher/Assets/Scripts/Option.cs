@@ -15,7 +15,7 @@ public class Option : MonoBehaviour
         onSetting = false;
 
         startMenuPos = new Vector3(950f, settingMenu.transform.localPosition.y, settingMenu.transform.localPosition.z);
-        endMenuPos = new Vector3(360f, settingMenu.transform.localPosition.y, settingMenu.transform.localPosition.z);
+        endMenuPos = new Vector3(350f, settingMenu.transform.localPosition.y, settingMenu.transform.localPosition.z);
     }
     public void OnSettingMenu()
     {

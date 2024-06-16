@@ -122,7 +122,6 @@ public class GameStart : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         resetMenu.SetActive(false);
-        settingMenu.SetActive(false);
     }
 
     // 튜토리얼 시작
