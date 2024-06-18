@@ -496,12 +496,10 @@ public class StageStatus : MonoBehaviour
     void Buff()
     {
         stageStatus.color = new Color(0f, 0.49f, 1f);
-        buffText.color = new Color(0f, 0.49f, 1f);
     }
 
     void DeBuff()
     {
         stageStatus.color = Color.red;
-        buffText.color = Color.red;
     }
 }
