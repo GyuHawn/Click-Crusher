@@ -13,9 +13,9 @@ public class CharacterSelect : MonoBehaviour
     public GameObject luckEx;
 
     // 캐릭터 오픈 여부
-    private bool waterChar = false;
-    private bool lightChar = false;
-    private bool luckChar = false;
+    public bool waterChar = false;
+    public bool lightChar = false;
+    public bool luckChar = false;
 
     // 캐릭터 선택 방지 UI
     public GameObject useWater;
@@ -24,6 +24,7 @@ public class CharacterSelect : MonoBehaviour
 
     // 선택한 캐릭터
     public int selectChar;
+    public GameObject[] checkChar;
 
     // 플레이어 돈 관리
     public int playerMoney;
@@ -135,9 +136,20 @@ public class CharacterSelect : MonoBehaviour
         }
     }
 
+    void CheckReset()
+    {
+        foreach(GameObject check in checkChar)
+        {
+            check.SetActive(false);
+        }
+    }
+
     // 캐릭터 선택
     public void RockChar()
     {
+        CheckReset();
+        checkChar[0].SetActive(true);
+
         rockEx.SetActive(true);
         waterEx.SetActive(false);
         lightEx.SetActive(false);
@@ -151,6 +163,10 @@ public class CharacterSelect : MonoBehaviour
     {
         if (waterChar)
         {
+
+            CheckReset();
+            checkChar[1].SetActive(true);
+
             waterEx.SetActive(true);
             rockEx.SetActive(false);
             lightEx.SetActive(false);
@@ -165,6 +181,9 @@ public class CharacterSelect : MonoBehaviour
     {
         if (lightChar)
         {
+            CheckReset();
+            checkChar[2].SetActive(true);
+
             lightEx.SetActive(true);
             rockEx.SetActive(false);
             waterEx.SetActive(false);
@@ -179,6 +198,9 @@ public class CharacterSelect : MonoBehaviour
     {
         if (luckChar)
         {
+            CheckReset();
+            checkChar[3].SetActive(true);
+
             luckEx.SetActive(true);
             rockEx.SetActive(false);
             waterEx.SetActive(false);

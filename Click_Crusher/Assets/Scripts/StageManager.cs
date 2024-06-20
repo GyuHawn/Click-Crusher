@@ -13,7 +13,7 @@ public class StageManager : MonoBehaviour
     private Character character;
     private ItemSkill itemSkill;
     private StageStatus stageStatus;
-    private StageTile stageTile;
+    private StageChange stageChange;
     private Combo combo;
 
     public bool gameStart = false; // 게임시작 여부
@@ -45,13 +45,6 @@ public class StageManager : MonoBehaviour
     public TMP_Text maxComboText;
     public TMP_Text clearText;
 
-    // 스테이지 타일
-    public GameObject tileMap;
-    public GameObject[] stageTiles;
-    public TMP_Text tileMapStageText;
-
-    public int tileNum; // 현재 스테이지 표시
-
     public bool passing; // 스테이지 타일 표시 중
 
     public Canvas canvas;
@@ -67,7 +60,7 @@ public class StageManager : MonoBehaviour
         character = GameObject.Find("Manager").GetComponent<Character>();
         itemSkill = GameObject.Find("Manager").GetComponent<ItemSkill>();
         stageStatus = GameObject.Find("Manager").GetComponent<StageStatus>();
-        stageTile = GameObject.Find("Manager").GetComponent<StageTile>();
+        stageChange = GameObject.Find("Manager").GetComponent<StageChange>();
         combo = GameObject.Find("Manager").GetComponent<Combo>();
     }
 
@@ -85,8 +78,6 @@ public class StageManager : MonoBehaviour
 
             totalTime = 0;
             rewardMoney = 0;
-
-            tileNum = 0;
         }   
     }
 
@@ -138,16 +129,6 @@ public class StageManager : MonoBehaviour
         {
             playerController.gameover.SetActive(true);
             gameStart = false;
-        }
-
-        // 스테이지타일에서 현재 스테이지 표시
-        if(mainStage <= 9)
-        {
-            tileMapStageText.text = "(0" + mainStage + "/20)";
-        }
-        else
-        {
-            tileMapStageText.text = "(" + mainStage + "/20)";
         }
 
         // 게임종료 결과 표시, 집계
@@ -366,29 +347,12 @@ public class StageManager : MonoBehaviour
 
     IEnumerator NextStageOrTile()
     {
-        canvas.enabled = !canvas.enabled; // 스테이지 타일 표시중 캔버스 비시각화
-        tileMap.SetActive(true); // 스테이지 타일 오픈, 스테이지 변경 표시
-        stageTile.stageNext = true;
         stageTimeLimit.stageFail = 0f;
-        tileNum++;
         yield return new WaitForSeconds(0.1f);
 
-        for (int i = 0; i <= 2; i++)
-        {
-            stageTiles[tileNum].SetActive(true);
-            yield return new WaitForSeconds(0.3f);
-            stageTiles[tileNum].SetActive(false);
-            yield return new WaitForSeconds(0.3f);
-        }
-
-        stageTiles[tileNum].SetActive(true);
-        yield return new WaitForSeconds(1f);
+        stageChange.ChangeStageText();
         passing = false;
-        tileMap.SetActive(false);
-        stageTile.stageNext = false;
-        canvas.enabled = !canvas.enabled;
-
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(3f);
 
         stageStatus.ResetStatus(); // 버프 초기화
 
