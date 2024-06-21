@@ -27,9 +27,11 @@ public class StageChange : MonoBehaviour
     }
 
     private void Update()
-    {     
-        mainStageText.text = stageManager.mainStage.ToString();
-        subStageText.text = stageManager.subStage.ToString();
+    {
+        if(stageManager.mainStage >= 8)
+        {
+            subStage = 1;
+        }
     }
 
     public void ChangeStageText()
@@ -38,13 +40,19 @@ public class StageChange : MonoBehaviour
     }
 
     IEnumerator ChangeText()
-    { 
+    {
         nextStageUI.SetActive(true);
         yield return new WaitForSeconds(2f);
 
         mainStage = stageManager.mainStage;
         subStage = stageManager.subStage;
+
+        mainStageText.text = mainStage.ToString();
+        subStageText.text = subStage.ToString();
+
         yield return new WaitForSeconds(1f);
         nextStageUI.SetActive(false);
+
+
     }
 }

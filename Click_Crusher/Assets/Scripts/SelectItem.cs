@@ -65,6 +65,7 @@ public class SelectItem : MonoBehaviour
     public bool selectedItem; // 아이템을 선택하였는지 확인
 
     public Canvas canvas;
+    public GameObject getItemUIPos;
 
     private void Awake()
     {
@@ -247,22 +248,22 @@ public class SelectItem : MonoBehaviour
         {
             case 1:
                 newItem = Instantiate(items[selectNum - 1], selectItemPos1.transform.position, Quaternion.identity);
-                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.SetParent(getItemUIPos.transform, false);
                 newItem.transform.position = selectItemPos1.transform.position;
                 break;
             case 2:
                 newItem = Instantiate(items[selectNum - 1], selectItemPos2.transform.position, Quaternion.identity);
-                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.SetParent(getItemUIPos.transform, false);
                 newItem.transform.position = selectItemPos2.transform.position;
                 break;
             case 3:
                 newItem = Instantiate(items[selectNum - 1], selectItemPos3.transform.position, Quaternion.identity);
-                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.SetParent(getItemUIPos.transform, false);
                 newItem.transform.position = selectItemPos3.transform.position;
                 break;
             case 4:
                 newItem = Instantiate(items[selectNum - 1], selectItemPos4.transform.position, Quaternion.identity);
-                newItem.transform.SetParent(canvas.transform, false);
+                newItem.transform.SetParent(getItemUIPos.transform, false);
                 newItem.transform.position = selectItemPos4.transform.position;
                 break;
         }
